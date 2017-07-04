@@ -7,6 +7,7 @@
 define(
     function (require) {
 
+		var unicodeType = require('./glyf-unicode-name');
 		var template = require('./glyf-template/support');
 
         /**
@@ -17,32 +18,33 @@ define(
          * @return {Array}  Glyf Name List
          */
         function generateGlyfNameForTemplate(type) {
-			type = type || 'KSC5601';
+			type = type || unicodeType.KSC5601;
 
 			return template.make(type);
         }
 
         function makeUnicodeGlyfForTemplate(type, keys) {
-			type = type || 'KSC5601';
+			type = type || unicodeType.KSC5601;
 
 			return template.makeUnicodeGlyf(type, keys);
         }
 
         function getCheckKeys(type) {
-			type = type || 'KSC5601';
+			type = type || unicodeType.KSC5601;
 
 			return template.getCheckKeys(type);
         }
 
+
 		function splitJaso (type, unicode) {
 
-			type = type || 'KSC5601';
+			type = type || unicodeType.KSC5601;
 
 			return template.splitJaso(type, unicode);
 		}
 
         function getSimilarGlyfName (type, name) {
-            type = type || 'KSC5601';
+            type = type || unicodeType.KSC5601;
 
             return template.getSimilarGlyfName(type, name);
         }
