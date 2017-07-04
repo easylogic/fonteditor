@@ -24,7 +24,7 @@
   </div>
 </div>
 <hr>
-<div class="form-inline column-3">
+<div class="form-inline column-2">
   <div class="form-group">
     <div class="input-group input-group-sm">
       <span class="input-group-addon">${lang.dialog_editor_gridsorption}</span>
@@ -42,19 +42,21 @@
     </div>
   </div>
 </div>
-<div class="form-inline">
-  <div class="input-group input-group-sm">
-    <span class="input-group-addon">${lang.dialog_editor_showgrid}</span>
-    <span class="form-control"><input data-field="editor.axis.showGrid" type="checkbox"></span>
+<div class="form-inline column-2">
+  <div class="form-group">
+	  <div class="input-group input-group-sm">
+		<span class="input-group-addon">${lang.dialog_editor_showgrid}</span>
+		<span class="form-control"><input data-field="editor.axis.showGrid" type="checkbox"></span>
+	  </div>
   </div>
-</div>
-<div class="form-inline column-3">
   <div class="form-group">
     <div class="input-group input-group-sm">
       <span class="input-group-addon">${lang.dialog_editor_fillcontour}</span>
       <span class="form-control"><input data-field="editor.fontLayer.fill" type="checkbox"></span>
     </div>
   </div>
+</div>
+<div class="form-inline column-2">
   <div class="form-group">
     <div class="input-group input-group-sm">
       <span class="input-group-addon">${lang.dialog_editor_contourstrokecolor}</span>
@@ -68,7 +70,8 @@
     </div>
   </div>
 </div>
-<div class="form-inline column-3">
+<div class="form-inline column-2">
+
   <div class="form-group">
     <div class="input-group input-group-sm">
       <span class="input-group-addon">${lang.dialog_editor_gapcolor}</span>
@@ -80,9 +83,9 @@
       <span class="input-group-addon">${lang.dialog_editor_gap}</span>
       <input data-field="editor.axis.graduation.gap" type="number" class="form-control">
     </div>
-  </div>
+  </div>  
 </div>
-<div class="form-inline column-3">
+<div class="form-inline column-2">
   <div class="form-group">
     <div class="input-group input-group-sm">
       <span class="input-group-addon">${lang.dialog_editor_metricscolor}</span>
@@ -90,7 +93,7 @@
     </div>
   </div>
 </div>
-<div class="form-inline column-3">
+<div class="form-inline column-2">
   <div class="input-group input-group-sm">
     <span class="input-group-addon">${lang.dialog_savesetting}</span>
     <span class="form-control"><input data-field="saveSetting" type="checkbox"></span>

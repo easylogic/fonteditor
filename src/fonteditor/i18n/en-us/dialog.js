@@ -11,7 +11,11 @@ define(
 
             dialog_no_input: 'No Input!',
             dialog_adjust_glyph: 'Adjust Glyph',
+            dialog_reduce_glyph: 'Reduce Glyph',
             dialog_glyph_info: 'Glyph Info',
+            dialog_points_info: 'Points Info',
+			dialog_color_palette: 'Color Palette',
+			dialog_shape_info: 'Symbol',
             dialog_adjust_pos: 'Adjust Glyph Position',
 
             dialog_scale_to_bound: 'Scale to Ascent and Descent',
@@ -24,7 +28,7 @@ define(
             dialog_find_glyf_by_index: 'Find Glyph by Index',
             dialog_find_glyf_example: 'example: Unicode："$21", Glyph Name： "uniE001", Index："5"',
 
-
+			dialog_erase: 'Erase Mode',
             dialog_editor_setting: 'Editor Setting',
             dialog_editor_viewercolor: 'Glhph Viewer Color',
             dialog_editor_fontsize: 'Font Size',
@@ -96,7 +100,8 @@ define(
             dialog_alert_set_sync_name: 'Please set sync name!',
             dialog_alert_set_url_or_syncurl: 'Please set sync url or pushurl!',
             dialog_alert_set_sync_url: 'Please set sync url!',
-            dialog_alert_set_filetype: 'Please set at lease one fonttype!'
+            dialog_alert_set_filetype: 'Please set at lease one fonttype!',
+			dialog_alert_validate_unicode: 'Please set a valid unicode!'
         };
     }
 );

@@ -1,13 +1,12 @@
 // 项目模块相关样式
 .project-btns {
-    margin: 0 15px;
-    padding: 10px 0;
-    border-bottom: #353D45 1px solid;
+	display:inline-block;
+	margin-left:10px;
 
     .btn {
         padding-left: 10px;
         padding-right: 12px;
-    }
+	}
 
     .btn:last-child {
         margin-left: 10px;
@@ -15,30 +14,75 @@
 }
 
 .project {
+	position:absolute;
+	top:0px;
+	height: 320px;
+	left:0px;
+	right:0px;
+
     .project-title {
-        font-weight: bold;
-        color: #6F7D88;
-        padding-left: 15px;
-        line-height: 32px;
+		position:absolute;
+		left:0px;
+		top:0px;	
+		height:30px;	
+		right:0px;
+		padding:5px 10px; 
+		color: #4A90E2;
+		display:block !important;
+		//background-color:#ececec;
+		box-sizing:border-box;
+	    border-bottom: 1px solid #a2a2a2;
+
+		.project-btns.action-groups {
+			.btn:last-child {
+				margin-left:0px;
+			}
+			.btn-flat {
+				padding-left:5px;
+				padding-right:5px;
+				padding-top:0px;
+				padding-bottom:0px;
+				background-color:transparent;
+			}
+		}
     }
 
     .project-list {
+		position:absolute;
+		left:0px;
+		top:0px;	
+		top:30px;	
+		right:0px;
+		bottom:0px;
+		overflow:auto;
+
         dl {
             padding: 0 10px 0 15px;
             cursor: pointer;
+			font-size:13px;
+			background: white;
+			border: 1px solid #70A9D6; 
+			border-radius:3px;
+			margin: 10px 10px;
+			position:relative;
+			background-color: rgba(41, 169, 255, 0.01);
 
             dt {
                 line-height: 28px;
                 font-weight: normal;
-                color: #9EB0C0;
             }
 
             dd {
-                display: none;
+                position:absolute;
+				right:0px;
+				top:0px;
+				bottom:0px;
+
+				display:inline-block;
                 line-height: 28px;
-                color: #6F7D88;
                 span {
                     margin-right: 10px;
+					font-size:16px;
                     &:hover {
                         text-decoration: underline;
                     }
@@ -47,17 +91,73 @@
         }
 
         dl:hover {
-            background: lighten(#323842, 10%);
-            dt {
-                color: #FFF;
-            }
+            background: lighten(rgba(41, 169, 255, 0.09), 10%);
         }
 
         dl.selected {
-            background: #323842;
+			border-color: #216bc3; 
+            background: rgba(41, 169, 255, 0.09);
+			dt {
+				font-weight:bold;
+			}
             dd {
-                display: block;
+                //display: block;
             }
         }
+    }
+}
+
+.symbol {
+	position:absolute;
+	top:0px;
+	bottom: 0px;
+	left:0px;
+	right:0px;
+	overflow:auto;
+
+    .symbol-title {
+		position:absolute;
+		left:0px;
+		right:0px;
+		top:0px;
+		height:30px;
+        font-weight: bold;
+        color: #6F7D88;
+        padding-left: 15px;
+        line-height: 32px;
+    }
+
+    .symbol-list {
+		position:absolute;
+		left:0px;
+		right:0px;
+		top:30px;
+		bottom:0px;
+		overflow:auto;
+		padding:10px;
+        
+		 .symbol-item {  
+			display:inline-block;
+			position: relative;
+			margin: 1px;
+			width: 70px;
+			height:70px;
+			cursor: pointer;
+			box-sizing:border-box;
+			padding:10px;
+			text-align:center;
+
+			svg {
+				pointer-events:none;
+				display:block;
+				width:50px;
+				height:50px;
+
+				path {
+					fill: #FFF;
+				}
+			}
+
+		}
     }
 }

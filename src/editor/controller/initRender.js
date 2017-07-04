@@ -113,7 +113,7 @@ define(
                 }
 
                 // 这里由于canvas绘制导致0.5像素偏差，需要修正一下
-                me.graduationMarker.moveTo(e.x - 1, e.y - 1);
+                //me.graduationMarker.moveTo(e.x - 1, e.y - 1);
                 me.mode.move && me.mode.move.call(me, e);
             });
 
@@ -167,12 +167,14 @@ define(
                 if (me.contextMenu.visible()) {
                     return;
                 }
-
                 // esc键，重置model
                 if (e.key === 'esc' && !me.mode.keyup) {
                     me.setMode();
-                }
-                else {
+                } else if (e.key == 'G' && !me.mode.keyup) {	// show grid 토글 
+					me.execCommand('showgrid', !me.options.axis.showGrid);
+                } else if (e.key == 'Y' && !me.mode.keyup) {	// outline 토글
+					me.execCommand('showoutline', !me.options.fontLayer.fill);
+                } else {
                     me.mode.keyup && me.mode.keyup.call(me, e);
                 }
             });
@@ -194,13 +196,13 @@ define(
                         me.execCommand('pasteshapes', shapes);
                     }
                 }
-                // 放大
+                // 放大  (ctrl + plus = 확대) 
                 else if (e.keyCode === 187 && (e.ctrlKey || e.altKey)) {
                     e.originEvent.stopPropagation();
                     e.originEvent.preventDefault();
                     me.execCommand('enlargeview')
                 }
-                // 缩小
+                // 缩小 ( alt + minus = 축소)  이상함 ,  ctrl  은 왜 동작을 안하지 
                 else if (e.keyCode === 189 && (e.ctrlKey || e.altKey)) {
                     e.originEvent.stopPropagation();
                     e.originEvent.preventDefault();

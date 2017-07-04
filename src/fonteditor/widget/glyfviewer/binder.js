@@ -11,6 +11,7 @@ define(
         var lang = require('common/lang');
         var DragSelector = require('../DragSelector');
         var program = require('../program');
+		var actions = require('../../controller/actions');
 
         function onItemClick(e) {
 
@@ -107,11 +108,11 @@ define(
                     me.fire('selection:change');
                 }
                 // 左移
-                else if (37 === e.keyCode) {
+                else if (37 === e.keyCode) {		// 왼쪽 
                     me.fire('moveleft');
                 }
                 // 右移
-                else if (39 === e.keyCode) {
+                else if (39 === e.keyCode) {		// 오른쪽 
                     me.fire('moveright');
                 }
                 // del, cut
@@ -153,18 +154,25 @@ define(
         function bindEvents() {
 
             var me = this;
-            me.main.on('click', '[data-action]', lang.bind(onItemClick, this))
-            .on('dblclick', '[data-index]', function (e) {
+
+			// 선택사항이 변경되었을 때 
+            me.on('selection:change', lang.debounce(function () {
+                var selected = getSelectedGlyf.call(me);
+                me.selectedList = selected;
+            }, 100));
+
+            me.main.on('click', '[data-action]', lang.bind(onItemClick, this))  // data-action 클릭하기 
+            .on('dblclick', '[data-index]', function (e) {  // data-index 더블클릭하기 
                 e.ctrl = e.ctrlKey || e.metaKey;
-                if (!e.ctrl && !e.shiftKey && !e.target.getAttribute('data-action') && me.mode === 'list') {
-                    var selected = $(this).attr('data-index');
+                if (!e.ctrl && !e.shiftKey && !e.target.getAttribute('data-action') /*&& me.mode === 'list'*/) {
+                    var selected = $(this).attr('data-index');      // 더블클릭하면 편집모드로 변경 
                     me.fire('edit', {
                         lastEditing: me.getEditing(),
                         list: [selected]
                     });
                 }
             })
-            .on('click', '[data-index]', function (e) {
+            .on('click', '[data-index]', function (e) {         // 현재 폰트 선택 , 클릭하기 
                 e.ctrl = e.ctrlKey || e.metaKey;
                 if (!e.target.getAttribute('data-action')) {
                     var selectedItems = null;
@@ -172,16 +180,19 @@ define(
                     var the = $(element);
 
                     // 选中单个
-                    if (!e.ctrl && !e.shiftKey) {
-                        if (me.mode === 'editor') {
+                    if (!e.ctrl && !e.shiftKey) {       // ctrl 도 아니고 shift 도 아니여야 한다. 
+                        /*if (me.mode === 'editor') { // editor 모드일 때는 바로 editing 으로 전환 */
                             var selected = the.attr('data-index');
+
                             me.fire('edit', {
                                 lastEditing: me.getEditing(),
                                 list: [selected]
                             });
-                        }
+                        /*}*/
 
+                        // 선택 여부 변경 
                         selectedItems = me.main.find('.selected');
+
                         if (the.hasClass('selected') && selectedItems.length === 1 && selectedItems[0] === element) {
                             return;
                         }
@@ -189,17 +200,35 @@ define(
                         selectedItems.removeClass('selected');
                         the.addClass('selected');
                         me.fire('selection:change');
+
+						// 한글 범위이면 자소를 편집할 수 있도록 자소 리스트를 보여준다. 
+						var ttf = program.ttfManager.get();
+						var font = ttf.glyf[selected];
+						if (0xAC00 <= font.unicode[0] && font.unicode[0] <= 0xD7A3)
+						{
+							var jaso_list = actions.splitJaso(font.unicode);
+							me.hideJasoList();
+							me.showJasoList(ttf, jaso_list);
+						} else {
+							if (!the.hasClass('jaso'))
+							{
+								me.hideJasoList();
+							}
+
+						}
+
+
                         return;
                     }
 
                     // 增加/减少选中
-                    if (e.ctrl) {
+                    if (e.ctrl) {   // ctrl 누른채 선택하면 여러개 선택 할 수 있도록 변경  
                         the.toggleClass('selected');
                         me.fire('selection:change');
                         return;
                     }
                     // 选中多个
-                    else if (e.shiftKey) {
+                    else if (e.shiftKey) {  // shift 누른채 선택하면 
                         selectedItems = Array.prototype.slice.call(me.main.find('.selected'));
                         the.addClass('selected');
 
@@ -239,6 +268,8 @@ define(
         /**
          * 获取选中的glyfIndex
          *
+         * 선택한 glyf 얻어오기 
+         *
          * @return {Array} 选中的glyf列表
          */
         function getSelectedGlyf() {
@@ -252,16 +283,19 @@ define(
         /**
          * 绑定命令菜单
          */
+		/*
         function bindCommandMenu() {
             var commandMenu = this.commandMenu;
 
             var me = this;
+
+            // 선택사항이 변경되었을 때 
             me.on('selection:change', lang.debounce(function () {
                 var selected = getSelectedGlyf.call(me);
                 me.selectedList = selected;
 
                 if (selected.length) {
-                    commandMenu.enableCommands(['copy', 'cut', 'del']);
+                    commandMenu.enableCommands(['copy', 'cut', 'del']); // copy, cut, del 활성화 
                     commandMenu[
                         selected.length === 1
                         ? 'enableCommands'
@@ -276,7 +310,7 @@ define(
 
             var delayFocus = lang.debounce(function () {
                 me.focus();
-            }, 20);
+            }, 20); 
 
             commandMenu.on('command', function (e) {
                 var command = e.command;
@@ -300,7 +334,7 @@ define(
                 delayFocus();
             });
         }
-
+		*/
         return function () {
 
             bindEvents.call(this);
@@ -309,11 +343,13 @@ define(
                 onSelect: lang.bind(onDragSelected, this)
             });
 
+			/*
             if (this.options.commandMenu) {
                 this.commandMenu = this.options.commandMenu;
                 delete this.options.commandMenu;
-                bindCommandMenu.call(this);
+	            bindCommandMenu.call(this);
             }
+			*/
         };
     }
 );

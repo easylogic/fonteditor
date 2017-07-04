@@ -12,12 +12,15 @@ define(
             [
                 ['zh-cn', require('./zh-cn/editor')],
                 ['en-us', require('./en-us/editor')],
+                ['ko-kr', require('./ko-kr/editor')],
 
                 ['zh-cn', require('./zh-cn/message')],
                 ['en-us', require('./en-us/message')],
+                ['ko-kr', require('./ko-kr/message')],
 
                 ['zh-cn', require('./zh-cn/dialog')],
-                ['en-us', require('./en-us/dialog')]
+                ['en-us', require('./en-us/dialog')],
+                ['ko-kr', require('./ko-kr/dialog')]
             ],
             window.language
         );

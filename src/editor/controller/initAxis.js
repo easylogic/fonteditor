@@ -42,10 +42,11 @@ define(
                 style: {
                     fill: true,
                     stroke: true,
-                    fillColor: 'blue',
-                    strokeColor: 'blue'
+                    fillColor: '#d6b4ef',
+                    strokeColor: '#9966ff'		// 여기에 font 사이즈도 넣을 수 있음 
                 }
             });
+			this.rightSideBearing.originPoint = this.getOriginalPoint(this.rightSideBearing.p0);
 
             // 刻度线
             this.graduation = this.graduationLayer.addShape('graduation', {
@@ -94,7 +95,7 @@ define(
             // 缩放到合适位置
             var size = this.render.getSize();
             this.render.scale(oldUnitsPerEm / this.options.unitsPerEm, {
-                x: size.width / 2,
+                x: size.width / 2,	
                 y: size.height / 2
             });
 

@@ -27,24 +27,37 @@ function format(source, data) {
 
 
 /**
- * 入口
+ * 빌드 시작
  */
 function main(version) {
     var baseDir = path.dirname(__dirname);
     var tpl = String(fs.readFileSync(baseDir + '/index.tpl'));
     tpl = tpl.replace(/\s+/g, ' ');
 
-
+    var tpl2 = String(fs.readFileSync(baseDir + '/simple.tpl'));
+    tpl2 = tpl2.replace(/\s+/g, ' ');
 
     var i18n = {};
     i18n.lang = require('./i18n.zh-cn');
     var fileContent = format(tpl, i18n);
-    fs.writeFileSync(baseDir + '/index.html', fileContent);
-
+    fs.writeFileSync(baseDir + '/index-cn.html', fileContent);
+    
+    fileContent = format(tpl2, i18n);
+    fs.writeFileSync(baseDir + '/simple-cn.html', fileContent);
 
     i18n.lang = require('./i18n.en-us');
     fileContent = format(tpl, i18n);
     fs.writeFileSync(baseDir + '/index-en.html', fileContent);
+
+    fileContent = format(tpl2, i18n);
+    fs.writeFileSync(baseDir + '/simple-en.html', fileContent);
+
+    i18n.lang = require('./i18n.ko-kr');
+    fileContent = format(tpl, i18n);
+    fs.writeFileSync(baseDir + '/index.html', fileContent);
+
+    fileContent = format(tpl2, i18n);
+    fs.writeFileSync(baseDir + '/simple.html', fileContent);
 }
 
 main.apply(null, process.argv.slice(2));

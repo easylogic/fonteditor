@@ -85,7 +85,8 @@ define(
          * @return {this}
          */
         ImageProcessor.prototype.clone = function () {
-            return new ImageProcessor(cloneImage(this.imageData));
+			var clone = cloneImage(this.imageData);
+            return new ImageProcessor(clone);
         };
 
 

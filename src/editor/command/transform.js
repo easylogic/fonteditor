@@ -31,7 +31,7 @@ define(
         var support = {
 
             /**
-             * 旋转指定角度
+             * 회전하기 (angle 만큼)
              *
              * @param {Array} shapes 图形集合
              * @param {number} angle 弧度
@@ -52,7 +52,7 @@ define(
             },
 
             /**
-             * 向左旋转
+             * 왼쪽으로 회전 (90도)
              *
              * @param {Array} shapes 图形集合
              * @return {boolean} `false`或者`undefined`
@@ -63,7 +63,7 @@ define(
             },
 
             /**
-             * 向右旋转
+             * 오른쪽으로 회전 (90도)
              *
              * @param {Array} shapes 图形集合
              * @return {boolean} `false`或者`undefined`
@@ -74,7 +74,7 @@ define(
             },
 
             /**
-             * 翻转
+             * 세로 대칭 이동 
              *
              * @param {Array} shapes 图形集合
              * @return {boolean} `false`或者`undefined`
@@ -93,7 +93,7 @@ define(
             },
 
             /**
-             * 镜像
+             * 가로 대칭 이동
              *
              * @param {Array} shapes 图形集合
              * @return {boolean} `false`或者`undefined`

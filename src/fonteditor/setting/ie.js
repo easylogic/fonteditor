@@ -12,12 +12,12 @@ define(
 
             // 导入
             'import': {
-                combinePath: true // 导入svg文件时合并`path`标签
+                combinePath: true // 导入svg文件时合并`path`标签   , svg path 합치기 
             },
 
             // 导出
             'export': {
-                saveWithGlyfName: true // 导出字体时保存字形的名字
+                saveWithGlyfName: true // 导出字体时保存字形的名字  glyfname 포함해서  저장하기 
             }
         };
 

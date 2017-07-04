@@ -14,7 +14,7 @@ define(
             down: function (e) {
                 if (1 === e.which) {
 
-                    // 是否在边界拉出参考线
+                    // 경계선이 기준을 인출 여부
                     if (e.x <= 20 || e.y <= 20) {
                         this.setMode('referenceline', referenceline.newLine, e.x, e.y);
                         return;
@@ -42,6 +42,7 @@ define(
 
 
             keydown: function (e) {
+
                 if (e.keyCode === 32) {
                     this.setMode('pan');
                 }

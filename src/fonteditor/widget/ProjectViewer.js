@@ -22,9 +22,10 @@ define(
 
             me.main.on('click', '[data-action]', function (e) {
                 e.stopPropagation();
-                var target = $(e.target);
+                var target = $(e.target).closest("[data-action]");
                 var action = target.attr('data-action');
                 var id = target.parents('[data-id]').attr('data-id');
+
                 if ('del' === action) {
                     if (!window.confirm(i18n.lang.msg_confirm_del_proj)) {
                         return;
@@ -47,6 +48,8 @@ define(
 
         /**
          * 选中一个项目
+		 * 
+		 * 프로젝트 아이디로 프로젝트 선택 설정 ( class  만 바꾸는 듯)
          *
          * @param {string} id 项目编号
          */
@@ -67,6 +70,8 @@ define(
         /**
          * 显示项目组
          *
+         * 프로젝트 리스트 출력 (서버 또는 로컬 스토리지에 있는 프로젝트를 표시한다) 
+         *
          * @param {Array} projects 项目组
          * @param {string} selectedId 选中的项目名称
          */
@@ -82,14 +87,15 @@ define(
                                     + i18n.lang.sync + '</span>')
                                   : ''
                                 )
-                    +           '<span data-action="saveas">' + i18n.lang.saveas + '</span>'
-                    +           '<span data-action="del">' + i18n.lang.del + '</span>'
+                    +           '<span data-action="saveas" title="'+ i18n.lang.saveas+'"><i class="ico i-copy"></i></span>'
+                    +           '<span data-action="del" title="'+ i18n.lang.del+'"><i class="ico i-trash"></i></span>'
                     +       '</dd>'
                     +   '</dl>';
             });
 
             this.main.html(str);
             if (undefined !== selectedId) {
+                // 프로젝트 선택 
                 this.select(selectedId);
             }
         };

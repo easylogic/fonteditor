@@ -9,6 +9,7 @@ define(
         var lang = require('common/lang');
         var support = {};
 
+        lang.extend(support, require('./point'));
         lang.extend(support, require('./shape'));
         lang.extend(support, require('./transform'));
         lang.extend(support, require('./align'));

@@ -11,7 +11,11 @@ define(
 
             dialog_no_input: '没有设置项目!',
             dialog_adjust_glyph: '调整字形',
+            dialog_reduce_glyph: 'Reduce Glyph',
             dialog_glyph_info: '字形信息',
+            dialog_points_info: 'Points Info',
+			dialog_color_palette: 'Color Palette',
+			dialog_shape_info: 'Symbol',
             dialog_adjust_pos: '调整字形位置',
 
             dialog_scale_to_bound: '缩放字形到上下边界',
@@ -24,6 +28,7 @@ define(
             dialog_find_glyf_by_index: '按字形序号查找字形',
             dialog_find_glyf_example: '<b>查找内容：</b> （代码点："$21"，名字： "uniE001"，序号："5"）',
 
+			dialog_erase: 'Erase Mode',
             dialog_editor_setting: '编辑器设置',
             dialog_editor_viewercolor: '字体列表颜色',
             dialog_editor_fontsize: '字体列表大小',
@@ -95,7 +100,8 @@ define(
             dialog_alert_set_sync_name: '请设置同步文件名称!',
             dialog_alert_set_url_or_syncurl: '需要设置远程地址或者推送地址至少一项!',
             dialog_alert_set_sync_url: '需要设置远程同步地址!',
-            dialog_alert_set_filetype: '请设置文件类型!'
+            dialog_alert_set_filetype: '请设置文件类型!',
+			dialog_alert_validate_unicode: '代码点设置不正确'
         };
     }
 );

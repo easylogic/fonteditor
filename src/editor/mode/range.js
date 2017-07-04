@@ -9,6 +9,7 @@ define(
 
         var computeBoundingBox = require('graphics/computeBoundingBox');
         var isBoundingBoxCross = require('graphics/isBoundingBoxCross');
+		var util = require('graphics/util');
 
         /**
          * 根据bound选择shapes
@@ -28,6 +29,26 @@ define(
             });
 
             return selectedShapes.length ? selectedShapes : false;
+        }
+
+        function selectPoints(bound) {
+            var shape = this.curShape;
+
+			if (!shape)
+			{
+				return false; 
+			}
+
+            var selectedPoints = [];
+
+			shape.points.forEach(function(p, i) {
+				if (util.isPointInBound(bound, p))
+				{
+					selectedPoints.push(i);
+				}
+			});
+
+            return selectedPoints.length ? selectedPoints : false;
         }
 
 
@@ -70,6 +91,12 @@ define(
                                 this.setMode('shapes', shapes, 'range');
                                 return;
                             }
+
+							if ((points = selectPoints.call(this, bound)))
+							{
+                                this.setMode('point', this.curShape, points);
+                                return;
+							}
                         }
                     }
 

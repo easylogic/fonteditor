@@ -9,6 +9,7 @@ define(
 
         var support = {
             editor: require('./editor'),
+            'simple.editor': require('./simple-editor'),
             ie: require('./ie')
         };
 

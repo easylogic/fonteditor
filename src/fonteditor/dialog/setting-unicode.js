@@ -46,7 +46,7 @@ define(
                     });
                 }
 
-                alert('代码点设置不正确');
+                alert(i18n.lang.dialog_alert_validate_unicode);
                 return false;
             }
         });

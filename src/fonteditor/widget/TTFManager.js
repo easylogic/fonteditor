@@ -1,5 +1,5 @@
 /**
- * @file ttf相关操作保持组件
+ * @file TTF 관리하는 매니저 플러그인 
  * @author mengke01(kekee000@gmail.com)
  */
 
@@ -12,9 +12,12 @@ define(
         var string = require('fonteditor-core/ttf/util/string');
         var transformGlyfContours = require('fonteditor-core/ttf/util/transformGlyfContours');
         var compound2simple = require('fonteditor-core/ttf/util/compound2simple');
+        var computeBoundingBox = require('graphics/computeBoundingBox');
 
         /**
          * 清除glyf编辑状态
+         *
+         * 수정상태 지우기 
          *
          * @param {Array} glyfList glyf列表
          * @return {Array} glyf列表
@@ -40,6 +43,8 @@ define(
 
         /**
          * 保存一个glyf副本
+         *
+         * 히스토리 추가 ttf 데이타를 그대로 넣는다. 
          *
          * @return {this}
          */
@@ -94,14 +99,81 @@ define(
         /**
          * 获取ttf对象
          *
+         * 폰트 얻어오기 
+         *
          * @return {ttfObject} ttf ttf对象
          */
         Manager.prototype.get = function () {
             return this.ttf.get();
         };
 
+		Manager.prototype.clone = function (opt) {
+			var cloneTTF = new Manager(lang.clone(this.ttf.get()));
+
+			opt = opt || {};
+
+			if (opt.empty) {
+				cloneTTF.emptyGlyf();
+			}
+
+			if (opt.reduceGlyf) {
+				cloneTTF = cloneTTF.reduceGlyf($(".text-input").text());
+			}
+			
+			if (opt.optimize){
+				cloneTTF.optimize();
+			}
+
+			return cloneTTF;
+		}
+
+		Manager.prototype.reduceGlyf = function (text) {
+
+            var indexList = this.ttf.findGlyf({
+                unicode: text.split('').map(function (u) {
+                    return u.charCodeAt(0);
+                })
+            });
+
+            if (indexList.length) {
+                var glyfList = this.ttf.getGlyf(indexList);
+                glyfList.unshift(this.ttf.getGlyfByIndex(0));
+                this.ttf.get().glyf = glyfList;
+            }
+            else {
+                this.ttf.get().glyf = [this.ttf.getGlyfByIndex(0)];
+            }
+
+            // 변경 이벤트 발생 
+            this.fireChange(true);
+
+            return this;
+		};
+
+		// 모양이 없는 glyf 삭제 
+		Manager.prototype.emptyGlyf = function () {
+			var glyf = this.ttf.get().glyf;
+
+			var temp = [];
+			for(var i = 0, len = glyf.length; i < len; i++) {
+				if (glyf[i].modify && glyf[i].modify  == 'new')
+				{
+					continue;
+				} else if (!glyf[i].contours || glyf[i].contours.length == 0) {	// 유니코드만 있고 contours 가 없는 것도 삭제 
+					continue;
+				}
+
+				temp.push(glyf[i]);
+			}
+
+			this.ttf.get().glyf = temp;
+		}
+
+
         /**
          * 查找glyf
+         *
+         * glyph 를 찾아준다. condition 에 맞게 
          *
          * @param {Object} condition 查询条件
          *
@@ -121,6 +193,8 @@ define(
         /**
          * 在指定索引前面添加新的glyf
          *
+         * glyf 를 추가한다. beforeIndex 앞에 
+         *
          * @param {Object} glyf 对象
          * @param {number} beforeIndex 索引号
          *
@@ -130,6 +204,7 @@ define(
             var glyfList = this.ttf.getGlyf();
             var unicode = 0x20;
 
+            // 유니코드 생성 
             if (!glyf.unicode || !glyf.unicode.length) {
                 // 找到unicode的最大值
                 for (var i = glyfList.length - 1; i > 0; i--) {
@@ -148,21 +223,130 @@ define(
 
                 glyf.unicode = [unicode];
             }
-
+             // 유니코드 이름 생성 
             if (!glyf.name) {
                 glyf.name = string.getUnicodeName(glyf.unicode[0]);
             }
 
+            // 수정상태 저장 
             glyf.modify = 'new';
 
-            this.ttf.insertGlyf(glyf, beforeIndex);
+            // 폰트에 glyf 넣기 
+            //this.ttf.insertGlyf(glyf, beforeIndex);
+			this.ttf.addGlyf(glyf);	//  마지막에 추가 하는걸로 합시다. 
+
+            // 변경 이벤트 발생 
             this.fireChange(true);
+
+            return this;
+        };
+
+		 Manager.prototype.insertTemplateGlyf = function (templateGlyfList) {
+            var glyfList = this.ttf.getGlyf();
+
+			templateGlyfList.forEach(function(glyf) {
+				glyf.modify = 'new';
+			});
+
+			var retList = this.ttf.insertMultipleGlyf(templateGlyfList, true);
+
+            // 변경 이벤트 발생 
+            this.fireChange(true);
+
+            return this;
+        };
+
+		Manager.prototype.copyGlyfTemplate = function (checkFunc, convertFunc) {
+
+
+			var keys = {};
+			var ttf = this.ttf; 
+			ttf.glyf.forEach(function(g, i) {
+				if (checkFunc(g))
+				{
+					keys[g.name] = i;
+				}
+			});
+
+
+			Object.keys(keys).forEach(function(key) {
+				var glyfIndex = keys[key];
+
+				if (glyfIndex && ttf.glyf[glyfIndex])
+				{
+					convertFunc(key, /* current glyf index*/glyfIndex, /* glyf name map */keys, /* glyf list */ttf.glyf);
+				}
+			});
+		}
+
+		// 유니코드 업데이트 하기 
+		 Manager.prototype.insertUnicodeGlyf = function (glyfList, hasEvent) {
+			var unitsPerEm = this.ttf.get().head.unitsPerEm;
+			var advanceWidth = unitsPerEm; 
+			var map  = this.ttf.getMapIndex();
+			for(var i = 0, len = glyfList.length; i < len; i++) {
+				var g = glyfList[i];
+				var contours = g.contours;
+
+				// contours 기반으로 좌우여백 다시 설정 
+		
+				// 设置边界
+				var box = computeBoundingBox.computePathBox.apply(null, contours) || {
+					x: 0,
+					y: 0,
+					width: 0,
+					height: 0
+				};
+			  
+				g.xMin = box.x;
+				g.yMin = box.y;
+				g.xMax = box.x + box.width;
+				g.yMax = box.y + box.height;
+				g.leftSideBearing = g.xMin;
+				g.advanceWidth = advanceWidth;
+
+				if (box) {
+                    g.rightSideBearing = g.advanceWidth - box.x - box.width;
+                } else {
+                    g.rightSideBearing = g.advanceWidth;
+                }
+
+				if (box.width === 0) {
+					g.advanceWidth = g.rightSideBearing;
+				}
+				else {
+					g.advanceWidth = advanceWidth || (g.xMax + g.rightSideBearing) || g.xMax;
+				}
+
+				delete g.rightSideBearing;
+
+				g.contours = contours;
+
+
+				var findIndex = map[g.unicode[0]];
+
+				if (findIndex)
+				{
+					this.ttf.replaceGlyf(g, findIndex);
+				} else {
+					this.ttf.addGlyf(g);	
+				}
+			}
+
+			// 변경 이벤트 발생 
+			if (hasEvent !== false)
+			{
+				this.fireChange(true, 'replace');
+			}
+
 
             return this;
         };
 
         /**
          * 合并两个ttfObject，此处仅合并简单字形
+         *
+         * 로드한 폰트 합치기 
          *
          * @param {Object} imported ttfObject
          * @param {Object} options 参数选项
@@ -188,10 +372,12 @@ define(
         /**
          * 删除指定字形
          *
+         * glyf 삭제 하기 
+         *
          * @param {Array=} indexList 索引列表
          * @return {this}
          */
-        Manager.prototype.removeGlyf = function (indexList) {
+        Manager.prototype.removeGlyf = function (indexList, isRe) {
 
             var list = this.ttf.removeGlyf(indexList);
             if (list.length) {
@@ -204,6 +390,8 @@ define(
 
         /**
          * 设置unicode代码
+         *
+         * 유니코드 설정하기 
          *
          * @param {string} unicode unicode代码
          * @param {Array=} indexList 索引列表
@@ -226,6 +414,8 @@ define(
         /**
          * 生成字形名称
          *
+         * 이름 생성하기 
+         *
          * @param {Array=} indexList 索引列表
          * @return {this}
          */
@@ -244,6 +434,8 @@ define(
 
         /**
          * 清除字形名称
+         *
+         * 이름 지우기 
          *
          * @param {Array=} indexList 索引列表
          * @return {this}
@@ -264,6 +456,8 @@ define(
         /**
          * 添加并体替换指定的glyf
          *
+         * glyf 추가 
+         *
          * @param {Array} glyfList 添加的列表
          * @param {Array=} indexList 需要替换的索引列表
          * @return {this}
@@ -283,6 +477,8 @@ define(
 
         /**
          * 替换指定的glyf
+         *  
+         * glyf 교체하기 
          *
          * @param {Object} glyf glyfobject
          * @param {string} index 需要替换的索引列表
@@ -299,6 +495,8 @@ define(
 
         /**
          * 调整glyf位置
+         *
+         * Glyf 위치 맞추기 
          *
          * @param {Array=} indexList 索引列表
          * @param {Object} setting 选项
@@ -321,6 +519,8 @@ define(
         /**
          * 调整glyf
          *
+         * glyf 맞추기 
+         *
          * @param {Array=} indexList 索引列表
          * @param {Object} setting 选项
          * @return {boolean}
@@ -341,6 +541,8 @@ define(
         /**
          * 设置glyf
          *
+         * glyf 수정하기 
+         *
          * @param {Object} setting 选项
          * @param {Array} index 索引
          * @return {boolean}
@@ -350,12 +552,14 @@ define(
             var glyf = this.getGlyf([index])[0];
             var changed = false;
 
+            // 유니코드 설정 
             if (setting.unicode.length) {
                 glyf.unicode = setting.unicode;
                 glyf.modify = 'edit';
                 changed = true;
             }
 
+            // 이름 설정 
             if (setting.name !== glyf.name) {
                 glyf.name = setting.name;
                 glyf.modify = 'edit';
@@ -386,6 +590,8 @@ define(
         /**
          * 获取glyfList
          *
+         * glyf 리스트 가지고 오기 
+         *
          * @param {Array=} indexList 索引列表
          * @return {Array} glyflist
          */
@@ -395,6 +601,8 @@ define(
 
         /**
          * 设置名字和头部信息
+         *
+         * 폰트 설정 
          *
          * @param {Object} info 设置
          * @return {this}
@@ -408,7 +616,7 @@ define(
 
         /**
          * 设置度量信息
-         *
+         * 
          * @param {Object} info 设置
          * @return {this}
          */
@@ -422,6 +630,8 @@ define(
 
         /**
          * 优化字体
+		 *
+		 * 글자 최적화 
          *
          * @return {true|Object} 优化成功，或者错误信息
          */
@@ -452,6 +662,8 @@ define(
 
         /**
          * 对字形按照unicode编码排序
+         * 
+         * glyf 정ㄹ렬하기 
          *
          * @return {true|Object} 优化成功，或者错误信息
          */
@@ -481,6 +693,9 @@ define(
 
         /**
          * 复合字形转简单字形
+		 * 
+		 * 복합 간단한 모양을 설정 모양
+		 *
          * @param {Array=} indexList 选中的字形索引
          * @return {this}
          */
@@ -535,14 +750,19 @@ define(
         /**
          * 设置状态
          *
+         * 상태 저장하기 
+         *
          * @param {string} state 状态值 new/saved
          * @return {this}
          */
         Manager.prototype.setState = function (state) {
+
+            // new 면 이제 시작 된 것이기 때문에 변경여부를 설정하지 않는다. 
             if (state === 'new') {
                 this.changed = false;
             }
             else if (state === 'saved') {
+                // save 는 저장된 표시 모두 삭제한다. 
                 this.ttf.get().glyf.forEach(function (g) {
                     delete g.modify;
                 });
@@ -560,6 +780,8 @@ define(
 
         /**
          * 获取复制的glyf对象，这里会将复合字形转换成简单字形，以便于粘贴到其他地方
+         *
+         * Glyf 복사하기 
          *
          * @param {Array=} indexList 索引列表
          * @return {Array} glyflist
@@ -589,6 +811,10 @@ define(
                 return this.ttf.calcMetrics();
             }
         };
+
+		Manager.prototype.isOTF = function () {
+			return !!this.ttf.CFF;
+		}
 
         /**
          * 注销

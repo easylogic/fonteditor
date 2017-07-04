@@ -1,12 +1,12 @@
 /**
- * @file 点绘制
+ * @file 포인트 그리기
  * @author mengke01(kekee000@gmail.com)
  */
 
 define(
     function (require) {
 
-        var POINT_SIZE = 6; // 控制点的大小
+        var POINT_SIZE = 8; // 제어포인트 크기 
 
         var proto = {
 
@@ -33,7 +33,6 @@ define(
             },
 
             draw: function (ctx, shape) {
-
                 var x = Math.round(shape.x);
                 var y = Math.round(shape.y);
                 var size = shape.size || POINT_SIZE;

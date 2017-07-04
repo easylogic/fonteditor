@@ -12,6 +12,16 @@ define(
 
         // 键盘名称映射表
         var keyCodeMap = {
+			48 : 'NUM0',
+			49 : 'NUM1',
+			50 : 'NUM2',
+			51 : 'NUM3',
+			52 : 'NUM4',
+			53 : 'NUM5',
+			54 : 'NUM6',
+			55 : 'NUM7',
+			56 : 'NUM8',
+			57 : 'NUM9',
             37: 'left',
             38: 'up',
             39: 'right',
@@ -27,7 +37,13 @@ define(
             36: 'home',
             47: 'help',
             20: 'caps',
-            9: 'tab'
+            9: 'tab',
+
+			// alphabet 
+			67 : 'C',
+			71 : 'G',
+			88 : 'X',
+			89 : 'Y'
         };
 
 

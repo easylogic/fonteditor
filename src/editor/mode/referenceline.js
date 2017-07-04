@@ -21,10 +21,17 @@ define(
                         var line = this.currentLine;
                         if (undefined !== line.p0.x) {
                             line.p0.x += camera.mx;
+							if (line.p0.x > this.render.painter.width)
+							{
+								line.p0.x = this.render.painter.width;
+							}
+							
                         }
                         else {
                             line.p0.y += camera.my;
                         }
+
+						line.originPoint = this.getOriginalPoint(line.p0);
                         this.referenceLineLayer.refresh();
                     }
                     else if (this._dragMode === mode.newLine) {
@@ -36,6 +43,7 @@ define(
                                 },
                                 style: this.options.referenceline.style
                             });
+							this.currentLine.originPoint = this.getOriginalPoint(this.currentLine.p0);
                             this._dragMode = mode.dragLine;
                             this.render.setCursor('col-resize');
                         }
@@ -46,6 +54,7 @@ define(
                                 },
                                 style: this.options.referenceline.style
                             });
+							this.currentLine.originPoint = this.getOriginalPoint(this.currentLine.p0);
                             this._dragMode = mode.dragLine;
                             this.render.setCursor('row-resize');
                         }
@@ -62,6 +71,7 @@ define(
                         // 如果右支撑被移除去了
                         if (line === this.rightSideBearing && line.p0.x < 20) {
                             line.p0.x = this.p0.x;
+							line.originPoint = this.getOriginalPoint(line.p0);
                             this.referenceLineLayer.refresh();
                         }
                         // 拖出刻度线，代表删除

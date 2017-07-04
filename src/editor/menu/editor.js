@@ -60,11 +60,6 @@ define(
                         name: 'addsupportshapes',
                         type: 'drop',
                         title: i18n.lang.drop
-                    },
-                    {
-                        name: 'addsupportshapes',
-                        type: 'du',
-                        title: i18n.lang.du
                     }
                 ]
             },
@@ -113,18 +108,6 @@ define(
             {
                 name: 'clearreferenceline',
                 title: i18n.lang.clearreferenceline
-            },
-            {
-                name: 'rescale',
-                title: i18n.lang.rescale
-            },
-            {
-                name: 'fontsetting',
-                title: i18n.lang.fontsetting
-            },
-            {
-                name: 'save',
-                title: i18n.lang.save
             }
         ];
     }

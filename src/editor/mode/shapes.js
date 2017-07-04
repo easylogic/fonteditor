@@ -21,9 +21,24 @@ define(
             down: [0, 1]
         };
 
+        var stepMapForShift = {
+            left: [-10, 0],
+            right: [10, 0],
+            up: [0, -10],
+            down: [0, 10]
+        };
+
+        var stepMapForControl = {
+            left: [-50, 0],
+            right: [50, 0],
+            up: [0, -50],
+            down: [0, 50]
+        };
+
+
 
         function onContextMenu(e) {
-
+			// 오른쪽 메뉴를 안쓰도록 하자. 그래야 쓰기 쉬워진다. 
             if (!this.currentGroup.shapes.length) {
                 return;
             }
@@ -39,6 +54,7 @@ define(
                 case 'bottomshape':
                 case 'upshape':
                 case 'downshape':
+                case 'createsymbol':  // 선택한 Shape 를 심볼로 만들기 , 여러개를 선택할 수도 있을까? 
                     this.execCommand(command, shapes[0]);
                     break;
                 case 'joinshapes':
@@ -111,7 +127,7 @@ define(
                         }
 
                         var shapes = [shape];
-                        // 多选
+                        // ctrl + mouse down 은  여러개 선택하기 
                         if (e.ctrlKey) {
                             shapes = shapes.concat(this.currentGroup.shapes);
                         }
@@ -135,7 +151,7 @@ define(
                     this.currentGroup.beginTransform(this.currentPoint, this.render.camera, e);
                 }
                 else {
-                    // 复制模式
+                    // 드래그 하면서 모양 복사하기  (ctrl + alt + mouse move 하면 객체 복사) 
                     if (e.ctrlKey && e.altKey) {
                         var shapes = lang.clone(this.currentGroup.shapes);
                         var fontLayer = this.fontLayer;
@@ -192,7 +208,7 @@ define(
 
 
             rightdown: function (e) {
-                // 对单个shape进行操作
+                // 그룹일때랑 아닐때랑 메뉴를 다르게 한다. 이것도 거의 쓰는 않는 방식으로 가자. 
                 this.contextMenu.onClick = lang.bind(onContextMenu, this);
                 this.contextMenu.show(e,
                     this.currentGroup.shapes.length > 1
@@ -203,7 +219,7 @@ define(
 
             click: function (e) {
                 if (this.clicked) {
-                    // 变换编辑模式
+                    // 모드 변경 (scale 은 크기변경 모드, rotate 는 회전 모드 )
                     var mode = this.currentGroup.mode;
                     this.currentGroup.setMode(mode === 'scale' ? 'rotate' : 'scale');
                     this.currentGroup.refresh();
@@ -235,21 +251,28 @@ define(
 
             keydown: function (e) {
                 // 剪切
-                if (e.keyCode === 88 && e.ctrlKey) {
+                if (e.key === 'X' && e.ctrlKey) {	// ctrl + x 는 자르기 
                     if (this.currentGroup.shapes.length) {
                         this.execCommand('cutshapes', this.currentGroup.shapes);
                     }
                 }
                 // 复制
-                else if (e.keyCode === 67 && e.ctrlKey) {
+                else if (e.key === 'C' && e.ctrlKey) {		// ctrl + c 는 복사 
                     if (this.currentGroup.shapes.length) {
                         this.execCommand('copyshapes', this.currentGroup.shapes);
                     }
                 }
 
-                // 移动
+                // 이동
                 if (stepMap[e.key]) {
-                    this.currentGroup.move(stepMap[e.key][0], stepMap[e.key][1]);
+					if (e.ctrlKey) {	// control key 로 하면 50px 씩 이동한다. 좀 더 빠르게 멀리 갈 수 있음. 
+	                    this.currentGroup.move(stepMapForControl[e.key][0], stepMapForControl[e.key][1]);
+					} else if (e.shiftKey) {	// shift 로 하면 10px 씩 이동한다. 좀 더 빠르게 멀리 갈 수 있음. 
+	                    this.currentGroup.move(stepMapForShift[e.key][0], stepMapForShift[e.key][1]);
+					} else {
+		                this.currentGroup.move(stepMap[e.key][0], stepMap[e.key][1]);
+					}
+
                 }
             },
 

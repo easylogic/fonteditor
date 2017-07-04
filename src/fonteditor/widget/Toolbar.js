@@ -27,6 +27,11 @@ define(
                     return;
                 }
 
+				if ($(this).hasClass('not-btn'))
+				{
+					return ;
+				}
+
                 var id = this.getAttribute('data-id');
                 var command = me.commands[id];
                 if (command) {
@@ -50,6 +55,21 @@ define(
                     me.fire('command', {
                         command: name,
                         args: command
+                    });
+                }
+            });
+
+			this.main.on('input', '[data-id] > input', function (e) {
+                var id = $(this).parent().data('id');
+                var command = me.commands[id];
+
+                if (command) {
+                    var name = command.name;
+					var value = this.value; 
+
+                    me.fire('command', {
+                        command: name,
+                        args: value
                     });
                 }
             });
@@ -87,16 +107,26 @@ define(
                 if (item.type === 'split') {
                     str += '<li data-id="-1" data-split="1"></li>';
                 }
+				else if (item.type == 'input') {
+                    str += '<li data-id="' + i + '" class="not-btn">' + item.title + ' <input type="number" min="1" max="100" /></li>';
+				}
                 else {
 
                     str += '<li data-id="' + i + '"'
                         + (item.disabled ? ' data-disabled="1"' : '')
                         + (item.on ? ' data-on="1"' : '')
                         + (item.ico ? 'data-theme="ico" title="' + item.title + '"' : '')
+                        + (item.direction ? 'data-direction="'+item.direction+'"' : '')
                         + '>';
 
                     if (item.ico) {
                         str += '<i class="ico i-' + item.ico + '"></i>';
+
+						if (item.text)
+						{
+	                        str += item.text
+						}
+
                     }
                     else {
                         str += item.title

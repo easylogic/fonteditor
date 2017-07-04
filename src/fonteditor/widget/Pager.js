@@ -9,14 +9,14 @@ define(
         var observable = require('common/observable');
         var i18n = require('../i18n/i18n');
         var PAGER_TPL = ''
-            + '<button data-pager="prev" type="button" class="btn btn-flat btn-new btn-sm">'
+            + '<button data-pager="prev" type="button" class="btn btn-flat btn-new btn-sm">＜'
             +   i18n.lang.prevpage + '</button>'
             + '<input data-pager="text" type="text" class="form-control">'
             + '<span data-pager="info"></span>'
             + '<button data-pager="goto" type="button" class="btn btn-flat btn-new btn-sm">'
             +   i18n.lang.gotopage + '</button>'
             + '<button data-pager="next" type="button" class="btn btn-flat btn-new btn-sm">'
-            +   i18n.lang.nextpage + '</button>';
+            +   i18n.lang.nextpage + '＞</button>';
 
 
         /**
@@ -93,7 +93,7 @@ define(
          */
         Pager.prototype.show = function (page, pageSize, total) {
             if (total <= pageSize) {
-                this.hide();
+                //this.hide();
             }
             else {
                 this.page = page;

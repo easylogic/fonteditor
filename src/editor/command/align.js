@@ -12,7 +12,7 @@ define(
         var support = {
 
             /**
-             * 对齐方式
+             * 정렬하기 
              *
              * @param {Array} shapes 形状集合
              * @param {string} align 对齐方式
@@ -68,7 +68,7 @@ define(
             },
 
             /**
-             * 字体垂直对齐
+             * 수직정렬 
              *
              * @param {Array} shapes 形状集合
              * @param {string} align 对齐方式
@@ -116,7 +116,7 @@ define(
             },
 
             /**
-             * 字体水平对齐
+             * 수평 정렬
              *
              * @param {Array} shapes 形状集合
              * @param {string} align 对齐方式

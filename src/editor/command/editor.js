@@ -15,22 +15,30 @@ define(
         return {
 
             /**
-             * 重置缩放
+             * 줌 리셋
              */
             rescale: function (scale) {
+
                 this.coverLayer.clearShapes();
                 var size = this.render.getSize();
-                scale = scale || (512 / this.options.unitsPerEm);
 
+                scale = scale || (512 / this.options.unitsPerEm);
+				var distX = 0;
+
+				if (this.options.simple)   //   simple  모드에서는 스케일을 고정시킨다.  0.5 로 
+				{
+					//scale = 0.5;
+				}
+				
                 this.render.scaleTo(scale, {
                     x: size.width / 2,
                     y: size.height / 2
-                });
+                });	// adjust  한다음  refresh  할 텐데 
                 this.setMode();
             },
 
             /**
-             * 放大视图
+             * 확대
              */
             enlargeview: function () {
                 var size = this.render.getSize();
@@ -41,7 +49,7 @@ define(
             },
 
             /**
-             * 缩小视图
+             * 축소
              */
             narrowview: function () {
                 var size = this.render.getSize();
@@ -50,9 +58,14 @@ define(
                     y: size.height / 2
                 });
             },
+ 
+			//  direction  에 따라 화면 이동하기 
+			moveview : function (obj) {
+				this.move(obj.direction);
+			},
 
             /**
-             * 撤销
+             * 되돌리기
              */
             undo: function () {
                 var shapes = this.history.back();
@@ -62,7 +75,7 @@ define(
             },
 
             /**
-             * 恢复
+             * 다시실행하기
              */
             redo: function () {
                 var shapes = this.history.forward();
@@ -71,8 +84,18 @@ define(
                 this.setMode();
             },
 
+			/**
+			 * 캔버스 크기 조정하기 
+			 *
+			 */
+			resize : function () {
+				this.render.resize();
+			},
+
             /**
              * 是否打开网格吸附
+			 *
+			 * Grid  에 붙이기 
              * @param {boolean} enabled 是否
              */
             gridsorption: function (enabled) {
@@ -82,6 +105,8 @@ define(
 
             /**
              * 是否打开轮廓吸附
+			 * 
+			 * shape  에 붙이기 
              * @param {boolean} enabled 是否
              */
             shapesorption: function (enabled) {
@@ -90,13 +115,49 @@ define(
             },
 
             /**
-             * 是否打开轮廓吸附
+             * 그리드 보기 설정 
              * @param {boolean} enabled 是否
              */
             showgrid: function (enabled) {
+				if (typeof enabled == 'undefined')
+				{
+					enabled = !this.options.axis.showGrid;
+				}
+
                 setSelectedCommand(commandList.editor, 'setting.showgrid', !!enabled);
                 this.options.axis.showGrid = this.axis.showGrid = !!enabled;
                 this.axisLayer.refresh();
+            },
+
+			/**
+			 * outline 보기 설정 (폰트 색상을 채우지 않음) 
+			 *
+			 */
+			showoutline : function (enabled) {
+				if (typeof enabled == 'undefined')
+				{
+					enabled = !this.options.fontLayer.fill;
+				}
+
+				this.setFontOptions({ fill : enabled  });
+			},
+
+			/**
+			 * 축의 기본 정보 보이기 안보이기 설정 
+			 *
+			 */
+			showaxis : function () {
+				this.options.axis.hide = !this.options.axis.hide;
+				this.axisLayer.toggle(!this.options.axis.hide);
+			},
+
+			/**
+			 * 레퍼런스 라인 기본 정보 보이기 안보이기 설정 
+			 *
+			 */
+            showreference : function () {
+				this.options.referenceline.hide = !this.options.referenceline.hide;
+				this.referenceLineLayer.toggle(!this.options.referenceline.hide);
             },
 
             /**
@@ -110,6 +171,7 @@ define(
 
             /**
              * 添加path
+			 *  path  추가 모드 변경 
              */
             addpath: function () {
                 var me = this;
@@ -121,6 +183,9 @@ define(
 
             /**
              * 添加自选图形
+             *
+             * 특정 모양 추가하기 
+             *
              * @param {string} type 图形类型
              */
             addsupportshapes: function (type) {
@@ -128,6 +193,10 @@ define(
                     this.setMode('addshapes', lang.clone(shapesSupport[type]));
                 }
             },
+
+			'import-pic' : function () {
+				console.log(this);
+			},
 
             /**
              * 设置字体信息

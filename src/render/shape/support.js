@@ -11,6 +11,7 @@ define(
             cpoint: require('./CirclePoint'),
             point: require('./Point'),
             rect: require('./Rect'),
+            image: require('./Image'),
             polygon: require('./Polygon'),
             font: require('./Font'),
             path: require('./Path'),

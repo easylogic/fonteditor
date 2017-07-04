@@ -117,6 +117,10 @@ define(
             {
                 name: 'addreferenceline',
                 title: i18n.lang.addboundreferenceline
+            },
+            {
+                name: 'createsymbol',
+                title: i18n.lang.createsymbol
             }
         ];
     }

@@ -54,7 +54,7 @@ define(
         }
 
         /**
-         * 查找轮廓集合
+         * 查找轮廓集合 윤곽 세트 찾기
          * @param  {Object} imageData 二值图像数据
          * @param  {number} minimumPoints     最少点数，如果轮廓点个数小于最少点数，则被去除
          * @param  {number} smooth 平滑边界
@@ -109,7 +109,7 @@ define(
                 data[row + j] = bg;
             }
 
-            // 查找 第一行
+            // 查找 第一行  첫 번째 행을 찾기
             for (j = 0; j < width;) {
                 for (; j < width && data[j] === bg; j++) {
                 }
@@ -135,7 +135,7 @@ define(
                 upperLine.push(tmpPrev = tmpPrev.next);
             }
 
-            // 查找中间行
+            // 查找中间行  중간 행을 찾습니다
             for (i = 1; i < height; i++) {
 
                 row = i * width;
@@ -173,7 +173,7 @@ define(
 
                 connectFlag = ICV_SINGLE;
 
-                // 查找当前行和上一行之间的连接
+                // 查找当前行和上一行之间的连接  현재 및 이전 라인 사이의 연결을 찾기
                 for (k = 0, n = 0; k < upperTotal && n < lowerTotal;) {
 
                     switch (connectFlag) {
@@ -305,7 +305,7 @@ define(
             var contour;
             var points;
 
-            // 查找轮廓集合
+            // 查找轮廓集合  윤곽 세트 찾기
             for (k = 0; k < 2; k++) {
 
                 points = k === 0 ? extPoints : inPoints;

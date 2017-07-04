@@ -1,12 +1,12 @@
 /**
- * @file 圆形点绘制
+ * @file 원형 점 무승부
  * @author mengke01(kekee000@gmail.com)
  */
 
 define(
     function (require) {
 
-        var POINT_SIZE = 2;
+        var POINT_SIZE = 5;
 
         var proto = {
 

@@ -45,7 +45,7 @@ define(
             // 是否允许缩放
             if (this.options.enableScale) {
                 this.capture.on('wheel', function (e) {
-                    if (e.altKey || e.ctrlKey) {
+                    if (e.altKey || e.ctrlKey) {   //  alt, ctrl  키 누르면  scale 조정 
 
                         var defaultRatio = me.options.defaultRatio || 1.2;
                         var ratio = e.delta > 0 ?  defaultRatio : 1 / defaultRatio;
@@ -57,9 +57,12 @@ define(
                             return;
                         }
 
-                        me.scale(ratio, e);
+                        me.scale(ratio, e);		// 비율 조정 
                     }
                     else {
+						// 간격 움직임 
+						// shift  누르면  x  축, 
+						// 아니면  y  축 
                         var moval = e.delta > 0 ? 30 : -30;
                         me.move(e.shiftKey ? moval : 0, e.shiftKey ? 0 : moval);
                         me.refresh();
@@ -71,20 +74,7 @@ define(
             if (this.options.enableResize) {
                 this.resizeCapture = new ResizeCapture(this.main);
                 this.resizeCapture.on('resize', function (e) {
-                    // 对象被隐藏，不做处理，仅作标记，refresh之后再处理
-                    if (me.main.style.display === 'none') {
-                        me.hasResized = true;
-                        return;
-                    }
-
-                    var prevSize = me.painter.getSize();
-                    me.painter.resetSize();
-                    var size = me.painter.getSize();
-
-                    me.fire('resize', {
-                        size: size,
-                        prevSize: prevSize
-                    });
+					 me.resize();
                 });
             }
         }
@@ -103,7 +93,7 @@ define(
          */
         function Render(main, options) {
 
-            this.main = main;
+			this.main = main;
 
             this.options = lang.extend(
                 {
@@ -124,6 +114,24 @@ define(
 
             init.call(this);
         }
+
+		Render.prototype.resize = function () {
+			var me = this; 
+
+			if (me.main.style.display === 'none') {
+				me.hasResized = true;
+				return;
+			}
+
+			var prevSize = me.painter.getSize();
+			me.painter.resetSize();
+			var size = me.painter.getSize();
+
+			me.fire('resize', {
+				size: size,
+				prevSize: prevSize
+			});
+		}
 
         /**
          * 设置鼠标样式
@@ -167,6 +175,7 @@ define(
         Render.prototype.scale = function (ratio, p, noRefresh) {
 
             var toScale = this.camera.scale * ratio;
+
             if (
                 toScale < this.options.minScale
                 || toScale > this.options.maxScale
@@ -199,6 +208,7 @@ define(
         Render.prototype.scaleTo = function (scale, p, noRefresh) {
 
             // 缩放
+
             this.scale(scale / this.camera.scale, this.camera.center, true);
 
             // 平移
@@ -206,6 +216,7 @@ define(
             this.camera.reset(p, scale);
 
             if (true !== noRefresh) {
+
                 this.painter.refresh();
             }
         };

@@ -11,7 +11,7 @@ define(
         var lang = require('./lang');
 
         var IndexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.msIndexedDB;
-
+		var recover = {};
         /**
          * 数据存储的构造函数
          *
@@ -62,6 +62,15 @@ define(
             return this;
         };
 
+		DataStore.prototype.saveFilterFunction = function (data) {
+			recover.tempSuccess = data.readOptions.success;
+			delete data.readOptions.success;			
+		}
+
+		DataStore.prototype.restoreFilterFunction = function (data) {
+			data.readOptions.success = recover.tempSuccess;	// 함수 복구 
+		}
+
         /**
          * 添加数据
          *
@@ -79,16 +88,22 @@ define(
 
             if (this.db) {
                 var transaction = this.db.transaction([this.storeName], 'readwrite');
+
+				// 이건 왜 있는 걸까? 
+				var self = this; 
+				//this.saveFilterFunction(data);
                 var request = transaction.objectStore(this.storeName).add({
                     id: key,
                     data: data
                 });
 
                 request.onsuccess = function (e) {
+					//self.restoreFilterFunction(data);
                     onSuccess && onSuccess(key);
                 };
 
                 request.onerror = function (e) {
+					//self.restoreFilterFunction(data);
                     onError && onError(e);
                 };
             }

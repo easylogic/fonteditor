@@ -9,6 +9,7 @@ define(
         var program = require('./widget/program');
         var controller = require('./controller/default');
         var actions = require('./controller/actions');
+		var imgCount=2;
 
         function loadFiles(files) {
             var file = files[0];
@@ -65,6 +66,7 @@ define(
         }
 
         function bindEvent() {
+			// 외부 버튼들 이벤트 설정,  data-action 으로 기능 정의 
             $('.action-groups').delegate('[data-action]', 'click',  function (e) {
                 var action = this.getAttribute('data-action');
                 if ('1' !== this.getAttribute('data-disabled') && actions[action]) {
@@ -74,10 +76,14 @@ define(
             });
 
             document.getElementById('font-import').addEventListener('change', onUpFile);
-            // 阻止拖拽默认事件
+            // 문서 전체 드래그 막기 
             $(document).on('dragleave drop dragenter dragover', function (e) {
                 e.preventDefault();
             });
+
+			// 글자 목록에 드래그 앤 드롭 
+			// woff, eot, ttf, svg  등의 폰트 파일 
+			// 순수하게 그림 하나 있는  svg  파일 
             document.getElementById('glyf-list').addEventListener('drop', onDrop);
         }
 
@@ -87,8 +93,8 @@ define(
             }
 
             program.project.ready().then(function () {
-                program.projectViewer.select(projectId);
-                program.projectViewer.fire('open', {
+                program.projectViewer.select(projectId);	// 화면 설정 바꾸고 
+                program.projectViewer.fire('open', {		// open 이벤트를 발생시킨다. 
                     projectId: projectId
                 });
             });
@@ -117,41 +123,22 @@ define(
              */
             init: function () {
 
+				//var img1=new Image();
+				//img1.src="https://mdn.mozillademos.org/files/222/Canvas_createpattern.png";
+
+				//program.pattern1 = img1;
+
+				window.program = program;
+
                 bindEvent();
 
+				program.isSimpleMode = $("body").hasClass("simple-mode");
+
                 program.setting = require('./widget/settingmanager');
+				program.setting.setSimpleMode(program.isSimpleMode);
 
                 program.config = require('./config');
 
-                // 拖拽面板管理器
-                var Spliter = require('./widget/Spliter');
-                program.spliter = new Spliter($('#glyf-list-spliter'));
-
-                // glyf查看器命令组
-                var Toolbar = require('./widget/Toolbar');
-                var viewerCommandMenu = new Toolbar($('#glyf-list-commandmenu'), {
-                    commands: require('./menu/viewer')
-                });
-
-                var Pager = require('./widget/Pager');
-                program.viewerPager = new Pager($('#glyf-list-pager'));
-
-                // glyf查看器
-                var GLYFViewer = require('./widget/glyfviewer/GLYFViewer');
-                program.viewer = new GLYFViewer($('#glyf-list'), {
-                    commandMenu: viewerCommandMenu
-                });
-
-                // 字体查看器命令组
-                var editorCommandMenu = new Toolbar($('#editor-commandmenu'), {
-                    commands: require('./menu/editor')
-                });
-
-                // 字体查看器
-                var GLYFEditor = require('./widget/GLYFEditor');
-                program.editor = new GLYFEditor($('#glyf-editor'), {
-                    commandMenu: editorCommandMenu
-                });
 
                 // 项目管理
                 var ProjectViewer = require('./widget/ProjectViewer');
@@ -172,6 +159,33 @@ define(
                 // 同步组件
                 program.sync = require('./widget/sync');
 
+                // glyf查看器命令组
+                var Toolbar = require('./widget/Toolbar');
+
+                var Pager = require('./widget/Pager');
+                program.viewerPager = new Pager($('#glyf-list-pager'));
+
+                // glyf查看器
+                var GLYFViewer = require('./widget/glyfviewer/GLYFViewer');
+                program.viewer = new GLYFViewer($('#glyf-list'));
+
+
+                // 字体查看器命令组
+                var editorCommandMenu = new Toolbar($('#editor-commandmenu'), {
+                    commands: program.isSimpleMode ? require('./menu/simple-editor') : require('./menu/editor')
+                });
+
+                var screenCommandMenu = new Toolbar($('#editor-commandmenu-bottom'), {
+                    commands: program.isSimpleMode ? require('./menu/simple-screen') : require('./menu/screen')
+                });
+
+                // 字体查看器
+                var GLYFEditor = require('./widget/GLYFEditor');
+                program.editor = new GLYFEditor($('#glyf-editor'), {
+                    commandMenu: editorCommandMenu,
+					screenCommandMenu : screenCommandMenu
+                });
+
                 controller.init(program);
 
                 // 加载用户设置
@@ -187,6 +201,7 @@ define(
                 if (projectId) {
                     loadProject(projectId);
                 }
+
 
             }
         };

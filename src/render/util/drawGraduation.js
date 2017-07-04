@@ -44,9 +44,11 @@ define(
 
             var originGap = config.graduation.gap;
             var curGap = config.graduation.gap * config.scale;
+			var dist = config.graduation.dist || 1;
             var scale;
             var gap;
             var markSize;
+			var markDist = dist * 10;
             var axis;
             var i;
 
@@ -71,7 +73,6 @@ define(
             }
 
             ctx.fillStyle = ctx.strokeStyle;
-
             // 横轴线
             for (axis = x, i = 0; axis < width; i++, axis += markSize) {
                 ctx.moveTo(axis, thickness - (i % 5 ? markHeight : 2 * markHeight));
@@ -84,6 +85,7 @@ define(
             }
 
             // 纵轴线
+
             var textOffset = 0; // 文本偏移
             for (axis = y, i = 0; axis > thickness; i++, axis -= markSize) {
                 ctx.moveTo(thickness - (i % 5 ? markHeight : 2 * markHeight), axis);
@@ -101,29 +103,32 @@ define(
             ctx.fillStyle = config.graduation.color || '#000';
             ctx.scale(0.8, 0.8);
             textOffset = thickness - 8; // 文本偏移
+			ctx.font = config.graduation.font || ctx.font;
+			ctx.textAlign="center"; 
 
             for (axis = x, i = 0; axis < width; i++, axis += markSize) {
-                if (0 === i % 10) {
-                    ctx.fillText(Math.ceil(gap * i), axis * 1.25 - 3, textOffset * 1.25);
+                if (0 === i % markDist) {
+                    ctx.fillText(Math.ceil(gap * i), axis * 1.25, textOffset * 1.25 - 5 );
                 }
             }
 
             for (axis = x, i = 0; axis > thickness; i++, axis -= markSize) {
-                if (0 === i % 10) {
-                    ctx.fillText(Math.ceil(-gap * i), axis * 1.25 - 3, textOffset * 1.25);
+                if (0 === i % markDist) {
+                    ctx.fillText(Math.ceil(-gap * i), axis * 1.25, textOffset * 1.25 - 5);
                 }
             }
 
             // 纵轴线
-            textOffset = 0; // 文本偏移
+			ctx.textAlign="end"; 
+            textOffset = thickness - 12; // 文本偏移
             for (axis = y, i = 0; axis > thickness; i++, axis -= markSize) {
-                if (0 === i % 10) {
+                if (0 === i % markDist) {
                     ctx.fillText(Math.ceil(gap * i), textOffset * 1.25, axis * 1.25 + 3);
                 }
             }
 
             for (axis = y, i = 0; axis < height; i++, axis += markSize) {
-                if (0 === i % 10) {
+                if (0 === i % markDist) {
                     ctx.fillText(Math.ceil(-gap * i), textOffset * 1.25, axis * 1.25 + 3);
                 }
             }

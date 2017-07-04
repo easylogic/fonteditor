@@ -36,11 +36,15 @@ define(
          * @param {Object} options 绘制参数
          */
         function setContextStyle(context, options) {
-            context.fillStyle = options.fillColor || 'black';
-            context.strokeStyle = options.strokeColor || 'black';
+            context.fillStyle = options.fillColor || '#00ff33';
+            context.strokeStyle = options.strokeColor || '#00ff33';
             context.lineWidth = options.lineWidth || 1;
-            context.font = options.font || 'normal 10px arial';
+            context.font = options.font || 'normal 18px arial';
         }
+
+		function getRandomColor() {
+			return "#" + (Math.round(Math.random() * 0XFFFFFF)).toString(16);
+		}
 
         /**
          * 层级基础对象
@@ -82,7 +86,7 @@ define(
              * @return {this}
              */
             refresh: function () {
-                // console.time('layer-refresh');
+
                 var support = this.painter.support;
                 var context = this.context;
                 var options = this.options;
@@ -161,7 +165,7 @@ define(
                     context.translate(0.5, 0.5);
                 }
 
-                // console.timeEnd('layer-refresh');
+
                 return this;
             },
 
@@ -278,6 +282,18 @@ define(
                 return result.length ? result : false;
             },
 
+			filterShape : function (callback) {
+				var result = [];
+                var shapes = this.shapes;
+				for (var i = 0, l = shapes.length; i < l; i++) {
+                    if ( callback.call(this, shapes[i]) == true ) {
+                        result.push(shapes[i]);
+                    }
+                }
+
+				return result; 
+			},
+
             /**
              * 根据镜头调整shape
              *
@@ -303,9 +319,9 @@ define(
 
                     shape = shapes[i];
                     if ((drawer = support[shape.type])) {
-                        if (camera.ratio !== 1) {
+                        //if (camera.ratio !== 1) {			// ratio  가 1 일 때는 왜 안했지? 
                             drawer.adjust(shape, camera);
-                        }
+                        //}
                     }
 
                 }
@@ -316,8 +332,8 @@ define(
             /**
              * 移动指定的偏移量
              *
-             * @param {number} x 偏移
-             * @param {number} y 偏移
+             * @param {number} x 오프셋
+             * @param {number} y 오프셋
              * @param {Object|string|number} shape shape对象
              * @return {this}
              */
@@ -443,7 +459,25 @@ define(
                 this.main = this.painter = this.context = this.options = null;
                 this.shapes.length = 0;
                 this.shapes = null;
-            }
+            },
+			
+			hide : function () {
+				this.context.canvas.style.display = 'none';
+			},
+
+			show : function () {
+				this.context.canvas.style.display = 'inline-block';
+			},
+
+			toggle : function (isShow) {
+				if (typeof isShow == 'undefined')
+				{
+					isShow = this.context.canvas.style.display != 'none';
+				} 
+				
+				this.context.canvas.style.display = !!isShow ? 'inline-block' : 'none';
+				
+			}
         };
 
         return Layer;

@@ -10,6 +10,7 @@ define(
         var lang = require('common/lang');
         var DataStore = require('common/DataStore');
         var Resolver = require('common/promise');
+		var program = require('./program');
 
         var storage = window.localStorage || window.sessionStorate;
         var projectDataStore;

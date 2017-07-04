@@ -14,6 +14,7 @@ define(
         var lang = require('common/lang');
         var program = require('../widget/program');
         var drawPath = require('render/util/drawPath');
+        var DrawProcessor = require('graphics/image/DrawProcessor');
         var ImageProcessor = require('graphics/image/ImageProcessor');
         var ContourPointsProcessor = require('graphics/image/ContourPointsProcessor');
         var getHistogram = require('graphics/image/util/getHistogram');
@@ -34,22 +35,44 @@ define(
             var width = image.width;
             var height = image.height;
 
-            canvas.width = width;
-            canvas.height = height;
 
-            if (pixelRatio !== 1) {
-                canvas.style.width = (width / pixelRatio) + 'px';
-                canvas.style.height = (height / pixelRatio) + 'px';
-            }
+			if (program.isSimpleMode)
+			{
 
-            canvas.ctx.drawImage(image, 0, 0, width, height);
+				if (pixelRatio !== 1) {
+					canvas.style.width = (width / pixelRatio) + 'px';
+					canvas.style.height = (height / pixelRatio) + 'px';
+				}
 
-            var imgData = canvas.ctx.getImageData(0, 0, width, height);
+				// 이미지를 바로 그리고 최종적으로 이미지를 개별 포인트로 변환한다. 
+				canvas.ctx.drawImage(image, 0, 0, width, height);
+				program.loading.hide();
+			} else {
+
+				if (pixelRatio !== 1) {
+					canvas.style.width = (width / pixelRatio) + 'px';
+					canvas.style.height = (height / pixelRatio) + 'px';
+				}
+
+				canvas.ctx.drawImage(image, 0, 0, width, height);
+				createContoursForImage ();
+				refreshCanvasOrigin();
+			}
+
+        }
+
+		function createContoursForImage () {
+			var canvas = $('#import-pic-canvas-origin').get(0);
+
+			var width = canvas.width;
+			var height = canvas.height; 
+
+			var imgData = canvas.ctx.getImageData(0, 0, width, height);
+
             var processor = program.data.imageProcessor;
             processor.set(imgData);
             processor.grayData = processor.clone();
             processor.resultContours = null;
-
             // 使用ostu来设置灰度阈值
             var histoGram = getHistogram(processor.get());
             getFilter('threshold').val(getThreshold(histoGram, 'ostu'));
@@ -57,10 +80,10 @@ define(
 
             processImage();
             binarizeImage();
-            refreshCanvasOrigin();
-        }
 
-        function refreshCanvasOrigin() {
+		}
+
+        function refreshCanvasOrigin(isOrigin) {
 
             var binarizedImage = program.data.imageProcessor.get();
             var canvas = $('#import-pic-canvas-origin').get(0);
@@ -69,8 +92,8 @@ define(
             var height = binarizedImage.height;
 
             if (!binarizedImage.binarize) {
-                binarizeImage();
-                binarizedImage = program.data.imageProcessor.get();
+                binarizeImage();             
+				binarizedImage = program.data.imageProcessor.get();
             }
 
             var imgData = canvas.ctx.getImageData(0, 0,  width, height);
@@ -107,14 +130,19 @@ define(
                 });
             });
 
-            canvas.ctx.putImageData(imgData, 0, 0);
+			canvas.ctx.putImageData(imgData, 0, 0);
+			canvas.style.visiblity = 'visible';
+			program.loading.hide();
 
-            canvas.style.visiblity = 'visible';
-            program.loading.hide();
 
-            setTimeout(function () {
-                refreshCanvasFit();
-            }, 20);
+			if (!isOrigin)
+			{
+				setTimeout(function () {
+					refreshCanvasFit();
+				}, 20);
+
+			}
+    
         }
 
         function refreshCanvasFit() {
@@ -325,10 +353,19 @@ define(
                     alert(i18n.lang.msg_input_pic_url);
                 }
             });
+
+			$("#isErase").on('click', function () {
+				program.data.drawProcessor.setErase($(this).prop('checked'));
+			});
+
+			program.data.drawProcessor.initEvent();
         }
 
         function unbindEvent() {
-            $('#import-pic-file').get(0).onchange = null;
+            if ($('#import-pic-file').get(0))
+            {
+				$('#import-pic-file').get(0).onchange = null;
+            }
             $('#import-pic-dialog').off('click');
             $('#import-pic-threshold-pre').off('change');
             $('#import-pic-url-text').off('keyup');
@@ -345,19 +382,68 @@ define(
             },
 
             set: function () {
+
                 program.data.imageProcessor = new ImageProcessor();
                 program.data.pointsProcessor = new ContourPointsProcessor();
+				program.data.drawProcessor = new DrawProcessor($('#import-pic-canvas-origin').get(0));
                 bindEvent();
+
+		        var $preview = $('#import-pic-dialog').find('.preview-panel');				
+
+				if (program.isSimpleMode)
+				{   
+					$preview.removeClass('fitpanel').removeClass('showright').toggleClass('showleft');
+					var $editor  = $(".editor.editing");
+					var pos = $editor.offset();
+					pos.top -= 40;
+					this.getDialog().css(pos).width($editor.width());
+					$preview.width($editor.width()).height($editor.height());
+
+					$("#editor-commandmenu").hide();
+					$("#editor-commandmenu-bottom").hide();
+		
+
+				}
+
+			
+				var width = $preview.find(".canvas-left").width();
+				var height = $preview.find(".canvas-left").height();
+
+				
+				var canvasOrigin = $('#import-pic-canvas-origin').get(0);
+				canvasOrigin.width = width; 
+				canvasOrigin.height = height;
+
+				if (program.isSimpleMode && this.options.glyf)
+				{
+					program.data.drawProcessor.drawGlyf(this.options.glyf);
+				}
+
+
             },
             onDispose: function () {
                 unbindEvent();
                 program.data.imageProcessor.grayData && program.data.imageProcessor.grayData.dispose();
                 program.data.imageProcessor.dispose();
+                program.data.drawProcessor.dispose();
                 program.data.pointsProcessor.dispose();
                 program.data.imageProcessor = program.data.pointsProcessor = null;
+
+				$("#editor-commandmenu").show();
+				$("#editor-commandmenu-bottom").show();
+				this.getDialog().css({left: 0, top: 0}).width('auto');
+
+			
+                this.options.onDispose && this.options.onDispose.call(this);
+				
+
             },
             validate: function () {
-                var contours = program.data.imageProcessor.resultContours;
+
+				createContoursForImage ();
+				refreshCanvasOrigin(true);
+	            var contours = program.data.pointsProcessor.getContours();
+
                 if (contours) {
                     if (!contours || !contours.length) {
                         alert(i18n.lang.msg_no_glyph_to_import);

@@ -24,6 +24,7 @@ define(
                     metrics[line] *= ratio;
                 });
 
+
                 shape.x = ratio * (shape.x - center.x) + center.x;
                 shape.y = ratio * (shape.y - center.y) + center.y;
 

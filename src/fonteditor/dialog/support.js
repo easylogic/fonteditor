@@ -10,6 +10,7 @@ define(
             'name': require('../dialog/setting-name'),
             'adjust-pos': require('../dialog/setting-adjust-pos'),
             'adjust-glyf': require('../dialog/setting-adjust-glyf'),
+            'reduce-glyf': require('../dialog/setting-reduce-glyf'),
             'metrics': require('../dialog/setting-metrics'),
             'online': require('../dialog/font-online'),
             'url': require('../dialog/font-url'),

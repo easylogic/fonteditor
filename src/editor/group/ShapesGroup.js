@@ -1,5 +1,5 @@
 /**
- * @file 形状组对象，用来管理多个形状的组合操作
+ * @file 形状组对象，用来管理多个形状的组合操作 Shape 그룹 관리 객체 
  * @author mengke01(kekee000@gmail.com)
  */
 
@@ -16,9 +16,17 @@ define(
 
 
         function getBound(shapes) {
-            return computeBoundingBox.computePath.apply(null, shapes.map(function (shape) {
-                return shape.points;
-            }));
+
+			if (shapes[0] && shapes[0].commands){
+				return computeBoundingBox.computePathCommands.apply(null, shapes.map(function (shape) {
+					return shape.commands;
+				}));
+			} else {
+
+				return computeBoundingBox.computePath.apply(null, shapes.map(function (shape) {
+					return shape.points;
+				}));
+			}
         }
 
         /**
@@ -50,7 +58,7 @@ define(
             });
             this.boundControl.hide();
 
-            // 设置吸附选项
+            // 스냅 옵션 설정
             if (this.mode === 'move' && this.editor.sorption.isEnable()) {
 
                 if (this.editor.sorption.enableShape) {
@@ -74,7 +82,7 @@ define(
                         ]
                     });
 
-                    // 过滤需要吸附的对象
+                    // 객체 그리드에 붙이기 
                     this.editor.fontLayer.shapes.forEach(function (shape) {
                         if (shapes.indexOf(shape) < 0) {
                             sorptionShapes.push(shape);
@@ -122,7 +130,7 @@ define(
                 );
             }
             else if (this.mode === 'scale') {
-                scaleTransform.call(this, point, camera);
+                scaleTransform.call(this, point, camera, key.shiftKey && key.ctrlKey /* center 지점 기준으로 확장 */);
             }
             else if (this.mode === 'rotate') {
                 rotateTransform.call(this, point, camera);

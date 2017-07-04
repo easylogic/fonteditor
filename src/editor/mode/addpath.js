@@ -14,7 +14,7 @@ define(
                 var coverLayer = this.coverLayer;
                 var result = coverLayer.getShapeIn(e);
 
-                // 闭合路径
+                // 닫힌 패스
                 if (result[0] && this.points.length > 1 && result[0] === this.points[0]) {
 
                     var points = this.points.map(function (p) {
@@ -30,6 +30,8 @@ define(
                         return ret;
                     });
 
+
+
                     var shape = this.fontLayer.addShape('path', {
                         points: points
                     });
@@ -39,7 +41,7 @@ define(
                     this.setMode('shapes', [shape], 'addpath');
 
                 }
-                // 添加控制点
+                // 제어점을 추가
                 else {
 
                     var x = e.x;
@@ -99,7 +101,7 @@ define(
                     coverLayer.refresh();
                 }
 
-                // 标记鼠标按住
+                // 마우스 표시를 누른 상태에서
                 this.downMouse = true;
             },
 
@@ -118,7 +120,7 @@ define(
 
             move: function (e) {
 
-                // 检查起始点, 用手型标注
+                // 시작점 핸드 형 라벨을 확인
                 var point = this.coverLayer.getShapeIn(e);
                 if (point[0] && point[0] === this.points[0]) {
                     this.render.setCursor('pointer');

@@ -2,18 +2,31 @@
 
 .editor {
     position: fixed;
-    width: 70%;
-    top: @top-height;
-    padding-top: @command-groups-height;
-    bottom: 0;
+    right: 10px;
+    top: @top-height * 2;
+    padding: 0px;
+	bottom: 0px;
+    left: 640px;
+    box-sizing:border-box;
     z-index: 1;
-    background: #FEFEFE;
-    border-right: 1px solid #DDD;
-    display: none;
+	background-color: @main-background-color;
 
     .command-groups {
-        background: rgba(112, 119, 128, 1);
-        margin-top: -40px;
+        //background: @main-background-color;
+        top:0px;
+		left:0px;
+		right:0px;
+		position:absolute;
+		box-sizing:border-box;
+    }
+
+    .command-groups-bottom {
+		position:absolute;
+		height:@command-groups-height;
+		left:0px;
+        right:0px;
+		bottom:0px;
+		box-sizing:border-box;
     }
 
     .close-editor {
@@ -37,16 +50,16 @@
         }
     }
     @media screen and (min-width:1300px) and (max-width:1600px){
-        .command-groups {
+        .command-groups, .command-groups-bottom {
             >li,
             >li[data-theme="ico"] {
-                padding: 0 8px;
+                padding: 0 4px;
             }
         }
     }
 
     @media screen and (max-width:1300px){
-        .command-groups {
+        .command-groups, .command-groups-bottom {
             >li,
             >li[data-theme="ico"] {
                 padding: 0 4px;
@@ -54,101 +67,3 @@
         }
     }
 }
-
-
-
-.editor.editing {
-    display: block;
-}
-
-.glyf-editor {
-    width: 100%;
-    height: 100%;
-    font-size: 12px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    display: none;
-
-    .marker-x,
-    .marker-y {
-        position: absolute;
-        width: 0;
-        height: 0;
-        z-index: 60;
-        pointer-events: none;
-    }
-
-    .marker-x {
-        width: 20px;
-        border-top: 1px dashed #000;
-    }
-
-    .marker-y {
-        height: 20px;
-        border-left: 1px dashed #000;
-    }
-}
-
-.editor-contextmenu {
-
-    color: #333;
-    width: 150px;
-    border: 1px solid #999;
-    background: #FEFEFE;
-    line-height: 24px;
-    padding: 0 4px;
-    box-shadow: 1px 1px 1px #CCC;
-    position: absolute;
-
-    li {
-        padding-left: 4px;
-        cursor: pointer;
-        border-bottom: 1px solid #CCC;
-        >ul {
-            display: none;
-            color: #333;
-            width: 150px;
-            border: 1px solid #999;
-            background: #FEFEFE;
-            line-height: 24px;
-            padding: 0 4px;
-            box-shadow: 1px 1px 1px #CCC;
-            position: absolute;
-            margin-left: 130px;
-        }
-    }
-
-    >li[data-sub] {
-        color: #4A90E2;
-        &:after {
-            content:'>';
-            margin-right: 10px;
-            float: right;
-            font-family: 'Simsun';
-        }
-    }
-
-    li[data-tag="selected"] {
-        .icon();
-        .i-ico('\e01f', 'after');
-        display: block;
-        &:after {
-            float: right;
-            margin-right: 4px;
-            color: #4A90E2;
-        }
-    }
-
-    li:hover {
-        background: #EEE;
-        >ul {
-            display: block;
-        }
-    }
-
-    li:last-child {
-        border-bottom: none;
-    }
-}
-

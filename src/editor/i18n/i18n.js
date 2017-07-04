@@ -11,7 +11,8 @@ define(
         return new I18n(
             [
                 ['zh-cn', require('./zh-cn')],
-                ['en-us', require('./en-us')]
+                ['en-us', require('./en-us')],
+                ['ko-kr', require('./ko-kr')]
             ],
             window.language
         );

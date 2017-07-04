@@ -14,6 +14,7 @@ define(
         var History = require('./widget/History');
         var Sorption = require('./widget/Sorption');
         var getFontHash = require('./util/getFontHash');
+		var lang = require('common/lang');
 
         // 默认editor的初始化函数列表，这里应该是按照特定顺序执行的函数集合
         var DEFAULT_INITERS = [
@@ -41,7 +42,7 @@ define(
         }
 
         /**
-         * 设置渲染器
+         * 렌더러 설정 
          *
          * @param {Render} render 渲染器对象
          * @return {this}
@@ -67,7 +68,6 @@ define(
          * @return {this}
          */
         Editor.prototype.setMode = function (modeName) {
-
             if (this.mode) {
                 this.mode.end && this.mode.end.call(this);
             }
@@ -75,6 +75,9 @@ define(
             this.mode = modeSupport[modeName] || modeSupport.default;
             var args = Array.prototype.slice.call(arguments, 1);
             this.mode.begin && this.mode.begin.apply(this, args);
+
+			this.fire('setMode');
+
             return this;
         };
 
@@ -91,6 +94,42 @@ define(
             return this;
         };
 
+		Editor.prototype.removePoint = function (pointId) {
+			if (this.currentGroup)
+			{
+				// 나중에 shape 도 index 정해서 맞출 수도 있겠군. 
+				var points = this.currentGroup.shapes[0].points;
+				points.splice(pointId, 1);
+
+				this.refreshSelected(this.currentGroup.shapes);
+			} else if (this.curShape) {
+				var points = this.curShape.points;
+				points.splice(pointId, 1);
+
+				this.mode.refresh && this.mode.refresh.call(this);
+			}
+
+            this.fontLayer.refresh();
+            this.coverLayer.refresh();
+			this.refresh();
+
+		}
+
+		Editor.prototype.resetPoints = function (points) {
+			if (this.currentGroup)
+			{
+				lang.overwrite(this.currentGroup.shapes[0].points, points);
+				this.refreshSelected(this.currentGroup.shapes);
+			} else if (this.curShape) {
+				lang.overwrite(this.curShape.points, points);
+				this.mode.refresh && this.mode.refresh.call(this);
+			}
+
+            this.fontLayer.refresh();
+            this.coverLayer.refresh();
+			this.refresh();
+		};
+
         /**
          * 刷新编辑器组件
          *
@@ -100,6 +139,28 @@ define(
             this.render.refresh();
             return this;
         };
+
+		// 커맨드로 화면 옮기기 
+		// direction (left, right, up, down) 에 따라 moval 만큼 화면을 옮긴다. moval 기본값은 30 
+		Editor.prototype.move = function (direction, moval) {
+
+			var x = 0, y = 0; 
+
+			moval = moval || 30; 
+
+			if (direction == 'left') {
+				x -= moval;
+			} else if (direction == 'right') {
+				x += moval; 
+			} else if (direction == 'up') {
+				y -= moval; 
+			} else if (direction == 'down') {
+				y += moval; 
+			}
+
+            this.render.move(x, y);
+			return this.refresh();
+		}
 
         /**
          * 设置选中的shapes

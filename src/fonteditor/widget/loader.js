@@ -12,12 +12,15 @@ define(
         var loading = require('./loading');
         var program = require('./program');
 
+        
+        // svg 파일 을 ttf 로 변환 
         function svg2ttf(buffer) {
             var options = program.setting.get('ie').import;
             options.type = 'svg';
             return font.create(buffer, options).data;
         }
 
+        // ttf 파일 읽기 
         function readttf(buffer, options) {
             // 暂不支持otf直接编辑，这里需要将otf转换成ttf
             if (options.type === 'woff') {
@@ -31,6 +34,10 @@ define(
 
         /**
          * 加载sfnt结构字体
+         *
+         * 브라우저에서 바이너리로 파일 읽기, 
+         *
+         * 이걸 ajax 의 arraybuffer 형태로 읽어들이자. 
          *
          * @param {File} file file对象
          * @param {Object} options 参数
@@ -193,6 +200,8 @@ define(
             /**
              * 支持的加载类型
              *
+             * 지원하는 파일 형식 
+             *
              * @param {string} fileName 文件类型
              * @return {boolean}
              */
@@ -202,6 +211,8 @@ define(
 
             /**
              * 支持的导入类型
+             *
+             * 추가하기 위한 형식 
              *
              * @param {string} fileName 文件类型
              * @return {boolean}

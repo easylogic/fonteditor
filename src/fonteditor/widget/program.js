@@ -45,6 +45,7 @@ define(
         function bindKey() {
             var me = this;
 
+			// 글로벌로 키 이벤트 입력 
             document.body.addEventListener('keydown', function (e) {
 
                 if (!me.listening) {
@@ -54,20 +55,20 @@ define(
                 e.ctrl = e.ctrlKey || e.metaKey;
 
                 // 全选
-                if (65 === e.keyCode && e.ctrl) {
+                if (65 === e.keyCode && e.ctrl) {   // ctrl + a  전체 선택 
                     e.preventDefault();
                     e.stopPropagation();
                 }
-                // 功能键
+                // 功能键		//  function  키 입력,  116(F5)  제외 , 브라우저 새로고침 버튼 
                 if (e.keyCode >= 112 && e.keyCode <= 119 && e.keyCode !== 116) {
                     e.preventDefault();
                     e.stopPropagation();
                     me.fire('function', {
-                        keyCode: e.keyCode
+                        keyCode: e.keyCode    // 펑션키 적용 	
                     });
                 }
                 // 保存
-                else if (83 === e.keyCode && e.ctrl) {
+                else if (83 === e.keyCode && e.ctrl) {	//  ctrl + s  는 저장 ,   ctrl  + shift + s 강제저장
                     e.preventDefault();
                     e.stopPropagation();
                     if (e.shiftKey) {
@@ -80,7 +81,7 @@ define(
                     }
                 }
                 // 粘贴
-                else if ((86 === e.keyCode && e.ctrl)) {
+                else if ((86 === e.keyCode && e.ctrl)) {	// ctrl + v  는 붙여넣기 
                     e.preventDefault();
                     e.stopPropagation();
                     me.fire('paste');
@@ -115,6 +116,18 @@ define(
         };
 
         observable.mixin(program);
+
+
+		/*
+		 * program.on('project.add', function (project) {
+		 *	 
+		 * });
+         * 
+		 * program.fire('project.add', project);
+		 *
+		 *
+		 *
+		 */
 
         return program;
     }

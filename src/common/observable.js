@@ -15,6 +15,8 @@ define(
         /**
          * 事件功能
          *
+         * 이벤트 관리기 (옵저버 패턴) 
+         *
          * @namespace
          */
         var observe = {

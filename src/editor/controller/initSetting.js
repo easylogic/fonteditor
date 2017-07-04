@@ -60,9 +60,31 @@ define(
             lang.overwrite(this.options, options);
         }
 
+		function setFontOptions (options) {
+
+			if (typeof options.fill != 'undefined') {
+				this.fontLayer.options.fill = !!options.fill;
+				this.options.fontLayer.fill = options.fill;
+			}
+
+			if (typeof options.fillColor != 'undefined') {
+				this.fontLayer.options.fillColor = options.fillColor;
+				this.options.fontLayer.fillColor = options.fillColor;
+			}
+
+			if (typeof options.strokeColor != 'undefined') {
+				this.fontLayer.options.strokeColor = options.strokeColor;
+				this.options.fontLayer.strokeColor = options.strokeColor;
+			}
+
+			this.fontLayer.refresh();
+
+		}
+
         return function () {
             initSetting.call(this, this.options);
             this.setOptions = setOptions;
+			this.setFontOptions = setFontOptions;
         };
     }
 );

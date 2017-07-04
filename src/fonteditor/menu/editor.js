@@ -11,23 +11,41 @@ define(
             {
                 name: 'copyshapes',
                 title: ei18n.lang.copy,
+				ico : 'copy',
                 quickKey: 'C',
+                disabled: true
+            },
+            {
+                name: 'cutshapes',
+                title: ei18n.lang.cut,
+				ico : 'cut',
+                quickKey: 'X',
                 disabled: true
             },
             {
                 name: 'pasteshapes',
                 title: ei18n.lang.paste,
-                quickKey: 'V'
+                quickKey: 'V',
+                disabled: true
             },
             {
                 name: 'removeshapes',
                 title: ei18n.lang.del,
+				ico: 'trash',
                 quickKey: 'D',
+                disabled: true
+            },
+            {
+                name: 'reversepoints',
+                title: ei18n.lang.reversepoints,
+				ico : 'reverse',
+                quickKey: 'R',
                 disabled: true
             },
             {
                 name: 'save',
                 title: ei18n.lang.save,
+				ico : 'save',
                 quickKey: 'S'
             },
             {
@@ -44,6 +62,11 @@ define(
                 ico: 'pointmode'
             },
             {
+                name: 'addpath',
+                title: ei18n.lang.addpath,
+                ico: 'pencil'
+            },
+            {
                 type: 'split'
             },
             {
@@ -56,12 +79,6 @@ define(
                 name: 'downshape',
                 title: ei18n.lang.downshape,
                 ico: 'downshape',
-                disabled: true
-            },
-            {
-                name: 'reversepoints',
-                title: ei18n.lang.reversepoints,
-                ico: 'reversepoints',
                 disabled: true
             },
             {
@@ -167,6 +184,38 @@ define(
                 name: 'tangencyshapes',
                 title: ei18n.lang.tangencyshapes,
                 ico: 'tangencyshapes',
+                disabled: true
+            },
+			{
+                type: 'split'
+            },
+             {
+                name: 'addpoint',
+                title: ei18n.lang.addpoint,
+				ico: 'addpoint',
+                disabled: true
+            },
+            {
+                name: 'removepoint',
+                title: ei18n.lang.removepoint,
+				ico: 'removepoint',
+                disabled: true
+            },
+            {
+                name: 'onCurve',
+                title: ei18n.lang.oncurve,
+				ico : 'oncurve',
+                disabled: true
+            },
+            {
+                name: 'offCurve',
+                title: ei18n.lang.offcurve,
+				ico : 'offcurve',
+                disabled: true
+            },
+            {
+                name: 'asStart',
+                title: ei18n.lang.asstart,
                 disabled: true
             }
         ];

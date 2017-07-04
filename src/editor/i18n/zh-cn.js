@@ -44,6 +44,8 @@ define(
             adjustpos: '调整位置',
             adjustglyf: '调整字形',
             addpath: '添加路径',
+            addsymbol: 'Add Symbol',
+            delsymbol: 'Delete Symbol',
             addshapes: '添加形状',
             circle: '圆',
             rect: '矩形',
@@ -59,17 +61,27 @@ define(
             gridsorption: '吸附到网格线',
             shapesorption: '吸附到轮廓',
             showgrid: '显示网格',
+            showgrid: 'Show Grid',
+            showoutline: 'Show Outline',
+            showaxis: 'Show Axis',
+            showreference: 'Show Reference Line',
             moresetting: '更多..',
             addreferenceline: '添加参考线',
             clearreferenceline: '清除参考线',
             addboundreferenceline: '添加边界参考线',
             rescale: '重置缩放',
+            zoomin: 'Zoom In',
+            zoomout: 'Zoom Out',
             fontsetting: '字形信息',
             addpoint: '添加点',
             removepoint: '删除点',
             oncurve: '在曲线上',
             offcurve: '远离曲线',
-            asstart: '作为开始点'
+            asstart: '作为开始点',
+            createsymbol : 'Create Symbol',
+			import_pic_title: '导入包含字形的图片',
+			import_glyf_title: 'Import glyph'
+	
         };
     }
 );

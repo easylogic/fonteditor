@@ -7,17 +7,18 @@
                     <input id="import-pic-url-text" value="" class="form-control">
                 </div>
             </div>
-            <button type="button" data-action="import-url" class="btn btn-flat btn-new btn-sm" title="${lang.dialog_picurl_load_title}">${lang.dialog_picurl_load}</button>&nbsp;
-            <button type="button" data-action="fitwindow" class="btn btn-flat btn-new btn-sm">${lang.dialog_adjustwindow}</button>&nbsp;
-            <button type="button" data-action="fitwindow-left" class="btn btn-flat btn-new btn-sm">${lang.dialog_showorigin}</button>&nbsp;
-            <button type="button" data-action="fitwindow-right" class="btn btn-flat btn-new btn-sm">${lang.dialog_showcontour}</button>
+            <button type="button" data-action="import-url" class="btn btn-flat btn-new btn-sm simple-hide" title="${lang.dialog_picurl_load_title}">${lang.dialog_picurl_load}</button>&nbsp;
+            <button type="button" data-action="fitwindow" class="btn btn-flat btn-new btn-sm simple-hide">${lang.dialog_adjustwindow}</button>&nbsp;
+            <button type="button" data-action="fitwindow-left" class="btn btn-flat btn-new btn-sm simple-hide">${lang.dialog_showorigin}</button>&nbsp;
+            <button type="button" data-action="fitwindow-right" class="btn btn-flat btn-new btn-sm simple-hide">${lang.dialog_showcontour}</button>
+            <label class="erase-label" style="display:none;"><input type="checkbox" id="isErase" /> ${lang.dialog_erase}</label>
         </div>
         <button data-action="openfile" type="button" class="btn btn-flat btn-new btn-sm">${lang.dialog_choosepic}</button>
         <span>${lang.dialog_choosepic_tip}</span>
         <form id="import-pic-form" style="width:0px;height:0px;overflow:hidden;"><input id="import-pic-file" type="file"></form>
     </div>
     <div class="preview-panel"><div class="canvas-left"><canvas id="import-pic-canvas-origin"></canvas></div><div class="canvas-right"><canvas id="import-pic-canvas-fit"></canvas></div></div>
-    <div class="form-inline">
+    <div class="form-inline simple-hide">
         <button type="button" data-filter="restore" class="btn btn-flat btn-sm btn-right">${lang.resume}</button>
         <span class="form-title">${lang.dialog_preprocess}: </span>
         <div class="form-group">
@@ -40,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="form-inline">
+    <div class="form-inline simple-hide">
         <button type="button" data-filter="restore-binarize" class="btn btn-flat btn-sm btn-right">${lang.resume}</button>
         <span class="form-title">${lang.dialog_contour}: </span>
         <div class="form-group">

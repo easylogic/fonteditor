@@ -17,10 +17,24 @@ define(
             down: [0, 1]
         };
 
+        var stepMapForShift = {
+            left: [-10, 0],
+            right: [10, 0],
+            up: [0, -10],
+            down: [0, 10]
+        };
+
+        var stepMapForControl = {
+            left: [-50, 0],
+            right: [50, 0],
+            up: [0, -50],
+            down: [0, 50]
+        };
+
+
 
         function onContextMenu(e) {
-
-            if (!this.curPoint) {
+            if (!this.curPoint && !this.curPoints) {
                 return;
             }
 
@@ -33,29 +47,89 @@ define(
             var command = e.command;
             var shape = this.curShape;
             var points = shape.points;
-            var pointId = +this.curPoint.pointId;
 
-            if (command === 'add') {
-                var cur = points[pointId];
-                var next = points[pointId === points.length - 1 ? 0 : pointId + 1];
-                var p = {
-                    x: (cur.x + next.x) / 2,
-                    y: (cur.y + next.y) / 2,
-                    onCurve: true
-                };
 
-                points.splice(pointId + 1, 0, p);
+            if (command === 'add' && this.curPoint) {
+	            var pointId = +this.curPoint.pointId;
+				// 1 ~ 5 키까지 점추가  (1 은 1개, 5는 5개 중간점 추가)
+				// shift + 1 ~ 5 키까지  곡선 점 추가 
+				// alt + 1 ~ 5 키까지  랜덤 곡선 점 추가 (짝수번째 곡선 점, 홀수번째 직선 점) 
+
+				var isCurve = typeof e.isCurve == 'undefined' ? true : e.isCurve;
+				var isRandom = e.isRandom; 
+
+				// 추가해야할 점의 개수 
+				var count = e.count || 1; 
+
+				// 두 점사이 나누는 공간의 수 (추가 해야할 점이 1이면 2칸을 나눠야 중간으로 옴) 
+				var divCount = count + 1; 
+
+				// 현재 포지션 설정 
+				var args = [pointId + 1, 0];
+
+				var cur = points[pointId];
+				var next = points[pointId === points.length - 1 ? 0 : pointId + 1];
+
+				// 점 표시할 거리 구하기 
+				var distX = Math.abs(cur.x - next.x) / divCount;  
+				if (cur.x > next.x ) { distX = -1 * distX;  }
+
+				var distY = Math.abs(cur.y - next.y) / divCount;  
+				if (cur.y > next.y ) { distY = -1 * distY;  }
+
+				// 나누는 숫자만큼 점 추가 
+				for(var i = 1; i <= count; i++) {
+
+					var onCurve = isCurve; 
+					
+					if (isRandom)
+					{
+						if (i % 2 == 0) {
+							onCurve = true; 
+						} else {
+							onCurve = false; 
+						}
+					}
+
+					var p = {
+						x: cur.x + (distX * i),
+						y: cur.y + (distY * i),
+						onCurve: onCurve
+					};
+
+					args.push(p);	// 점 개수만큼 더하기 
+				}
+
+				// 원하는 개수만큼 점 추가하기 
+				Array.prototype.splice.apply(points, args);
+                //points.splice(pointId + 1, 0, p);
             }
             else if (command === 'remove') {
-                points.splice(pointId, 1);
+				if (this.curPoint)
+				{
+		            var pointId = +this.curPoint.pointId;
+	                points.splice(pointId, 1);
+				} else if (this.curPoints && this.curPoints.length) {
+					var curPoints = this.curPoints; 
+					shape.points = points.filter(function(p, i) {
+						return 0 == curPoints.filter(function (cp) {
+							return cp.pointId == i; 
+						}).length ;
+					});
+				}
+
+
             }
-            else if (command === 'onCurve') {
+            else if (command === 'onCurve' && this.curPoint) {
+	            var pointId = +this.curPoint.pointId;
                 points[pointId].onCurve = true;
             }
-            else if (command === 'offCurve') {
+            else if (command === 'offCurve' && this.curPoint) {
+	            var pointId = +this.curPoint.pointId;
                 delete points[pointId].onCurve;
             }
-            else if (command === 'asStart') {
+            else if (command === 'asStart' && this.curPoint) {
+	            var pointId = +this.curPoint.pointId;
                 shape.points = points.slice(pointId).concat(points.slice(0, pointId));
             }
             else if (this.supportCommand(command)) {
@@ -71,46 +145,200 @@ define(
         }
 
 
-        function refreshControlPoints(shape) {
+        function refreshControlGuideLine(type) {
+            var coverLayer = this.coverLayer;
+			var controls = coverLayer.filterShape(function(shape) {
+				return shape.isControl;
+			});
+
+			var arr = [];
+			controls.forEach(function(c) {
+				arr[c.pointId] = c; 
+			});
+
+			coverLayer.filterShape(function(shape) {
+				return shape.type == 'line' && shape.point0Id != undefined && shape.point1Id != undefined;
+			}).forEach(function (shape) {
+				var p0 = arr[shape.point0Id];
+				var p1 = arr[shape.point1Id];
+
+				shape.p0 = { x : p0.x, y : p0.y }
+				shape.p1 = { x : p1.x, y : p1.y }
+			});
+
+            coverLayer.refresh();
+        }
+
+        function refreshControlPoints(shape, pointIndexList) {
             var controls = [];
+			pointIndexList = pointIndexList || [];
             var last = shape.points.length - 1;
             var clonedShape = lang.clone(shape);
 
             var style = this.options.coverLayer;
+
+			var lineStyle = {
+				fill : false,
+				stroke : true,
+				strokeWidth: 2,
+				strokeColor: style.strokeColor
+			}
+
+			var guideLineStyle = {
+				stroke: true,
+				strokeColor: style.strokeColor
+			}
 
             clonedShape.id = 'cover-' + shape.id;
             clonedShape.selectable = false;
             clonedShape.style = {
                 strokeColor: style.outlineColor
             };
-            clonedShape.points.forEach(function (p, index) {
-                var cpoint = {
-                    type: p.onCurve ? 'point' : 'cpoint',
-                    x: p.x,
-                    y: p.y,
-                    point: p,
-                    pointId: index,
-                    style: {
-                        fill: true,
-                        stroke: true,
-                        strokeColor: style.strokeColor,
-                        fillColor: style.fillColor
-                    }
-                };
+			
+			clonedShape.points.forEach(function (p, index) {
 
-                if (index === 0) {
-                    cpoint.style.strokeColor = 'blue';
-                    cpoint.style.fillColor = 'blue';
-                    cpoint.style.strokeWidth = 2;
-                }
-                else if (index === last) {
-                    cpoint.style.strokeColor = 'red';
-                    cpoint.style.fillColor = 'red';
-                    cpoint.style.strokeWidth = 2;
-                }
+				var current = p.current; 
+				
+				if (pointIndexList.indexOf(index) >= 0) {
+					p.current = true; 
+				}
 
-                controls.push(cpoint);
-            });
+				var cpoint = {
+					type: p.onCurve ? 'point' : 'cpoint',
+					x: p.x,
+					y: p.y,
+					isControl : true, 
+					point: p,
+					pointId: index,
+					style: {
+						fill: true,
+						stroke: true,
+						strokeColor: style.strokeColor,
+						fillColor: p.current ? style.outlineColor : style.fillColor
+					}
+				};
+
+				if (index === 0 && !p.current) {
+					cpoint.style.strokeColor = 'blue';
+					cpoint.style.fillColor = 'blue';
+					cpoint.style.strokeWidth = 1;
+				}
+				else if (index === last && !p.current) {
+					cpoint.style.strokeColor = 'red';
+					cpoint.style.fillColor = 'red';
+					cpoint.style.strokeWidth = 1;
+				}
+
+				controls.push(cpoint);
+
+				if (cpoint.type == 'cpoint')   //  커브일 때 가이드 선을 그림 
+				{
+
+					if (cpoint.point.type)
+					{
+						if (cpoint.point.indexType == 'c1')
+						{
+							var clineIndex = index == 0 ? last-1 : index - 1; 
+
+							var p0 = clonedShape.points[clineIndex];
+							var p1 = clonedShape.points[index];
+							var p2 = clonedShape.points[index+1];
+							var p3 = clonedShape.points[index+2];
+
+							var cline = {
+								type : 'line', 
+								dashed : true, 
+								notScaled : true, 
+								point0Id : clineIndex, 
+								point1Id : index,
+								p0 : {
+									x : p0.x,
+									y : p0.y
+								},
+								p1 : {
+									x : p1.x,
+									y : p1.y
+								},
+								style: guideLineStyle
+							}
+
+							controls.push(cline);  // 왼쪽 
+
+							var cline2 = {
+								type : 'line', 
+								dashed : true, 
+								notScaled : true, 
+								point0Id : index+1, 
+								point1Id : index+2,
+								p0 : {
+									x : p2.x,
+									y : p2.y
+								},
+								p1 : {
+									x : p3.x,
+									y : p3.y
+								},
+								style: guideLineStyle
+							}
+
+							controls.push(cline2); //오른 쪽 
+
+						}
+
+					} else {
+						var clineIndex = index == 0 ? last : index-1; 
+						var clineIndex2 = index == last ? 0 : index+1; 
+
+						var p0 =  clonedShape.points[index];
+						var p1 =  clonedShape.points[clineIndex];
+						var p2 =  clonedShape.points[clineIndex2];
+
+						var cline = {
+							type : 'line', 
+							dashed : true, 
+							notScaled : true, 
+							point0Id : index, 
+							point1Id : clineIndex,
+							p0 : {
+								x : p0.x,
+								y : p0.y
+							},
+							p1 : {
+								x : p1.x,
+								y : p1.y
+							},
+							style: guideLineStyle
+						}
+
+						controls.push(cline);  // 왼쪽 
+
+						var cline2 = {
+							type : 'line', 
+							dashed : true, 
+							notScaled : true, 
+							point0Id : index, 
+							point1Id : clineIndex2,
+							p0 : {
+								x : p0.x,
+								y : p0.y
+							},
+							p1 : {
+								x : p2.x,
+								y : p2.y
+							},
+							style: guideLineStyle
+						}
+
+						controls.push(cline2); //오른 쪽 
+					}
+
+					
+				}
+
+			});
+
+
+
 
             var coverLayer = this.coverLayer;
 
@@ -127,8 +355,10 @@ define(
             coverLayer.refresh();
         }
 
-
         var mode = {
+
+			type : 'point',
+
 
 
             down: function (e) {
@@ -138,6 +368,8 @@ define(
                     if (this.curPoint._style) {
                         this.curPoint.style = lang.clone(this.curPoint._style);
                     }
+					delete this.curPoint.current;	// 기존의 current 속성 삭제 
+
                 }
 
                 delete this.curPoint;
@@ -148,6 +380,8 @@ define(
                     this.curPoint = result[0];
                     this.curPoint._style = lang.clone(this.curPoint.style);
                     this.curPoint.style.fillColor = this.options.coverLayer.outlineColor;
+					this.curPoint.current = true; 
+					delete this.curPoints;
 
                     // 设置吸附选项
                     if (this.sorption.isEnable()) {
@@ -180,8 +414,31 @@ define(
                         }
                     }
 
-                    this.coverLayer.refresh();
-                }
+					if(this.curPoint) {
+						var current = this.curPoint;
+						if (current.point)
+						{
+							current.point.x = current.x;
+							current.point.y = current.y;
+
+							var origin = this.getOriginalPoint(current.point);
+
+							current.point.originX = origin.x;
+							current.point.originY = origin.y;
+						}
+
+					}
+
+
+
+					refreshControlGuideLine.call(this);
+                    //this.coverLayer.refresh();
+
+					this.fire('refreshPoint');
+                } else {
+					this.isRangeMode = true; 
+					this.setMode('range', 'point');
+				}
             },
 
 
@@ -191,6 +448,11 @@ define(
                 if (this.curPoint) {
                     var current = this.curPoint;
                     var reserved = this.curShape.points[current.pointId];
+
+					if (!reserved)
+					{
+						return;
+					}
 
                     if (camera.event.altKey) {
                         current.x = reserved.x;
@@ -221,12 +483,21 @@ define(
                     current.point.x = current.x;
                     current.point.y = current.y;
 
-                    this.coverLayer.refresh();
+					var origin = this.getOriginalPoint(current.point);
+
+					current.point.originX = origin.x;
+					current.point.originY = origin.y;
+
+                    //this.coverLayer.refresh();
+
+					refreshControlGuideLine.call(this, 'drag');
+
+					this.fire('refreshPoint');
                 }
             },
 
             dragend: function () {
-                if (this.curPoint) {
+                if (this.curPoint && this.curPoint.x) {
                     var reserved = this.curShape.points[this.curPoint.pointId];
                     reserved.x = this.curPoint.x;
                     reserved.y = this.curPoint.y;
@@ -253,35 +524,78 @@ define(
 
 
             rightdown: function (e) {
+				// 왠만하면 오른쪽 안누르고 할 수 있도록 하자. 
                 if (this.curPoint) {
                     this.contextMenu.onClick = lang.bind(onContextMenu, this);
                     this.contextMenu.show(e, require('../menu/commandList').point);
                 }
             },
 
+			command : function (editor, e) {
+				onContextMenu.call(editor, {
+	                command: e.command,
+					count : e.count,
+					isCurve : e.isCurve,
+					isRandom : e.isRandom 
+                });
+			},
+
 
             keyup: function (e) {
 
+
                 // esc键，重置model
-                if (e.key === 'delete' && this.curPoint) {
+                if (e.key === 'delete' && (this.curPoint || this.curPoints)) {
                     onContextMenu.call(this, {
                         command: 'remove'
                     });
                 }
+				// 1 ~ 5 까지 키 누른만큼 point 추가 하기 
+                else if (e.keyCode >= 49 && e.keyCode <= 53 && this.curPoint) {
+                    onContextMenu.call(this, {
+                        command: 'add',
+						count : e.keyCode - 48,	// 48 은  `0`의 ascii 코드
+						isCurve : !e.shiftKey,
+						isRandom : e.altKey
+                    });
+                } else if (e.key == 'C' && this.curPoint) {		// `C`를 누르면 curve 인지 아닌지 변경한다. 
+					var current = this.curPoint;
+                    var reserved = this.curShape.points[current.pointId];
+
+					if (reserved.onCurve)
+					{
+						onContextMenu.call(this, {
+							command: 'offCurve'
+						});
+					} else {
+						onContextMenu.call(this, {
+							command: 'onCurve'
+						});
+					}
+
+                }
                 // 移动
                 else if (stepMap[e.key] && this.curPoint) {
                     this.fire('change');
+                } else if (stepMap[e.key] && this.curPoints) {
+                    this.fire('change');
                 }
-                else if (e.key === 'esc') {
+                else if (e.key === 'esc') {			// point 모드 해제 
                     this.setMode();
                 }
             },
 
 
             keydown: function (e) {
-                // 移动
+				// 화살표로 점 이동하기 
+				// 기본 스텝 1 
+				// shift 를 누른채로 움직이면 스텝 5 적용 (좀 더 빠르게, 멀리 움직일 수 있다.)
                 if (stepMap[e.key] && this.curPoint) {
                     var step = stepMap[e.key];
+					
+					if (e.ctrlKey)  { step = stepMapForControl[e.key]; }
+					else if (e.shiftKey)  { step = stepMapForShift[e.key]; }
+					
                     var current = this.curPoint;
 
                     if (step[0]) {
@@ -296,26 +610,88 @@ define(
                     reserved.x = current.point.x = current.x;
                     reserved.y = current.point.y = current.y;
 
-                    this.coverLayer.refresh();
+                    //this.coverLayer.refresh();
+					
+					refreshControlGuideLine.call(this);
                     this.fontLayer.refresh();
-                }
+                } 
+
+				if (stepMap[e.key] && this.curPoints && this.curPoints.length) {
+                    var step = stepMap[e.key];
+					
+					if (e.ctrlKey)  { step = stepMapForControl[e.key]; }
+					else if (e.shiftKey)  { step = stepMapForShift[e.key]; }
+
+					var me = this; 
+					this.curPoints.forEach(function(current) {
+						if (step[0]) {
+							current.x += step[0];
+						}
+
+						if (step[1]) {
+							current.y += step[1];
+						}
+
+						var reserved = me.curShape.points[current.pointId];
+						reserved.x = current.point.x = current.x;
+						reserved.y = current.point.y = current.y;
+
+					});
+
+                    //this.coverLayer.refresh();
+					
+					refreshControlGuideLine.call(this);
+                    this.fontLayer.refresh();
+                } 
             },
 
 
-            begin: function (shape) {
+            begin: function (shape, points) {
+				this.isRangeMode = false; 
                 var me = this;
-                refreshControlPoints.call(me, shape);
+                refreshControlPoints.call(me, shape, points || []);		// 컨트롤 포인트 다시 그리기 
+
+				// 선택된 점 표시 
+				if (points && points.length)
+				{
+					delete this.curPoint;
+					this.curPoints = points.map(function(index) { 
+						var coverShape = me.coverLayer.shapes.filter(function(s) {
+							return s.pointId == index; 	
+						});
+
+						var point = coverShape[0];
+						point.current = true; 
+
+						return point; 
+					});
+				}
             },
+
+			refresh : function () {
+
+				if (this.curShape)
+				{
+					var me = this;
+					refreshControlPoints.call(me, this.curShape);		// 컨트롤 포인트 다시 그리기 
+				}
+
+			},
 
 
             end: function () {
 
-                delete this.curPoint;
-                delete this.curShape;
+				if (!this.isRangeMode)
+				{
+					delete this.curPoint;
+					delete this.curPoints;
+					delete this.curShape;
 
-                this.coverLayer.clearShapes();
-                this.coverLayer.refresh();
-                this.render.setCursor('default');
+					this.coverLayer.clearShapes();
+					this.coverLayer.refresh();
+					this.render.setCursor('default');
+
+				} 
             }
         };
 

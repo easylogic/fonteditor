@@ -57,10 +57,19 @@ define(
              * @param {Object} shape.arrow 箭头配置数据
              */
             draw: function (ctx, shape) {
+
                 if (undefined !== shape.p0.x) {
                     x0 = Math.round(shape.p0.x);
                     ctx.moveTo(x0, 0);
                     ctx.lineTo(x0, ctx.canvas.height);
+
+					if (shape.originPoint)
+					{
+						ctx.font = shape.style ? (shape.style.font || '11px Arial') : '11px Arial'; 
+						ctx.textAlign = shape.style ? (shape.style.textAlign || 'start') : 'start';
+						ctx.fillText(Math.floor(shape.originPoint.x) + "", x0 + ARROW_WIDTH, 50);
+					}
+
                     if (shape.arrow) {
                         ctx.moveTo(x0, shape.arrow.y);
                         ctx.lineTo(x0 - ARROW_WIDTH, shape.arrow.y + ARROW_HEIGHT);
@@ -72,6 +81,14 @@ define(
                     y0 = Math.round(shape.p0.y);
                     ctx.moveTo(0, y0);
                     ctx.lineTo(ctx.canvas.width, y0);
+
+					if (shape.originPoint)
+					{
+						ctx.font = shape.style ? (shape.style.font || '11px Arial') : '11px Arial'; 
+						ctx.textAlign = shape.style ? (shape.style.textAlign || 'start') : 'start';
+						ctx.fillText(Math.floor(shape.originPoint.y) + "", 40, y0 + ARROW_HEIGHT + 4);
+					}
+
                     if (shape.arrow) {
                         ctx.moveTo(shape.arrow.x, y0);
                         ctx.lineTo(shape.arrow.x + ARROW_HEIGHT, y0 - ARROW_WIDTH);

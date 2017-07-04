@@ -9,7 +9,9 @@ define(
 
         var editorFactory = require('editor/main');
         var editorOptions = require('editor/options');
+        var simpleOptions = require('editor/simple-options');
         var settingSupport = require('../dialog/support');
+        var innerDialogSupport = require('./innerdialog/support');
         var program = require('./program');
         var lang = require('common/lang');
 
@@ -18,15 +20,17 @@ define(
         var COMMAND_SUPPORT = {
             // 形状组
             shapes: [
-                'copyshapes', 'removeshapes', 'reversepoints',
-                'horizontalalignshapes', 'verticalalignshapes',
-                'rotateleft', 'rotateright', 'flipshapes', 'mirrorshapes'
+                //'copyshapes', 'cutshapes', 'removeshapes', 
+				
+				'reversepoints','horizontalalignshapes', 'verticalalignshapes',
+                'rotateleft', 'rotateright', 'flipshapes', 'mirrorshapes', 'addsymbol'
             ],
             shapes2: [
                 'joinshapes', 'intersectshapes', 'tangencyshapes'
             ],
             // 单个形状
-            shape: ['pointmode', 'upshape', 'downshape']
+            shape: ['pointmode', 'upshape', 'downshape'],
+			point : [ 'addpoint', 'removepoint', 'onCurve', 'offCurve', 'asStart' ]
         };
 
 
@@ -50,7 +54,8 @@ define(
                         // 此处需要等待点击完成后设置focus状态
                         delayFocus();
                     }
-                }).show(e.setting);
+                }).show(e.setting); 
+
             });
 
             editor.on('setting:editor', function (e) {
@@ -69,6 +74,44 @@ define(
                 });
             });
 
+            var screenCommandMenu = this.screenCommandMenu; 
+
+            if (screenCommandMenu) {
+                screenCommandMenu.on('command', function (e) {
+                     // 这里延时进行focus
+                    delayFocus();
+
+                    var command = e.command;
+                    var args = e.args;
+
+					// 객체 선택과 상관없이 동작하는 command 
+					switch(command) {
+						case 'showgrid': 
+						case 'showoutline': 
+						case 'showaxis': 
+						case 'showreference': 
+						case 'rescale': 
+						case 'enlargeview':
+						case 'narrowview': 
+							editor.execCommand(command);
+							break;
+
+						// TODO: 이건 새로 구해보자. rescale 의 숫자 범위를 명확히 해야 정확히 구할 수 있다. 
+						// 가운데 지점을 정확히 찾을 수가 없어서 다시 해봐야한다. 
+						//case 'scaleinput': 
+						//	editor.execCommand('rescale', (+args)/100);
+						//	break;
+						case 'move-left': 
+						case 'move-right': 
+						case 'move-up': 
+						case 'move-down': 
+							editor.execCommand('moveview', { direction : command.split('-')[1] } );
+							break;
+					}
+
+                });
+            }
+
             var commandMenu = this.commandMenu;
             if (commandMenu) {
 
@@ -78,12 +121,19 @@ define(
                         commandMenu.disableCommands(COMMAND_SUPPORT.shapes);
                         commandMenu.disableCommands(COMMAND_SUPPORT.shapes2);
                         commandMenu.disableCommands(COMMAND_SUPPORT.shape);
+                        commandMenu[editor.mode.type == 'point' ? 'enableCommands' : 'disableCommands'](COMMAND_SUPPORT.point);
+
                     }
                     else {
                         commandMenu.enableCommands(COMMAND_SUPPORT.shapes);
+                        commandMenu.enableCommands(COMMAND_SUPPORT.point);
                         commandMenu[length >= 2 ? 'enableCommands' : 'disableCommands'](COMMAND_SUPPORT.shapes2);
                         commandMenu[length === 1 ? 'enableCommands' : 'disableCommands'](COMMAND_SUPPORT.shape);
                     }
+                }), 100);
+
+				 editor.on('change', lang.debounce(function (e) {
+                    commandMenu[editor.mode.type == 'point' ? 'enableCommands' : 'disableCommands'](COMMAND_SUPPORT.point);
                 }), 100);
 
                 commandMenu.on('command', function (e) {
@@ -102,10 +152,25 @@ define(
                         return;
                     }
 
+					if (command === 'import-pic')
+					{
+						program.fire('import-pic');
+						return;
+					}
+
+					if (command === 'import-glyf')
+					{
+						program.fire('import-glyf');
+						return;
+					}
+
+					
                     if (command === 'splitshapes') {
                         editor.setMode('split');
                         return;
                     }
+
+					
 
                     if (command === 'pasteshapes') {
                         shapes = editor.getClipBoard();
@@ -125,10 +190,11 @@ define(
                             case 'downshape':
                                 editor.execCommand(command, shapes[0]);
                                 break;
-
                             case 'copyshapes':
+                            case 'cutshapes':
                             case 'pasteshapes':
                             case 'removeshapes':
+                            case 'reversepoints':
                             case 'joinshapes':
                             case 'intersectshapes':
                             case 'tangencyshapes':
@@ -143,6 +209,7 @@ define(
                             case 'joinshapes':
                             case 'intersectshapes':
                             case 'tangencyshapes':
+                            case 'addsymbol':
                                 editor.execCommand(command, shapes);
                                 break;
 
@@ -152,9 +219,20 @@ define(
                                 editor.execCommand(command, shapes, args.align);
                                 break;
                         }
-                    }
-                    else if (command === 'rangemode') {
+                    } else if (command === 'rangemode') {
                         editor.setMode('bound');
+                    } else if (command === 'addpath') {
+                        editor.execCommand('addpath'); 
+                    } else if (command === 'addpoint') {
+						editor.execCommand('addpoint'); 
+                    } else if (command === 'removepoint') {
+						editor.execCommand('removepoint'); 
+                    } else if (command === 'onCurve') {
+						editor.execCommand('onCurve'); 
+                    } else if (command === 'offCurve') {
+						editor.execCommand('offCurve'); 
+                    } else if (command === 'asStart') {
+						editor.execCommand('asStart'); 
                     }
                 });
             }
@@ -169,6 +247,7 @@ define(
             if (this.editor) {
                 this.editor.execCommand.apply(this.editor, arguments);
             }
+
         }
 
         /**
@@ -188,7 +267,34 @@ define(
                 this.commandMenu = this.options.commandMenu;
                 delete this.options.commandMenu;
             }
+
+            if (this.options.screenCommandMenu) {
+                this.screenCommandMenu = this.options.screenCommandMenu;
+                delete this.options.screenCommandMenu;
+            }
+
+            if (!this.editor) {
+				this.main.find('h1').hide();
+                this.editor = editorFactory.create(this.main.get(0), { simple : program.isSimpleMode });
+                bindEditor.call(this);
+            }
+
+			// inner dialog create 
+			this.createInnerDialog();
+
         }
+
+		GLYFEditor.prototype.createInnerDialog = function () {
+			this.innerDialog = {};
+
+			Object.keys(innerDialogSupport).forEach(lang.bind(function(name) {
+				var InnerDialog = innerDialogSupport[name];
+
+				this.innerDialog[name] = new InnerDialog({
+					glyfeditor : this
+				});
+			}, this));
+		}
 
         /**
          * 显示
@@ -197,10 +303,6 @@ define(
             // 这里注意显示顺序，否则editor创建的时候计算宽度会错误
             this.main.show();
 
-            if (!this.editor) {
-                this.editor = editorFactory.create(this.main.get(0));
-                bindEditor.call(this);
-            }
 
             this.editing = true;
         };
@@ -260,6 +362,11 @@ define(
             execCommand.call(this, 'redo');
         };
 
+		GLYFEditor.prototype.getDefaultOptions = function (options) {
+			return editorOptions;
+            //return (program.isSimpleMode ? simpleOptions : editorOptions);
+		}
+
         /**
          * 设置项目
          * @param {Object} options 参数集合
@@ -269,7 +376,7 @@ define(
                 this.editor.setOptions(options);
             }
             else {
-                lang.overwrite(editorOptions.editor, options);
+                lang.overwrite(this.getDefaultOptions().editor, options);
             }
         };
 
@@ -278,7 +385,7 @@ define(
          * @return {Object} 设置项目
          */
         GLYFEditor.prototype.getSetting = function () {
-            return this.editor ? this.editor.options : editorOptions.editor;
+            return this.editor ? this.editor.options : this.getDefaultOptions().editor;
         };
 
 

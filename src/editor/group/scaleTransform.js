@@ -16,10 +16,11 @@ define(
          *
          * @param {Object} point 参考点
          * @param {Camera} camera 镜头对象
+		 * @param {Boolean} isOriginCenter  가운데 점 기준으로 크기 조절하기 (ctrl + shift 누르고 마우스를 움직이면 된다.)
          */
-        function scaleTransform(point, camera) {
+        function scaleTransform(point, camera, isOriginCenter) {
 
-            var matrix = getScaleMatrix(point.pos, this.bound, camera);
+            var matrix = getScaleMatrix(point.pos, this.bound, camera, isOriginCenter);
             // 默认等比缩放
             if (scalePoints.indexOf(point.pos) >= 0) {
                 if (!camera.event.shiftKey) {
@@ -36,7 +37,12 @@ define(
 
                 var shape = lang.clone(shapes[index]);
                 pathAdjust(shape.points, matrix[2], matrix[3], -matrix[0], -matrix[1]);
-                pathAdjust(shape.points, 1, 1, matrix[0], matrix[1]);
+
+				if (typeof matrix[4] == 'undefined') {
+	                pathAdjust(shape.points, 1, 1, matrix[0], matrix[1]);
+				} else {
+					pathAdjust(shape.points, 1, 1, matrix[4], matrix[5]);
+				}
 
                 if (matrix[2] < 0 && matrix[3] >= 0) {
                     shape.points = shape.points.reverse();
@@ -62,7 +68,14 @@ define(
                 ],
                 matrix[2], matrix[3], -matrix[0], -matrix[1]
             );
-            pathAdjust(points, 1, 1, matrix[0], matrix[1]);
+
+			if (typeof matrix[4] == 'undefined') {
+				pathAdjust(points, 1, 1, matrix[0], matrix[1]);
+			} else {
+				pathAdjust(points, 1, 1, matrix[4], matrix[5]);
+			}
+
+
             boundShape.points = points;
             coverLayer.refresh();
 

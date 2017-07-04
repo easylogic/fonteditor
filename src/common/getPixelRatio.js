@@ -5,6 +5,9 @@
 define(
     function (require) {
 
+		// 픽셀 레티오가 수시로 변해서 흠 머랄까. 
+		// 실시간으로 다시 가지고 와야 할 수도 있다. 
+		// 아무래도 펑션을 따로 만들어야할 듯 
         var pixelRatio = (function (context) {
             var backingStore = context.backingStorePixelRatio ||
                         context.webkitBackingStorePixelRatio ||

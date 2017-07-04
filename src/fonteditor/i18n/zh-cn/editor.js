@@ -74,7 +74,17 @@ define(
             help: '帮助',
             confirm: '确定',
             cancel: '取消',
-            pushurl: '推送地址'
+            pushurl: '推送地址',
+
+			circle: '원',
+            rect: '사각형',
+            roundrect: '둥근 사각형',
+            star: '별',
+            arrow: '화살표',
+            triangle: '삼각형',
+            heart: '하트',
+            tel: '전화',
+            drop: '물방울'
         };
     }
 );

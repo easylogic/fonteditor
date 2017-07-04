@@ -16,19 +16,23 @@ define(
              */
             addreferenceline: function (x, y) {
                 if (x > 20) {
-                    this.referenceLineLayer.addShape('gridarrow', {
+                    var line = this.referenceLineLayer.addShape('gridarrow', {
                         p0: {
                             x: x
                         }
                     });
+
+					line.originPoint = this.getOriginalPoint(line.p0);
                 }
 
                 if (y > 20) {
-                    this.referenceLineLayer.addShape('gridarrow', {
+                    var line = this.referenceLineLayer.addShape('gridarrow', {
                         p0: {
                             y: y
                         }
                     });
+
+					line.originPoint = this.getOriginalPoint(line.p0);
                 }
 
                 this.referenceLineLayer.refresh();

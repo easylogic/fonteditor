@@ -12,8 +12,17 @@ define(
         var ajaxFile = require('common/ajaxFile');
         var string = require('common/string');
         var lang = require('common/lang');
+		var defaultObject = require('../data/default');
         var glyfAdjust = require('fonteditor-core/ttf/util/glyfAdjust');
         var getEmptyttfObject = require('fonteditor-core/ttf/getEmptyttfObject');
+		var glyfGenerator = require('../widget/glyf-generator');
+
+		var getEmptyContent = function () {
+			var obj = getEmptyttfObject();
+			lang.extend(obj, defaultObject);
+
+			return	obj;
+		}
 
         /**
          * 读取在线字体
@@ -26,6 +35,7 @@ define(
                 type: type === 'svg' ? 'xml' : 'binary',
                 url: url,
                 onSuccess: function (buffer) {
+                    // binary font 로드 
                     program.loader.load(buffer, {
                         type: type || 'ttf',
                         success: function (imported) {
@@ -63,7 +73,10 @@ define(
                 else if (options.type === 'push' && data && data.newData) {
                     program.ttfManager.ttf.set(data.newData);
                     program.ttfManager.fireChange(true);
+
+                    // 프로젝트 저장하기 , projectid : newData 
                     program.project.update(options.projectId, data.newData).then(function () {
+                        // saved 상태 변경 
                         program.ttfManager.setState('saved');
                     });
                 }
@@ -79,6 +92,21 @@ define(
 
         var actions = {
 
+			'move-right' : function () { program.editor.move('right'); }, 
+			'move-left' : function () { program.editor.move('left'); }, 
+			'move-up' : function () { program.editor.move('up'); }, 
+			'move-down' : function () { program.editor.move('down'); }, 
+
+			// 지원되는 모양 입력하기, 외부에서 ajax 형태로 받아오는 리스트는 어떻게 할까 고민해보자. 
+			'addsupportshapes' : function (e) {
+				var target = $(e.target);
+				var type = target.attr('data-type');
+				
+				// 에디팅 상태랑 상관 없이 적용된다. 
+				program.editor.execCommand('addsupportshapes', type);
+			},
+
+            // 되돌리기 
             'undo': function () {
                 if (program.editor.isEditing()) {
                     program.editor.undo();
@@ -89,6 +117,7 @@ define(
                 }
             },
 
+            // 재실행 
             'redo': function () {
                 if (program.editor.isEditing()) {
                     program.editor.redo();
@@ -99,17 +128,19 @@ define(
                 }
             },
 
+            // 새 폰트 
             'new': function (options) {
                 if (program.ttfManager.isChanged() && !window.confirm(i18n.lang.msg_confirm_save_proj)) {
                     return;
                 }
-                program.ttfManager.set((options && options.ttf) || getEmptyttfObject());
+                program.ttfManager.set((options && options.ttf) || getEmptyContent());
                 program.data.projectId = null;
 
-                // 建立项目 提示保存
+				// 브라우저에 폰트 저장 
                 actions.save(options);
             },
 
+            // 가져오기 창 열기 
             'open': function () {
                 $('#font-import').click();
             },
@@ -120,9 +151,12 @@ define(
                 }
             },
 
+            // 내보내기 
             'export': function (e) {
-                if (program.ttfManager.get()) {
+                if (program.ttfManager.get()) { // 폰트를 얻어오고 
                     var target = $(e.target);
+
+                    // exporter 를 사용해서 내보낸다.font 를 
                     program.exporter.export(program.ttfManager.get(), {
                         type: target.attr('data-type'),
                         error: function (ev) {
@@ -132,6 +166,7 @@ define(
                 }
             },
 
+            // 서버로 부터 동기화 한다. 
             'sync-from-server': function () {
                 var SettingSync = settingSupport.sync;
                 // 从服务器同步字体
@@ -149,6 +184,7 @@ define(
                 });
             },
 
+            // 서버에 동기화(push) 한다. 
             'sync': function (projectId, ttf, config) {
                 // 推送字体
                 fontDelaySync({
@@ -158,19 +194,23 @@ define(
                     config: config
                 });
             },
+            //  sync 를 시작한다. , 무조건 자동 ync 모드로 돌아가도록 하자. 
             'dosync': function (projectId) {
                 var syncConfig = program.project.getConfig(projectId).sync;
                 if (syncConfig && syncConfig.autoSync) {
                     actions.sync(projectId, program.ttfManager.get(), syncConfig);
                 }
             },
+
+            // 폰트를 저장한다. 
             'save': function (options) {
                 if (program.ttfManager.get()) {
                     // 已经保存过的项目
                     var projectId = program.data.projectId;
-                    if (projectId) {
-                        program.project.update(projectId, program.ttfManager.get())
+                    if (projectId) {    // project id 가 있을 때 
+                        program.project.update(projectId, program.ttfManager.get()) // projectid : font 를 저장한다. 
                         .then(function () {
+                            // 저장한 이후에 ttfManager 의 상태를 바꾼다. 
                             program.ttfManager.setState('saved');
                             program.loading.show(i18n.lang.msg_save_success, 400);
                             actions['dosync'](projectId);
@@ -214,7 +254,7 @@ define(
                 }
             },
 
-            'add-online': function () {
+            'add-online': function () { // online 에서 폰트 추가 
                 var SettingOnline = settingSupport.online;
                 !new SettingOnline({
                     onChange: function (url) {
@@ -263,6 +303,55 @@ define(
                 }
             },
 
+			'setting-glyf-generate-template': function () {
+               var ttf = program.ttfManager.get();
+                if (ttf) {
+					var glyfList = glyfGenerator.generate('KSC5601').map(function(name) {
+
+						return {
+							unicode : [],
+							name : name,
+							contours : []	
+						}; 
+					});
+
+					program.ttfManager.insertTemplateGlyf(glyfList);
+                }
+			},
+
+			'splitJaso' : function (unicode) {
+				return glyfGenerator.splitJaso('KSC5601', unicode);
+			},
+
+			//  템플릿으로 한글 코드 자동 생성 
+			'setting-make-korean-glyf' : function (hasEvent) {
+				if (typeof hasEvent == 'undefined') {
+					hasEvent = true; 
+				}
+
+				var ttf = program.ttfManager.get();
+
+				if (ttf)
+				{
+					var checkKeys = glyfGenerator.getCheckKeys('KSC5601');
+
+					//  키를 가지고 있는 목록만 추림 
+					var keys = {};
+					ttf.glyf.forEach(function (g, i) {	
+						if (g.name && g.name.length && checkKeys.indexOf(g.name.split('-')[0]) > -1)
+						{
+							keys[g.name] = { index : i, glyf : g }; 
+						}
+					});
+
+
+					var realGlyfList = glyfGenerator.makeUnicodeGlyf('KSC5601', keys);
+
+					program.ttfManager.insertUnicodeGlyf(realGlyfList, hasEvent); 
+				}
+			},
+
+            // 이름 설정하기 
             'setting-name': function () {
                 var ttf = program.ttfManager.get();
                 if (ttf) {
@@ -275,6 +364,26 @@ define(
                 }
             },
 
+			// 글자 찾기 
+			'find-glyf' : function () {
+				program.viewer.fire('find-glyf');
+			},
+
+			// 글자 줄이기
+			'setting-reduce-unicode' : function () {
+				program.viewer.fire('setting-reduce-unicode');
+			},
+
+			'download-glyf' : function () {
+
+				var selected = program.viewer.getSelected();
+
+				program.viewer.fire('download-glyf', {
+					list : selected
+				});
+			},
+
+            // 좌표 설정하기 
             'setting-metrics': function () {
                 var ttf = program.ttfManager.get();
                 if (ttf) {
@@ -287,6 +396,7 @@ define(
                 }
             },
 
+            // glyf 이름 설정하기 
             'setting-glyf-name': function () {
                 if (program.ttfManager.get()) {
                     if (window.confirm(i18n.lang.msg_confirm_gen_names)) {
@@ -301,6 +411,7 @@ define(
                 }
             },
 
+            // 현재 폰트 최적화 하기 
             'setting-optimize': function () {
                 if (program.ttfManager.get()) {
                     var result = program.ttfManager.optimize();
@@ -316,6 +427,8 @@ define(
                 }
             },
 
+
+            // 정렬하기 
             'setting-sort': function () {
                 if (program.ttfManager.get()) {
                     var result = program.ttfManager.sortGlyf();
@@ -325,10 +438,33 @@ define(
                 }
             },
 
+            // 윤곽선 최적화 
             'setting-compound2simple': function () {
                 if (program.ttfManager.get()) {
                     program.ttfManager.compound2simple(program.viewer.getSelected());
                 }
+            },
+
+            'layout-editor-only' : function () {
+				program.fire('resize', { showMain : false, showEditor : true,  showSidebar : false });
+            },
+
+
+            'layout-glyf-only' : function () {
+				program.fire('resize', { showMain : true, showEditor : true,  showSidebar : false });
+            },
+
+
+            'layout-project-only' : function () {
+				program.fire('resize', { showMain : false, showEditor : true,  showSidebar : true });
+            },
+
+            'layout-all' : function () {
+				program.fire('resize', { showMain : true, showEditor : true,  showSidebar : true });
+            },
+
+            'layout-glyf-viewer' : function () {
+				program.fire('resize', { showMain : false, showEditor : false,  showSidebar : true });
             },
 
             'setting-editor': function () {
@@ -344,10 +480,20 @@ define(
                 }).show(program.setting.get('editor'));
             },
 
-            'import-pic': function () {
+            // 사진 가지고 오기 
+            'import-pic': function (glyf) {
                 var SettingEditor = settingSupport['import-pic'];
                 if (program.ttfManager.get()) {
                     !new SettingEditor({
+						isSimple : program.isSimpleMode,
+						glyf: glyf,
+						onDispose : function (setting) {
+							if (program.isSimpleMode)
+							{
+								$("#innerdialog-setting-shape-maker").show();
+							}
+
+						},
                         onChange: function (setting) {
                             if (setting.contours) {
 
@@ -365,6 +511,36 @@ define(
                                     }, 1, 1, 0, 0, false), selected[0]);
                                 }
                             }
+
+						
+                        }
+                    }).show();
+					if (program.isSimpleMode)
+					{
+						$("#innerdialog-setting-shape-maker").hide();
+					}
+
+                }
+            },
+
+
+			// glyf 가져오기, name 과 unicode 기준으로 참고할 glyf 리스트를 보여준다.  
+            'import-glyf': function (glyf) {
+
+                var SettingEditor = settingSupport['import-glyf'];
+                if (program.ttfManager.get()) {
+                    !new SettingEditor({
+						isSimple : program.isSimpleMode,
+						glyf: glyf,
+						onDispose : function (setting) {
+							if (program.isSimpleMode)
+							{
+								$("#innerdialog-setting-shape-maker").show();
+							}
+
+						},
+                        onChange: function (setting) {
+                           						
                         }
                     }).show();
                 }

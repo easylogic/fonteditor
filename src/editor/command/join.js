@@ -87,7 +87,7 @@ define(
             },
 
             /**
-             * 相交
+             * 相交 - 교차
              *
              * @param {Array} shapes 路径对象数组
              */
@@ -97,7 +97,7 @@ define(
             },
 
             /**
-             * 相切
+             * 相切 - 접선
              *
              * @param {Array} shapes 路径对象数组
              */

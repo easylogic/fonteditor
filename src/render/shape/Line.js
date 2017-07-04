@@ -14,11 +14,17 @@ define(
             type: 'line',
 
             adjust: function (shape, camera) {
+				var notScaled = !!shape.notScaled;
                 var center = camera.center;
                 var ratio = camera.ratio;
 
                 if (undefined !== shape.p0.x) {
                     shape.p0.x = ratio * (shape.p0.x - center.x) + center.x;
+
+					if (notScaled)
+					{
+						shape.p0.y = ratio * (shape.p0.y - center.y) + center.y;
+					}
                 }
                 else {
                     shape.p0.y = ratio * (shape.p0.y - center.y) + center.y;
@@ -30,12 +36,17 @@ define(
                 }
 
                 return shape;
-            },
+            }, 
 
             move: function (shape, mx, my) {
-
+				var notScaled = !!shape.notScaled;
                 if (undefined !== shape.p0.x) {
                     shape.p0.x += mx;
+
+					if (notScaled)
+					{
+						shape.p0.y += my;
+					}
                 }
                 else {
                     shape.p0.y += my;
@@ -56,7 +67,7 @@ define(
 
             isIn: function (shape, x, y) {
 
-                // 单点模式
+                // 단일 포인트 모드
                 if (undefined === shape.p1) {
                     return  undefined !== shape.p0.x && Math.abs(shape.p0.x - x) < 4
                         || undefined !== shape.p0.y && Math.abs(shape.p0.y - y) < 4;
@@ -70,7 +81,7 @@ define(
             },
 
             /**
-             * 绘制一个shape对象
+             * Shape 객체 그리기
              *
              * @param {CanvasContext} ctx canvas的context
              * @param {Object} shape shape数据
@@ -104,7 +115,7 @@ define(
                     y1 = Math.round(shape.p1.y);
 
                     if (shape.dashed) {
-                        dashedLineTo(ctx, x0, y0, x1, y1);
+                        dashedLineTo(ctx, x0, y0, x1, y1, 3);
                     }
                     else {
                         ctx.moveTo(x0, y0);

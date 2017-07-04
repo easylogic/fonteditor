@@ -11,10 +11,10 @@ define(
 
             saveSetting: true, // 是否保存setting
 
-            // 查看器选项
+            // 뷰어 옵션
             viewer: {
                 color: '', // 查看器颜色
-                shapeSize: 'normal', // 字形大小
+                shapeSize: 'small', // 字形大小
                 pageSize: 100 // 翻页大小
             },
 
@@ -36,10 +36,10 @@ define(
                     }
                 },
                 axis: {
-                    showGrid: true,
-                    gapColor: editorDefault.axis.gapColor,
-                    metricsColor: editorDefault.axis.metricsColor,
-                    graduation: {
+                    showGrid: true,   // 그리드 보기 
+                    gapColor: editorDefault.axis.gapColor, // 중간 선 색깔 
+                    metricsColor: editorDefault.axis.metricsColor,  // 좌표 색깔 
+                    graduation: {   // 윤곽선 
                         gap: editorDefault.axis.graduation.gap
                     }
                 }

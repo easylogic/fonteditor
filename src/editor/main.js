@@ -10,6 +10,7 @@ define(
         var render = require('render/main');
         var Editor = require('./Editor');
         var defaultOptions = require('./options');
+        var simpleOptions = require('./simple-options');
         var lang = require('common/lang');
 
         var exports = {};
@@ -29,7 +30,7 @@ define(
                 throw 'need main element';
             }
 
-            options = lang.extend({}, defaultOptions, options);
+            options = lang.extend({}, options.simple ? simpleOptions : defaultOptions, options);
 
             var editor = new Editor(main, options.editor);
             var opt = options.render || {};

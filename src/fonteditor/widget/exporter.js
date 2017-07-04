@@ -33,6 +33,8 @@ define(
 
         /**
          * 导出SFNT结构字体
+		 * 
+		 * SFNT 폰트 형식  내보내기  
          *
          * @param {Object} ttf ttf字体结构
          * @param {Object} options 参数
@@ -51,7 +53,7 @@ define(
                     var base64Str = '';
                     var fileName = (options.fileName || ttf.name.fontFamily || 'export');
 
-                    // 导出
+                    // 导出, zip 파일 만들기 
                     if (options.type === 'zip') {
 
                         // zip
@@ -117,6 +119,10 @@ define(
                     }
 
                     download(fileName + '.' + options.type, base64Str);
+
+					// TODO: 다운로드 여부 체크해서  바로 서버로 배포해도 될 듯 하다.  
+					// TODO: 배포 시스템은 여기 기준으로 만드는 것으로 하자. 
+
                     if (options.success) {
                         options.success(base64Str);
                     }

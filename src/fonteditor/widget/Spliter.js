@@ -42,6 +42,8 @@ define(function (require) {
     /**
      * 面板分割管理器
      *
+	 * 폰트 에디트 화면과 폰트리스트 화면을 분리시켜 준다. 
+	 * 
      * @constructor
      * @param {HTMLElement} main 主元素
      * @param {Object} options 参数

@@ -34,8 +34,9 @@ define(function(require) {
             'width:14px; height:14px; margin:-5px -7px; border:1px solid #666!important;' +
             'box-shadow:inset -2px -4px 3px #ccc}',
             renderCallback: function (e, toggle) {
-                if (false === toggle) {
-                    this.$trigger.trigger('change');
+                if (false === toggle && this.$trigger) {
+
+	                this.$trigger.trigger('change');
                 }
             }
     };

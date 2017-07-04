@@ -50,6 +50,18 @@ define(
 
         var previewer = {
 
+			toBase64 : function (ttf) {
+				var options = {
+					type: 'ttf'
+				};
+
+				ttf = resolvettf(ttf);
+				
+				var fontData = font.create(ttf).toBase64(options);
+				
+				return fontData;
+			},
+
             /**
              * 加载预览按钮
              *

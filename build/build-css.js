@@ -11,6 +11,7 @@ var BASE_DIR = process.cwd();
 // 默认的文件列表
 var DEFAULT_FILES = [
     'css/main.less',
+    'css/editor.less',
     'css/preview.less'
 ];
 

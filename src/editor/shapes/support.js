@@ -14,7 +14,6 @@ define(
             triangle: require('./triangle'),
             heart: require('./heart'),
             tel: require('./tel'),
-            du: require('./du'),
             drop: require('./drop')
         };
     }

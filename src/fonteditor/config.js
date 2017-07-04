@@ -6,7 +6,6 @@
 
 define(function (require) {
 
-    // 在线地址读取接口
     var readOnlineUrl = location.hostname.indexOf('baidu.com') >= 0
         ? '/font/proxy?type=${0}&url=${1}'
         : './php/readOnline.php?type=${0}&file=${1}';

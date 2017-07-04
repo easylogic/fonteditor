@@ -1,29 +1,47 @@
 // 对话框样式
 
 .modal {
-    background: -webkit-radial-gradient(center, circle contain, rgba(255,255,255,0.6) 0%, rgba(0,0,0,0.6) 100%);
+    background: rgba(0, 0, 0, 0.5);
+
+	
+	&.mini {
+		.modal-header {
+			display:none;
+		}
+	}
 }
 
 .modal-dialog {
     margin-top: 100px;
+	
 
     hr {
         margin-top: 0;
     }
+
+}
+
+.modal-content {
+	border-radius:3px;
 }
 
 .modal-header {
-    padding-top: 6px;
-    padding-bottom: 6px;
-    background: #fff;
-    color: #202430;
+    padding: 15px 25px;
+	background: #333;
+    color: #888;
+	border:0;
+	border-bottom: 1px solid rgba(80, 80, 80, 0.6);
     .close {
         margin-top: 3px;
+		color: #eee;
+		font-weight: 300;
+		text-shadow: none;
     }
 
     .modal-title {
         font-size: 14px;
         line-height: 25px;
+	    color: #eee;
     }
 }
 
@@ -31,8 +49,51 @@
 
 .modal-body {
     min-height: 100px;
-    padding-bottom: 5px;
-    background: #F8F9F9;
+	padding: 25px 25px 30px 25px;
+    background: #3a3a3a;
+
+	hr {
+		border:0px;
+		border-top: 1px solid rgba(80, 80, 80, 0.6);
+	}
+
+	.input-group-addon {
+		font-size: 13px;
+		color: #decfcf;
+		background-color: #3a3a3a;
+		border: 1px solid #3a3a3a;
+	}
+
+	.input-group.fixed {
+		.input-group-addon {
+			width: 200px;
+			text-align:right;
+		}
+
+		input[type="text"], input[type="password"], input[type="number"], input[type="date"], .form-control, select, textarea, textarea.form-control {
+			width: 300px;
+		}
+	}
+
+	input[type="text"], input[type="password"], input[type="number"], input[type="date"], .form-control, select, textarea, textarea.form-control {
+		background: #333;
+		border-color: #333;
+		color: #c9c9c9;
+	}
+
+	.form-inline span {
+		color: white; 
+	}
+
+	label {
+		color:white;
+	}
+
+	.form-group {
+		span {
+			color: white; 
+		}
+	}
 }
 
 .modal-content {
@@ -41,11 +102,12 @@
     -webkit-box-shadow: 0 2px 4px rgba(0,0,0,.2);
     box-shadow: 0 2px 4px rgba(0,0,0,.2);
     overflow: hidden;
+
 }
 
 .modal-footer {
-    border-top: 0;
-    background: #F8F9F9;
+	border-top: 1px solid rgba(80, 80, 80, 0.6);
+	background: #333;
     padding-top: 10px;
     padding-bottom: 10px;
 

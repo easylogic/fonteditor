@@ -28,13 +28,13 @@ define(
             },
 
             /**
-             * 反转shape
+             * 모양 반전 시키기
              *
              * @param {Array} shapes 形状集合
              */
             reversepoints: function (shapes) {
                 shapes.forEach(function (shape) {
-                    shape.points = shape.points.reverse();
+                    shape.points = pathsUtil.reverse(shape.points);
                 });
 
                 this.fontLayer.refresh();
@@ -82,6 +82,14 @@ define(
                 var index = this.fontLayer.shapes.indexOf(shape);
                 this.fontLayer.shapes.splice(index, 1);
                 this.fontLayer.shapes.splice(index - 1, 0, shape);
+            },
+
+            /**
+             * 심볼 만들기 
+             *
+             **/
+            createsymbol : function (shape) {
+                console.log('create symbol', shape);
             },
 
             /**
@@ -153,7 +161,15 @@ define(
             },
 
             /**
-             * 增加轮廓
+             * 심볼 추가하기 command 
+             *
+             */
+            addsymbol : function (shapes, selected) {
+                console.log('addsymbol', shapes, selected);
+            },
+
+            /**
+             * 윤곽선 추가
              *
              * @param {Array} contours 轮廓集合
              * @param {Object} options 选项

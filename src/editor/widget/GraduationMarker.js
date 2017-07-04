@@ -26,8 +26,12 @@ define(
                 yAxis.style.height = options.thickness + 'px';
             }
 
-            main.appendChild(this.xAxis = xAxis);
-            main.appendChild(this.yAxis = yAxis);
+			// TODO: 마커를 표시할 때 다시 주석을 풀어주세요. 할일이 없을 듯도 하고 . 
+			this.xAxis = xAxis
+			this.yAxis = yAxis
+
+            //main.appendChild(this.xAxis);
+            //main.appendChild(this.yAxis);
         }
 
         /**
@@ -37,17 +41,17 @@ define(
          * @param {number} y y坐标
          */
         GraduationMarker.prototype.moveTo = function (x, y) {
-            this.xAxis.style.top = y + 'px';
-            this.yAxis.style.left = x + 'px';
+            //this.xAxis.style.top = y + 'px';
+            //this.yAxis.style.left = x + 'px';
         };
 
         /**
          * 注销
          */
         GraduationMarker.prototype.dispose = function () {
-            this.xAxis.parentNode.removeChild(this.xAxis);
-            this.yAxis.parentNode.removeChild(this.yAxis);
-            this.xAxis = this.yAxis = null;
+            //this.xAxis.parentNode.removeChild(this.xAxis);
+            //this.yAxis.parentNode.removeChild(this.yAxis);
+            //this.xAxis = this.yAxis = null;
         };
 
         return GraduationMarker;

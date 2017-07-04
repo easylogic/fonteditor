@@ -18,6 +18,14 @@ define(
                 fill: false
             });
 
+            this.imageLayer = this.render.addLayer('image', lang.extend({
+                level: 15,
+                lineWidth: 1,
+                strokeColor: '#999',
+                fillColor: '#555',
+                strokeSeparate: false
+            }, this.options.imageLayer));
+
             this.fontLayer = this.render.addLayer('font', lang.extend({
                 level: 20,
                 lineWidth: 1,

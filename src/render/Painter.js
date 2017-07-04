@@ -265,7 +265,6 @@ define(
              * @return {this}
              */
             move: function (x, y, layerId) {
-
                 var layers = [];
                 if (layerId) {
                     var layer = this.getLayer(layerId);
@@ -293,7 +292,6 @@ define(
              * @return {this}
              */
             moveTo: function (x, y, layerId) {
-
                 var layers = [];
                 if (layerId) {
                     var layer = this.getLayer(layerId);
@@ -313,10 +311,20 @@ define(
                 });
 
                 var bound = computeBoundingBox.computeBounding(boundPoints);
-
+			
                 if (bound) {
                     var mx = x - (bound.x + bound.width / 2);
                     var my = y - (bound.y + bound.height / 2);
+
+					if (this.options.simple && this.camera.ratio == 1)		// 정사이즈 비율일때 
+					{
+						mx = -bound.x;
+
+						var axis = layers[0].shapes[0];
+						var baselineY = (this.height + axis.metrics.descent);
+						my = baselineY - axis.y;
+
+					}
 
                     layers.forEach(function (layer) {
                         layer.move(mx, my);
@@ -357,6 +365,7 @@ define(
                 var width = this.main.clientWidth;
                 var height = this.main.clientHeight;
 
+				// FIXME: 화면, 확대 축소할때는 사이즈를 조절하는게 맞는 것인가?  
                 this.layers.forEach(function (layer) {
                     document.getElementById(layer.id).style.width = width + 'px';
                     document.getElementById(layer.id).style.height = height + 'px';

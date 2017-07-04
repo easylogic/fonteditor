@@ -44,6 +44,8 @@ define(
             adjustpos: 'Adjust Position',
             adjustglyf: 'Adjust Glyph',
             addpath: 'Add Contour',
+            addsymbol: 'Add Symbol',
+            delsymbol: 'Delete Symbol',
             addshapes: 'Add Shape',
             circle: 'Circle',
             rect: 'Rectangle',
@@ -59,17 +61,25 @@ define(
             gridsorption: 'Adsorbed to Grid',
             shapesorption: 'Adsorbed to Contour',
             showgrid: 'Show Grid',
+            showoutline: 'Show Outline',
+            showaxis: 'Show Axis',
+            showreference: 'Show Reference Line',
             moresetting: 'More..',
             addreferenceline: 'Add Reference Line',
             clearreferenceline: 'Clear Reference Line',
             addboundreferenceline: 'Bound Reference Line',
             rescale: 'Rescale',
+            zoomin: 'Zoom In',
+            zoomout: 'Zoom Out',
             fontsetting: 'Font Setting',
             addpoint: 'Add Point',
             removepoint: 'Remove Point',
             oncurve: 'On Curve',
             offcurv: 'Off Curve',
-            asstart: 'First Point'
+            asstart: 'First Point',
+            createsymbol : 'Create Symbol',
+		    import_pic_title: 'Import glyph with image',
+			import_glyf_title: 'Import glyph'
         };
     }
 );

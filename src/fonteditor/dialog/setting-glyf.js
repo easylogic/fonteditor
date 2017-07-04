@@ -14,6 +14,10 @@ define(
 
             title: i18n.lang.dialog_glyph_info,
 
+			isMiniMode: function () {
+				return true; 
+			},
+
             getTpl: function () {
                 return tpl;
             },

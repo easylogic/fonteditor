@@ -9,47 +9,55 @@ define(
             // 编辑器相关
             editor: {
 
-                unitsPerEm: 512, // 框大小
+                unitsPerEm: 1024, // 框大小, 상자크기? 
 
-                // 吸附选项
+                // 吸附选项  (그리드에 붙이기, 자석효과)
                 sorption: {
                     enableGrid: false, // 吸附到网格
                     enableShape: true, // 吸附到对象
                     gridDelta: 5, // 网格delta
                     delta: 5, // 对象delta
-                    sorptionColor: '#F0913A'
+                    sorptionColor: '#ff0000'	// 그리드 붙이기 할 때 가이드 선 색깔 
                 },
 
                 // 辅助线
                 referenceline: {
+					hide: false,		// reference line(가이드선) 영역 보이기 여부 
                     style: {
-                        strokeColor: '#746AFE'
+                        strokeColor: '#939300',
+						fillColor: '#939300',
+						thin: true
                     }
                 },
 
-                // 覆盖层
+                // 객체 선택시 나타나는 컬러 설정 
                 coverLayer: {
-                    lineColor: '#4780FF',
-                    outlineColor: '#3372FF',
-                    strokeColor: '#4780FF',
-                    fillColor: 'white'
+					thin: true,
+					font : "normal 12px arial",
+                    lineColor: '#4a90e2',
+                    outlineColor: '#115e16',
+                    strokeColor: '#4a90e2',
+                    fillColor: 'rgba(255, 255, 255, 0.4)'		// 점 포인트 색상 
                 },
 
-                // 字体层
+                // 글자 설정 
                 fontLayer: {
+					thin: true,
                     lineWidth: 1,
-                    strokeColor: '#888',
+                    strokeColor: '#0000ff',		// 폰트 border 색상 
                     fill: true,
-                    fillColor: '#999'
+                    fillColor: '#ececec'			// 폰트 채움 색상 , 랜덤 컬러
                 },
 
                 // 轴线
                 axis: {
-                    showGrid: true, // 显示网格
-                    gapColor: '#DEDCFE', // 网格线颜色
-                    axisColor: 'red',
-                    metricsColor: '#FF9592', // 测量辅助线颜色
-                    emColor: 'red', // em框颜色
+					hide: false,	// axis 보이기 여부 
+                    showGrid: true, // 격자 표시 여부 
+                    gapColor: 'rgba(100, 100, 100, 0.1)', // 그리드 선 색상
+                    axisColor: 'rgba(200, 200, 200, 1)',
+                    metricsColor: 'rgba(255, 0, 0, 0.9)', // 측정 가이드 색상
+                    emColor: '#993300', // em 프레임 색상			// descent, capHeight 등 metrics 기준 선 표시 색상 
+					font : 'normal 11px arial',
 
                     // 字体测量规格
                     metrics: {
@@ -59,15 +67,26 @@ define(
                         capHeight: 358 // 大写字母高度
                     },
 
-                    // 刻度
+                    // 줄자
                     graduation: {
-                        gap: 100,
-                        thickness: 20, // 厚度
-                        markHeight: 3, // 标记高度
-                        markBackgroundColor: '#C3CBD2', // 背景色
-                        markColor: '#65737E', // 前景色
-                        color: '#65737E' // 文字颜色
-                    }
+						strokeColor: '#330033',
+                        gap: 100,		// 줄자 표시 간격 
+						dist : 1,  // 50 * 4 = 200  단위로 글자 표시 
+                        thickness: 34, // 줄자 그리기 간격 
+                        markHeight: 5, // 标记高度
+                        markBackgroundColor: '#ffffff', // 背景色
+                        markColor: '#006633', // 前景色
+                        color: '#990000', // 글자색,
+						font : 'normal 13px arial'
+
+                    },
+
+					style: {
+						thin: true,
+						fillColor: '#4a90e2',
+						strokeColor : '#4a90e2',
+						font: 'normal 16px arial'
+					}
                 },
                 // 命令栏
                 contextMenu: {}
@@ -76,11 +95,11 @@ define(
 
             // 渲染器相关
             render: {
-                defaultRatio: 1.2, // 默认的缩放比例
-                minScale: 0.1, // 最小缩放
-                maxScale: 200, // 最大缩放
-                enableScale: true, // 是否允许缩放
-                enableResize: true // 是否允许大小改变
+                defaultRatio: 1.25, // 기본 크기 조정
+                minScale: 0.1, // 최소 크기(줌)
+                maxScale: 200, // 최대 크기(줌)
+                enableScale: true, // 확장 가능 여부
+                enableResize: true // 크기 조정 가능 여부
             }
         };
         return options;

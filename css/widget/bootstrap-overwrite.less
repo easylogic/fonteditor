@@ -2,17 +2,15 @@
 
 .dropdown-menu {
     margin-top: 0;
-    border-radius: 0;
-    background: #323842;
-    border: none;
+    //background: #373738;
     >li>a {
         cursor: pointer;
-        color: #B6CBDD;
+        color: #333;
 
         &:hover,
         &:focus {
-            color: #FFF;
-            background: #232830;
+            color: white;
+            background: #838fa5;
         }
     }
 }
@@ -66,7 +64,7 @@ hr {
 
 .navbar {
     height: 50px;
-    background: #F9F9F9;
+    //background: #373738;
 }
 
 .btn-groups {
@@ -76,27 +74,40 @@ hr {
         width: 1px;
         height: 30px;
         line-height: 30px;
-        background: #D8D8D8;
+        background: rgba(255,255, 255, 0.5);
         margin: 0 8px;
         display: inline-block;
         vertical-align: middle;
     }
+
+	span {
+		color: #4A90E2;
+	}
 }
 
-.btn-flat {
-    border-radius: 0;
-    color: #FFF;
-    background: #738089;
+.btn-flat, .btn-default {
+    border-radius: 3px;
+    color: rgba(0, 0, 0, 0.8);
+    background: white;
+	border:0px;
+	box-shadow:none !important;
+	-webkit-box-shadow:none !important;
+
+	&.active {
+		box-shadow:none !important;
+		-webkit-box-shadow:none !important;
+	}
 
     &:hover,
     &:focus, {
-        background: #323842;
-        color: #B6CBDD;
+        //background: #141415 !important; 
+        color: rgba(0, 0, 0, 1) !important;
         outline: none;
+		border-radius:3px;
     }
 
     >.ico-left {
-        margin-right: 8px;
+        //margin-right: 8px;
     }
 
     >.ico {
@@ -109,35 +120,45 @@ hr {
 }
 
 .btn-new {
-    color: #FFF;
-    background: #4A90E2;
+    color: #4A90E2;
 
     &:hover,
     &:focus {
-        background: darken(#4A90E2, 10%);
-        color: #FFF;
+		outline:none;
+        color: darken(#4A90E2, 10%);
     }
 }
 
-.btn-preview {
-    color: #FFF;
-    background: #28B4A0;
+
+.btn-new.glyf-add-button,
+.project-view-btn
+{
+	position: absolute;
+    left: 50%;
+    top: 50%;
+	margin-top:-15px;
+	margin-left:-15px;
+    width: 100px;
+}
+
+.btn-preview, .btn-download {
+    color: #4A90E2;
 
     &:hover,
     &:focus {
-        background: lighten(#28B4A0, 10%);
-        color: #FFF;
+        outline:none;
+        color: darken(#4A90E2, 10%);
     }
 
     &.dropdown-toggle:focus {
-        background: #323842;
+        //background: #323842;
         color: #B6CBDD;
     }
 }
 
 .btn-confirm {
     color: #FFF;
-    background: #4A90E2;
+    background: #4A90E2; 
 
     &:hover,
     &:focus {
@@ -157,20 +178,20 @@ hr {
     }
 }
 
-
-// 命令组
-.command-groups {
+.command-groups, .command-groups-bottom {
     height: 40px;
     padding-left: 8px;
     overflow: hidden;
-    background: rgba(112, 119, 128, 0.8);
+    //background: #141415;
+	z-index:1000;
+	pointer-events: none;  
 
     >li {
-
+		pointer-events: auto; 
         float: left;
         line-height: 40px;
-        padding: 0 8px;
-        color: #FFF;
+        padding: 0 4px;
+        color: #333;
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -182,32 +203,57 @@ hr {
         }
 
         >.ico {
-            font-size: 20px;
+            font-size: 24px;
             text-decoration: none;
         }
 
-        &:hover {
-            background: lighten(#707781, 10%);
+		> input {
+	        //background: #141415;
+			outline:none;
+			border:0px;
+			width:50px;
+			border: 1px solid rgba(255, 255, 255, 0.5);
+		}
+
+        &:hover:not(.not-btn) {
+	        //background: #373738;
+			color: rgba(0, 0, 255, 1);
+			border-radius: 3px;
         }
     }
 
     >li[data-theme="ico"] {
-        padding: 0 12px;
+        padding: 0 8px;
     }
 
     >li[data-disabled] {
         color: #B9BDC1;
+		display:none;
+    }
+
+    >li[data-direction=right] {
+        float:right;
     }
 
     >li[data-on] {
-        background: darken(#707781, 10%);
+        background: #373738;
     }
 
     >[data-split] {
         padding: 0!important;
-        width: 1px;
+        width: 0px;
         height: 40px;
-        background: lighten(#707781, 15%);
+        background: rgba(255, 255, 255, 0.5);
+        pointer-events: none;
+    }
+}
+
+#glyf-list-commandmenu {
+	>[data-split] {
+        width: 2px !important;
+        height: 20px !important;
+		margin-top:10px;
+        background: rgba(255, 255, 255, 0.5);
         pointer-events: none;
     }
 }
@@ -235,6 +281,7 @@ hr {
 
 .form-line {
     line-height: 34px;
+	color:rgba(255, 255, 255, 0.8);
 }
 
 
@@ -245,4 +292,15 @@ hr {
 .btn-right {
     float: right;
     margin-left: 10px;
+}
+
+
+.btn-group.open .dropdown-toggle {
+    -webkit-box-shadow: none !important;
+    box-shadow:  none !important;
+
+	&:focus {
+		-webkit-box-shadow: none !important;
+		box-shadow:  none !important;
+	}
 }

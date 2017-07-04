@@ -8,7 +8,7 @@ define(
         var lang = require('common/lang');
 
         /**
-         * 控制点管理
+         * 컨트롤 포인트 관리
          *
          * @constructor
          * @param {Layer} layer layer对象
@@ -68,11 +68,11 @@ define(
                 if (i > 0) {
                     if (mode === 'rotate' && i <= 4) {
                         p.type = 'cpoint';
-                        p.size = 3;
+                        p.size = 4;
                     }
                     else {
                         p.type = 'point';
-                        p.size = 6;
+                        p.size = 8;
                     }
                 }
                 lang.extend(controls[i], p);
