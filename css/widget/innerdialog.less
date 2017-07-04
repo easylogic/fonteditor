@@ -1,0 +1,255 @@
+.main {
+
+	display:flex;
+	flex-direction: column;
+
+	.innerdialog {
+		flex-grow: 1;
+		//background: #333;
+		position:relative;
+		display:block;
+		width: '100%'; 
+		height: 200px;
+		z-index: 1000;
+		border-bottom:1px solid #a2a2a2;
+		box-sizing:border-box;
+
+		&:last-child {
+			border-bottom:0px;
+		}
+
+		> .title {
+			position:absolute;
+			left:0px;
+			right:0px;
+			height:30px;
+			top:0px;
+			box-sizing:border-box;
+			border-bottom:1px solid #a2a2a2;
+			padding:5px 10px;
+		}
+
+		.tools {
+			display:inline-block;
+			position:absolute;
+			right:0px;
+			height:30px;
+			top:0px;
+			box-sizing:border-box;
+			padding:5px 10px;
+		}
+
+		.content  {
+			position:absolute;
+			left:0px;
+			right:0px;
+			top:30px;
+			bottom:0px;
+			padding:10px;
+			overflow:auto;
+
+			hr {
+				border:0px;
+				border-top: 1px solid rgba(80, 80, 80, 0.6);
+			}
+
+			.input-group-addon {
+				font-size: 13px;
+				//color: #decfcf;
+				background-color: transparent;
+				border: 0px;
+			}
+
+			.input-group {
+				.input-group-addon {
+					width: 100px;
+				}
+
+				input[type="text"], input[type="password"], input[type="number"], input[type="date"], .form-control, select, textarea, textarea.form-control {
+					width: 140px;
+				}
+			}
+
+			input[type="text"], input[type="password"], input[type="number"], input[type="date"], .form-control, select, textarea, textarea.form-control {
+				//background: #333;
+				//border-color: #333;
+				//color: #c9c9c9;
+			}
+
+			.form-inline span {
+				//color: white; 
+			}
+
+			.help {
+				//color: white; 
+				margin-bottom:5px;
+				padding-left:10px;
+				font-size:11px;
+			}
+
+			label {
+				//color:white;
+			}
+
+			.form-group {
+				span {
+				//	color: white; 
+				}
+			}
+		}
+
+
+	}
+
+
+	#innerdialog-setting-points {
+
+		.content {
+			padding: 0px !important;
+		}
+
+		.point-group {
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top:2px;
+			padding-bottom:2px;
+		}
+
+		.point-group.current {
+			background-color: #d2d2d2;			
+
+			.input-group {
+			//	background-color: #6c6c6c;			
+			}
+		}
+
+		.input-group {
+			font-size: 12px;
+			//color: #decfcf;
+			padding: 2px 3px;
+			//background-color: #3a3a3a;
+			//border: 1px solid #3a3a3a;
+			display:block;
+			margin-bottom:0px;
+		}
+
+
+		input[type="text"], input[type="password"], input[type="number"], input[type="date"], .form-control, select, textarea, textarea.form-control {
+			//background: #333;
+			//border-color: #333;
+			//color: #c9c9c9;
+			width: 65px;
+			display:inline-block;
+			vertical-align:middle;
+		}
+
+		span {
+			//color: white; 
+			display:inline-block;
+		} 
+
+		label {
+			//color:white;
+			width: 30px;
+			display:inline-block;
+		}
+
+		.del-btn {
+			cursor:pointer; 
+			vertical-align:middle;
+			margin-left:10px;
+		}
+
+	}
+
+
+	#innerdialog-setting-color-palette {
+
+		.content {
+			padding: 0px !important;
+		}
+
+		.color-group {
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top:2px;
+			padding-bottom:2px;
+		}
+
+		.input-group {
+			font-size: 12px;
+			padding: 2px 3px;
+			display:block;
+			margin-bottom:0px;
+		}
+
+
+		input[type="text"], input[type="password"], input[type="number"], input[type="date"], .form-control, select, textarea, textarea.form-control {
+			width: 40px;
+			display:inline-block;
+			vertical-align:middle;
+		}
+
+		span {
+			//color: white; 
+			display:inline-block;
+		} 
+
+		label {
+			width: 25px;
+			height: 25px;
+			vertical-align: middle;
+			border-radius: 50%;
+			display: inline-block;
+			box-sizing:border-box;
+			margin-right:0px;
+			margin-bottom:0px;
+			border:1px solid #aaa;
+		}
+
+		.del-btn {
+			cursor:pointer; 
+			vertical-align:middle;
+			margin-left:10px;
+		}
+
+	}
+
+
+	#innerdialog-setting-shape-maker {
+	 .symbol-list {
+			position:absolute;
+			left:0px;
+			right:0px;
+			top:0px;
+			bottom:0px;
+			overflow:auto;
+			padding:10px;
+			
+			 .symbol-item {  
+				display:inline-block;
+				position: relative;
+				margin: 1px;
+				width: 50px;
+				height:50px;
+				cursor: pointer;
+				box-sizing:border-box;
+				padding:10px;
+				text-align:center;
+
+				svg {
+					pointer-events:none;
+					display:block;
+					width:30px;
+					height:30px;
+
+					path {
+						fill: #666;
+					}
+				}
+
+			}
+		}
+	}
+
+}
