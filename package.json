@@ -16,7 +16,7 @@
     "description": "ttf to woff,svg,eot convert, ttf adjust",
     "scripts": {
         "start": "edp webserver start",
-        "build": "sh build.sh",
+        "build": "node build/build-index.js && node build/build-css.js",
         "build-index": "node build/build-index.js",
         "build-css": "node build/build-css.js"
     },
@@ -36,7 +36,7 @@
     "name": "fonteditor",
     "repository": {
         "type": "git",
-        "url": "git://github.com/ecomfe/fonteditor.git"
+        "url": "git://github.com/easylogic/fonteditor.git"
     },
     "version": "0.0.1"
 }

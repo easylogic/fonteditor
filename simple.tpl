@@ -118,10 +118,10 @@
 
 		<div class="glyf-selector-tabs">
 			<div class="tab-item " data-value="project">Project</div>
-			<div class="tab-item" data-value="classic">Classic</div>
-			<div class="tab-item selected" data-value="simple">Simple</div>
+			<div class="tab-item selected" data-value="classic">Classic</div>
+			<div class="tab-item" data-value="simple">Simple</div>
 		</div>
-		<div class="notebook notebook-left">
+		<div class="notebook notebook-left classic-mode">
 
 			<div class="simple-glyf-selector">
 				<div class="text-view" >
@@ -139,12 +139,19 @@
 			<div class="project-glyf-selector"> </div>
 		</div>
 		<div class="notebook notebook-right">
+			<div class="tools">
+				<a class="extensions-open" href="#"><i class="ico i-gear" ></i></a>
+			</div>
 			<section class="editor editing">
 				<ul id="editor-commandmenu" class="command-groups"></ul>
 				<div id="glyf-editor" class="glyf-editor" oncontextMenu="return false"></div>
 				<ul id="editor-commandmenu-bottom" class="command-groups-bottom"></ul>
 			</section>
 		</div>
+		<div class="notebook notebook-options">
+			
+		</div>		
+		<!--
 		<div class="chain">
 			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
 			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
@@ -152,6 +159,7 @@
 			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
 			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
 		</div>
+		-->
 	</div>
 
     <div class="modal" id="model-dialog" tabindex="-1" role="dialog" aria-labelledby="model-label" aria-hidden="true" data-backdrop="false">
@@ -212,8 +220,17 @@
 			$("body").addClass('back-' + backgroundIndex);
 
 
-			$("#innerdialog-setting-glyf").appendTo(".notebook-right");
-			$("#innerdialog-setting-shape-maker").appendTo(".notebook-right");
+			/*
+			// 이건 스타일 다 바꿔야겠네. 
+			// 일단 개별로 동작하던 방식을 버리고 다 같이 동작하도록 함. 
+			// accordian  형태로 가야할 수도 있음. 
+			//$("#innerdialog-setting-glyf").appendTo(".notebook-right");
+			//$("#innerdialog-setting-shape-maker").appendTo(".notebook-right");
+
+			// innder dialog 를 모두  편집기 오른쪽으로 배치함.  
+			// 접었다 폈다 기능을 할 수 있도록 구조를 맞춤. */
+			$(".notebook-options").append($(".main.editing").children());
+
 			$(".glyf-list-manager").appendTo(".classic-glyf-selector");
 			$(".project").appendTo(".project-glyf-selector");
 
@@ -241,6 +258,14 @@
 			$("#guidChar").on('click', function () {
 				$fontView.toggleClass('no-border', !$(this).prop('checked'));
 			});	
+
+			$(".extensions-open").on('click', function () {
+				$(".editor-area").toggleClass('has-options');
+			
+				if ($(".notebook-options .innerdialog.show").length == 0) {
+					accordian_resize($(".notebook-options").find(".innderdialog:first").find(".title"));
+				}
+			});
 
 			$(".delete-glyf").on("click", function () {
 
@@ -275,6 +300,25 @@
 				}
 			});
 
+			$(".notebook-options").on('click', '.innerdialog .title', function () {
+				var $title = $(this);
+				accordian_resize($title);
+			});
+
+			function accordian_resize($title) {
+				var $dialog = $title.parent();
+				var $content = $dialog.find(".content");
+				var count = $(".notebook-options").children().length; 
+
+				var total_height = $(".notebook-options").outerHeight();
+				var title_height = $title.outerHeight();
+
+				var view_height = total_height - title_height * count; 
+
+				$(".notebook-options").find(".innerdialog.show").removeClass('show');
+				$dialog.addClass('show');
+				$content.height(view_height);
+			}
 
 			var update_font_timer = null;
 			function update_font() {
@@ -352,8 +396,6 @@
 					$(this).html($(this).data('empty-ch'));	
 				});
 				$fontView.find("[data-empty-ch='"+$(self).text()+"']").toggleClass('selected', true);
-
-				console.log(unicode);
 					
 				program.viewer.showGlyfByUnicode(unicode, function (isEmptyChar) {
 					var $char = $fontView.find("[data-empty-ch='"+$(self).text()+"']");

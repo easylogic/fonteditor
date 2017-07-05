@@ -24,36 +24,31 @@ define(
 
 			init : function () {
 
-				if (program.isSimpleMode)
-				{
-					// simple 모드 에서는 동작하지 않는다. 
-				} else {
 
-					// 이벤트 정의할게 있으면 여기다가 하자. 
-					this.viewer.on('selection:change', lang.bind(function () {
-						this.execCommand();
-					}, this));
+				// 이벤트 정의할게 있으면 여기다가 하자. 
+				this.viewer.on('selection:change', lang.bind(function () {
+					this.execCommand();
+				}, this));
 
-					this.editor.on('change', lang.bind(function () {
-						this.execCommand();
-					}, this));
+				this.editor.on('change', lang.bind(function () {
+					this.execCommand();
+				}, this));
 
-					this.editor.on('setMode', lang.bind(function () {
-						this.execCommand();
-					}, this));
+				this.editor.on('setMode', lang.bind(function () {
+					this.execCommand();
+				}, this));
 
-					this.editor.on('selection:change', lang.bind(function () {
-						this.execCommand();
-					}, this));
+				this.editor.on('selection:change', lang.bind(function () {
+					this.execCommand();
+				}, this));
 
-					this.editor.on('refreshPoint', lang.bind(function () {
-						this.execCommand();
-					}, this));
+				this.editor.on('refreshPoint', lang.bind(function () {
+					this.execCommand();
+				}, this));
 
-					this.$dialog.on('click', '.del-btn', lang.bind(function (e) { 
-						this.deletePoint($(e.target).closest('.point-group'));
-					}, this));
-				}
+				this.$dialog.on('click', '.del-btn', lang.bind(function (e) { 
+					this.deletePoint($(e.target).closest('.point-group'));
+				}, this));
 
 			},
 

@@ -18,7 +18,7 @@
 
 	.command-groups > li > .ico,
 	.command-groups-bottom > li > .ico {
-		font-size: 20px;
+		font-size: 20px; 
 	}
 
 	[contenteditable=true]:empty:not(:focus):before {
@@ -150,14 +150,23 @@
 		display:flex;
 		height: 700px;
 		margin-top: 100px;
-		transition: all 0.3s ease-in;
+		//transition: all 0.3s ease-in;
 
 	    box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
 		-webkit-box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
 	    -moz-box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
 
-		&.on {
-			margin-left: 500px;
+		&.has-options {
+			max-width: 1400px !important;
+
+			.notebook-right {
+				border-top-right-radius:0px; 
+				border-bottom-right-radius:0px;  
+			}
+
+			.notebook-options {
+				display:block;
+			}
 		}
 
 		
@@ -166,7 +175,7 @@
 			height:26px;
 			top:-26px;
 			left:0px;
-			right:50%;
+			flex:3;
 			z-index:100;
 			padding-left:20px;
             padding-right:10px;
@@ -191,19 +200,13 @@
 					-webkit-box-shadow: 5px 0px 8px 0px rgba(50, 50, 50, 0.45);
 					-moz-box-shadow: 5px 0px 8px 0px rgba(50, 50, 50, 0.45);
 				}
-
-                &[data-value=classic],
-                &[data-value=simple]
-                {
-                    float:right;
-                }
 			}
 
             
 		}
 
 		.notebook {
-			flex:1;
+			flex:3;
 			
 			height:100%;
 			display:block;
@@ -340,126 +343,160 @@
 			overflow:hidden;
 			//margin-left:1.5px;
 
-			
-			#innerdialog-setting-glyf {
+			// 에디터 위에 필요한 도구 설정 
+			> .tools {
 				position:absolute;
-                display:none;
-				top:0px;
 				right:0px;
-				left:0px;
-				padding:10px 10px;
-				text-align:center;
-				height:50px !important;
-				background-color:rgba(54, 167, 255, 0.3); 
+				top:0px;
+				display:inline-block;
+				padding:5px 10px;
+			}
+
+			
+		}
+
+		.notebook-options {
+			display:none;
+			flex: 1;
+			background-color:rgba(0, 0, 0, 0.82); 
+			width: 150px !important;
+			border-top-right-radius:5px; 
+			border-bottom-right-radius:5px;  
+			margin-left:1px;
+
+			.innerdialog {
 				color:white;
+				height : auto !important;
 
-                &.show {
-                    display:block;
-                }
+				.title {
+					padding: 5px;
+					background-color: rgba(50, 50, 50, 0.5);
+				}
 
-				.title, .tools {
+				&.show {
+					.content {
+						display:block;
+					}
+				}
+
+				.content {
+					height: 0px;
 					display:none;
+					overflow:auto;
+					background-color: rgba(255, 255, 255, 0.1);
 				}
+			}
 
-				.input-group-addon {
-					display:none;
+			#innerdialog-setting-glyf {
+				.content {
+					padding-left:10px;
+					padding-right:10px;
+
+
+					.input-group {
+						width: 100%;
+					}
+
+					.input-group-addon {
+						display:block;
+						border:0px;
+						background-color:transparent;
+						color:rgba(255, 255, 255, 0.8);
+					}
+
+					.form-control {
+						background-color:rgba(0, 0, 0, 0.8);
+						color:rgba(255, 255, 255, 0.8);
+						border:1px solid rgba(0, 0, 0, 0.9); 			
+						display:block;
+					}
+
+					.help {
+						font-size:12px;
+					}
 				}
+			}
 
-				.input-group, 
-				.form-inline{
-					display:inline-block !important;
-					margin-bottom:0px;
-				}
+			#innerdialog-setting-points {
 
-				.form-control {
-					display:inline !important;
-				}		
+				.content {
+					box-sizing:border-box;
+					padding: 0px;
+					padding-left:10px;
+					padding-right:10px;
 
-				.help {
-					display:none;
-				}
+					.point-group {
 
-				.form-inline .input-group>.form-control {
-					width: 130px;
+						.input-group {
+							> label,
+							> span {
+								display:none;
+							}
+
+							> input[type=number] {
+								width: 60px;
+								background-color:rgba(0, 0, 0, 0.8);
+								color:rgba(255, 255, 255, 0.8);
+								border:1px solid rgba(0, 0, 0, 0.9); 
+								margin-right:2px;
+								display:inline-block;
+								vertical-align: middle;
+
+								&:after {
+									content : attr(data-field);
+									color: #999999;
+									display:inline-block;
+									vertical-align:middle;
+								}
+							}
+
+							> input[type=checkbox] {
+								margin-left:5px;
+								vertical-align: middle;
+								display:inline-block;
+							}
+
+							.del-btn {
+								margin-left:5px;
+								display:inline-block;
+								font-weight:nornal;
+								vertical-align: middle;
+							}
+						}
+					}
 				}
 			}
 
 			#innerdialog-setting-shape-maker {
-				position:absolute;
-				bottom:0px;
-				right:0px;
-				left:0px;
-				height:50px !important;
-				background-color:transparent; 
 
-				.title, .tools {
-					display:none;
-				}
-
-                .content {
-                    position:absolute;
-                    left:0px;
-                    right:0px;
-                    bottom:0px;
-                    top:0px;
-                    overflow:auto;
-                }
 
 				.symbol-list {
+					text-align:left;
+					
+					.symbol-item {  
+						display:inline-block;
+						position: relative;
+						margin: 1px;
+						width: 50px;
+						height:50px;
+						cursor: pointer;
+						box-sizing:border-box;
+						padding:10px;
 						text-align:center;
-						
-						 .symbol-item {  
-							display:inline-block;
-							position: relative;
-							margin: 1px;
-							width: 50px;
-							height:50px;
-							cursor: pointer;
-							box-sizing:border-box;
-							padding:10px;
-							text-align:center;
 
-							svg {
-								pointer-events:none;
-								display:block;
-								width:30px;
-								height:30px;
+						svg {
+							pointer-events:none;
+							display:block;
+							width:30px;
+							height:30px;
 
-								path {
-									fill: rgba(255, 255, 255, 0.8);
-								}
+							path {
+								fill: rgba(255, 255, 255, 0.8);
 							}
-
 						}
+
 					}
-
-              	.glyf-list {
-						text-align:center;
-						
-						 .glyf-item {  
-							display:inline-block;
-							position: relative;
-							margin: 1px;
-							width: 50px;
-							height:50px;
-							cursor: pointer;
-							box-sizing:border-box;
-							padding:10px;
-							text-align:center;
-
-							svg {
-								pointer-events:none;
-								display:block;
-								width:30px;
-								height:30px;
-
-								path {
-									fill: rgba(0, 0, 0, 0.8);
-								}
-							}
-
-						}
-					}
+				}
      
 			}
 		}

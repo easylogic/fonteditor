@@ -80,7 +80,7 @@ define(
 				var $list = $("<div class='symbol-list' />");
 				$list.html(arr.join(''));
 
-                var $glyfList = $("<div class='glyf-list' />");
+                var $glyfList = $("<div class='other-glyf-list' />");
 
 				this.$content.html($list);
                 this.$content.append($glyfList);
