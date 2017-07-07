@@ -1,106 +1,45 @@
-fonteditor 在线ttf字体编辑器
+Fontmoa Fonteditor
 ==========
 
-[线上地址](http://font.baidu.com)
+TTF 포맷 기반의 폰트 에디터 입니다. 
 
-[English Version](http://font.baidu.com/editor/index-en.html)
+https://github.com/ecomfe/fonteditor 를 기반으로 편집하는 방식을 재구성하고 필요한 ttf  관련된 스펙을 재작성하는 방식으로 구성되었습니다. 
+
+[한글](http://www.fontmoa.com/editor/release/simple.html), [English](http://www.fontmoa.com/editor/release/simple-en.html), [线上地址](http://www.fontmoa.com/editor/release/simple-cn.html)  3가지 버전이 존재합니다. 
 
 
-### 开发:
+### 설치 및 실행 
 
-* fonteditor依赖[fonteditor-core](https://github.com/kekee000/fonteditor-core)项目，需要在dep目录引入`fonteditor-core`。
-
-```
-cd ./dep
-git clone https://github.com/kekee000/fonteditor-core
-```
-
-* `index.tpl`为入口模板文件，若要修改`index.tpl`需要执行以下命令来生成`index.html`和`index-en.html`入口文件。
+* clone
 
 ```
-node ./build/build-index.js
+git clone https://github.com/easylogic/fonteditor
 ```
 
-* `less`文件修改之后使用如下脚本编译：
+* install 
 
 ```
-node ./build/build-css.js
+npm install -g edp 
 ```
 
-* 使用`edp`对fonteditor进行调试
-
-
-```
-edp webserver start
-```
-
-### 编译:
+* run server 
 
 ```
-sh build.sh
+npm run start 
 ```
 
-### 相关项目
+* build 
 
+기본 html 파일이 템플릿 형태로 되어 있기 때문에  바로 사용하실 수가 없습니다. 항상 빌드를 통해서생성된 html 만 로드하실 수 있습니다. 
 
-在线编辑器核心: [fonteditor-core](https://github.com/kekee000/fonteditor-core)
+```
+npm run build 
+or
+npm run build-index
+npm run build-css 
 
-在线编辑器node版: [fonteditor-ttf](https://github.com/kekee000/fonteditor-ttf)
+```
 
+### 관련링크 
 
-## release log:
-
-
-1. 2014-10-7 ttf管理器发布.
-
-2. 2014-10-19 ttf编辑器发布.
-
-3. 2014-10-28 ttf编辑器增加路径合集、交集、差集.
-
-4. 2014-11-10 ttf编辑器增加svg arc 指令，增加路径切割.
-
-5. 2014-11-10 ttf编辑器增加智能吸附，增加编辑器设置.
-
-6. 2014-12-7 ttf编辑器增加百度编辑器样式.
-
-7. 2014-12-13 ttf编辑器增加列表和查看器命令栏，增加glyf点吸附.
-
-8. 2014-12-13 ttf编辑器增加设置保存.
-
-9. 2014-12-25 圣诞新装发布.
-
-10. 2015-1-8 增加svg circle, ellipse, polygon, path 导入, 自动变换导入轮廓.
-
-11. 2015-1-26 改变项目存储方式为IndexedDB.
-
-12. 2015-1-29 增加移动方向键改变glyf顺序.
-
-13. 2015-2-5 添加轮廓支持拖拽曲线，支持`ctrl+Z`回退.
-
-14. 2015-3-12 修复路径合并，修复路径split，修复项目管理.
-
-15. 2015-3-12 增加字形图像导入功能.
-
-16. 2015-4-9 增加图像导入参数设置，优化导入图形.
-
-17. 2015-4-12 增加同步字体功能.
-
-18. 2015-4-27 增加otf字体读取和转换ttf功能.
-
-19. 2015-5-29 增加英文版本.
-
-20. 2015-7-19 拆分fonteditor-core模块，以便于开发和维护.
-
-21. 2015-8-9 增加按照unicode排序功能，增加菜单状态.
-
-22. 2016-1-5 增加复合字形编辑和复制功能.
-
-23. 2016-2-25 增加字形导出svg和png功能.
-
-24. 2016-3-7 将path的布尔操作库替换成paper.js的路径库.
-
-25. 2016-3-20 增加字体同步的拉取和推送，增加自动更新同步版本.
-
-26. 2016-3-22 增加字形旋转吸附，调整配色.
-
-27. 2016-4-18 更新新lib库，优化错误提示体验.
+* [fonteditor](https://github.com/ecomfe/fonteditor)
