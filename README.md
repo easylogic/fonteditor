@@ -43,3 +43,9 @@ npm run build-css
 ### 관련링크 
 
 * [fonteditor](https://github.com/ecomfe/fonteditor)
+
+
+### LICENSE 
+
+Code released under the MIT License. 
+
