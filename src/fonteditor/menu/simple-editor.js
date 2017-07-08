@@ -68,7 +68,7 @@ define(
 				title: ei18n.lang.import_pic_title,
 				ico: 'file-image',
 				direction : 'right'
-			},
+            }/*,
 
 			{
 				name: 'import-glyf',
@@ -76,7 +76,7 @@ define(
 				title: ei18n.lang.import_glyf_title,
 				ico: 'copy',
 				direction : 'right'
-			}
+			}*/
         ];
     }
 );

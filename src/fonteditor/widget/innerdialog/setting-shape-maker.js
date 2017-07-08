@@ -22,14 +22,6 @@ define(
             +   '</svg>'
 			+ "</a>";
 
-            var GLYF_ITEM_TPL  = ''   // glyf 아이템 템플릿 ( div 안에 svg 구조 ) 
-			+ "<a class='glyf-item' "
-			+ " data-action='addglyfshapes' data-glyf-index='${index}' title='${title}'>" 
-            +   '<svg viewbox="0 0 ${unitsPerEm.xMax} ${unitsPerEm.yMax}">'
-            +       '<g><path class="path" ${fillColor} ${d}/></g>'
-            +   '</svg>'
-			+ "</a>";
-
 
 		function getMax (contours) {
 			var xMax = 0; 
@@ -88,86 +80,17 @@ define(
 				this.initEvent();
 			},
 
-            createGlyfList : function (font) {
-                var list = [];
-                
-                var names = glyfGenerator.getSimilarGlyfName('KSC5601', font.name);
-
-                var ttf = program.ttfManager.get();
-
-                if (ttf) {
-                    ttf.glyf.forEach(function(g, index) {
-
-                        if (names.indexOf(g.name) > -1) {
-                            list.push( { contours : g.contours, index : index });
-                        }
-                    });
-                }
-
-                // 이름으로 유추 
-                // 자소이름일 경우 유사한 자소를 모두 표시한다. 
-                // 예를 들어  k1-1-ㄱ 인 경우  k2-1-ㄱ  부터 죽 나열하고
-                // 자음의 경우   초성과  종성을 나열하고 
-                // 모음의 경우  위치에 따른 중성을 나열한다. 
-                // ㅚ 같은 글자의 경우  ㅙ, ㅟ, ㅢ, 등의 정해진 글자를 나열한다. 
-
-
-                // unicode 로 유추 
-
-
-                return list; 
-            },
-
-            update : function ()  {
-                // 현재 폰트 정보 얻어옴 
-                var font = this.editor.getFontInfo();
-                // unicode 및 name 정보로 유사한 glyf 유추 
-                var glyfList = this.createGlyfList(font); 
-
-                // glyf 리스트 화면에 출력 
-                var arr = [];
-				var self = this; 
-
-				glyfList.forEach(function(g) {
-
-					var unitsPerEm = getMax(g.contours);
-
-					var obj = {
-                        index : g.index,
-						d : 'd="' + contours2svg(g.contours) + '"',
-						unitsPerEm : unitsPerEm
-					}
-					arr.push(string.format(GLYF_ITEM_TPL, obj));
-				});
-
-                this.$content.find(".glyf-list").html(arr.join(''));
-
-            },
-
 			initEvent : function () {
 				// 이벤트 정의할게 있으면 여기다가 하자. 
-				this.viewer.on('selection:change', lang.bind(function () {
-					this.update();
-				}, this));
 
 				this.$content.on('click', '[data-action="addsupportshapes"]', lang.bind(function (e) { 
 					this.addShape($(e.target));
-				}, this));
-
-        		this.$content.on('click', '[data-action="addglyfshapes"]', lang.bind(function (e) { 
-					this.addGlyfShape($(e.target));
 				}, this));
 
 			},
 
             getTpl: function () {
                 return "";
-            },
-
-            addGlyfShape : function (target) {
-                var index = target.attr('data-glyf-index');
-
-                program.editor.execCommand('addglyfshapes', index);
             },
 
 			addShape : function (target) {

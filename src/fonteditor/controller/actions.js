@@ -107,6 +107,16 @@ define(
 				program.editor.execCommand('addsupportshapes', type);
 			},
 
+			'addglyfshapes' : function (e) {
+				var target = $(e.target);
+				var type = target.attr('data-type');
+
+                console.log(arguments);
+
+				// 에디팅 상태랑 상관 없이 적용된다. 
+				program.editor.execCommand('addglyfshapes', type);
+			},            
+
             // 되돌리기 
             'undo': function () {
                 if (program.editor.isEditing()) {

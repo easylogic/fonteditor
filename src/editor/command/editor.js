@@ -194,6 +194,10 @@ define(
                 }
             },
 
+            addglyfshapes: function (shape) {
+                // 한번에 붙이는게 없다. 
+            },            
+
 			'import-pic' : function () {
 				console.log(this);
 			},

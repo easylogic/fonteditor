@@ -13,6 +13,7 @@ define(
             dialog_adjust_glyph: 'Adjust Glyph',
             dialog_reduce_glyph: '글자 줄이기',
             dialog_glyph_info: '글자 정보',
+            dialog_similar_glyf: '비슷한 글자들',
             dialog_points_info: '포인트 정보',
 			dialog_color_palette: 'Color Palette',
 			dialog_shape_info: 'Symbol',

@@ -17,7 +17,7 @@
 				<a href="simple-en.html" title="${lang.english}">${lang.english}</a>
 				<a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a>
 			</span>
-		</div>
+		</div> 
 
         <div class="action-groups btn-groups">
             <button data-action="add-new" type="button" class="btn btn-flat btn-new glyf-add-button" title="${lang.newglyph}"><i class="ico ico-left i-add"></i> ${lang.newglyph}</button>

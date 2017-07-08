@@ -330,7 +330,6 @@
 
 					update_font_timer = setTimeout(function () {
 						var cloneTTF = program.ttfManager.clone({ empty: true, reduceGlyf: $(".text-input").text(), optimize: true });
-						console.log(cloneTTF);
 						var base64 = program.previewer.toBase64(cloneTTF.get());
 						$("#simple-font").html("@font-face { font-family: simple; src: url('" + base64 + "'); }");
 					}, 200);

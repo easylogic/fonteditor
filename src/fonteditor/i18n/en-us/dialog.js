@@ -13,6 +13,7 @@ define(
             dialog_adjust_glyph: 'Adjust Glyph',
             dialog_reduce_glyph: 'Reduce Glyph',
             dialog_glyph_info: 'Glyph Info',
+            dialog_similar_glyf: 'Similar Glyphs',            
             dialog_points_info: 'Points Info',
 			dialog_color_palette: 'Color Palette',
 			dialog_shape_info: 'Symbol',

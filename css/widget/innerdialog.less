@@ -215,6 +215,71 @@
 
 	}
 
+	#innerdialog-setting-similar-glyf {
+
+		.similar-glyf-list {
+			>.similar-glyf-item {
+
+				float: left;
+				position: relative;
+				margin: 8px;
+				width: 60px;
+				cursor: pointer;
+				border-radius:3px;
+
+				/* 특수 문자 */
+				&.jaso {
+					.glyf {
+						background-color: rgb(74, 144, 226);
+
+						.path {
+							fill: white;
+						}
+					}
+				}
+
+				.unicode,
+				.name {
+					font-size: 12px;
+					line-height: 20px;
+					height: 20px;
+					padding-left: 4px;
+					color: #000066;
+					.ellipsis();
+					position:relative;
+				}
+
+				.unicode {
+					color: #70A9D6;
+				}
+
+				.glyf {
+					width: 80px;
+					height: 80px;
+					border: 1px solid #bbb;
+					background: #FFF;
+					box-sizing: border-box;
+					display: block;
+					.path {
+						fill: #666;
+					}
+				}
+
+			}
+
+			>.glyf-item:hover{
+				.glyf {
+					border-bottom-left-radius:0px;
+					border-bottom-right-radius:0px;
+					border-color: #216bc3;
+				}
+				.name {
+					color: #7a7a7a;
+				}
+			}
+		}
+	}
+
 
 	#innerdialog-setting-shape-maker {
 	 .symbol-list {
