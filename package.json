@@ -1,9 +1,13 @@
 {
-    "author": "mkwiser",
+    "author": "easylogic",
     "bugs": {
-        "url": "https://github.com/ecomfe/fonteditor/issues"
+        "url": "https://github.com/easylogic/fonteditor/issues"
     },
     "contributors": [
+        {
+            "email": "cyberuls@gmail.com",
+            "name": "easylogic"
+        },
         {
             "email": "kekee000@gmail.com",
             "name": "kekee000"
@@ -38,5 +42,5 @@
         "type": "git",
         "url": "git://github.com/easylogic/fonteditor.git"
     },
-    "version": "0.0.1"
+    "version": "1.0.9"
 }
