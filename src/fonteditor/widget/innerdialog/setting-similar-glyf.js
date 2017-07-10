@@ -90,6 +90,9 @@ define(
 
                 var ttf = program.ttfManager.get();
                 if (ttf.glyf[index]) {
+
+                    // 이건 모양을 바로 넣는 방식 
+                    // addcontours 커맨드를 써봅시다. 
                     program.editor.execCommand('addcontours', ttf.glyf[index].contours, {
                         selected: true
                     });

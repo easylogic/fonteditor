@@ -79,8 +79,8 @@
 							<li><a data-disabled="1" data-action="setting-sort">${lang.sort_glyf}</a></li>
 							<li><a data-disabled="1" data-action="setting-compound2simple">${lang.compound2simple}</a></li>
 							<li class="divider"></li>
-							<li><a data-disabled="1" data-action="setting-glyf-generate-template">${lang.generate_glyf_name_template}</a></li> 
-							<li><a data-disabled="1" data-action="setting-make-korean-glyf">${lang.make_korean_glyf}</a></li> 
+							<li><a data-disabled="1" data-action="setting-glyf-generate-template">1. ${lang.generate_glyf_name_template}</a></li> 
+							<li><a data-disabled="1" data-action="setting-make-korean-glyf">2. ${lang.make_korean_glyf}</a></li> 
 						</ul>
 					</div>
 					 <div class="btn-group action-groups">
