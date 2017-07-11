@@ -317,7 +317,7 @@ define(
 			'setting-glyf-generate-template': function () {
                var ttf = program.ttfManager.get();
                 if (ttf) {
-					var glyfList = glyfGenerator.generate(unicodeType.KSC5601).map(function(name) {
+					var glyfList = glyfGenerator.generate(unicodeType.KOREAN).map(function(name) {
 
 						return {
 							unicode : [],
@@ -331,7 +331,7 @@ define(
 			},
 
 			'splitJaso' : function (unicode) {
-				return glyfGenerator.splitJaso(unicodeType.KSC5601, unicode);
+				return glyfGenerator.splitJaso(unicodeType.KOREAN, unicode);
 			},
 
 			//  템플릿으로 한글 코드 자동 생성 
@@ -344,7 +344,7 @@ define(
 
 				if (ttf)
 				{
-					var checkKeys = glyfGenerator.getCheckKeys(unicodeType.KSC5601);
+					var checkKeys = glyfGenerator.getCheckKeys(unicodeType.KOREAN);
 
 					//  키를 가지고 있는 목록만 추림 
 					var keys = {};
@@ -356,7 +356,7 @@ define(
 					});
 
 
-					var realGlyfList = glyfGenerator.makeUnicodeGlyf(unicodeType.KSC5601, keys);
+					var realGlyfList = glyfGenerator.makeUnicodeGlyf(unicodeType.KOREAN, keys);
 
 					program.ttfManager.insertUnicodeGlyf(realGlyfList, hasEvent); 
 				}

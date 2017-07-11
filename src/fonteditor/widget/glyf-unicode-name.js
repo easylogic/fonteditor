@@ -1,5 +1,5 @@
 /**
- * @file ±Û¸®ÇÁ À¯´ÏÄÚµå ÀÌ¸§ Å¸ÀÔ 
+ * @file ï¿½Û¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½Ì¸ï¿½ Å¸ï¿½ï¿½ 
  * @author mengke01(kekee000@gmail.com)
  */
 
@@ -8,7 +8,7 @@ define(
     function (require) {
 
         var constraint = {
-            'KSC5601': 'KSC5601'
+            'KOREAN': 'KOREAN'
 		};
 
         return constraint;

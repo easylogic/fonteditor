@@ -49,7 +49,7 @@ define(
                 }
             },
 			
-            'KSC5601': require('./KSC5601')
+            'KOREAN': require('./KOREAN')
         };
     }
 );

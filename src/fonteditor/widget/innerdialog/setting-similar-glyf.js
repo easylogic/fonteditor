@@ -104,7 +104,7 @@ define(
                     var fontInfo = this.editor.getFontInfo();
 
                     if (fontInfo && fontInfo.name) {
-                        var list = glyfGenerator.getSimilarGlyfName(unicodeType.KSC5601, fontInfo.name);
+                        var list = glyfGenerator.getSimilarGlyfName(unicodeType.KOREAN, fontInfo.name);
 
                         var glyfIndexList = program.ttfManager.findGlyf({
                             filter : function (glyf) {

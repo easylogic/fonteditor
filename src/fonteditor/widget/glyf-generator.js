@@ -18,19 +18,19 @@ define(
          * @return {Array}  Glyf Name List
          */
         function generateGlyfNameForTemplate(type) {
-			type = type || unicodeType.KSC5601;
+			type = type || unicodeType.KOREAN;
 
 			return template.make(type);
         }
 
         function makeUnicodeGlyfForTemplate(type, keys) {
-			type = type || unicodeType.KSC5601;
+			type = type || unicodeType.KOREAN;
 
 			return template.makeUnicodeGlyf(type, keys);
         }
 
         function getCheckKeys(type) {
-			type = type || unicodeType.KSC5601;
+			type = type || unicodeType.KOREAN;
 
 			return template.getCheckKeys(type);
         }
@@ -38,13 +38,13 @@ define(
 
 		function splitJaso (type, unicode) {
 
-			type = type || unicodeType.KSC5601;
+			type = type || unicodeType.KOREAN;
 
 			return template.splitJaso(type, unicode);
 		}
 
         function getSimilarGlyfName (type, name) {
-            type = type || unicodeType.KSC5601;
+            type = type || unicodeType.KOREAN;
 
             return template.getSimilarGlyfName(type, name);
         }
