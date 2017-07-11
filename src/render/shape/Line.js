@@ -86,7 +86,7 @@ define(
              * @param {CanvasContext} ctx canvas的context
              * @param {Object} shape shape数据
              */
-            draw: function (ctx, shape) {
+            draw: function (ctx, shape , camera) {
 
                 var x0;
                 var y0;
@@ -121,6 +121,26 @@ define(
                         ctx.moveTo(x0, y0);
                         ctx.lineTo(x1, y1);
                     }
+                }
+
+                if (shape.id == 'sorptionX') {
+                    var minY = Math.min(y0, y1);
+                    var maxY = Math.max(y0, y1);
+                    var distY = (maxY - minY);
+                    var centerY = minY + (distY / 2) ; 
+                    var posY = Math.abs(maxY - minY) *(1/camera.scale) ;    // 좌표 값을 실제 값으로 변환 
+                    ctx.textAlign = "left";
+                    ctx.textBaseline = "middle";
+                    ctx.fillText(posY, x0 + 2, centerY);
+                } else if (shape.id == 'sorptionY') {
+                    var minX = Math.min(x0, x1);
+                    var maxX = Math.max(x0, x1);
+                    var distX = (maxX - minX);
+                    var centerX = minX + (distX / 2) ; 
+                    var posX = distX  * (1/camera.scale);    // 좌표 값을 실제 값으로 변환 
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "bottom";
+                    ctx.fillText(posX, centerX, y0);
                 }
 
             }

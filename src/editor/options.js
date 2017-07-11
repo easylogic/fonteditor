@@ -17,7 +17,9 @@ define(
                     enableShape: true, // 吸附到对象
                     gridDelta: 5, // 网格delta
                     delta: 5, // 对象delta
-                    sorptionColor: '#ff0000'	// 그리드 붙이기 할 때 가이드 선 색깔 
+                    sorptionColor: '#ff0000',	// 그리드 붙이기 할 때 가이드 선 색깔 
+                    sorptionLineWidth : 1, 
+                    sorptionFont : "normal 13px arial"
                 },
 
                 // 辅助线

@@ -34,6 +34,8 @@ define(
                 var centerX = bound.x + bound.width / 2;
                 var centerY = bound.y + bound.height / 2;
                 var sorptionColor = this.editor.options.sorption.sorptionColor;
+                var sorptionLineWidth = this.editor.options.sorption.sorptionLineWidth;
+                var sorptionFont = this.editor.options.sorption.sorptionFont;
                 var i;
                 var result;
 
@@ -46,10 +48,13 @@ define(
                             type: 'line',
                             id: 'sorptionX',
                             style: {
-                                strokeColor: sorptionColor
+                                strokeColor: sorptionColor,
+                                lineWidth : sorptionLineWidth,
+                                font : sorptionFont
                             },
                             p0: {},
-                            p1: {}
+                            p1: {},
+                            offset : { x : x , y : y }
                         });
                     }
 
@@ -80,10 +85,13 @@ define(
                             type: 'line',
                             id: 'sorptionY',
                             style: {
-                                strokeColor: sorptionColor
+                                strokeColor: sorptionColor,
+                                lineWidth : sorptionLineWidth,
+                                font : sorptionFont
                             },
                             p0: {},
-                            p1: {}
+                            p1: {},
+                            offset : { x : x , y : y }
                         });
                     }
 

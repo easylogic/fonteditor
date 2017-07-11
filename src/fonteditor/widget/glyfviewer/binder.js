@@ -204,7 +204,8 @@ define(
 						// 한글 범위이면 자소를 편집할 수 있도록 자소 리스트를 보여준다. 
 						var ttf = program.ttfManager.get();
 						var font = ttf.glyf[selected];
-						if (font && (0xAC00 <= font.unicode[0] && font.unicode[0] <= 0xD7A3))
+                        var isKoreanUnicode = font && font.unicode && (0xAC00 <= font.unicode[0] && font.unicode[0] <= 0xD7A3);
+						if (isKoreanUnicode)
 						{
 							var jaso_list = actions.splitJaso(font.unicode);
 							me.hideJasoList();
