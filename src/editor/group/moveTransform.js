@@ -67,6 +67,7 @@ define(
                             sorptionShapeX.p0.y = centerY + y;
                             sorptionShapeX.p1.y = result.y;
                             sorptionShapeX.disabled = false;
+                            sorptionShapeX.distY = Math.abs(sorptionShapeX.p0.y - sorptionShapeX.p1.y) * (1/camera.scale);
                             break;
                         }
                     }
@@ -103,6 +104,7 @@ define(
                             sorptionShapeY.p0.x = centerX + x;
                             sorptionShapeY.p1.x = result.x;
                             sorptionShapeY.p0.y = sorptionShapeY.p1.y = result.axis;
+                            sorptionShapeY.distX = Math.abs(sorptionShapeY.p0.x - sorptionShapeY.p1.x) * (1/camera.scale);
                             sorptionShapeY.disabled = false;
                             break;
                         }
