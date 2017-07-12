@@ -13,7 +13,7 @@ define(
 
                 // 吸附选项  (그리드에 붙이기, 자석효과)
                 sorption: {
-                    enableGrid: false, // 吸附到网格
+                    enableGrid: true, // 吸附到网格
                     enableShape: true, // 吸附到对象
                     gridDelta: 5, // 网格delta
                     delta: 5, // 对象delta
@@ -60,7 +60,8 @@ define(
                     metricsColor: 'rgba(255, 0, 0, 0.9)', // 측정 가이드 색상
                     emColor: '#993300', // em 프레임 색상			// descent, capHeight 등 metrics 기준 선 표시 색상 
 					font : 'normal 11px arial',
-
+                    thin : true,
+                    
                     // 字体测量规格
                     metrics: {
                         ascent: 480, // 上升
@@ -79,8 +80,8 @@ define(
                         markBackgroundColor: '#ffffff', // 背景色
                         markColor: '#006633', // 前景色
                         color: '#990000', // 글자색,
-						font : 'normal 13px arial'
-
+						font : 'normal 13px arial',
+						thin : true
                     },
 
 					style: {
