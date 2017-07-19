@@ -1,20 +1,122 @@
-
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 
 .simple-mode {
-	background: black;  /* fallback for old browsers */
-	background-repeat: no-repeat;  
-	background-size: cover;
+
+	&body {
+		background: #fff;
+		font-family: 'Lato', sans-serif;
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 22px;
+		color: #000;
+	}
+
+	a{
+		color:#C03035;
+	}
+
+	a:hover {
+		outline: none;
+		text-decoration:none;
+		color:#4fcccd;
+	}
+
+	a:focus {
+		outline:none;
+		outline-offset: 0;
+	}
+
+	a {
+		-webkit-transition: 300ms;
+		-moz-transition: 300ms;
+		-o-transition: 300ms;
+		transition: 300ms;
+	}
 
 
-	&.back-1 { background-image: url("../img/dawn-190055_1280.jpg"); }
-	&.back-2 { background-image: url("../img/mountains-1828596_1920.jpg"); }
-	&.back-3 { background-image: url("../img/pencil-1629888_1920.jpg"); }
-	&.back-4 { background-image: url("../img/pencil-141166_1920.jpg"); }
-	&.back-5 { background-image: url("../img/pink-2187216_1920.jpg"); }
-	&.back-6 { background-image: url("../img/art-1714166_1920.jpg"); }
-	&.back-7 { background-image: url("../img/book-1291164_1920.jpg"); }
-	&.back-8 { background-image: url("../img/narrative-794978_1920.jpg"); }
-	&.back-9 { background-image: url("../img/life-2382349_1920.jpg"); } 
+	ul {
+		list-style: none;
+	}
+
+	
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Lato', sans-serif;
+		font-weight: 300;
+	}
+
+	h1{
+		color: #686868;
+		font-size: 36px;
+	}
+
+	h2{
+		font-size: 24px;
+		color: #686868;
+	}
+
+	h3{
+		font-size: 18px;
+	}
+
+	.overflow{
+		overflow: hidden;
+	}
+
+	.uppercase{
+		text-transform: uppercase;
+	}
+
+	.btn-common {
+		font-size: 14px;
+		color: #0099ae;
+		border: 1px solid #0099ae;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300;
+		padding: 10px 25px;
+	}
+
+	.btn-common:hover, 
+	.btn-common:focus{
+		outline: none;
+		background: none;
+		box-shadow: none;
+		color: #01707f;
+		border-color:#01707f;
+	}
+
+	.align-right{
+		text-align: right;
+	}
+
+	.inline{
+		display: inline-block;
+	}
+
+	.padding{
+		padding: 65px 0;
+	}
+
+	.padding-bottom{
+		padding-bottom: 65px;
+	}
+
+	.padding-top{
+		padding-top: 90px;
+	}
+
+	.padding-right{
+		padding-right: 80px;
+	}
+
+	.padding-left{
+		padding-left: 80px;
+	}
+
+	.margin-bottom{
+		margin-bottom: 35px;
+	}
 
 	.command-groups > li > .ico,
 	.command-groups-bottom > li > .ico {
@@ -42,38 +144,53 @@
 
 		h1 {
 			font-size: 40px;
-			color:white;
+			//color:white;
 			padding:20px; 
 
 			.small-title {
-				color: rgba(200, 200, 200, 0.8);
+				//color: rgba(200, 200, 200, 0.8);
 			}
 		}
 	}
 
 	.navbar {
-        position:absolute;
-		top: 0px;
-		height: 50px;
-		width:320px;
-		left: 0px;
-		min-width:320px;
-		transition: all 0.3s ease-in;
+		position:relative;
+		height: auto !important;
 		border-right:0px solid #ececec;
 		border-bottom:0px solid #ececec;
+		margin-bottom: 0;
+    	padding: 30px 0 10px 0;
 		//background-color:white;
 
-		.logo {
+		.container {
+			max-width: 1170px;
+			margin: 0 auto;
 			display:block;
+		}
+
+		.logo {
+			display:inline-block;
 			float:none;
+			vertical-align: middle;
 		}
 
 		.language {
+			float:right;
+			display:inline-block;
+			vertical-align: middle;
+			padding-top: 10px;
 			a {
 				font-size: 13px;
-				color: #aaa;
+				//color: #aaa;
 			}
 		}
+
+		
+        .change-editor {
+            background-color:transparent;
+            font-weight:normal;
+            font-size:13px;
+        }
 
 	    &.on {
 			left: 0px;
@@ -108,35 +225,33 @@
 	}
 
 	.toolbar {
-		position:absolute;
-		display:inline-block;
-		right:0px;
-		top:0px;
-		left:auto;
-		height:50px;
+		position:relative;		
+		top:auto;
 		box-sizing:border-box;
-		width:auto;
-		min-width:320px;
 		border-left:1px solid #ececec;
-		padding:10px;
+		//padding:10px;
+		height:auto;
 		vertical-align:middle;
 		background-color:transparent;
 		border-bottom-left-radius:5px;
-        color:rgba(255, 255, 255, 0.8);
         border-bottom:0px;
-        border-left:0px;
+		border-left:0px;
+		text-align: right;
+		
+		.container {
+			display:block;
+			flex:none;
+			max-width: 1170px;
+			margin: 0 auto;
+			vertical-align: middle;
+		}
 
         .btn-flat {
-           background-color:transparent;
-           color:rgba(255, 255, 255, 0.6);
+		   background-color:transparent;
+		   vertical-align: middle;
+		   display: inline-block;
         }
 
-        .change-editor {
-            background-color:transparent;
-            font-weight:normal;
-            color:rgba(255, 255, 255, 0.8);
-            font-size:13px;
-        }
 	}
 
 	.main.editing {
@@ -149,23 +264,37 @@
 		position: relative;
 		display:flex;
 		height: 640px;
-		margin-top: 100px;
+		//margin-top: 100px;
 		//transition: all 0.3s ease-in;
+		background-color: rgba(0, 0, 0, 0.82);
 
 	    box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
 		-webkit-box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
 	    -moz-box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
 
 		&.has-options {
-			max-width: 1400px !important;
+			//max-width: 1400px !important;
+			display:block;
 
+			.notebook-left {
+				width: 394px;
+				display:inline-block;
+
+				.project-glyf-selector .project .project-list {
+					top: 80px;
+
+				}
+			}
 			.notebook-right {
-				border-top-right-radius:0px; 
-				border-bottom-right-radius:0px;  
+				width: 600px;
+				display:inline-block;				
+				margin-left:-1px;
 			}
 
 			.notebook-options {
-				display:block;
+				display:inline-block;		
+				vertical-align: top;
+				margin-left:-2px;
 			}
 		}
 
@@ -176,7 +305,7 @@
 			top:-26px;
 			left:0px;
 			flex:3;
-			z-index:100;
+			z-index:1000;
 			padding-left:20px;
             padding-right:10px;
 
@@ -210,7 +339,6 @@
 			
 			height:100%;
 			display:block;
-			//border-radius:5px;
 			position:relative;
 			
 		}
@@ -218,15 +346,7 @@
 		@notebook-shadow-color:  rgba(255, 255, 255, 0.3);
 
 		.notebook-left {
-			background-color: rgba(255, 255, 255, 0.9);
-			/*box-shadow: -8px 8px 0px 4px @notebook-shadow-color, 
-						-7px 7px 0px 3.5px @notebook-shadow-color, 
-						-6px 6px 0px 3px @notebook-shadow-color, 
-						-5px 5px 0px 2.5px @notebook-shadow-color, 
-						-4px 4px 0px 2px @notebook-shadow-color, 
-						-2px 2px 0px 1px @notebook-shadow-color;*/
-			border-top-left-radius:5px; 
-			border-bottom-left-radius:5px; 
+			background-color: rgba(255, 255, 255, 1);
 			overflow:hidden;
 			//margin-right:1.5px;
 
@@ -279,7 +399,7 @@
 					.glyf-list-title {
 						height: 50px;
 						padding:14px;
-					    background-color: rgba(240,240,240,0.6);
+					    //background-color: rgba(240,240,240,0.6);
 						box-sizing:border-box;
 						border-bottom:0px;
 						padding-right:30px;
@@ -309,6 +429,8 @@
                 display:none;
 
                 .project {
+					bottom:0px;
+					height:auto;
                     .project-title {
                         padding:20px 20px;
                         height: 50px;
@@ -332,14 +454,6 @@
 
 		.notebook-right {
 			background-color:rgba(0, 0, 0, 0.82); 
-			/*box-shadow: 8px 8px 0px 4px @notebook-shadow-color, 
-						7px 7px 0px 3.5px @notebook-shadow-color, 
-						6px 6px 0px 3px @notebook-shadow-color, 
-						5px 5px 0px 2.5px @notebook-shadow-color, 
-						4px 4px 0px 2px @notebook-shadow-color, 
-						2px 2px 0px 1px @notebook-shadow-color;*/
-			border-top-right-radius:5px; 
-			border-bottom-right-radius:5px;  
 			overflow:hidden;
 			//margin-left:1.5px;
 
@@ -359,10 +473,9 @@
 			display:none;
 			flex: 1;
 			background-color:rgba(0, 0, 0, 0.82); 
-			width: 150px !important;
-			border-top-right-radius:5px; 
-			border-bottom-right-radius:5px;  
-			margin-left:1px;
+			width: 200px !important;
+			border-left:1px solid rgba(255, 255, 255, 0.1);
+			box-sizing: border-box;
 
 			.innerdialog {
 				color:white;
@@ -371,6 +484,7 @@
 				.title {
 					padding: 5px;
 					background-color: rgba(50, 50, 50, 0.5);
+					cursor: pointer;
 				}
 
 				&.show {
@@ -749,10 +863,8 @@
 			left:0px;
 			right:0px;
 			color: black; 
-			font-size: 20px;
 			bottom: 0px;
 			padding:10px 5px ;
-			font-size: 15px;
 			box-sizing:border-box;
 			text-align:center;
 			background-color: rgba(240,240,240,0.6);
@@ -923,13 +1035,6 @@
 				border:1px solid #ececec !important;
 			}
 
-			.form-group span {
-				color: black;
-			}
-
-			label {
-				color: black;
-			}
 		}
 
 		.modal-footer {

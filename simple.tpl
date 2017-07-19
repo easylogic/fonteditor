@@ -13,26 +13,29 @@
 <body class='simple-mode only-editor show-sidebar show-main show-editor'>
 
     <section class="navbar" role="navigation">
-        <div class="logo"><a href="/" title="Welcome to FontMOA!!">FontMOA</a>  
-		<span class='language'>
-			<a href="simple.html" title="${lang.korean}">${lang.korean}</a>
-			<a href="simple-en.html" title="${lang.english}">${lang.english}</a>
-			<a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a>
-		</span>
+		<div class="container">
+			<h1 class="logo"><a href="/" title="Welcome to Fontmoa!!">Fontmoa</a></h1>
+			<span class='language'>
+				<a href="simple.html" title="${lang.korean}">${lang.korean}</a>
+				<a href="simple-en.html" title="${lang.english}">${lang.english}</a>
+				<a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a>
+				<span class='divider'>|</span>
+				<a class='change-editor' href='${lang.advanced_mode_link}'>Advanced  mode</a>				
+			</span>
 		</div>
     </section>
 
 
     <section class="toolbar action-groups" role="tools">
-		
-		${lang.download} 
+		<div class="container">
+			${lang.download} 
 
-		<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
-	    <!--<a class='btn btn-flat' data-action="export" data-type="otf" title="${lang.export_otf}"><i class="ico i-ttf"></i></a> -->
-		<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
-		<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
-		<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
-		<a class='change-editor' href='${lang.advanced_mode_link}'>Advanced  mode</a>
+			<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
+			<!--<a class='btn btn-flat' data-action="export" data-type="otf" title="${lang.export_otf}"><i class="ico i-ttf"></i></a> -->
+			<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
+			<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
+			<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
+		</div>
     </section>
 
     <section class="sidebar">

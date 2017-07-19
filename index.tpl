@@ -11,7 +11,7 @@
 
     <section class="navbar" role="navigation">
         <div class="logo">
-			<a href="/" title="Welcome to FontMOA!!">FontMOA</a> 
+			<a href="/" title="Welcome to Fontmoa!!">Fontmoa</a> 
 			<span class='language'>
 				<a href="simple.html" title="${lang.korean}">${lang.korean}</a>
 				<a href="simple-en.html" title="${lang.english}">${lang.english}</a>
