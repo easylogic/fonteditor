@@ -80,12 +80,13 @@ define(
 
 			if (glyf.unicode)
 			{
+				console.log(glyf.fontSize);
 				var font = [glyf.fontSize + 'px', glyf.fontFamily].join(" ");
 				this.canvas.ctx.font = font ;
 				this.canvas.ctx.fillStyle = glyf.color;
 				this.canvas.textAlign = "left";
-				this.canvas.textBaseline = "bottom";
-				this.canvas.ctx.fillText(String.fromCharCode(glyf.unicode), 0, 412);
+				this.canvas.textBaseline = "middle";
+				this.canvas.ctx.fillText(String.fromCharCode(glyf.unicode), 0, 230);
 			}
 
 		}

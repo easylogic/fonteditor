@@ -395,7 +395,7 @@ define(
 					$preview.removeClass('fitpanel').removeClass('showright').toggleClass('showleft');
 					var $editor  = $(".editor.editing");
 					var pos = $editor.offset();
-					pos.top -= 40;
+					pos.top -= 45;
 					this.getDialog().css(pos).width($editor.width());
 					$preview.width($editor.width()).height($editor.height());
 
