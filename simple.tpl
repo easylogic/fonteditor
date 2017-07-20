@@ -55,7 +55,7 @@
 						</button>
 						<ul class="dropdown-menu dropdown-menu-right" role="menu">
 							<li><a data-disabled="1" data-action="setting-name"  >${lang.fontinfo}</a></li>
-							<li><a data-disabled="1" data-action="setting-metrics">${lang.metrics}</a></li>
+							<!-- <li><a data-disabled="1" data-action="setting-metrics">${lang.metrics}</a></li> -->
 						</ul>
 					</div>
 				</div>
@@ -75,12 +75,12 @@
 							<li><a data-disabled="1" data-action="setting-editor">${lang.setting}</a></li>
 							<li class="divider"></li>
 							<li><a data-disabled="1" data-action="find-glyf">${lang.find_glyf}</a></li>
-							<li class="divider"></li>
-							<li><a data-disabled="1" data-action="setting-glyf-name">${lang.gen_glyph_name}</a></li>
-							<li><a data-disabled="1" data-action="setting-glyf-clearname">${lang.clear_glyph_name}</a></li>
-							<li><a data-disabled="1" data-action="setting-optimize">${lang.optimize_glyph}</a></li>
+							<!--<li class="divider"></li>-->
+							<!--<li><a data-disabled="1" data-action="setting-glyf-name">${lang.gen_glyph_name}</a></li>-->
+							<!--<li><a data-disabled="1" data-action="setting-glyf-clearname">${lang.clear_glyph_name}</a></li>-->
+							<!--<li><a data-disabled="1" data-action="setting-optimize">${lang.optimize_glyph}</a></li>-->
 							<li><a data-disabled="1" data-action="setting-sort">${lang.sort_glyf}</a></li>
-							<li><a data-disabled="1" data-action="setting-compound2simple">${lang.compound2simple}</a></li>
+							<!--<li><a data-disabled="1" data-action="setting-compound2simple">${lang.compound2simple}</a></li>-->
 							<li class="divider"></li>
 							<li><a data-disabled="1" data-action="setting-glyf-generate-template">1. ${lang.generate_glyf_name_template}</a></li> 
 							<li><a data-disabled="1" data-action="setting-make-korean-glyf">2. ${lang.make_korean_glyf}</a></li> 
