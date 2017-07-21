@@ -21,6 +21,7 @@
 				<a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a>
 				<span class='divider'>|</span>
 				<a class='change-editor' href='${lang.advanced_mode_link}'>Advanced  mode</a>				
+				<a class="manual-link" href="https://easylogic.gitbooks.io/fontmoa-fonteditor/content/" target="_manual"><i class="ico i-help"></i> ${lang.help} </a>
 			</span>
 		</div>
     </section>
