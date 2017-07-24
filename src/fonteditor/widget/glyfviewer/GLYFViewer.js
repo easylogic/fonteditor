@@ -408,7 +408,7 @@ define(
 			if (!glyf.length)
 			{
 				// 없는 것이면 마지막에 추가 
-				program.ttfManager.insertGlyf({ unicode : [unicode] }, null, false);
+				program.ttfManager.insertGlyf({ unicode : [unicode] }, null, /* 기본 이름 생성하지 않음*/false);
 
 				// 정렬을 해야하는가? 
 				//program.ttfManager.sort();

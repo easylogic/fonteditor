@@ -200,7 +200,7 @@ define(
             var canvasFit = $('#import-pic-canvas-fit').get(0);
             canvasFit.ctx = canvasFit.getContext('2d');
 
-            // 这里由于对retina屏幕进行修正，需要修复下设置
+            // 레티나 보정 
             if (pixelRatio !== 1) {
                 canvasOrigin.width = canvasOrigin.height = 0;
                 canvasOrigin.style.width = canvasOrigin.style.height = 'auto';
@@ -442,7 +442,7 @@ define(
 
 				createContoursForImage ();
 				refreshCanvasOrigin(true);
-	            var contours = program.data.pointsProcessor.getContours();
+                var contours = program.data.pointsProcessor.getContours();
 
                 if (contours) {
                     if (!contours || !contours.length) {

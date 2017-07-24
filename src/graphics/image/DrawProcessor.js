@@ -80,13 +80,14 @@ define(
 
 			if (glyf.unicode)
 			{
-				console.log(glyf.fontSize);
-				var font = [glyf.fontSize + 'px', glyf.fontFamily].join(" ");
+				var fontSize = glyf.fontSize / pixelRatio;
+				var font = [fontSize + 'px', glyf.fontFamily].join(" ");
+				var text = String.fromCharCode(glyf.unicode);
 				this.canvas.ctx.font = font ;
-				this.canvas.ctx.fillStyle = glyf.color;
-				this.canvas.textAlign = "left";
-				this.canvas.textBaseline = "middle";
-				this.canvas.ctx.fillText(String.fromCharCode(glyf.unicode), 0, 230);
+				this.canvas.ctx.fillStyle = this.strokeStyle;
+				this.canvas.ctx.textAlign = "left";
+				this.canvas.ctx.textBaseline = "top";
+				this.canvas.ctx.fillText(text, 0, 0 );
 			}
 
 		}

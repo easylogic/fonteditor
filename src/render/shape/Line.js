@@ -130,7 +130,7 @@ define(
                     var centerY = minY + (distY / 2) ; 
                     ctx.textAlign = "left";
                     ctx.textBaseline = "middle";
-                    ctx.fillText(shape.distY, x0 + 2, centerY);
+                    ctx.fillText(Math.floor(shape.distY), x0 + 2, centerY);
                 } else if (shape.id == 'sorptionY' && shape.distX) {
                     var minX = Math.min(x0, x1);
                     var maxX = Math.max(x0, x1);
@@ -138,7 +138,7 @@ define(
                     var centerX = minX + (distX / 2) ; 
                     ctx.textAlign = "center";
                     ctx.textBaseline = "bottom";
-                    ctx.fillText(shape.distX, centerX, y0);
+                    ctx.fillText(Math.floor(shape.distX), centerX, y0);
                 }
 
             }
