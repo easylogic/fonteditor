@@ -200,7 +200,7 @@ define(
          *
          * @return {this}
          */
-        Manager.prototype.insertGlyf = function (glyf, beforeIndex) {
+        Manager.prototype.insertGlyf = function (glyf, beforeIndex, isGenerateName) {
             var glyfList = this.ttf.getGlyf();
             var unicode = 0x20;
 
@@ -224,7 +224,7 @@ define(
                 glyf.unicode = [unicode];
             }
              // 유니코드 이름 생성 
-            if (!glyf.name) {
+            if (isGenerateName && !glyf.name) {
                 glyf.name = string.getUnicodeName(glyf.unicode[0]);
             }
 
