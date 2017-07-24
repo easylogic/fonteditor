@@ -68,6 +68,12 @@ http://learning.hangeul.go.kr/write/theory/
 
 한글 폰트를 만들기 위해서는 11,172 자의 많은 글자를 그려야 하는 부분이 있는데 자소 템플릿을 만들어  11,172 자의 글자를 좀 더 쉽게 만들 수 있는 방식을 제공한다.  
 
+### Manual 
+
+에디터 사용방법은 메뉴얼을 참고해주세요. 
+
+https://easylogic.gitbooks.io/fontmoa-fonteditor/
+
 
 ### 관련링크 
 
