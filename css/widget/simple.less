@@ -118,6 +118,10 @@
 		margin-bottom: 35px;
 	}
 
+	.only-simple-hide {
+		display:none;
+	}
+
 	.command-groups > li > .ico,
 	.command-groups-bottom > li > .ico {
 		font-size: 20px; 
@@ -271,6 +275,18 @@
 	    box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
 		-webkit-box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
 	    -moz-box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
+
+		&.has-only-editor {
+			.notebook-left {
+				display:none;
+			}
+			.notebook-options {
+				display: none !important;
+			}
+
+			max-width: 600px !important;
+		}
+
 
 		&.has-options {
 			//max-width: 1400px !important;

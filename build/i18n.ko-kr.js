@@ -48,7 +48,7 @@ module.exports = exports = {
     metrics: 'Metrics',
     editor_setting: '에디터',
     import_and_export: '불러오기,내보내기',
-    setting: '설정',
+    setting: '에디터 설정',
     help: '도움말',
     confirm: '확인',
     cancel: '취소',

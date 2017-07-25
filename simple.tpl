@@ -36,6 +36,11 @@
 			<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
 			<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
 			<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
+
+			|
+
+			<a data-disabled="1" data-action="setting-editor" class='btn btn-flat'><i class="ico i-gear" ></i> ${lang.setting}</a>
+
 		</div>
     </section>
 
@@ -48,7 +53,10 @@
 					<button data-action="open" type="button" class="btn btn-flat" title="${lang.open_font_title}"><i class="ico ico-left i-open"></i> ${lang.open_font_title_2}</button>
 				</div>
 				<div class="project-btns action-groups" style="float:right">
-					<button data-action="save" type="button" class="btn btn-flat" title="${lang.save_proj}"><i class="ico ico-left i-save"></i> ${lang.save_proj}</button>
+					<button data-action="save" type="button" class="btn btn-flat" title="${lang.save_proj}"><i class="ico ico-left i-save"></i> ${lang.save_proj}</button> | 
+					<button data-disabled="1" data-action="setting-name" class="btn btn-flat" title="${lang.fontinfo}" >${lang.fontinfo}</button>
+					
+					<!--
 					<div class="btn-group action-groups">
 						<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown"title="${lang.tool}">
 							<i class="ico i-gear" ></i> ${lang.tool}
@@ -56,9 +64,9 @@
 						</button>
 						<ul class="dropdown-menu dropdown-menu-right" role="menu">
 							<li><a data-disabled="1" data-action="setting-name"  >${lang.fontinfo}</a></li>
-							<!-- <li><a data-disabled="1" data-action="setting-metrics">${lang.metrics}</a></li> -->
+							<li><a data-disabled="1" data-action="setting-metrics">${lang.metrics}</a></li>
 						</ul>
-					</div>
+					</div> -->
 				</div>
 			</div>
             <div id="project-list" class="project-list"></div>
@@ -73,8 +81,8 @@
 							<span class="drop ico i-down"></span>
 						</button>
 						<ul class="dropdown-menu dropdown-menu-right" role="menu">
-							<li><a data-disabled="1" data-action="setting-editor">${lang.setting}</a></li>
-							<li class="divider"></li>
+							<!--<li><a data-disabled="1" data-action="setting-editor">${lang.setting}</a></li>
+							<li class="divider"></li>-->
 							<li><a data-disabled="1" data-action="find-glyf">${lang.find_glyf}</a></li>
 							<!--<li class="divider"></li>-->
 							<!--<li><a data-disabled="1" data-action="setting-glyf-name">${lang.gen_glyph_name}</a></li>-->
@@ -87,6 +95,7 @@
 							<li><a data-disabled="1" data-action="setting-make-korean-glyf">2. ${lang.make_korean_glyf}</a></li> 
 						</ul>
 					</div>
+					<!--
 					 <div class="btn-group action-groups">
 						<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown" title="${lang.import}">
 							<i class="ico i-open" ></i> ${lang.import}
@@ -94,14 +103,16 @@
 						</button>
 						<ul class="dropdown-menu dropdown-menu-right" role="menu">
 							<li><a data-disabled="1" data-action="import"  title="${lang.import_svg_title}">${lang.import} - ${lang.import_svg}</a></li>
-							<!--<li><a data-disabled="1" data-action="import-pic"  title="${lang.import_pic_title}">${lang.import} - ${lang.import_pic}</a></li> -->
+							<li><a data-disabled="1" data-action="import-pic"  title="${lang.import_pic_title}">${lang.import} - ${lang.import_pic}</a></li>
 							<li><a data-disabled="1" data-action="import"  title="${lang.import_font_title}">${lang.import} - ${lang.import_font}</a></li>
 							<li><a data-disabled="1" data-action="add-online">${lang.onlinefont}</a></li>
 							<li><a data-disabled="1" data-action="add-url">${lang.fonturl}</a></li>
 						</ul>
-					  </div>
+					  </div> -->
 					  <div class="btn-group action-groups">
 						<button data-action="add-new" type="button" class="btn btn-flat btn-new" title="${lang.newglyph}"><i class="ico ico-left i-add"></i> ${lang.newglyph}</button>
+					    <button data-disabled="1" data-action="import" class="btn btn-flat" title="${lang.import}"><i class="ico ico-left i-add"></i> ${lang.import}</button>
+						
 					  </div>
 			        <ul id="glyf-list-commandmenu" class="command-groups"></ul>
 			</div>
