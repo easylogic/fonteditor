@@ -200,12 +200,6 @@
 
     <form id="font-form" style="width:0px;height:0px;overflow:hidden;"><input id="font-import" type="file" multiple="multiple"></form>
     <iframe id="sync-frame" name="sync-frame" width="0" height="0" frameborder="0" style="display:none;"></iframe>
-	<script>
-	if (window.require) {
-		window.nodeRequire = window.require;
-		delete window.require;
-	}
-	</script>
     <script src="./dep/esl.js"></script>
     <script src="./dep/jquery.min.js"></script>
     <script src="./dep/jqColorPicker.min.js"></script>
@@ -213,7 +207,7 @@
     <script src="./dep/paper-full.js"></script>
     <script src="./dep/hidpi-canvas.js"></script>
     <script>
-		window.$ = window.jQuery;
+		window.$ = window.jQuery = require('./dep/jquery.min.js');
         window.language = '${lang.lang}';
         require.config({
             baseUrl: './src',
