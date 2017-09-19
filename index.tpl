@@ -13,9 +13,9 @@
         <div class="logo">
 			<a href="/" title="Welcome to Fontmoa!!">Fontmoa</a> 
 			<span class='language'>
-				<a href="simple.html" title="${lang.korean}">${lang.korean}</a>
-				<a href="simple-en.html" title="${lang.english}">${lang.english}</a>
-				<a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a>
+				<a href="index.html" title="${lang.korean}">${lang.korean}</a>
+				<a href="index-en.html" title="${lang.english}">${lang.english}</a>
+				<a href="index-cn.html" title="${lang.chinese}">${lang.chinese}</a>
 			</span>
 		</div> 
 

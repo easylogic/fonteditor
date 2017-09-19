@@ -2,16 +2,19 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
 @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 
+body.simple-mode {
+	background: #fff;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 22px;
+	color: #000;
+	padding-top:20px;
+}
+
 .simple-mode {
 
-	&body {
-		background: #fff;
-		font-family: 'Lato', sans-serif;
-		font-weight: 300;
-		font-size: 14px;
-		line-height: 22px;
-		color: #000;
-	}
+
 
 	a{
 		color:#C03035;
@@ -159,15 +162,14 @@
 
 	.navbar {
 		position:relative;
-		height: auto !important;
 		border-right:0px solid #ececec;
 		border-bottom:0px solid #ececec;
 		margin-bottom: 0;
-    	padding: 30px 0 10px 0;
+		height:20px !important;
 		//background-color:white;
 
 		.container {
-			max-width: 1170px;
+			max-width: 1200px;
 			margin: 0 auto;
 			display:block;
 		}
@@ -245,7 +247,8 @@
 		.container {
 			display:block;
 			flex:none;
-			max-width: 1170px;
+			width:100%;
+			max-width: 1200px;
 			margin: 0 auto;
 			vertical-align: middle;
 		}
@@ -317,13 +320,25 @@
 		
 		.glyf-selector-tabs {
 			position:absolute;
-			height:26px;
-			top:-26px;
+			height:30px;
+			top:-36px;
 			left:0px;
 			flex:3;
 			z-index:1000;
-			padding-left:20px;
+			padding-left:0px;
             padding-right:10px;
+
+			.tab-title {
+				display:inline-block;
+				height:100%;
+				box-sizing:border-box;
+				background-color: rgba(255, 255, 255, 0.7);
+				color:black;
+				cursor:pointer;
+                margin-right:4px;
+				margin-left:4px;
+				font-size: 20px;
+			}
 
 			.tab-item {
 				display:inline-block;

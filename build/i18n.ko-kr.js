@@ -3,6 +3,7 @@ module.exports = exports = {
 	english: 'English',
 	chinese: '中文',
     lang: 'ko-kr',
+    language: '언어',
 	advanced_mode_link : 'index.html',
 	simple_mode_link : 'simple.html',
     newglyph: '새 글자',

@@ -12,23 +12,10 @@
 </head>
 <body class='simple-mode only-editor show-sidebar show-main show-editor'>
 
-    <section class="navbar" role="navigation">
-		<div class="container">
-			<h1 class="logo"><a href="/" title="Welcome to Fontmoa!!">Fontmoa</a></h1>
-			<span class='language'>
-				<a href="simple.html" title="${lang.korean}">${lang.korean}</a>
-				<a href="simple-en.html" title="${lang.english}">${lang.english}</a>
-				<a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a>
-				<span class='divider'>|</span>
-				<a class='change-editor' href='${lang.advanced_mode_link}'>Advanced  mode</a>				
-				<a class="manual-link" href="https://easylogic.gitbooks.io/fontmoa-fonteditor/" target="_manual"><i class="ico i-help"></i> ${lang.help} </a>
-			</span>
-		</div>
-    </section>
-
-
     <section class="toolbar action-groups" role="tools">
 		<div class="container">
+
+
 			${lang.download} 
 
 			<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
@@ -36,11 +23,23 @@
 			<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
 			<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
 			<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
-
-			|
-
 			<a data-disabled="1" data-action="setting-editor" class='btn btn-flat'><i class="ico i-gear" ></i> ${lang.setting}</a>
 
+			| 	
+			<div class="btn-group action-groups">
+				<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">
+					<i class="ico i-link" ></i> ${lang.language}
+					<span class="drop ico i-down"></span>
+				</button>
+				<ul class="dropdown-menu dropdown-menu-right" role="menu">
+					<li><a href="simple.html" title="${lang.korean}">${lang.korean}</a></li>
+					<li><a href="simple-en.html" title="${lang.english}">${lang.english}</a></li>
+					<li><a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a></li>
+					<li class='divider'></li>
+					<li><a href='${lang.advanced_mode_link}'>Advanced  mode</a></li>
+				</ul>
+			</div>
+			<a class="manual-link" href="https://easylogic.gitbooks.io/fontmoa-fonteditor/" target="_manual"><i class="ico i-help"></i></a>
 		</div>
     </section>
 
@@ -132,6 +131,7 @@
 	<div class="editor-area">
 
 		<div class="glyf-selector-tabs">
+			<div class="tab-title"><a href="/">Fontmoa</a></div>
 			<div class="tab-item " data-value="project">Project</div>
 			<div class="tab-item selected" data-value="classic">Classic</div>
 			<div class="tab-item" data-value="simple">Simple</div>
@@ -207,7 +207,6 @@
     <script src="./dep/paper-full.js"></script>
     <script src="./dep/hidpi-canvas.js"></script>
     <script>
-		window.$ = window.jQuery = require('./dep/jquery.min.js');
         window.language = '${lang.lang}';
         require.config({
             baseUrl: './src',
