@@ -5,6 +5,7 @@ version=`date "+%Y%m%d"`
 
 # build首页版本
 build_index() {
+    rm -rf v1
     node "./build/build-index.js" $version
 }
 
@@ -43,8 +44,11 @@ move_asset() {
 
     cat ./release/editor.html | sed -e "s#'\.\/src'#'./$version'#g" > ./release/editor.html.tmp
     mv ./release/editor.html.tmp ./release/editor.html
+
+    ln -s ./release v1 
 }
 
+git pull
 build_index
 build_asset
 move_asset
