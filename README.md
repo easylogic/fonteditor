@@ -5,7 +5,7 @@ TTF 포맷 기반의 폰트 에디터 입니다.
 
 https://github.com/ecomfe/fonteditor 를 기반으로 편집하는 방식을 재구성하고 필요한 ttf  관련된 스펙을 재작성하는 방식으로 구성되었습니다. 
 
-[한글](http://www.fontmoa.com/editor/release/simple.html), [English](http://www.fontmoa.com/editor/release/simple-en.html), [线上地址](http://www.fontmoa.com/editor/release/simple-cn.html)  3가지 버전이 존재합니다. 
+[한글](http://www.fontmoa.com/editor/v1/simple.html), [English](http://www.fontmoa.com/editor/v1/simple-en.html), [线上地址](http://www.fontmoa.com/editor/v1/simple-cn.html)  3가지 버전이 존재합니다. 
 
 
 ### 설치 및 실행 
@@ -13,7 +13,7 @@ https://github.com/ecomfe/fonteditor 를 기반으로 편집하는 방식을 재
 * clone
 
 ```
-git clone https://github.com/easylogic/fonteditor
+git clone https://github.com/fontmoa/fonteditor
 ```
 
 * install 
