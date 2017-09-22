@@ -72,7 +72,7 @@ http://learning.hangeul.go.kr/write/theory/
 
 에디터 사용방법은 메뉴얼을 참고해주세요. 
 
-https://easylogic.gitbooks.io/fontmoa-fonteditor/
+https://fontmoa.gitbooks.io/fontmoa-fonteditor/
 
 
 ### 관련링크 

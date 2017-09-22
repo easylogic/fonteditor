@@ -20,7 +20,7 @@
     "description": "ttf to woff,svg,eot convert, ttf adjust",
     "scripts": {
         "start": "edp webserver start",
-        "build": "node build/build-index.js && node build/build-css.js",
+        "build": "npm run build-index && npm run build-css",
         "build-index": "node build/build-index.js",
         "build-css": "node build/build-css.js"
     },

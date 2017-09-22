@@ -131,7 +131,7 @@
 	<div class="editor-area">
 
 		<div class="glyf-selector-tabs">
-			<div class="tab-title"><a href="/">Fontmoa</a></div>
+			<div class="tab-title"><img src="./css/img/icon.png" width="20px" align="absmiddle" /><a href="/">ontmoa</a></div>
 			<div class="tab-item " data-value="project">Project</div>
 			<div class="tab-item selected" data-value="classic">Classic</div>
 			<div class="tab-item" data-value="simple">Simple</div>
