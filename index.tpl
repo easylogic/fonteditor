@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FontMoa - FontEditor</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/ico/icon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./dep/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/main.css">
 </head>
