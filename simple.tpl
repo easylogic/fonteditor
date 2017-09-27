@@ -11,37 +11,49 @@
 	</style>
 </head>
 <body class='simple-mode only-editor show-sidebar show-main show-editor'>
+	<header id="header">      
+        <div class="container " style="margin:0 auto; max-width:800px">
+            <div class="row">
+                <div class="col-sm-12 overflow">
+                   <div class="social-icons pull-right">
+                        <ul class="nav nav-pills">
+                            <li><a href="https://www.facebook.com/fontmoa" target="_facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.twitter.com/fontmoa" target="_twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.github.com/fontmoa" target="_github"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div> 
+                </div>
+             </div>
+        </div>
+        <div class="navbar" role="banner">
+            <div class="container stack-style" style="margin:0 auto; max-width:800px">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-    <section class="toolbar action-groups" role="tools">
-		<div class="container">
+                    <a class="navbar-brand" href="/">
+                        <h1 style='vertical-align:middle' title="If the font falls from the cloud"><img src="./css/img/icon.png" alt="logo" width="40px" align="absmiddle">ontMoa </h1>
+                    </a>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ><a href="/">Home</a></li>
+						<li ><a href="/fontmoa/">Font Manager</a></li>
+						<li ><a href="/font/">Web Font</a></li>
+						<li ><a href="/icon/">Icon Font</a></li>
+						<li class='active'><a href="/editor/v1/simple.html">Font Editor</a></li>
+                    </ul>
+                </div>
 
+            </div>
+        </div>
+    </header>
 
-			${lang.download} 
-
-			<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
-			<!--<a class='btn btn-flat' data-action="export" data-type="otf" title="${lang.export_otf}"><i class="ico i-ttf"></i></a> -->
-			<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
-			<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
-			<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
-			<a data-disabled="1" data-action="setting-editor" class='btn btn-flat'><i class="ico i-gear" ></i> ${lang.setting}</a>
-
-			| 	
-			<div class="btn-group action-groups">
-				<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">
-					<i class="ico i-link" ></i> ${lang.language}
-					<span class="drop ico i-down"></span>
-				</button>
-				<ul class="dropdown-menu dropdown-menu-right" role="menu">
-					<li><a href="simple.html" title="${lang.korean}">${lang.korean}</a></li>
-					<li><a href="simple-en.html" title="${lang.english}">${lang.english}</a></li>
-					<li><a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a></li>
-					<li class='divider'></li>
-					<li><a href='${lang.advanced_mode_link}'>Advanced  mode</a></li>
-				</ul>
-			</div>
-			<a class="manual-link" href="https://easylogic.gitbooks.io/fontmoa-fonteditor/" target="_manual"><i class="ico i-help"></i></a>
-		</div>
-    </section>
 
     <section class="sidebar">
 		<!--<div class="open-btn"><i class='ico i-gear'></i></div>-->
@@ -128,15 +140,44 @@
     </section>
 
 
-	<div class="editor-area">
+	<div class="editor-area stack-style">
 
 		<div class="glyf-selector-tabs">
-			<div class="tab-title"><img src="./css/img/icon.png" width="20px" align="absmiddle" /><a href="/">ontmoa</a></div>
-			<div class="tab-item " data-value="project">Project</div>
-			<div class="tab-item selected" data-value="classic">Classic</div>
-			<div class="tab-item" data-value="simple">Simple</div>
+			<!--<div class="tab-title"><img src="./css/img/icon.png" width="20px" align="absmiddle" /><a href="/">ontmoa</a></div> -->
+			<div class="tab-item  selected" data-value="project">${lang.tabs_project}</div>
+			<div class="tab-item" data-value="classic">${lang.tabs_glyf}</div>
+			<div class="tab-item" data-value="simple">${lang.tabs_simple}</div>
+			<div class="tab-tools">
+			    <section class="toolbar action-groups" role="tools">
+					${lang.download} 
+
+					<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
+					<!--<a class='btn btn-flat' data-action="export" data-type="otf" title="${lang.export_otf}"><i class="ico i-ttf"></i></a> -->
+					<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
+					<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
+					<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
+					<a data-disabled="1" data-action="setting-editor" class='btn btn-flat'><i class="ico i-gear" ></i> ${lang.setting}</a>
+
+					| 	
+					<div class="btn-group action-groups">
+						<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">
+							<i class="ico i-link" ></i> ${lang.language}
+							<span class="drop ico i-down"></span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right" role="menu">
+							<li><a href="simple.html" title="${lang.korean}">${lang.korean}</a></li>
+							<li><a href="simple-en.html" title="${lang.english}">${lang.english}</a></li>
+							<li><a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a></li>
+							<li class='divider'></li>
+							<li><a href='${lang.advanced_mode_link}'>Advanced  mode</a></li>
+						</ul>
+					</div>
+					<a class="manual-link" href="https://fontmoa.gitbooks.io/fontmoa-fonteditor/" target="_manual"><i class="ico i-help"></i></a>
+				</section>
+			</div>
 		</div>
-		<div class="notebook notebook-left classic-mode">
+
+		<div class="notebook notebook-left project-mode">
 
 			<div class="simple-glyf-selector">
 				<div class="text-view" >
@@ -155,7 +196,7 @@
 		</div>
 		<div class="notebook notebook-right">
 			<div class="tools">
-				<a class="extensions-open" href="#"><i class="ico i-gear" ></i></a>
+				<a class="extensions-open" href="#glyf-editor"><i class="ico i-gear" ></i></a>
 			</div>
 			<section class="editor editing">
 				<ul id="editor-commandmenu" class="command-groups"></ul>
@@ -166,16 +207,33 @@
 		<div class="notebook notebook-options">
 			
 		</div>		
-		<!--
-		<div class="chain">
-			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
-			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
-			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
-			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
-			<div class="ring"><div class="circle left"></div><div class="circle right"></div><div class="rect"></div></div>
-		</div>
-		-->
 	</div>
+
+	
+    <footer id="footer">
+        <div class="container stack-style">
+            <div class="row">
+                <div class="col-sm-12">
+					<hr />
+                    <div >
+                        <address style="text-align:center">
+						Contacts - 
+                        E-mail: <a href="mailto:cyberuls@gmail.com">cyberuls@gmail.com</a> <span class='divider'></span>
+                        Facebook: <a href="https://www.facebook.com/fontmoa">facebook.com/fontmoa</a> <span class='divider'></span>
+                        Twitter: <a href="https://www.twitter.com/fontmoa">@fontmoa</a>  <span class='divider'></span>
+                        Github: <a href="https://www.github.com/fontmoa">fontmoa</a> 
+                        </address>
+
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class=" text-center">
+                        <p>&copy; Fontmoa 2017. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <div class="modal" id="model-dialog" tabindex="-1" role="dialog" aria-labelledby="model-label" aria-hidden="true" data-backdrop="false">
       <div class="modal-dialog">

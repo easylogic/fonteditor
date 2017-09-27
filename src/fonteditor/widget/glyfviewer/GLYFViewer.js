@@ -185,6 +185,7 @@ define(
             }, options);
 
             this.main = $(main);
+            this.main.addClass(this.options.shapeSize);
             this.mode = 'editor';		// 기본을 무조건 edit 모드로, list 모드는 없음. 
             this.page = 0;
             this.selectedList = [];
@@ -372,9 +373,9 @@ define(
         GLYFViewer.prototype.setSetting = function (options) {
 
             var oldOptions = this.options;
-            if (options.shapeSize !== oldOptions.shapeSize) {
-                this.main.removeClass(oldOptions.shapeSize);
-                this.main.addClass(options.shapeSize);
+
+            if (options.shapeSize) {
+                this.main.removeClass("large xlarge small").addClass(options.shapeSize);
             }
 
             var needRefresh = false;

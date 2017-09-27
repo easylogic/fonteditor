@@ -3,13 +3,14 @@
 @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 
 body.simple-mode {
-	background: #fff;
 	font-family: 'Lato', sans-serif;
 	font-weight: 300;
-	font-size: 14px;
-	line-height: 22px;
+	font-size: 13px;
 	color: #000;
-	padding-top:20px;
+	background-color: rgba(0, 0, 0, 0.1);
+	margin: 0 auto;
+	max-width:840px;
+	box-shadow: 0px 0px 20px 1px #888888;	
 }
 
 .simple-mode {
@@ -59,6 +60,10 @@ body.simple-mode {
 
 	h3{
 		font-size: 18px;
+	}
+
+	.btn {
+		font-size: 13px;
 	}
 
 	.overflow{
@@ -138,6 +143,14 @@ body.simple-mode {
 		outline:none;
 	}
 
+	> header  {
+		background-color: white; 
+
+		a:hover {
+			background-color: transparent !important;
+		}
+	}
+
 	.simple-mode-title {
 		z-index:-1;
 		display:inline-block;
@@ -158,18 +171,39 @@ body.simple-mode {
 		}
 	}
 
+	footer {
+		background-color: white; 
+		padding-top:30px;
+		padding-bottom:50px;
+		.container {
+			&.stack-style {
+				width:auto;
+				max-width: 800px;
+				min-width:800px;
+			}
+		}
+	}
+
 	.navbar {
 		position:relative;
 		border-right:0px solid #ececec;
 		border-bottom:0px solid #ececec;
 		margin-bottom: 0;
-		height:20px !important;
+		height:70px !important;
 		//background-color:white;
+		max-width: 800px;
+		min-width: 800px;
 
 		.container {
 			max-width: 1200px;
 			margin: 0 auto;
 			display:block;
+
+			&.stack-style {
+				width:auto;
+				max-width: 800px;
+				min-width:800px;
+			}
 		}
 
 		.logo {
@@ -230,25 +264,27 @@ body.simple-mode {
 
 	.toolbar {
 		position:relative;		
-		top:auto;
+		display:inline-block;
 		box-sizing:border-box;
-		border-left:1px solid #ececec;
-		//padding:10px;
 		height:auto;
-		vertical-align:middle;
 		background-color:transparent;
-		border-bottom-left-radius:5px;
-        border-bottom:0px;
-		border-left:0px;
+		border:0px;
 		text-align: right;
+		top:auto;
+		min-width: auto;
 		
+
 		.container {
-			display:block;
+			display:inline-block;
 			flex:none;
 			width:100%;
-			max-width: 1200px;
+			max-width: auto;
 			margin: 0 auto;
-			vertical-align: middle;
+
+			&.stack-style {
+				max-width: auto;
+				min-width: auto;
+			}			
 		}
 
         .btn-flat {
@@ -264,18 +300,29 @@ body.simple-mode {
 	}
 
 	.editor-area {
-		margin:0 auto;
+		padding:20px;
 		max-width: 1200px;
 		position: relative;
 		display:flex;
-		height: 640px;
+		box-sizing:border-box;
 		//margin-top: 100px;
 		//transition: all 0.3s ease-in;
-		background-color: #121C42;
+		background-color: white; 
 
-	    box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
-		-webkit-box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
-	    -moz-box-shadow: 0px 6px 13px rgba(50, 50, 50, 0.45);
+		&.stack-style {
+			display:block;
+			height: auto; 
+
+			.notebook-left,
+			.notebook-right {
+				flex:none;
+			}
+
+			.notebook-left {
+				height: 260px;
+				width: 100%;
+			}
+		}
 
 		&.has-only-editor {
 			.notebook-left {
@@ -290,73 +337,51 @@ body.simple-mode {
 
 
 		&.has-options {
-			//max-width: 1400px !important;
-			display:block;
-
-			.notebook-left {
-				width: 394px;
-				display:inline-block;
-
-				.project-glyf-selector .project .project-list {
-					top: 80px;
-
-				}
-			}
-			.notebook-right {
-				width: 600px;
-				display:inline-block;				
-				margin-left:-1px;
-			}
-
 			.notebook-options {
 				display:inline-block;		
 				vertical-align: top;
-				margin-left:-2px;
+				position:absolute;
+				top: 312px;
+				right: -279px;
+				z-index:1000;
+				width: 300px !important;
 			}
 		}
 
 		
 		.glyf-selector-tabs {
-			position:absolute;
-			height:30px;
-			top:-36px;
-			left:0px;
-			flex:3;
-			z-index:1000;
+			position:relative;
+			width:100%;
 			padding-left:0px;
-            padding-right:10px;
+			padding-right:10px;
 
-			.tab-title {
-				display:inline-block;
-				height:100%;
-				box-sizing:border-box;
-				background-color: rgba(255, 255, 255, 0.7);
-				color:black;
-				cursor:pointer;
-                margin-right:4px;
-				margin-left:4px;
-				font-size: 20px;
+			.tab-tools {
+				display: inline-block;
+				height: 100%;
+				margin-right:2px;
+				float: right;
 			}
 
 			.tab-item {
 				display:inline-block;
 				height:100%;
 				padding:5px;
+				height:32px;
 				box-sizing:border-box;
 				background-color: rgba(255, 255, 255, 0.7);
 				color:black;
+				border:1px solid #cecece;
+				border-bottom:0px;
 				border-top-left-radius:5px;
 				border-top-right-radius:5px;
 				cursor:pointer;
-                margin-right:4px;
-                margin-left:4px;
+                margin-right:2px;
+                margin-left:2px;
 
 				&.selected {
-					background-color: rgba(255, 0, 0, 0.9);
+					background-color: #121c42;
 					color:white;
-					box-shadow: 5px 0px 8px 0px rgba(50, 50, 50, 0.45);
-					-webkit-box-shadow: 5px 0px 8px 0px rgba(50, 50, 50, 0.45);
-					-moz-box-shadow: 5px 0px 8px 0px rgba(50, 50, 50, 0.45);
+					font-weight:bold;
 				}
 			}
 
@@ -366,13 +391,12 @@ body.simple-mode {
 		.notebook {
 			flex:3;
 			
-			height:100%;
 			display:block;
 			position:relative;
-			
+			height: 640px;			
+			border: 1px solid #ececec;
+		
 		}
-
-		@notebook-shadow-color:  rgba(255, 255, 255, 0.3);
 
 		.notebook-left {
 			background-color: rgba(255, 255, 255, 1);
@@ -426,16 +450,16 @@ body.simple-mode {
 					border-top:0px;
 
 					.glyf-list-title {
-						height: 50px;
-						padding:14px;
+						height: 30px;
+						padding:5px;
 					    //background-color: rgba(240,240,240,0.6);
 						box-sizing:border-box;
 						border-bottom:0px;
-						padding-right:30px;
 					}
 
 					.glyf-list {
 						bottom: 50px;
+						top:30px;
 					}
 
 					#glyf-list-pager {
@@ -461,14 +485,20 @@ body.simple-mode {
 					bottom:0px;
 					height:auto;
                     .project-title {
-                        padding:20px 20px;
-                        height: 50px;
+                        padding:5px;
+                        height: 30px;
                         border-bottom:0px;
                     }
 
                     .project-list {
  
-                       top:50px;
+					   top:30px;
+					   
+					   dl {
+						   border:0px;
+						   margin:0px;
+						   border-bottom:1px solid #ececec;
+					   }
 
                         span[data-action]:after {
                             content: attr(title);
@@ -501,7 +531,7 @@ body.simple-mode {
 		.notebook-options {
 			display:none;
 			flex: 1;
-			background-color:rgba(0, 0, 0, 0.82); 
+			background-color:rgba(0, 0, 0, 0.9); 
 			width: 200px !important;
 			border-left:1px solid rgba(255, 255, 255, 0.1);
 			box-sizing: border-box;
@@ -754,7 +784,7 @@ body.simple-mode {
 			top:0px;
 			left:0;
 			right: 0px;
-			height: 100px;
+			height: 50px;
 			box-sizing:border-box;
 			font-size: 1rem;
 			background-color: rgba(255, 255, 255, 0.8);
@@ -763,39 +793,18 @@ body.simple-mode {
 
 			[contenteditable=true]:empty:not(:focus):before {
 			  color:rgba(0, 0, 0, 0.6);
-  			}
-
-			&:before {
-				content: "\e021"; 
-				position:absolute;
-				font-family: fontmoa; 
-				left:0px;
-				top:0px;
-				bottom:0px;
-				width:100px;
-				padding:10px 20px;
-				box-sizing:border-box;
-				text-align:center;
-				line-height:1;
-				font-size:70px;
-				color: #f7f7f7;
-				text-shadow: 0 1px 0 #ccc,
-							   0 3px 0 #bbb,
-							   0 6px 1px rgba(0,0,0,.1),
-							   0 10px 10px rgba(0,0,0,.2),
-							   0 20px 20px rgba(0,0,0,.15);
-			}
-
+			  }
+			  
 			.text-input {
 				display:block;
 				overflow:auto;
 				position:absolute;
-				left:80px;
+				left:0px;
 				right:0px;
 				bottom:0px;
-				font-size:20px;
+				font-size:14px;
 				top:0px;
-				padding:10px 30px;
+				padding:10px;
 				box-sizing:border-box;
 				color:rgba(0, 0, 0, 0.8);
 			}
@@ -804,7 +813,7 @@ body.simple-mode {
 
 		.notebook .font-view {
 			position:absolute;
-			top:100px;
+			top:50px;
 			left:0px;
 			right: 0px;
 			bottom: 50px;
@@ -812,7 +821,7 @@ body.simple-mode {
 			font-family:simple,arial;
 			overflow:auto;
 			font-size:70px;
-			padding:30px;
+			padding:10px;
 			background-color: rgba(255, 255, 255, 0.6);
 			color: black;
 
@@ -910,7 +919,7 @@ body.simple-mode {
 			right:40px;
 			left: auto;
 			bottom:auto;
-			width: 514px;
+			width: 714px;
 			height: 514px;
 			box-sizing:border-box;
 			border:0px;
@@ -950,85 +959,7 @@ body.simple-mode {
 			}
 		}
 
-		.chain {
-			position:absolute;
-			height:100%;
-			left:50%;
-			z-index:1;
-			display: none; /*flex;*/
-			transform: translateX(-50%);
-			width:100px;
-			flex-direction:column;
-			pointer-events:none;
-
-			&:before {
-				content: "\00a0";
-				display: block;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 50%;
-				transform: translateX(-30px);
-				width: 30px;
-				background: -webkit-gradient(linear, right top, left top, from(rgba(150,150,150,0.1)), to(rgba(150,150,150,0)));
-				background: -moz-linear-gradient(right, rgba(150,150,150,0.1), rgba(150,150,150,0));
-			}
-
-			&:after {
-				content: "\00a0";
-				display: block;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: 50%;
-				transform: translateX(0px);
-				width: 30px;
-				background: -webkit-gradient(linear, left top, right top, from(rgba(150,150,150,0.1)), to(rgba(150,150,150,0)));
-				background: -moz-linear-gradient(left, rgba(150,150,150,0.1), rgba(150,150,150,0));
-			}
-
-			.ring {
-
-				flex:1;
-				box-sizing:border-box;
-				padding: 60px 0px;
-				position:relative;
-				.circle {
-					width:16px;
-					height:16px;
-					position:absolute;
-					display:block;
-					background-color: rgba(230, 230, 230, 0.9);
-					border-radius:50%;
-					-webkit-box-shadow: inset 2px 2px 5px rgba(125,125,125,1);
-					-moz-box-shadow: inset 2px 2px 5px rgba(125,125,125,1);
-					box-shadow: inset 2px 2px 5px rgba(125,125,125,1);
-				}
-
-				.rect {
-					left: 25%;
-					right:25%;
-					position:absolute;
-					top:65px;
-					height: 6px;
-					overflow:hidden;
-					border-bottom:0px;
-					background-color: rgba(230, 230, 230, 0.9);
-
-				}
-
-				
-				.left {
-					left: 25%;
-					transform:translate(-30%);
-				}
-				.right {
-					left: 75%;
-					transform:translate(-75%);
-				}
-			}
-			
-		}
+		
 	}
 
 
