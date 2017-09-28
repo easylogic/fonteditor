@@ -15,6 +15,10 @@ body.simple-mode {
 
 .simple-mode {
 
+	&.modal-open {
+		overflow:auto;
+	}
+
 	a{
 		color:#C03035;
 	}
@@ -973,13 +977,15 @@ body.simple-mode {
 	}
 
 	.import-pic-dialog {
-
-		background-color:transparent;
+		position:absolute !important;
+		//background-color:transparent;
+		width: 714px !important;
+		height: 618px !important;
 
 		.modal-content {
+
+			border-color: transparent;
 			background-color: transparent;
-			border-color:transparent;
-			border:0px !important;
 			box-shadow:none !important;
 		}
 
@@ -988,7 +994,7 @@ body.simple-mode {
 		}
 
 		.modal-dialog {
-			width: 514px;
+			width: 100%;
 			margin:0px !important;
 		}
 

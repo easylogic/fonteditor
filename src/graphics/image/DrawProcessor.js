@@ -10,52 +10,52 @@ define(
 
 		var renderer = {
 			'default' : {
-				mousedown : function (context, x, y) {
+				mousedown : function (context, pos) {
 					if (this.isErase) {
 						// NOOP
 					} else {
-					  context.moveTo(x, y);
+					  context.moveTo(pos.x, pos.y);
 					}
 
 				},
 
-				mousemove : function (context, x, y) {
+				mousemove : function (context, pos) {
 					if (this.isErase)
 					{
-						context.moveTo(x, y);
-						context.arc(x, y, this.lineWidth/2, 0, Math.PI * 2, false);
+						context.moveTo(pos.x, pos.y);
+						context.arc(pos.x, pos.y, this.lineWidth/2, 0, Math.PI * 2, false);
 						context.fill();
 					} else {
-						context.lineTo(x, y);
+						context.lineTo(pos.x, pos.y);
 						context.stroke();
 					}
 
 				}
 			},
 			'shadow' : {
-				mousedown : function (context, x, y) {
+				mousedown : function (context, pos) {
 					context.shadowBlur = 10;
 					context.shadowColor = 'rgb(0, 0, 0)';
-					context.moveTo(x, y);
+					context.moveTo(pos.x, pos.y);
 				},
-				mousemove : function (context, x, y) {
-					context.lineTo(x, y);
+				mousemove : function (context, pos) {
+					context.lineTo(pos.x, pos.y);
 					context.stroke();
 				}
 			},
 			'radial-gradient' : {
-				mousedown : function (context, x, y) {
-					context.moveTo(x, y);
+				mousedown : function (context, pos) {
+					context.moveTo(pos.x, pos.y);
 				},
-				mousemove : function (context, x, y) {
-					var g = context.createRadialGradient(x,y,10,x,y,20);
+				mousemove : function (context, pos) {
+					var g = context.createRadialGradient(pos.x, pos.y,10,pos.x, pos.y,20);
     
 					g.addColorStop(0, '#000');
 					g.addColorStop(0.5, 'rgba(0,0,0,0.5)');
 					g.addColorStop(1, 'rgba(0,0,0,0)');
 					context.fillStyle = g;
 				
-					context.fillRect(x-20, y-20, 40, 40);
+					context.fillRect(pos.x-20, pos.y-20, 40, 40);
 				}
 			}
 		};
@@ -69,7 +69,7 @@ define(
             this.canvas = canvas;
 			
 			this.isErase = false; 
-			this.setRenderType('default');
+			this.setRenderType('shadow');
 			this.setStrokeStyle('#000000');
 			this.setLineWidth(20); 
 			this.setLineJoin('round');
@@ -124,39 +124,37 @@ define(
 			this.lineCap = lineCap || 'round'; 
 		}
 
+		DrawProcessor.prototype.getXY = function (e, pos) {
+			var x = e.laryerX || e.clientX - pos.left;
+			var y = e.laryerY || e.clientY - pos.top;
+
+			x += $("html,body").scrollLeft()
+			y += $("html,body").scrollTop()
+
+			if (pixelRatio !== 1)
+			{
+				x = x / pixelRatio;
+				y = y / pixelRatio;
+			}
+
+			return { x : x , y : y };
+		}
+
 		DrawProcessor.prototype.mousedown = function (e, pos) {
 			this.canvas.ctx.beginPath();
 
 			if (this.isErase)
 			{
-				this.canvas.ctx.globalCompositeOperation="destination-out";
+				this.canvas.ctx.globalCompositeOperation = "destination-out";
 			} else {
-				this.canvas.ctx.globalCompositeOperation="source-over";
+				this.canvas.ctx.globalCompositeOperation = "source-over";
 			}
 
-			var x = e.clientX - pos.left;
-			var y = e.clientY - pos.top;
-
-			if (pixelRatio !== 1)
-			{
-				x = x / pixelRatio;
-				y = y / pixelRatio;
-			}
-
-			renderer[this.renderType].mousedown.call(this, this.canvas.ctx, x, y);
+			renderer[this.renderType].mousedown.call(this, this.canvas.ctx, this.getXY(e, pos));
 		}
 		DrawProcessor.prototype.mousemove = function (e, pos) {
 
-			var x = e.clientX - pos.left;
-			var y = e.clientY - pos.top;
-
-			if (pixelRatio !== 1)
-			{
-				x = x / pixelRatio;
-				y = y / pixelRatio;
-			}
-
-			renderer[this.renderType].mousemove.call(this, this.canvas.ctx, x, y);
+			renderer[this.renderType].mousemove.call(this, this.canvas.ctx, this.getXY(e, pos));
 		}
 
 		DrawProcessor.prototype.initEvent = function () {
@@ -169,11 +167,17 @@ define(
 			var self = this; 
 			canvasOrigin.onmousedown = function(e) {
 				isDrawing = true;
-				pos = $('.preview-panel').offset();
+
 				canvasOrigin.ctx.strokeStyle = self.strokeStyle;
 				canvasOrigin.ctx.lineWidth = self.lineWidth;
 				canvasOrigin.ctx.lineJoin = self.lineJoin;
 				canvasOrigin.ctx.lineCap = self.lineCap;
+
+				var $previewPanel = $('.preview-panel');
+				pos = $previewPanel.offset();		
+				//pos.top += $previewPanel.scrollTop();
+				//pos.left += $previewPanel.scrollLeft();
+
 				self.mousedown(e, pos);
 			};
 			canvasOrigin.onmousemove = function(e) {

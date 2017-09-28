@@ -123,6 +123,7 @@ define(
                     }
                 }
 
+                /*
                 if (shape.id == 'sorptionX' && shape.distY) {
                     var minY = Math.min(y0, y1);
                     var maxY = Math.max(y0, y1);
@@ -139,7 +140,7 @@ define(
                     ctx.textAlign = "center";
                     ctx.textBaseline = "bottom";
                     ctx.fillText(Math.floor(shape.distX), centerX, y0);
-                }
+                } */
 
             }
         };
