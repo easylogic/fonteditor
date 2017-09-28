@@ -410,7 +410,21 @@
 			}
 
 			function init_text_select () {
-				var arr = $(".text-input").text().split('');
+				var inputText = $(".text-input").text();
+				
+
+				/* support unicode String for code point */
+				var matches = inputText.match(/(\\\u[0-9a-zA-Z]{2,4})/gi) || [];
+
+				for(var i = 0, len = matches.length ; i < len; i++) {
+					var  m = matches[i];
+					var codePoint = parseInt(m.split('u')[1], 16);
+					var unicodeString = String.fromCodePoint(codePoint);
+
+					inputText = inputText.replace(m, unicodeString);
+				}
+				
+				var arr = inputText.split('');
 
 				var temp = [];
 				var pointList= [];
