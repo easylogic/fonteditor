@@ -34,7 +34,7 @@ define(
 			},
 			'shadow' : {
 				mousedown : function (context, pos) {
-					context.shadowBlur = 10;
+					context.shadowBlur = this.lineWidth/2;
 					context.shadowColor = 'rgb(0, 0, 0)';
 					context.moveTo(pos.x, pos.y);
 				},
@@ -48,14 +48,14 @@ define(
 					context.moveTo(pos.x, pos.y);
 				},
 				mousemove : function (context, pos) {
-					var g = context.createRadialGradient(pos.x, pos.y,10,pos.x, pos.y,20);
+					var g = context.createRadialGradient(pos.x, pos.y,this.lineWidth/2,pos.x, pos.y,this.lineWidth);
     
 					g.addColorStop(0, '#000');
 					g.addColorStop(0.5, 'rgba(0,0,0,0.5)');
 					g.addColorStop(1, 'rgba(0,0,0,0)');
 					context.fillStyle = g;
 				
-					context.fillRect(pos.x-20, pos.y-20, 40, 40);
+					context.fillRect(pos.x - this.lineWidth, pos.y - this.lineWidth,  this.lineWidth * 2, this.lineWidth * 2);
 				}
 			}
 		};
@@ -66,7 +66,8 @@ define(
          * @param {Object} imageData 图像数据
          */
         function DrawProcessor(canvas) {
-            this.canvas = canvas;
+			this.canvas = canvas;
+		
 			
 			this.isErase = false; 
 			this.setRenderType('shadow');
@@ -74,7 +75,26 @@ define(
 			this.setLineWidth(20); 
 			this.setLineJoin('round');
 			this.setLineCap('round');
-        }
+
+			this.makeTracker();
+		}
+		
+		DrawProcessor.prototype.makeTracker = function () {
+
+			this.$tracker = $("<div />").css({
+				position: "absolute",
+				borderRadius: '50%',
+				border: "1px solid rgba(255, 255, 255, 0.3)",
+				backgroundColor: 'transparent',
+				width: this.lineWidth*2,
+				height: this.lineWidth*2,
+				'pointer-events' : 'none'
+			});
+
+			this.hideTracker();
+
+			this.$tracker.insertAfter(this.canvas);			
+		}
 
 		DrawProcessor.prototype.drawGlyf = function (glyf) {
 
@@ -140,6 +160,21 @@ define(
 			return { x : x , y : y };
 		}
 
+		DrawProcessor.prototype.setTrackerPosition = function (xy, isShow) {
+			if (isShow) {
+				this.$tracker.show();
+			}
+
+			this.$tracker.css({
+				left: xy.x * pixelRatio - this.lineWidth,
+				top : xy.y * pixelRatio + this.lineWidth
+			})
+		}
+
+		DrawProcessor.prototype.hideTracker = function () {
+			this.$tracker.hide();
+		}
+
 		DrawProcessor.prototype.mousedown = function (e, pos) {
 			this.canvas.ctx.beginPath();
 
@@ -150,11 +185,19 @@ define(
 				this.canvas.ctx.globalCompositeOperation = "source-over";
 			}
 
-			renderer[this.renderType].mousedown.call(this, this.canvas.ctx, this.getXY(e, pos));
+			var xy = this.getXY(e, pos);
+
+			this.setTrackerPosition(xy, true);
+
+			renderer[this.renderType].mousedown.call(this, this.canvas.ctx, xy);
 		}
 		DrawProcessor.prototype.mousemove = function (e, pos) {
 
-			renderer[this.renderType].mousemove.call(this, this.canvas.ctx, this.getXY(e, pos));
+			var xy = this.getXY(e, pos);
+			
+			this.setTrackerPosition(xy);
+
+			renderer[this.renderType].mousemove.call(this, this.canvas.ctx, xy);
 		}
 
 		DrawProcessor.prototype.initEvent = function () {
@@ -187,6 +230,7 @@ define(
 			};
 			canvasOrigin.onmouseup = function() {
 			  isDrawing = false;
+			  self.hideTracker(); 
 			};
 
 			this.onpaste = (function (self) { 

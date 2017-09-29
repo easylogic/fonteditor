@@ -3,6 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>FontMoa - FontEditor</title>
+
+    <meta name="generator" content="Fontmoa v1.0.9">
+    <meta name="description" content="한글 폰트를 쉽게 다루기 위해서 만든 폰트 에디터, FontEditor, 폰트모아, Fontmoa">
+    
+    <!-- Meta for Facebook -->
+    <meta property="og:title" content="Fontmoa - 한글 폰트 에디터 , Font Editor, 폰트모아 ">
+    <meta property="og:type" content="website">
+    <!--<meta property="og:image" content="https://example.com/image-to-be-shown-in-facebook.jpg">-->
+    <meta property="og:description" content="한글 폰트를 좀 더 다루기 쉽게 하기 위해서 만들어진 폰트 에디터, FontEditor">
+    
+    <!-- Meta for Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@fontmoa">
+    <meta name="twitter:creator" content="@easylogic">
+    <meta name="twitter:title" content="Fontmoa - 한글 폰트 에디터 , Font Editor, 폰트모아">
+    <meta name="twitter:description" content="한글 폰트를 좀 더 다루기 쉽게 하기 위해서 만들어진 폰트 에디터, FontEditor">
+    <!--<meta name="twitter:image" content="https://example.com/image-to-be-shown-in-twitter.jpg"> -->
+ 	
 	<!-- Global Site Tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107292462-1"></script>	
     <link rel="shortcut icon" href="/images/ico/icon.ico" type="image/x-icon">
