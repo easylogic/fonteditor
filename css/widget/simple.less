@@ -374,7 +374,7 @@ body.simple-mode {
 			.tab-item {
 				display:inline-block;
 				height:100%;
-				padding:5px;
+				padding:5px 10px;
 				height:32px;
 				box-sizing:border-box;
 				background-color: rgba(255, 255, 255, 0.7);
@@ -459,25 +459,28 @@ body.simple-mode {
 					border-top:0px;
 
 					.glyf-list-title {
-						height: 30px;
-						padding:5px;
-					    //background-color: rgba(240,240,240,0.6);
+						height: 40px;
+						padding:10px 5px;
 						box-sizing:border-box;
-						border-bottom:0px;
+						border-bottom:1px solid #ececec;
 					}
 
 					.glyf-list {
 						bottom: 50px;
-						top:30px;
+						top:40px;
 					}
 
 					#glyf-list-pager {
-						height: 50px;
+						height: 40px;
 						color: black;
-						background-color: rgba(240,240,240,0.6);
+						background-color: rgba(240,240,240,0.2);
 
 						[data-pager="info"] {
 							color: black; 
+						}
+
+						.btn {
+							border: 1px solid rgba(0, 0, 0, 0.1);
 						}
 					}
 				}
@@ -494,19 +497,21 @@ body.simple-mode {
 					bottom:0px;
 					height:auto;
                     .project-title {
-                        padding:5px;
-                        height: 30px;
-                        border-bottom:0px;
+                        padding:10px 5px;
+                        height: 40px;
+                        border-bottom:1px solid #ececec;
                     }
 
                     .project-list {
  
-					   top:30px;
+					   top:40px;
 					   
 					   dl {
 						   border:0px;
 						   margin:0px;
-						   border-bottom:1px solid #ececec;
+						   border-radius: 0px;
+						   line-height:1;
+						   padding:5px;
 					   }
 
                         span[data-action]:after {
@@ -790,7 +795,7 @@ body.simple-mode {
 
 		.notebook .text-view {
 			position:absolute;
-			top:0px;
+			top:40px;
 			left:0;
 			right: 0px;
 			height: 50px;
@@ -822,10 +827,10 @@ body.simple-mode {
 
 		.notebook .font-view {
 			position:absolute;
-			top:50px;
+			top:90px;
 			left:0px;
 			right: 0px;
-			bottom: 50px;
+			bottom: 0px;
 			box-sizing:border-box;
 			font-family:simple,arial;
 			overflow:auto;
@@ -906,19 +911,18 @@ body.simple-mode {
 		.notebook .font-view-description {
 
 			position:absolute;
-			height: 50px;
+			top: 0px;
+			height:40px;
 			left:0px;
 			right:0px;
 			color: black; 
-			bottom: 0px;
-			padding:10px 5px ;
+			padding:5px;
 			box-sizing:border-box;
-			text-align:center;
-			background-color: rgba(240,240,240,0.6);
+			font-size:13px;
+			border-bottom:1px solid #ececec;
 
-
-			input {
-				//color: black;
+			.delete-glyf {
+				border:1px solid rgba(0, 0, 0, 0.2);
 			}
 		}
 

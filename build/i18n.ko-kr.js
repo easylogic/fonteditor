@@ -25,7 +25,7 @@ module.exports = exports = {
     export_ttf: 'ttf 내보내기',
     export_woff: 'woff 내보내기',
     export_zip: 'zip file 내보내기(ttf,woff,eot,svg 폰트와 샘플 포함)',
-    save_proj: '프로젝트 저장',
+    save_proj: '폰트 저장',
     onlinefont: 'Online 폰트 열기',
     fonturl: 'URL 로 폰트 열기',
 	glyf : '글자',

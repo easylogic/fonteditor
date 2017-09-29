@@ -58,7 +58,7 @@
     <section class="sidebar">
 		<!--<div class="open-btn"><i class='ico i-gear'></i></div>-->
         <div class="project">
-            <div class="project-title">${lang.project_list}
+            <div class="project-title">
 				<div class="project-btns action-groups">
 					<button data-action="new" type="button" class="btn btn-flat" title="${lang.new_font_title}"><i class="ico ico-left i-new"></i> ${lang.new_font_title}</button>
 					<button data-action="open" type="button" class="btn btn-flat" title="${lang.open_font_title}"><i class="ico ico-left i-open"></i> ${lang.open_font_title_2}</button>
@@ -187,7 +187,7 @@
 					<label>${lang.font_size}</label> <span style="display:inline-block;width:200px;vertical-align:middle;"><input type="range" min="5" max="100" id="fontSize" style="width:100px;display:inline-block;vertical-align:middle;"/> <input type="number" min="5" max="100"  id="fontSizeInput"  style="width:60px;text-align:center;display:inline-block;vertical-align:middle;height:24px;"/> px</span>
 					<label><input type="checkbox" checked id="guidChar"/> ${lang.view_guide_chars}</label>
 					&nbsp;
-					<button type="button" class="btn btn-flat delete-glyf">${lang.delete_glyf}</button>
+					<button type="button" class="btn btn-flat delete-glyf pull-right">${lang.delete_glyf}</button>
 				</div>
 				<div class="font-view"></div>
 			</div>
