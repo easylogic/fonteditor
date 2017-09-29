@@ -6,6 +6,8 @@
     <link rel="shortcut icon" href="/images/ico/icon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./dep/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/main.css">
+	<!-- Global Site Tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107292462-1"></script>    
 </head>
 <body class='view-mode only-editor show-sidebar show-main show-editor'>
 
@@ -206,5 +208,12 @@
         define('paper', window.paper);
         require(['fonteditor/main'])
     </script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments)};
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-107292462-1');
+	</script>    
 </body>
 </html>
