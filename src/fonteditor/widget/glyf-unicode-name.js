@@ -1,6 +1,6 @@
 /**
- * @file �۸��� �����ڵ� �̸� Ÿ�� 
- * @author mengke01(kekee000@gmail.com)
+ * @file 한글 변환기 
+ * @author easylogic(cyberuls@gmail.com)
  */
 
 

@@ -64,9 +64,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li ><a href="/">Home</a></li>
 						<li ><a href="/fontmoa/">Font Manager</a></li>
+						<li class='active'><a href="/editor/v1/simple.html">Font Editor</a></li>						
 						<li ><a href="/font/">Web Font</a></li>
 						<li ><a href="/icon/">Icon Font</a></li>
-						<li class='active'><a href="/editor/v1/simple.html">Font Editor</a></li>
                     </ul>
                 </div>
 
@@ -167,6 +167,7 @@
 			<div class="tab-item  selected" data-value="project">${lang.tabs_project}</div>
 			<div class="tab-item" data-value="classic">${lang.tabs_glyf}</div>
 			<div class="tab-item" data-value="simple">${lang.tabs_simple}</div>
+			<div class="tab-item" data-value="subsetting">${lang.tabs_subsetting}</div>			
 			<div class="tab-tools">
 			    <section class="toolbar action-groups" role="tools">
 					${lang.download} 
@@ -213,6 +214,20 @@
 			</div>
 			<div class="classic-glyf-selector"> </div>
 			<div class="project-glyf-selector"> </div>
+			<div class="subsetting-glyf-selector">
+				<div class="subsetting-tools">
+					<div class="subsetting-download  action-groups">
+						${lang.subsetting_download} 
+
+						<a class='btn btn-flat' data-action="export" data-type="ttf" data-reduceGlyf="true" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
+						<a class='btn btn-flat' data-action="export" data-type="woff" data-reduceGlyf="true" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
+						<a class='btn btn-flat' data-action="export" data-type="zip" data-reduceGlyf="true" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
+					</div>
+				</div>			
+				<div class="subsetting-text-view" >
+					<textarea id="subsetting-text" placeholder="${lang.write_a_custom_text}"></textarea>
+				</div>
+			</div>			
 		</div>
 		<div class="notebook notebook-right">
 			<div class="tools">
@@ -356,7 +371,7 @@
 				$(".editor-area").toggleClass('has-options');
 			
 				if ($(".notebook-options .innerdialog.show").length == 0) {
-					accordian_resize($(".notebook-options").find(".innderdialog:first").find(".title"));
+					accordian_resize($(".notebook-options .innerdialog:first .title"));
 				}
 			});
 
@@ -384,12 +399,16 @@
 				$(this).parent().find(".selected").removeClass('selected');
 				$(this).addClass('selected');
 
-				if ($(this).data('value') == 'classic') {
-					$(".notebook-left").addClass('classic-mode').removeClass('project-mode simple-mode');
-				} else if ($(this).data('value') == 'project') {
-					$(".notebook-left").addClass('project-mode').removeClass('classic-mode simple-mode');
+				var tab = $(this).data('value');
+
+				if (tab == 'classic') {
+					$(".notebook-left").addClass('classic-mode').removeClass('project-mode simple-mode subsetting-mode');
+				} else if (tab == 'project') {
+					$(".notebook-left").addClass('project-mode').removeClass('classic-mode simple-mode subsetting-mode');
+				} else if (tab == 'subsetting') {
+					$(".notebook-left").addClass('subsetting-mode').removeClass('project-mode classic-mode simple-mode');					
 				} else {
-					$(".notebook-left").addClass('simple-mode').removeClass('classic-mode project-mode');
+					$(".notebook-left").addClass('simple-mode').removeClass('classic-mode project-mode subsetting-mode');
 				}
 			});
 

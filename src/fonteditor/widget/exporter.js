@@ -53,6 +53,10 @@ define(
                     var base64Str = '';
                     var fileName = (options.fileName || ttf.name.fontFamily || 'export');
 
+                    if (options.isReduceGlyf) {
+                        fileName += "-small";
+                    }
+
                     // 导出, zip 파일 만들기 
                     if (options.type === 'zip') {
 

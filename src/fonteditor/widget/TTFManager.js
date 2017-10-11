@@ -116,8 +116,9 @@ define(
 				cloneTTF.emptyGlyf();
 			}
 
+            // subset
 			if (opt.reduceGlyf) {
-				cloneTTF = cloneTTF.reduceGlyf($(".text-input").text());
+				cloneTTF = cloneTTF.reduceGlyf(opt.reduceGlyf);
 			}
 			
 			if (opt.optimize){
@@ -131,7 +132,7 @@ define(
 
             var indexList = this.ttf.findGlyf({
                 unicode: text.split('').map(function (u) {
-                    return u.charCodeAt(0);
+                    return u.codePointAt(0);
                 })
             });
 

@@ -347,13 +347,13 @@ body.simple-mode {
 
 		&.has-options {
 			.notebook-options {
-				display:inline-block;		
+				display: inline-block;
 				vertical-align: top;
-				position:absolute;
+				position: absolute;
 				top: 312px;
-				right: -279px;
-				z-index:1000;
-				width: 300px !important;
+				right: -229px;
+				z-index: 1000;
+				width: 250px !important;
 			}
 		}
 
@@ -418,6 +418,7 @@ body.simple-mode {
 				}
 
 				.simple-glyf-selector,
+				.subsetting-glyf-selector,				
 				.project-glyf-selector
                 {
 					display:none;
@@ -430,6 +431,7 @@ body.simple-mode {
 				}
 
 				.classic-glyf-selector,
+				.subsetting-glyf-selector,				
 				.project-glyf-selector
                 {
 					display:none;
@@ -443,12 +445,27 @@ body.simple-mode {
 				}
 
 				.classic-glyf-selector,
+				.subsetting-glyf-selector,
 				.simple-glyf-selector
                 {
 					display:none;
 				}
 
-            }
+			}
+			
+            &.subsetting-mode {
+		        .subsetting-glyf-selector {
+					display:block;
+				}
+
+				.project-glyf-selector,
+				.classic-glyf-selector,
+				.simple-glyf-selector
+                {
+					display:none;
+				}
+
+            }			
 
 
 			.classic-glyf-selector {
@@ -488,6 +505,201 @@ body.simple-mode {
 
 			.simple-glyf-selector {
 				display:block;
+
+				.text-view-description {
+					position:absolute;
+					top:-40px;
+					left:0;
+					right: 0px;
+					height: 40px;
+					box-sizing:border-box;
+					font-size: 20px;
+					padding:5px;
+					padding-left: 10px;
+					font-size:15px;
+					color: white;
+		
+					&:before {
+						display:inline-block;
+						content: "T";
+						width: 24px;
+						height:24px;
+						text-align:center;
+						padding:0px;
+						font-weight:bold;
+						margin-right:10px;
+						border-radius: 3px;
+						box-sizing:border-box;
+						background-color: red;
+						color: white;
+					}
+				}
+		
+				.text-view {
+					position:absolute;
+					top:40px;
+					left:0;
+					right: 0px;
+					height: 50px;
+					box-sizing:border-box;
+					font-size: 1rem;
+					background-color: rgba(255, 255, 255, 0.8);
+					color: black;
+					border-bottom:1px solid #ececec;
+		
+					[contenteditable=true]:empty:not(:focus):before {
+					  color:rgba(0, 0, 0, 0.6);
+					  }
+					  
+					.text-input {
+						display:block;
+						overflow:auto;
+						position:absolute;
+						left:0px;
+						right:0px;
+						bottom:0px;
+						font-size:14px;
+						top:0px;
+						padding:10px;
+						box-sizing:border-box;
+						color:rgba(0, 0, 0, 0.8);
+					}
+		
+				}
+		
+				.font-view {
+					position:absolute;
+					top:90px;
+					left:0px;
+					right: 0px;
+					bottom: 0px;
+					box-sizing:border-box;
+					font-family:simple,arial;
+					overflow:auto;
+					font-size:70px;
+					padding:10px;
+					background-color: rgba(255, 255, 255, 0.6);
+					color: black;
+		
+					.glyf {
+						display:inline-block;
+						box-sizing:border-box;
+						position:relative;
+						cursor:pointer;
+						margin-left:-1px;
+						margin-top:-1px;
+						vertical-align:middle;
+						line-height: 100%;
+						text-align:center;
+		
+						.del-glyf {
+								position: absolute;
+								right: 0;
+								bottom: -15px;
+								height: 15px;
+								font-size: 13px;
+								line-height: 1;
+								display: none;
+						}
+		
+						&.selected {
+							background-color: rgba(139, 195, 74, 0.7);
+		
+							.del-glyf {
+								display:inline-block;
+							}
+						}
+		
+						&:after {
+							content: attr(data-empty-ch);
+							position:absolute;
+							font-family:arial;
+							display:block;
+							height:15px;
+							width:100%;
+							font-size:10pt;
+							color: #999999;
+							box-sizing:border-box;
+							line-height:1;
+							left:0px;
+							bottom:-15px;
+						}
+		
+						&:empty:before {
+						  content: attr(data-empty-ch);
+						  display: block; /* For Firefox */
+						  color:#999999;
+						  font-family: arial;
+						  vertical-align:middle;
+						  font-size: 70px;
+						  line-height:1;
+						}
+		
+						&:hover {
+							background-color: rgba(139, 195, 74, 0.7);
+							color: #333;
+						}
+					}
+		
+					&.no-border {
+						.glyf {
+							&:after {
+								display:none;
+							}
+						}
+					}
+				}
+		
+				.font-view-description {
+		
+					position:absolute;
+					top: 0px;
+					height:40px;
+					left:0px;
+					right:0px;
+					color: black; 
+					padding:5px;
+					box-sizing:border-box;
+					font-size:13px;
+					border-bottom:1px solid #ececec;
+		
+					.delete-glyf {
+						border:1px solid rgba(0, 0, 0, 0.2);
+					}
+				}	
+
+			}
+
+			.subsetting-glyf-selector {
+				display:none;
+
+				.subsetting-tools {
+					position:absolute;
+					top:0px;
+					left:0px;
+					right:0px;
+					height:30px;
+					padding: 5px 10px;
+
+					.subsetting-download {
+						float:right;
+					}
+				}
+
+				.subsetting-text-view {
+					position:absolute;
+					top:30px;
+					left:0px;
+					right:0px;
+					bottom:0px;
+					padding:10px;
+
+					textarea {
+						border:1px solid #ececec;
+						width:100%;
+						height:100%;
+					}
+				}
 			}
 
             .project-glyf-selector {
@@ -528,6 +740,11 @@ body.simple-mode {
 		.notebook-right {
 			background-color:#121C42; 
 			overflow:hidden;
+			/*
+			background-image: url(../img/narrative-794978_1920.jpg);
+			background-repeat: no-repeat;
+			background-size: cover;
+			*/
 			//margin-left:1.5px;
 
 			// 에디터 위에 필요한 도구 설정 
@@ -536,7 +753,7 @@ body.simple-mode {
 				right:0px;
 				top:0px;
 				display:inline-block;
-				padding:5px 10px;
+				padding:3px 5px;
 			}
 
 			
@@ -764,175 +981,13 @@ body.simple-mode {
 			}
 		}
 
-		.notebook .text-view-description {
-			position:absolute;
-			top:-40px;
-			left:0;
-			right: 0px;
-			height: 40px;
-			box-sizing:border-box;
-			font-size: 20px;
-			padding:5px;
-			padding-left: 10px;
-			font-size:15px;
-			color: white;
 
-			&:before {
-				display:inline-block;
-				content: "T";
-				width: 24px;
-				height:24px;
-				text-align:center;
-				padding:0px;
-				font-weight:bold;
-				margin-right:10px;
-				border-radius: 3px;
-				box-sizing:border-box;
-				background-color: red;
-				color: white;
-			}
-		}
-
-		.notebook .text-view {
-			position:absolute;
-			top:40px;
-			left:0;
-			right: 0px;
-			height: 50px;
-			box-sizing:border-box;
-			font-size: 1rem;
-			background-color: rgba(255, 255, 255, 0.8);
-			color: black;
-			border-bottom:1px solid #ececec;
-
-			[contenteditable=true]:empty:not(:focus):before {
-			  color:rgba(0, 0, 0, 0.6);
-			  }
-			  
-			.text-input {
-				display:block;
-				overflow:auto;
-				position:absolute;
-				left:0px;
-				right:0px;
-				bottom:0px;
-				font-size:14px;
-				top:0px;
-				padding:10px;
-				box-sizing:border-box;
-				color:rgba(0, 0, 0, 0.8);
-			}
-
-		}
-
-		.notebook .font-view {
-			position:absolute;
-			top:90px;
-			left:0px;
-			right: 0px;
-			bottom: 0px;
-			box-sizing:border-box;
-			font-family:simple,arial;
-			overflow:auto;
-			font-size:70px;
-			padding:10px;
-			background-color: rgba(255, 255, 255, 0.6);
-			color: black;
-
-			.glyf {
-				display:inline-block;
-				box-sizing:border-box;
-				position:relative;
-				cursor:pointer;
-				margin-left:-1px;
-				margin-top:-1px;
-				vertical-align:middle;
-				line-height: 100%;
-				text-align:center;
-
-				.del-glyf {
-					    position: absolute;
-						right: 0;
-						bottom: -15px;
-						height: 15px;
-						font-size: 13px;
-						line-height: 1;
-						display: none;
-				}
-
-				&.selected {
-					background-color: rgba(139, 195, 74, 0.7);
-
-					.del-glyf {
-						display:inline-block;
-					}
-				}
-
-				&:after {
-					content: attr(data-empty-ch);
-					position:absolute;
-					font-family:arial;
-					display:block;
-					height:15px;
-					width:100%;
-					font-size:10pt;
-					color: #999999;
-					box-sizing:border-box;
-					line-height:1;
-					left:0px;
-					bottom:-15px;
-				}
-
-				&:empty:before {
-				  content: attr(data-empty-ch);
-				  display: block; /* For Firefox */
-				  color:#999999;
-				  font-family: arial;
-				  vertical-align:middle;
-				  font-size: 70px;
-				  line-height:1;
-				}
-
-				&:hover {
-					background-color: rgba(139, 195, 74, 0.7);
-					color: #333;
-				}
-			}
-
-			&.no-border {
-				.glyf {
-					&:after {
-						display:none;
-					}
-				}
-			}
-		}
-
-		.notebook .font-view-description {
-
-			position:absolute;
-			top: 0px;
-			height:40px;
-			left:0px;
-			right:0px;
-			color: black; 
-			padding:5px;
-			box-sizing:border-box;
-			font-size:13px;
-			border-bottom:1px solid #ececec;
-
-			.delete-glyf {
-				border:1px solid rgba(0, 0, 0, 0.2);
-			}
-		}
 
 		.editor {
 			position:absolute;
 			top:60px;
-			right:40px;
-			left: auto;
-			bottom:auto;
-			width: 714px;
+			right:20px;
+			left: 20px;
 			height: 514px;
 			box-sizing:border-box;
 			border:0px;
@@ -940,10 +995,9 @@ body.simple-mode {
 			border-radius:5px;
 
 			#editor-commandmenu {
-				top:-40px;			
-				
-				border-top-left-radius: 5px;
-				border-top-right-radius: 5px;
+				top:-46px;			
+				border-radius: 5px;
+				background-color: rgba(229, 229, 229, 0.1);				
 
 				li {
 					color:rgba(255, 255, 255, 0.8);
@@ -951,10 +1005,9 @@ body.simple-mode {
 			}
 			
 			#editor-commandmenu-bottom {
-				bottom:-40px;			
-
-				border-bottom-left-radius: 5px;
-				border-bottom-right-radius: 5px;
+				bottom: -54px;
+				border-radius: 5px;
+				background-color: rgba(229, 229, 229, 0.1);
 
 				li {
 					color:rgba(255, 255, 255, 0.8);

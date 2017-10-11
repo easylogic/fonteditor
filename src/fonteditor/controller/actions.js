@@ -166,10 +166,21 @@ define(
             'export': function (e) {
                 if (program.ttfManager.get()) { // 폰트를 얻어오고 
                     var target = $(e.target);
+                    var ttfObject = {}; 
+                    var isReduceGlyf = target.attr('data-reduceGlyf') === 'true'
+                    if (isReduceGlyf) {
+                        ttfObject = program.ttfManager.clone({ reduceGlyf: $("#subsetting-text").val() }).get();
+                    } else {
+                        ttfObject = program.ttfManager.get();
+                    }
+
+                    var projectName = program.projectViewer.current.find("dt").html();
 
                     // exporter 를 사용해서 내보낸다.font 를 
-                    program.exporter.export(program.ttfManager.get(), {
+                    program.exporter.export(ttfObject, {
                         type: target.attr('data-type'),
+                        isReduceGlyf: isReduceGlyf,
+                        fileName : projectName, 
                         error: function (ev) {
                             program.fire('font-error', ev);
                         }
