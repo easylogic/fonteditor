@@ -221,8 +221,25 @@ define(
                 if (this.clicked) {
                     // 모드 변경 (scale 은 크기변경 모드, rotate 는 회전 모드 )
                     var mode = this.currentGroup.mode;
-                    this.currentGroup.setMode(mode === 'scale' ? 'rotate' : 'scale');
+                    var newMode = mode === 'scale' ? 'rotate' : 'scale';
+
+                    if (e.isTouch) {
+                        if (mode === 'scale') {
+                            newMode = 'rotate';
+                        } else if (mode === 'rotate') {
+                            newMode = 'point'
+                        } else if (mode === 'point') {
+                            newMode = 'scale';
+                        }
+
+                    }
+
+                    this.currentGroup.setMode(newMode);
                     this.currentGroup.refresh();
+
+                    if (newMode === 'point') {
+                        this.setMode(newMode, this.currentGroup.shapes[0]);
+                    }
                 }
                 this.clicked = true;
             },

@@ -47,21 +47,16 @@ define(
             }
         }
 
+        function setCamera(render, e) {
+            render.camera.x = e.x;
+            render.camera.y = e.y;
+            render.camera.event = e;
+        }
 
-        /**
-         * 初始化渲染器
-         */
-        function initRender() {
-            var me = this;
-            var render = this.render;
+        function initCaptureEvent (capture, render) {
+            var me = this; 
 
-            var setCamera = function (e) {
-                render.camera.x = e.x;
-                render.camera.y = e.y;
-                render.camera.event = e;
-            };
-
-            render.capture.on('down', function (e) {
+            capture.on('down', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
@@ -69,21 +64,21 @@ define(
 
                 render.camera.startX = e.x;
                 render.camera.startY = e.y;
-                setCamera(e);
+                setCamera(render, e);
 
                 me.mode.down && me.mode.down.call(me, e);
             });
 
-            render.capture.on('dragstart', function (e) {
+            capture.on('dragstart', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
                 }
-                setCamera(e);
+                setCamera(render, e);
                 me.mode.dragstart && me.mode.dragstart.call(me, e);
             });
 
-            render.capture.on('drag', function (e) {
+            capture.on('drag', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
@@ -91,22 +86,22 @@ define(
 
                 render.camera.mx = e.x - render.camera.x;
                 render.camera.my = e.y - render.camera.y;
-                setCamera(e);
+                setCamera(render, e);
 
                 me.mode.drag && me.mode.drag.call(me, e);
             });
 
-            render.capture.on('dragend', function (e) {
+            capture.on('dragend', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
                 }
-                setCamera(e);
+                setCamera(render, e);
 
                 me.mode.dragend && me.mode.dragend.call(me, e);
             });
 
-            render.capture.on('move', function (e) {
+            capture.on('move', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
@@ -117,7 +112,7 @@ define(
                 me.mode.move && me.mode.move.call(me, e);
             });
 
-            render.capture.on('up', function (e) {
+            capture.on('up', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
@@ -126,7 +121,7 @@ define(
                 me.mode.up && me.mode.up.call(me, e);
             });
 
-            render.capture.on('click', function (e) {
+            capture.on('click', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
@@ -136,7 +131,7 @@ define(
             });
 
 
-            render.capture.on('dblclick', function (e) {
+            capture.on('dblclick', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
@@ -152,7 +147,7 @@ define(
                 }
             });
 
-            render.capture.on('rightdown', function (e) {
+            capture.on('rightdown', function (e) {
 
                 if (me.mode.rightdown) {
                     me.mode.rightdown.call(me, e);
@@ -162,8 +157,11 @@ define(
                     me.contextMenu.show(e, commandList.editor);
                 }
             });
+        }
 
-            render.keyCapture.on('keyup', function (e) {
+        function initKeyboardEvent (capture, render) {
+            var me = this; 
+            capture.on('keyup', function (e) {
                 if (me.contextMenu.visible()) {
                     return;
                 }
@@ -179,7 +177,7 @@ define(
                 }
             });
 
-            render.keyCapture.on('keydown', function (e) {
+            capture.on('keydown', function (e) {
 
                 if (me.contextMenu.visible()) {
                     return;
@@ -233,13 +231,37 @@ define(
             });
 
 
-            render.keyCapture.on('keydown', function (e) {
+            capture.on('keydown', function (e) {
                 if (me.contextMenu.visible()) {
                     return;
                 }
 
                 me.mode.keydown && me.mode.keydown.call(me, e);
             });
+
+        }
+
+        /**
+         * 初始化渲染器
+         */
+        function initRender() {
+            var me = this;
+            var render = this.render;
+
+            var setCamera = function (e) {
+                render.camera.x = e.x;
+                render.camera.y = e.y;
+                render.camera.event = e;
+            };
+
+            // init mouse event 
+            initCaptureEvent.call(this, render.capture, render);
+
+            // init touch event 
+            initCaptureEvent.call(this, render.touchCapture, render);
+
+            // init keyboard event 
+            initKeyboardEvent.call(this, render.keyCapture, render);
 
 
             render.on('resize', function (e) {

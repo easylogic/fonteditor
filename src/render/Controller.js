@@ -9,6 +9,57 @@ define(
 
         var selectShape = require('./util/selectShape');
 
+
+        function down (e, render) {
+            var result = render.getLayer('cover').getShapeIn(e);
+            
+            if (result) {
+                render.selectedShape = result[0];
+            }
+            else {
+                result = render.getLayer('font').getShapeIn(e);
+                if (result.length > 1) {
+                    render.selectedShape = selectShape(result, e);
+                }
+                else {
+                    render.selectedShape = result[0];
+                }
+            }
+
+
+            render.camera.x = e.x;
+            render.camera.y = e.y;
+            
+        }
+
+        function drag (e, render) {
+            var shape = render.selectedShape;
+            if (shape) {
+                render.getLayer(shape.layerId)
+                    .move(e.x - render.camera.x, e.y - render.camera.y, shape)
+                    .refresh();
+            }
+            else {
+                render.move(e.x - render.camera.x, e.y - render.camera.y)
+                    .refresh();
+            }
+            render.camera.x = e.x;
+            render.camera.y = e.y;
+        }
+
+        function dragend(e, render) {
+            var shape = render.selectedShape;
+            if (shape) {
+                render.getLayer(shape.layerId)
+                    .move(e.x - render.camera.x, e.y - render.camera.y, shape)
+                    .refresh();
+                render.selectedShape = null;
+            }
+            else {
+                render.painter.refresh();
+            }
+        }
+
         /**
          * 初始化
          */
@@ -16,55 +67,27 @@ define(
 
             var render = this.render;
 
+            [
+                // mouse 
+                render.capture, 
+                // touch 
+                render.touchCapture 
+                
+            ].forEach(function (capture) {
 
-            render.capture.on('down', function (e) {
-                var result = render.getLayer('cover').getShapeIn(e);
+                capture.on('down', function (e) {
+                    down(e, render);
+                });
 
-                if (result) {
-                    render.selectedShape = result[0];
-                }
-                else {
-                    result = render.getLayer('font').getShapeIn(e);
-                    if (result.length > 1) {
-                        render.selectedShape = selectShape(result, e);
-                    }
-                    else {
-                        render.selectedShape = result[0];
-                    }
-                }
+                capture.on('drag', function (e) {
+                    drag(e, render);
+                });
 
+                capture.on('dragend', function (e) {
+                    dragend(e, render);
+                });
+            })
 
-                render.camera.x = e.x;
-                render.camera.y = e.y;
-            });
-
-            render.capture.on('drag', function (e) {
-                var shape = render.selectedShape;
-                if (shape) {
-                    render.getLayer(shape.layerId)
-                        .move(e.x - render.camera.x, e.y - render.camera.y, shape)
-                        .refresh();
-                }
-                else {
-                    render.move(e.x - render.camera.x, e.y - render.camera.y)
-                        .refresh();
-                }
-                render.camera.x = e.x;
-                render.camera.y = e.y;
-            });
-
-            render.capture.on('dragend', function (e) {
-                var shape = render.selectedShape;
-                if (shape) {
-                    render.getLayer(shape.layerId)
-                        .move(e.x - render.camera.x, e.y - render.camera.y, shape)
-                        .refresh();
-                    render.selectedShape = null;
-                }
-                else {
-                    render.painter.refresh();
-                }
-            });
         }
 
 

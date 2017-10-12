@@ -32,14 +32,16 @@ define(
 
 
         function getEvent(e) {
+            var offset = $(e.target).offset(); 
             return {
-                x: getX(e),
-                y: getY(e),
+                x: getX(e) - offset.left,
+                y: getY(e) - offset.top,
                 which: 1,   // [workround] touch event is equal to left mouse down event
                 ctrlKey: e.ctrlKey || e.metaKey,
                 metaKey: e.metaKey,
                 altKey: e.altKey,
                 shiftKey: e.shiftKey,
+                isTouch: true, 
                 originEvent: e
             };
         }
@@ -65,7 +67,6 @@ define(
             prevent(e);
 
             var event = getEvent(e);
-            console.log('touchstart', event);
             this.startX = event.x;
             this.startY = event.y;
             this.startTime = Date.now();
@@ -74,9 +75,6 @@ define(
             // 左键
 
             this.fire('down', event);
-            console.log('down start', event);
-
-
 
             document.addEventListener('touchend', this.handlers.touchend, false);
         }
@@ -111,9 +109,9 @@ define(
             prevent(e);
 
             var event = getEvent(e);
-            console.log('touchmove', event);
+
             this.fire('move', event);
-            console.log('move', event);
+
 
             if (this.isDown && false !== this.events.drag) {
 
@@ -132,8 +130,8 @@ define(
                     }
                 }
 
-                if (this.isDragging) {
-                    this.fire('drag', event);
+                if (this.isDragging) {                    
+                    this.fire('drag', event);             
                 }
             }
         }
@@ -150,7 +148,6 @@ define(
 
             var event = getEvent(e);
             event.time = Date.now() - this.startTime;
-            console.log('touchend', event);
 
             this.fire('up', event);
 
