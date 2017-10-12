@@ -12,6 +12,7 @@ define(
         var mode = {
 
             down: function (e) {
+                console.log('down', e);
                 if (1 === e.which) {
 
                     // 初始化空路径
@@ -30,7 +31,9 @@ define(
             },
 
             drag: function (e) {
+                console.log('drag', e);                
                 if (1 === e.which) {
+                    console.log(e);
                     if (this.curShapes) {
                         var x = e.startX;
                         var y = e.startY;
@@ -62,6 +65,7 @@ define(
 
 
             dragend: function (e) {
+                console.log('dragend', e);                
                 if (1 === e.which) {
 
                     if (this.curShapes) {
@@ -85,6 +89,7 @@ define(
             begin: function (shapes) {
                 this.render.setCursor('crosshair');
                 this.curShapes = shapes;
+                console.log(shapes);
             },
 
 

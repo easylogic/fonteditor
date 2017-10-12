@@ -11,6 +11,7 @@ define(
         var guid = require('./util/guid');
         var Painter = require('./Painter');
         var MouseCapture = require('./capture/Mouse');
+        var TouchCapture = require('./capture/Touch');        
         var KeyboardCapture = require('./capture/Keyboard');
         var ResizeCapture = require('./capture/Resize');
         var observable = require('common/observable');
@@ -31,6 +32,12 @@ define(
                 this.main,
                 this.options.mouse
             );
+
+            // 注册鼠标
+            this.touchCapture = new TouchCapture(
+                this.main,
+                this.options.touch
+            );            
 
             // 注册键盘
             this.keyCapture = new KeyboardCapture(
@@ -246,11 +253,12 @@ define(
 
             this.painter.dispose();
             this.capture.dispose();
+            this.touchCapture.dispose();
             this.keyCapture.dispose();
             this.resizeCapture && this.resizeCapture.dispose();
 
             this.main = this.options = this.camera = null;
-            this.painter = this.capture = this.keyCapture = null;
+            this.painter = this.capture = this.touchCapture = this.keyCapture = null;
         };
 
         // 注册painter中的函数

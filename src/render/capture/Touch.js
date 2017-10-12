@@ -1,6 +1,6 @@
 /**
- * @file 鼠标捕获器
- * @author mengke01(kekee000@gmail.com)
+ * @file Implements Touch Event 
+ * @author easylogic(cyberuls@gmail.com)
  */
 
 define(
@@ -11,36 +11,31 @@ define(
         var observable = require('common/observable');
 
         /**
-         * 获取X坐标
+         * TouchEvent X 좌표 
          *
-         * @param {TouchEvent} e 事件
-         * @return {number} 坐标值
+         * @param {TouchEvent} e 
+         * @return {number} 
          */
-        function getX(e) {
-            return e.offsetX || e.layerX || e.clientX;
+        function getX(e, touchIndex) {
+            return e.changedTouches[touchIndex || 0].pageX;
         }
 
         /**
-         * 获取Y坐标
+         * TouchEvent Y 좌표 
          *
-         * @param {TouchEvent} e 事件
-         * @return {number} 坐标值
+         * @param {TouchEvent} e
+         * @return {number} 
          */
-        function getY(e) {
-            return e.offsetY || e.layerY || e.clientY;
+        function getY(e, touchIndex) {
+            return e.changedTouches[touchIndex || 0].pageY;
         }
 
-        /**
-         * 获取事件参数
-         *
-         * @param {TouchEvent} e 事件
-         * @return {Object} 事件参数
-         */
+
         function getEvent(e) {
             return {
                 x: getX(e),
                 y: getY(e),
-                which: e.which,
+                which: 1,   // [workround] touch event is equal to left mouse down event
                 ctrlKey: e.ctrlKey || e.metaKey,
                 metaKey: e.metaKey,
                 altKey: e.altKey,
@@ -49,11 +44,7 @@ define(
             };
         }
 
-        /**
-         * 阻止事件传递
-         *
-         * @param {TouchEvent} e 事件
-         */
+
         function prevent(e) {
             e.stopPropagation();
             if (e.preventDefault) {
@@ -64,21 +55,17 @@ define(
             }
         }
 
-        /**
-         * 按下处理事件
-         *
-         * @param {Object} e 事件参数
-         */
-        function mousedown(e) {
 
-            if (false === this.events.mousedown) {
+        function touchstart(e) {
+
+            if (false === this.events.touchstart) {
                 return;
             }
 
             prevent(e);
 
             var event = getEvent(e);
-
+            console.log('touchstart', event);
             this.startX = event.x;
             this.startY = event.y;
             this.startTime = Date.now();
@@ -87,12 +74,11 @@ define(
             // 左键
 
             this.fire('down', event);
+            console.log('down start', event);
 
-            if (3 === e.which) {
-                this.fire('rightdown', event);
-            }
 
-            document.addEventListener('mouseup', this.handlers.mouseup, false);
+
+            document.addEventListener('touchend', this.handlers.touchend, false);
         }
 
         /**
@@ -100,11 +86,11 @@ define(
          *
          * @param {Object} e 事件参数
          */
-        function dblclick(e) {
+        function hold(e) {
 
             prevent(e);
 
-            if (false === this.events.dblclick) {
+            if (false === this.events.hold) {
                 return;
             }
 
@@ -116,17 +102,18 @@ define(
          *
          * @param {Object} e 事件参数
          */
-        function mousemove(e) {
+        function touchmove(e) {
 
-            if (false === this.events.mousemove) {
+            if (false === this.events.touchmove) {
                 return;
             }
 
             prevent(e);
 
             var event = getEvent(e);
-
+            console.log('touchmove', event);
             this.fire('move', event);
+            console.log('move', event);
 
             if (this.isDown && false !== this.events.drag) {
 
@@ -151,17 +138,11 @@ define(
             }
         }
 
-
-        /**
-         * 鼠标弹起事件
-         *
-         * @param {Object} e 事件参数
-         */
-        function mouseup(e) {
+        function touchend(e) {
 
 
 
-            if (false === this.events.mouseup) {
+            if (false === this.events.touchend) {
                 return;
             }
 
@@ -169,14 +150,15 @@ define(
 
             var event = getEvent(e);
             event.time = Date.now() - this.startTime;
-
-            // 左键
+            console.log('touchend', event);
 
             this.fire('up', event);
 
+            /*
             if (3 === e.which) {
                 this.fire('rightup', event);
             }
+            */
 
             if (this.isDown && this.isDragging && false !== this.events.drag) {
                 event.deltaX = event.x - this.startX;
@@ -184,94 +166,21 @@ define(
                 this.isDragging = false;
                 this.fire('dragend', event);
             }
-            else if (this.isDown && !this.isDragging && false !== this.events.click) {
+            else if (this.isDown && !this.isDragging && false !== this.events.touchstart) {
                 this.isDragging = false;
                 this.fire('click', event);
             }
 
             this.isDown = false;
 
-            document.removeEventListener('mouseup', this.handlers.mouseup);
-        }
-
-        /**
-         * 滚轮事件
-         *
-         * @param {Object} e 事件参数
-         */
-        function mousewheel(e) {
-
-            if (false === this.events.mousewheel) {
-                return;
-            }
-
-            prevent(e);
-
-            // tracepad触发滚动事件比滚轮触发速度快很多，这里需要截流一下
-            // 15毫秒可以去掉一半的trancepad滚动事件, 但是对滚轮滚动影响很小
-            // http://stackoverflow.com/questions/5527601/normalizing-mousewheel-speed-across-browsers
-            var now = Date.now();
-            if (this.lastWheel && now - this.lastWheel < 15) {
-                return;
-            }
-            this.lastWheel = now;
-
-
-            var delta = 0;
-            if (e.wheelDelta) {
-                delta = e.wheelDelta % 120 === 0 ? e.wheelDelta / 120 : e.wheelDelta / 3;
-            }
-            else if (e.detail) {
-                delta = -e.detail / 3;
-            }
-
-            var event = getEvent(e);
-            event.delta = delta;
-            this.fire('wheel', event);
+            document.removeEventListener('touchend', this.handlers.touchend);
         }
 
 
-        /**
-         * 进入处理事件
-         *
-         * @param {Object} e 事件参数
-         */
-        function mouseover(e) {
 
-            if (false === this.events.mouseover) {
-                return;
-            }
+        
 
-            prevent(e);
 
-            this.fire('over');
-        }
-
-        /**
-         * 离开处理事件
-         *
-         * @param {Object} e 事件参数
-         */
-        function mouseout(e) {
-
-            if (false === this.events.mouseout) {
-                return;
-            }
-
-            prevent(e);
-
-            this.fire('out');
-        }
-
-        /**
-         * 鼠标动作捕获器
-         *
-         * @param {HTMLElement} main 控制元素
-         * @param {Object} options 参数选项
-         * @param {HTMLElement} options.main 监控对象
-         *
-         * @constructor
-         */
         function TouchCapture(main, options) {
 
             this.main = main;
@@ -282,13 +191,10 @@ define(
 			// 터치 관련된 마우스 이벤트를 바인딩하자. 
 			// 다른 라이브러리를 써서 맞춰도 된다. 
             this.handlers = {
-                mousewheel: lang.bind(mousewheel, this),
-                mousemove: lang.bind(mousemove, this),
-                mousedown: lang.bind(mousedown, this),
-                dblclick: lang.bind(dblclick, this),
-                mouseover: lang.bind(mouseover, this),
-                mouseout: lang.bind(mouseout, this),
-                mouseup: lang.bind(mouseup, this)
+                touchmove: lang.bind(touchmove, this),
+                touchstart: lang.bind(touchstart, this),
+                hold: lang.bind(hold, this),
+                touchend: lang.bind(touchend, this)
             };
 
             this.start();
@@ -299,59 +205,38 @@ define(
 
             constructor: TouchCapture,
 
-            /**
-             * 开始监听
-             *
-             * @return {this}
-             */
+
             start: function () {
 
                 if (!this.listening) {
                     this.listening = true;
 
                     var target = this.main;
-                    target.addEventListener('DOMTouchScroll', this.handlers.mousewheel, false);
-                    target.addEventListener('mousewheel', this.handlers.mousewheel, false);
-                    target.addEventListener('mousemove', this.handlers.mousemove, false);
-                    target.addEventListener('mousedown', this.handlers.mousedown, false);
-                    target.addEventListener('dblclick', this.handlers.dblclick, false);
-                    target.addEventListener('mouseover', this.handlers.mouseover, false);
-                    target.addEventListener('mouseout', this.handlers.mouseout, false);
+                    target.addEventListener('touchmove', this.handlers.touchmove, false);
+                    target.addEventListener('touchstart', this.handlers.touchstart, false);
+                    target.addEventListener('hold', this.handlers.hold, false);
+                    target.addEventListener('touchend', this.handlers.touchend, false);
                 }
 
                 return this;
             },
 
-            /**
-             * 停止监听
-             *
-             * @return {this}
-             */
             stop: function () {
 
                 if (this.listening) {
                     this.listening = false;
 
                     var target = this.main;
-                    target.removeEventListener('DOMTouchScroll', this.handlers.mousewheel);
-                    target.removeEventListener('mousewheel', this.handlers.mousewheel);
-                    target.removeEventListener('mousemove', this.handlers.mousemove);
-                    target.removeEventListener('mousedown', this.handlers.mousedown);
-                    target.removeEventListener('click', this.handlers.click);
-                    target.removeEventListener('dblclick', this.handlers.dblclick);
-                    target.removeEventListener('mouseover', this.handlers.mouseover);
-                    target.removeEventListener('mouseout', this.handlers.mouseout);
-                    document.removeEventListener('mouseup', this.handlers.mouseup);
+                    target.removeEventListener('touchmove', this.handlers.touchmove);
+                    target.removeEventListener('touchstart', this.handlers.touchstart);
+                    target.removeEventListener('hold', this.handlers.hold);
+                    document.removeEventListener('touchend', this.handlers.touchend);
                 }
 
                 return this;
             },
 
-            /**
-             * 是否监听中
-             *
-             * @return {boolean} 是否
-             */
+
             isListening: function () {
                 return !!this.listening;
             },

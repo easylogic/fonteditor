@@ -1,20 +1,29 @@
 {
+    "name": "fonteditor",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/fontmoa/fonteditor.git"
+    },
+    "version": "1.0.10",
     "author": "easylogic",
     "bugs": {
-        "url": "https://github.com/easylogic/fonteditor/issues"
+        "url": "https://github.com/fontmoa/fonteditor/issues"
     },
+    "homepage": "http://www.fontmoa/editor/v1/simple.html",
+    "keywords": [
+        "font",
+        "ttf",
+        "woff",
+        "svg",
+        "eot",
+        "fontmoa",
+        "fonteditor"
+    ],
+    "license": "MIT",
     "contributors": [
         {
             "email": "cyberuls@gmail.com",
             "name": "easylogic"
-        },
-        {
-            "email": "kekee000@gmail.com",
-            "name": "kekee000"
-        },
-        {
-            "email": "junmer@foxmail.com",
-            "name": "junmer"
         }
     ],
     "description": "ttf to woff,svg,eot convert, ttf adjust",
@@ -25,22 +34,7 @@
         "build-css": "node build/build-css.js"
     },
     "devDependencies": {
-            "less": "~2.0.0",
-            "q": "^1.2.0"
-    },
-    "homepage": "https://github.com/ecomfe/fonteditor",
-    "keywords": [
-        "font",
-        "ttf",
-        "woff",
-        "svg",
-        "eot"
-    ],
-    "license": "MIT",
-    "name": "fonteditor",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/easylogic/fonteditor.git"
-    },
-    "version": "1.0.9"
+        "less": "~2.0.0",
+        "q": "^1.2.0"
+    }
 }
