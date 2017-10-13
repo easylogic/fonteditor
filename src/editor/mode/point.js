@@ -189,10 +189,14 @@ define(
 				strokeColor: style.strokeColor
 			}
 
+			var startPointStyle = this.options.pointColor.start;
+			var endPointStyle = this.options.pointColor.end;
+			var middlePointStyle = this.options.pointColor.middle;
+
             clonedShape.id = 'cover-' + shape.id;
             clonedShape.selectable = false;
             clonedShape.style = {
-                strokeColor: style.outlineColor
+                strokeColor: middlePointStyle.outlineColor
             };
 			
 			clonedShape.points.forEach(function (p, index) {
@@ -213,20 +217,20 @@ define(
 					style: {
 						fill: true,
 						stroke: true,
-						strokeColor: style.strokeColor,
-						fillColor: p.current ? style.outlineColor : style.fillColor
+						strokeColor: middlePointStyle.strokeColor,
+						fillColor: p.current ? middlePointStyle.outlineColor : middlePointStyle.fillColor
 					}
 				};
 
 				if (index === 0 && !p.current) {
-					cpoint.style.strokeColor = 'blue';
-					cpoint.style.fillColor = 'blue';
-					cpoint.style.strokeWidth = 1;
+					cpoint.style.strokeColor = startPointStyle.strokeColor;
+					cpoint.style.fillColor = startPointStyle.fillColor;
+					cpoint.style.strokeWidth = startPointStyle.stroke;
 				}
 				else if (index === last && !p.current) {
-					cpoint.style.strokeColor = 'red';
-					cpoint.style.fillColor = 'red';
-					cpoint.style.strokeWidth = 1;
+					cpoint.style.strokeColor = endPointStyle.strokeColor;
+					cpoint.style.fillColor = endPointStyle.fillColor;
+					cpoint.style.strokeWidth = endPointStyle.stroke;
 				}
 
 				controls.push(cpoint);

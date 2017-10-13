@@ -87,7 +87,7 @@ define(
             heart: '하트',
             tel: '전화',
             drop: '물방울',
-			import_pic_title: '이미지로 글자 추가'
+			import_pic_title: '이미지 글자 추가'
 
         };
     }

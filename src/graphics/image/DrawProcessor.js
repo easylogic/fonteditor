@@ -67,7 +67,8 @@ define(
          */
         function DrawProcessor(canvas) {
 			this.canvas = canvas;
-		
+	
+			$(this.canvas).css('cursor', 'pointer');
 			
 			this.isErase = false; 
 			this.setRenderType('shadow');
@@ -86,8 +87,8 @@ define(
 				borderRadius: '50%',
 				border: "1px solid rgba(255, 255, 255, 0.3)",
 				backgroundColor: 'transparent',
-				width: this.lineWidth*2,
-				height: this.lineWidth*2,
+				width: this.lineWidth*2-1,
+				height: this.lineWidth*2-1,
 				'pointer-events' : 'none'
 			});
 

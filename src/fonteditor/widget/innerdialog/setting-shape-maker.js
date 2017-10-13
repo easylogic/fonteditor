@@ -83,9 +83,12 @@ define(
 			initEvent : function () {
 				// 이벤트 정의할게 있으면 여기다가 하자. 
 
-				this.$content.on('click, touchend', '[data-action="addsupportshapes"]', lang.bind(function (e) { 
+				var callback = lang.bind(function (e) { 
 					this.addShape($(e.target));
-				}, this));
+				}, this);
+
+				this.$content.on('click', '[data-action="addsupportshapes"]', callback);
+				this.$content.on('touchend', '[data-action="addsupportshapes"]', callback);
 
 			},
 

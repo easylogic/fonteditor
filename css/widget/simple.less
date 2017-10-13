@@ -3,18 +3,8 @@
 @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 
 body.simple-mode {
-	font-family: 'Lato', sans-serif;
-	font-weight: 300;
-	font-size: 13px;
-	color: #000;
 	background-color: rgba(0, 0, 0, 0.1);
-	margin: 0 auto;
-	max-width:840px;
-	box-shadow: 0px 0px 20px 1px #888888;	
-}
-
-.simple-mode {
-
+	
 	&.modal-open {
 		overflow:auto;
 	}
@@ -147,7 +137,96 @@ body.simple-mode {
 		outline:none;
 	}
 
-	> header  {
+
+	.simple-hide {
+		display:none;
+	}
+
+		
+
+	.import-pic-dialog {
+		position:absolute !important;
+		background-color:transparent !important;
+		width: 760px !important;
+		height: 618px !important;
+
+		.modal-content {
+
+			border-color: transparent;
+			background-color: transparent;
+			box-shadow:none !important;
+		}
+
+		.modal-header {
+			display:none;
+		}
+
+		.modal-dialog {
+			width: 100%;
+			margin:0px !important;
+		}
+
+		.modal-body {
+			padding:0px !important;
+			background-color:transparent !important;
+
+			.btn-right {
+				width: 120px;
+			}
+
+			.btn-flat, .btn-default {
+				border:1px solid #ececec !important;
+			}
+
+			.form-group {
+				margin-bottom:5px;
+				margin-top:5px;
+				margin-left:5px;
+				margin-right:5px;
+				box-sizing:border-box;
+			}
+
+		}
+
+		.modal-footer {
+			background-color: transparent; 
+		}
+
+		.preview-panel {
+			overflow:hidden;
+			background-color:rgba(255, 255, 255, 0.2);
+			margin-bottom:0px;
+
+			.canvas-left {
+				height:100%;
+				overflow:hidden;
+			}
+		}
+
+		.erase-label {
+			display:inline-block !important;
+			vertical-align: middle;
+			margin-bottom:0px;
+		}
+	}
+}
+
+.page {
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	font-size: 13px;
+	color: #000;
+	background-color: rgba(0, 0, 0, 0.1);
+	margin: 0 auto;
+	max-width:840px;
+	box-shadow: 0px 0px 20px 1px #888888;	
+
+	.container {
+		max-width:100% !important;
+	}
+
+
+	#header  {
 		background-color: white; 
 
 		a:hover {	
@@ -310,40 +389,11 @@ body.simple-mode {
 
 	.editor-area {
 		padding:20px;
-		max-width: 1200px;
 		position: relative;
-		display:flex;
 		box-sizing:border-box;
 		//margin-top: 100px;
 		//transition: all 0.3s ease-in;
 		background-color: white; 
-
-		&.stack-style {
-			display:block;
-			height: auto; 
-
-			.notebook-left,
-			.notebook-right {
-				flex:none;
-			}
-
-			.notebook-left {
-				height: 260px;
-				width: 100%;
-			}
-		}
-
-		&.has-only-editor {
-			.notebook-left {
-				display:none;
-			}
-			.notebook-options {
-				display: none !important;
-			}
-
-			max-width: 600px !important;
-		}
-
 
 		&.has-options {
 			.notebook-options {
@@ -359,14 +409,14 @@ body.simple-mode {
 
 		
 		.glyf-selector-tabs {
+			display:block;
 			position:relative;
 			width:100%;
 			padding-left:0px;
-			padding-right:10px;
+			padding-right:0px;
 
 			.tab-tools {
 				display: inline-block;
-				height: 100%;
 				margin-right:2px;
 				float: right;
 			}
@@ -398,18 +448,15 @@ body.simple-mode {
 		}
 
 		.notebook {
-			flex:3;
-			
 			display:block;
 			position:relative;
-			height: 640px;			
 			border: 1px solid #ececec;
-		
 		}
 
 		.notebook-left {
 			background-color: rgba(255, 255, 255, 1);
 			overflow:hidden;
+			height: 260px;
 			//margin-right:1.5px;
 
 			&.classic-mode {
@@ -740,6 +787,7 @@ body.simple-mode {
 		.notebook-right {
 			background-color:#121C42; 
 			overflow:hidden;
+			height: 640px;
 			/*
 			background-image: url(../img/narrative-794978_1920.jpg);
 			background-repeat: no-repeat;
@@ -761,9 +809,9 @@ body.simple-mode {
 
 		.notebook-options {
 			display:none;
-			flex: 1;
 			background-color:rgba(0, 0, 0, 0.9); 
-			width: 200px !important;
+			width: 200px;
+			height: 640px;
 			border-left:1px solid rgba(255, 255, 255, 0.1);
 			box-sizing: border-box;
 
@@ -1028,97 +1076,4 @@ body.simple-mode {
 		
 	}
 
-
-	.simple-hide {
-		display:none;
-	}
-
-	.import-pic-dialog {
-		position:absolute !important;
-		//background-color:transparent;
-		width: 714px !important;
-		height: 618px !important;
-
-		.modal-content {
-
-			border-color: transparent;
-			background-color: transparent;
-			box-shadow:none !important;
-		}
-
-		.modal-header {
-			display:none;
-		}
-
-		.modal-dialog {
-			width: 100%;
-			margin:0px !important;
-		}
-
-		.modal-body {
-			padding:0px !important;
-			background-color:transparent;
-
-			.btn-right {
-				width: 120px;
-			}
-
-			.btn-flat, .btn-default {
-				border:1px solid #ececec !important;
-			}
-
-		}
-
-		.modal-footer {
-			background-color: transparent; 
-		}
-
-		.preview-panel {
-			overflow:hidden;
-			background-color:rgba(255, 255, 255, 0.3);
-			margin-bottom:0px;
-
-			.canvas-left {
-				height:100%;
-				overflow:hidden;
-			}
-		}
-
-		.erase-label {
-			display:inline-block !important;
-			vertical-align: middle;
-    		margin-top: 10px;
-			margin-bottom:0px;
-		}
-	}
-
-	&.flat-style {
-
-		.editor-area > * {
-			position:relative;
-			top:auto;
-			left:auto;
-			right:auto;
-			bottom:auto;
-			margin:0 !important;
-
-
-		}
-
-		.editor-area {
-			margin-top: 10px !important; 
-
-			> .text-view {
-				height: 100px;
-			}
-
-			> .font-view {
-				height: 100px;
-			}
-
-			.editor.editing {
-				margin:40px auto !important;
-			}
-		}
-	}
 }

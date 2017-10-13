@@ -21,7 +21,7 @@ define(
                     enableShape: true, // 吸附到对象
                     gridDelta: 5, // 网格delta
                     delta: 5, // 对象delta
-                    sorptionColor: '#ff0000',	// 그리드 붙이기 할 때 가이드 선 색깔 
+                    sorptionColor: 'rgba(255, 0, 0, 0.5)',	// 그리드 붙이기 할 때 가이드 선 색깔 
                     sorptionLineWidth : 2, 
                     sorptionFont : "normal 12px arial" 
                 },
@@ -36,13 +36,35 @@ define(
                     }
                 },
 
+                // 객체 선택시 표시되는 포인트 컬러를 정의한다. 
+                pointColor : {
+                    // 시작점 
+                    start: {
+                        fillColor: 'rgba(0, 0, 255, 1)',
+                        strokeColor: 'blue',
+                        stroke : 1
+                    },
+                    // 중간점 
+                    middle : {
+                        outlineColor: '#115e16',                        
+                        fillColor: 'rgba(255, 255, 255, 0.4)',
+                        strokeColor: '#4a90e2',
+                        stroke : 1
+                    },
+                    // 끝점 
+                    end : {
+                        fillColor: 'rgba(255, 0, 0, 0.5)',
+                        strokeColor: 'red',
+                        stroke : 1
+                    }
+                },
+
                 // 객체 선택시 나타나는 컬러 설정 
                 coverLayer: {
 					thin: true,
 					font : "normal 12px arial",
                     lineColor: '#4a90e2',
                     outlineColor: '#115e16',
-					thin : true,
                     strokeColor: '#4a90e2',
                     fillColor: 'rgba(255, 255, 255, 0.4)'		// 점 포인트 색상 
                 },
@@ -109,7 +131,7 @@ define(
 				painter : {
 					simple : true 
 				},
-                defaultRatio: 1.25, // 기본 크기 조정		1 
+                defaultRatio: 1, // 기본 크기 조정		1 
                 minScale: 0.1, // 최소 크기(줌)
                 maxScale: 200, // 최대 크기(줌)
                 enableScale: true, // 확장 가능 여부

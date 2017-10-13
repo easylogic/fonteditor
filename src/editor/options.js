@@ -32,6 +32,28 @@ define(
                     }
                 },
 
+                // 객체 선택시 표시되는 포인트 컬러를 정의한다. 
+                pointColor : {
+                    // 시작점 
+                    start: {
+                        fillColor: 'rgba(0, 0, 255, 0.5)',
+                        strokeColor: 'blue',
+                        stroke : 1
+                    },
+                    // 중간점 
+                    middle : {
+                        outlineColor: '#115e16',                        
+                        fillColor: 'rgba(255, 255, 255, 0.4)',
+                        strokeColor: '#4a90e2',
+                        stroke : 1
+                    },
+                    // 끝점 
+                    end : {
+                        fillColor: 'rgba(255, 0, 0, 0.5)',
+                        strokeColor: 'red',
+                        stroke : 1
+                    }
+                },
                 // 객체 선택시 나타나는 컬러 설정 
                 coverLayer: {
 					thin: true,

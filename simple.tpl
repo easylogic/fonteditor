@@ -5,20 +5,20 @@
     <title>FontMoa - FontEditor</title>
 
     <meta name="generator" content="Fontmoa v1.0.9">
-    <meta name="description" content="한글 폰트를 쉽게 다루기 위해서 만든 폰트 에디터, FontEditor, 폰트모아, Fontmoa">
+    <meta name="description" content="한글 폰트를 쉽게 다루기 위해서 만든 폰트 에디터, FontEditor, 폰트모아, Fontmoa, Simple Font Editor for TTF">
     
     <!-- Meta for Facebook -->
     <meta property="og:title" content="Fontmoa - 한글 폰트 에디터 , Font Editor, 폰트모아 ">
     <meta property="og:type" content="website">
     <!--<meta property="og:image" content="https://example.com/image-to-be-shown-in-facebook.jpg">-->
-    <meta property="og:description" content="한글 폰트를 좀 더 다루기 쉽게 하기 위해서 만들어진 폰트 에디터, FontEditor">
+    <meta property="og:description" content="한글 폰트를 좀 더 다루기 쉽게 하기 위해서 만들어진 폰트 에디터, FontEditor, Simple Font Editor for TTF">
     
     <!-- Meta for Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@fontmoa">
     <meta name="twitter:creator" content="@easylogic">
     <meta name="twitter:title" content="Fontmoa - 한글 폰트 에디터 , Font Editor, 폰트모아">
-    <meta name="twitter:description" content="한글 폰트를 좀 더 다루기 쉽게 하기 위해서 만들어진 폰트 에디터, FontEditor">
+    <meta name="twitter:description" content="한글 폰트를 좀 더 다루기 쉽게 하기 위해서 만들어진 폰트 에디터, FontEditor, Simple Font Editor for TTF">
     <!--<meta name="twitter:image" content="https://example.com/image-to-be-shown-in-twitter.jpg"> -->
  	
 	<!-- Global Site Tag (gtag.js) - Google Analytics -->
@@ -31,245 +31,242 @@
 	</style>
 </head>
 <body class='simple-mode only-editor show-sidebar show-main show-editor'>
-	<header id="header">      
-        <div class="container " style="margin:0 auto; max-width:800px">
-            <div class="row">
-                <div class="col-sm-12 overflow">
-                   <div class="social-icons pull-right">
-                        <ul class="nav nav-pills">
-                            <li><a href="https://www.facebook.com/fontmoa" target="_facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="https://www.twitter.com/fontmoa" target="_twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://www.github.com/fontmoa" target="_github"><i class="fa fa-github"></i></a></li>
-                        </ul>
-                    </div> 
-                </div>
-             </div>
-        </div>
-        <div class="navbar" role="banner">
-            <div class="container stack-style" style="margin:0 auto; max-width:800px">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
 
-                    <a class="navbar-brand" href="/">
-                        <h1 style='vertical-align:middle' title="If the font falls from the cloud"><img src="./css/img/icon.png" alt="logo" width="40px" align="absmiddle">ontMoa </h1>
-                    </a>
-                    
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li ><a href="/">Home</a></li>
-						<li ><a href="/fontmoa/">Font Manager</a></li>
-						<li class='active'><a href="/editor/v1/simple.html">Font Editor</a></li>						
-						<li ><a href="/font/">Web Font</a></li>
-						<li ><a href="/icon/">Icon Font</a></li>
-                    </ul>
-                </div>
+	<div class="page">
 
-            </div>
-        </div>
-    </header>
-
-
-    <section class="sidebar">
-		<!--<div class="open-btn"><i class='ico i-gear'></i></div>-->
-        <div class="project">
-            <div class="project-title">
-				<div class="project-btns action-groups">
-					<button data-action="new" type="button" class="btn btn-flat" title="${lang.new_font_title}"><i class="ico ico-left i-new"></i> ${lang.new_font_title}</button>
-					<button data-action="open" type="button" class="btn btn-flat" title="${lang.open_font_title}"><i class="ico ico-left i-open"></i> ${lang.open_font_title_2}</button>
-				</div>
-				<div class="project-btns action-groups" style="float:right">
-					<button data-action="save" type="button" class="btn btn-flat" title="${lang.save_proj}"><i class="ico ico-left i-save"></i> ${lang.save_proj}</button> | 
-					<button data-disabled="1" data-action="setting-name" class="btn btn-flat" title="${lang.fontinfo}" >${lang.fontinfo}</button>
-					
-					<!--
-					<div class="btn-group action-groups">
-						<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown"title="${lang.tool}">
-							<i class="ico i-gear" ></i> ${lang.tool}
-							<span class="drop ico i-down"></span>
-						</button>
-						<ul class="dropdown-menu dropdown-menu-right" role="menu">
-							<li><a data-disabled="1" data-action="setting-name"  >${lang.fontinfo}</a></li>
-							<li><a data-disabled="1" data-action="setting-metrics">${lang.metrics}</a></li>
-						</ul>
-					</div> -->
+		<header id="header">      
+			<div class="container ">
+				<div class="row">
+					<div class="col-sm-12 overflow">
+					<div class="social-icons pull-right">
+							<ul class="nav nav-pills">
+								<li><a href="https://www.facebook.com/fontmoa" target="_facebook"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="https://www.twitter.com/fontmoa" target="_twitter"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="https://www.github.com/fontmoa" target="_github"><i class="fa fa-github"></i></a></li>
+							</ul>
+						</div> 
+					</div>
 				</div>
 			</div>
-            <div id="project-list" class="project-list"></div>
-        </div>
-		<div class="glyf-list-manager">
-			<div class='glyf-list-title'>
-					${lang.glyf} <span class='glyf-total-count'></span>
+			<div class="navbar" role="banner">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
 
-					  <div class="btn-group action-groups">
-						<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown" title="${lang.tool}">
-							<i class="ico i-gear" ></i> ${lang.tool}
-							<span class="drop ico i-down"></span>
-						</button>
-						<ul class="dropdown-menu dropdown-menu-right" role="menu">
-							<!--<li><a data-disabled="1" data-action="setting-editor">${lang.setting}</a></li>
-							<li class="divider"></li>-->
-							<li><a data-disabled="1" data-action="find-glyf">${lang.find_glyf}</a></li>
-							<!--<li class="divider"></li>-->
-							<!--<li><a data-disabled="1" data-action="setting-glyf-name">${lang.gen_glyph_name}</a></li>-->
-							<!--<li><a data-disabled="1" data-action="setting-glyf-clearname">${lang.clear_glyph_name}</a></li>-->
-							<!--<li><a data-disabled="1" data-action="setting-optimize">${lang.optimize_glyph}</a></li>-->
-							<li><a data-disabled="1" data-action="setting-sort">${lang.sort_glyf}</a></li>
-							<!--<li><a data-disabled="1" data-action="setting-compound2simple">${lang.compound2simple}</a></li>-->
-							<li class="divider"></li>
-							<li><a data-disabled="1" data-action="setting-glyf-generate-template">1. ${lang.generate_glyf_name_template}</a></li> 
-							<li><a data-disabled="1" data-action="setting-make-korean-glyf">2. ${lang.make_korean_glyf}</a></li> 
-						</ul>
-					</div>
-					<!--
-					 <div class="btn-group action-groups">
-						<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown" title="${lang.import}">
-							<i class="ico i-open" ></i> ${lang.import}
-							<span class="drop ico i-down"></span>
-						</button>
-						<ul class="dropdown-menu dropdown-menu-right" role="menu">
-							<li><a data-disabled="1" data-action="import"  title="${lang.import_svg_title}">${lang.import} - ${lang.import_svg}</a></li>
-							<li><a data-disabled="1" data-action="import-pic"  title="${lang.import_pic_title}">${lang.import} - ${lang.import_pic}</a></li>
-							<li><a data-disabled="1" data-action="import"  title="${lang.import_font_title}">${lang.import} - ${lang.import_font}</a></li>
-							<li><a data-disabled="1" data-action="add-online">${lang.onlinefont}</a></li>
-							<li><a data-disabled="1" data-action="add-url">${lang.fonturl}</a></li>
-						</ul>
-					  </div> -->
-					  <div class="btn-group action-groups">
-						<button data-action="add-new" type="button" class="btn btn-flat btn-new" title="${lang.newglyph}"><i class="ico ico-left i-add"></i> ${lang.newglyph}</button>
-					    <button data-disabled="1" data-action="import" class="btn btn-flat" title="${lang.import}"><i class="ico ico-left i-add"></i> ${lang.import}(svg,font)</button>
+						<a class="navbar-brand" href="/">
+							<h1 style='vertical-align:middle' title="If the font falls from the cloud"><img src="./css/img/icon.png" alt="logo" width="40px" align="absmiddle">ontMoa </h1>
+						</a>
 						
-					  </div>
-			        <ul id="glyf-list-commandmenu" class="command-groups"></ul>
-			</div>
-			<div id="glyf-list-view">
-				<div id="glyf-list-pager" class="pager"></div>
-				<div id="glyf-list" class="glyf-list"></div>
-			</div>
-        </div>
-		
-    </section>
-
-    <section class="main editing">
-
-    </section>
-
-
-	<div class="editor-area stack-style">
-
-		<div class="glyf-selector-tabs">
-			<!--<div class="tab-title"><img src="./css/img/icon.png" width="20px" align="absmiddle" /><a href="/">ontmoa</a></div> -->
-			<div class="tab-item  selected" data-value="project">${lang.tabs_project}</div>
-			<div class="tab-item" data-value="classic">${lang.tabs_glyf}</div>
-			<div class="tab-item" data-value="simple">${lang.tabs_simple}</div>
-			<div class="tab-item" data-value="subsetting">${lang.tabs_subsetting}</div>			
-			<div class="tab-tools">
-			    <section class="toolbar action-groups" role="tools">
-					${lang.download} 
-
-					<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
-					<!--<a class='btn btn-flat' data-action="export" data-type="otf" title="${lang.export_otf}"><i class="ico i-ttf"></i></a> -->
-					<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
-					<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
-					<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
-					<a data-disabled="1" data-action="setting-editor" class='btn btn-flat'><i class="ico i-gear" ></i> ${lang.setting}</a>
-
-					| 	
-					<div class="btn-group action-groups">
-						<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">
-							<i class="ico i-link" ></i> ${lang.language}
-							<span class="drop ico i-down"></span>
-						</button>
-						<ul class="dropdown-menu dropdown-menu-right" role="menu">
-							<li><a href="simple.html" title="${lang.korean}">${lang.korean}</a></li>
-							<li><a href="simple-en.html" title="${lang.english}">${lang.english}</a></li>
-							<li><a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a></li>
-							<li class='divider'></li>
-							<li><a href='${lang.advanced_mode_link}'>Advanced  mode</a></li>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li ><a href="/">Home</a></li>
+							<li ><a href="/fontmoa/">Font Manager</a></li>
+							<li class='active'><a href="/editor/v1/simple.html">Font Editor</a></li>						
+							<li ><a href="/font/">Web Font</a></li>
+							<li ><a href="/icon/">Icon Font</a></li>
 						</ul>
 					</div>
-					<a class="manual-link" href="https://fontmoa.gitbooks.io/fontmoa-fonteditor/" target="_manual"><i class="ico i-help"></i></a>
-				</section>
-			</div>
-		</div>
 
-		<div class="notebook notebook-left project-mode">
-
-			<div class="simple-glyf-selector">
-				<div class="text-view" >
-					<div class="text-input" contenteditable="true" tabindex="-1" placeholder="${lang.write_a_text}"></div>
 				</div>
-				<div class="font-view-description  description">
-					<label>${lang.font_size}</label> <span style="display:inline-block;width:200px;vertical-align:middle;"><input type="range" min="5" max="100" id="fontSize" style="width:100px;display:inline-block;vertical-align:middle;"/> <input type="number" min="5" max="100"  id="fontSizeInput"  style="width:60px;text-align:center;display:inline-block;vertical-align:middle;height:24px;"/> px</span>
-					<label><input type="checkbox" checked id="guidChar"/> ${lang.view_guide_chars}</label>
-					&nbsp;
-					<button type="button" class="btn btn-flat delete-glyf pull-right">${lang.delete_glyf}</button>
-				</div>
-				<div class="font-view"></div>
 			</div>
-			<div class="classic-glyf-selector"> </div>
-			<div class="project-glyf-selector"> </div>
-			<div class="subsetting-glyf-selector">
-				<div class="subsetting-tools">
-					<div class="subsetting-download  action-groups">
-						${lang.subsetting_download} 
+		</header>
 
-						<a class='btn btn-flat' data-action="export" data-type="ttf" data-reduceGlyf="true" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
-						<a class='btn btn-flat' data-action="export" data-type="woff" data-reduceGlyf="true" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
-						<a class='btn btn-flat' data-action="export" data-type="zip" data-reduceGlyf="true" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
+
+		<section class="sidebar">
+			<div class="project">
+				<div class="project-title">
+					<div class="project-btns action-groups">
+						<button data-action="new" type="button" class="btn btn-flat" title="${lang.new_font_title}"><i class="ico ico-left i-new"></i> ${lang.new_font_title}</button>
+						<button data-action="open" type="button" class="btn btn-flat" title="${lang.open_font_title}"><i class="ico ico-left i-open"></i> ${lang.open_font_title_2}</button>
+					</div>
+					<div class="project-btns action-groups" style="float:right">
+						<button data-action="save" type="button" class="btn btn-flat" title="${lang.save_proj}"><i class="ico ico-left i-save"></i> ${lang.save_proj}</button> | 
+						<button data-disabled="1" data-action="setting-name" class="btn btn-flat" title="${lang.fontinfo}" >${lang.fontinfo}</button>
+						
+						<div class="btn-group action-groups">
+							<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown"title="${lang.tool}">
+								<i class="ico i-gear" ></i> ${lang.tool}
+								<span class="drop ico i-down"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li><a data-disabled="1" data-action="setting-name"  >${lang.fontinfo}</a></li>
+								<li><a data-disabled="1" data-action="setting-metrics">${lang.metrics}</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="project-list" class="project-list"></div>
+			</div>
+			<div class="glyf-list-manager">
+				<div class='glyf-list-title'>
+						${lang.glyf} <span class='glyf-total-count'></span>
+
+						<div class="btn-group action-groups">
+							<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown" title="${lang.tool}">
+								<i class="ico i-gear" ></i> ${lang.tool}
+								<span class="drop ico i-down"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<!--<li><a data-disabled="1" data-action="setting-editor">${lang.setting}</a></li>
+								<li class="divider"></li>-->
+								<li><a data-disabled="1" data-action="find-glyf">${lang.find_glyf}</a></li>
+								<!--<li class="divider"></li>-->
+								<!--<li><a data-disabled="1" data-action="setting-glyf-name">${lang.gen_glyph_name}</a></li>-->
+								<!--<li><a data-disabled="1" data-action="setting-glyf-clearname">${lang.clear_glyph_name}</a></li>-->
+								<!--<li><a data-disabled="1" data-action="setting-optimize">${lang.optimize_glyph}</a></li>-->
+								<li><a data-disabled="1" data-action="setting-sort">${lang.sort_glyf}</a></li>
+								<!--<li><a data-disabled="1" data-action="setting-compound2simple">${lang.compound2simple}</a></li>-->
+								<li class="divider"></li>
+								<li><a data-disabled="1" data-action="setting-glyf-generate-template">1. ${lang.generate_glyf_name_template}</a></li> 
+								<li><a data-disabled="1" data-action="setting-make-korean-glyf">2. ${lang.make_korean_glyf}</a></li> 
+							</ul>
+						</div>
+						<!--
+						<div class="btn-group action-groups">
+							<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown" title="${lang.import}">
+								<i class="ico i-open" ></i> ${lang.import}
+								<span class="drop ico i-down"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li><a data-disabled="1" data-action="import"  title="${lang.import_svg_title}">${lang.import} - ${lang.import_svg}</a></li>
+								<li><a data-disabled="1" data-action="import-pic"  title="${lang.import_pic_title}">${lang.import} - ${lang.import_pic}</a></li>
+								<li><a data-disabled="1" data-action="import"  title="${lang.import_font_title}">${lang.import} - ${lang.import_font}</a></li>
+								<li><a data-disabled="1" data-action="add-online">${lang.onlinefont}</a></li>
+								<li><a data-disabled="1" data-action="add-url">${lang.fonturl}</a></li>
+							</ul>
+						</div> -->
+						<div class="btn-group action-groups">
+							<button data-action="add-new" type="button" class="btn btn-flat btn-new" title="${lang.newglyph}"><i class="ico ico-left i-add"></i> ${lang.newglyph}</button>
+							<button data-disabled="1" data-action="import" class="btn btn-flat" title="${lang.import}"><i class="ico ico-left i-add"></i> ${lang.import}(svg,font)</button>
+							
+						</div>
+						<ul id="glyf-list-commandmenu" class="command-groups"></ul>
+				</div>
+				<div id="glyf-list-view">
+					<div id="glyf-list-pager" class="pager"></div>
+					<div id="glyf-list" class="glyf-list"></div>
+				</div>
+			</div>
+			
+		</section>
+
+		<section class="main editing"></section>
+
+		<div class="editor-area">
+
+			<div class="glyf-selector-tabs">
+				<div class="tab-item  selected" data-value="project">${lang.tabs_project}</div>
+				<div class="tab-item" data-value="classic">${lang.tabs_glyf}</div>
+				<div class="tab-item" data-value="simple">${lang.tabs_simple}</div>
+				<div class="tab-item" data-value="subsetting">${lang.tabs_subsetting}</div>			
+				<div class="tab-tools">
+					<section class="toolbar action-groups" role="tools">
+						${lang.download} 
+
+						<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
+						<!--<a class='btn btn-flat' data-action="export" data-type="otf" title="${lang.export_otf}"><i class="ico i-ttf"></i></a> -->
+						<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
+						<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
+						<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
+						<a data-disabled="1" data-action="setting-editor" class='btn btn-flat'><i class="ico i-gear" ></i> ${lang.setting}</a>
+
+						| 	
+						<div class="btn-group action-groups">
+							<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">
+								<i class="ico i-link" ></i> ${lang.language}
+								<span class="drop ico i-down"></span>
+							</button>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li><a href="simple.html" title="${lang.korean}">${lang.korean}</a></li>
+								<li><a href="simple-en.html" title="${lang.english}">${lang.english}</a></li>
+								<li><a href="simple-cn.html" title="${lang.chinese}">${lang.chinese}</a></li>
+								<li class='divider'></li>
+								<li><a href='${lang.advanced_mode_link}'>Advanced  mode</a></li>
+							</ul>
+						</div>
+						<a class="manual-link" href="https://fontmoa.gitbooks.io/fontmoa-fonteditor/" target="_manual"><i class="ico i-help"></i></a>
+					</section>
+				</div>
+			</div>
+
+			<div class="notebook notebook-left project-mode">
+
+				<div class="simple-glyf-selector">
+					<div class="text-view" >
+						<div class="text-input" contenteditable="true" tabindex="-1" placeholder="${lang.write_a_text}"></div>
+					</div>
+					<div class="font-view-description  description">
+						<label>${lang.font_size}</label> <span style="display:inline-block;width:200px;vertical-align:middle;"><input type="range" min="5" max="100" id="fontSize" style="width:100px;display:inline-block;vertical-align:middle;"/> <input type="number" min="5" max="100"  id="fontSizeInput"  style="width:60px;text-align:center;display:inline-block;vertical-align:middle;height:24px;"/> px</span>
+						<label><input type="checkbox" checked id="guidChar"/> ${lang.view_guide_chars}</label>
+						&nbsp;
+						<button type="button" class="btn btn-flat delete-glyf pull-right">${lang.delete_glyf}</button>
+					</div>
+					<div class="font-view"></div>
+				</div>
+				<div class="classic-glyf-selector"> </div>
+				<div class="project-glyf-selector"> </div>
+				<div class="subsetting-glyf-selector">
+					<div class="subsetting-tools">
+						<div class="subsetting-download  action-groups">
+							${lang.subsetting_download} 
+
+							<a class='btn btn-flat' data-action="export" data-type="ttf" data-reduceGlyf="true" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
+							<a class='btn btn-flat' data-action="export" data-type="woff" data-reduceGlyf="true" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
+							<a class='btn btn-flat' data-action="export" data-type="zip" data-reduceGlyf="true" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
+						</div>
+					</div>			
+					<div class="subsetting-text-view" >
+						<textarea id="subsetting-text" placeholder="${lang.write_a_custom_text}"></textarea>
 					</div>
 				</div>			
-				<div class="subsetting-text-view" >
-					<textarea id="subsetting-text" placeholder="${lang.write_a_custom_text}"></textarea>
-				</div>
-			</div>			
-		</div>
-		<div class="notebook notebook-right">
-			<div class="tools">
-				<a class="extensions-open" href="#glyf-editor"><i class="ico i-gear" ></i></a>
 			</div>
-			<section class="editor editing">
-				<ul id="editor-commandmenu" class="command-groups"></ul>
-				<div id="glyf-editor" class="glyf-editor" oncontextMenu="return false"></div>
-				<ul id="editor-commandmenu-bottom" class="command-groups-bottom"></ul>
-			</section>
+			<div class="notebook notebook-right">
+				<div class="tools">
+					<a class="extensions-open" href="#glyf-editor"><i class="ico i-gear" ></i></a>
+				</div>
+				<section class="editor editing">
+					<ul id="editor-commandmenu" class="command-groups"></ul>
+					<div id="glyf-editor" class="glyf-editor" oncontextMenu="return false"></div>
+					<ul id="editor-commandmenu-bottom" class="command-groups-bottom"></ul>
+				</section>
+			</div>
+			<div class="notebook notebook-options">
+				
+			</div>		
 		</div>
-		<div class="notebook notebook-options">
-			
-		</div>		
+
+		
+		<footer id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<hr />
+						<div >
+							<address style="text-align:center">
+							Contacts - 
+							E-mail: <a href="mailto:cyberuls@gmail.com">cyberuls@gmail.com</a> <span class='divider'></span>
+							Facebook: <a href="https://www.facebook.com/fontmoa">facebook.com/fontmoa</a> <span class='divider'></span>
+							Twitter: <a href="https://www.twitter.com/fontmoa">@fontmoa</a>  <span class='divider'></span>
+							Github: <a href="https://www.github.com/fontmoa">fontmoa</a> 
+							</address>
+
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class=" text-center">
+							<p>&copy; Fontmoa 2017. All Rights Reserved.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
 	</div>
-
-	
-    <footer id="footer">
-        <div class="container stack-style">
-            <div class="row">
-                <div class="col-sm-12">
-					<hr />
-                    <div >
-                        <address style="text-align:center">
-						Contacts - 
-                        E-mail: <a href="mailto:cyberuls@gmail.com">cyberuls@gmail.com</a> <span class='divider'></span>
-                        Facebook: <a href="https://www.facebook.com/fontmoa">facebook.com/fontmoa</a> <span class='divider'></span>
-                        Twitter: <a href="https://www.twitter.com/fontmoa">@fontmoa</a>  <span class='divider'></span>
-                        Github: <a href="https://www.github.com/fontmoa">fontmoa</a> 
-                        </address>
-
-                    </div>
-                </div>
-                <div class="col-sm-12">
-                    <div class=" text-center">
-                        <p>&copy; Fontmoa 2017. All Rights Reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <div class="modal" id="model-dialog" tabindex="-1" role="dialog" aria-labelledby="model-label" aria-hidden="true" data-backdrop="false">
       <div class="modal-dialog">
         <div class="modal-content">
