@@ -86,19 +86,9 @@
 						<button data-action="open" type="button" class="btn btn-flat" title="${lang.open_font_title}"><i class="ico ico-left i-open"></i> ${lang.open_font_title_2}</button>
 					</div>
 					<div class="project-btns action-groups" style="float:right">
-						<button data-action="save" type="button" class="btn btn-flat" title="${lang.save_proj}"><i class="ico ico-left i-save"></i> ${lang.save_proj}</button> | 
-						<button data-disabled="1" data-action="setting-name" class="btn btn-flat" title="${lang.fontinfo}" >${lang.fontinfo}</button>
-						
-						<div class="btn-group action-groups">
-							<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown"title="${lang.tool}">
-								<i class="ico i-gear" ></i> ${lang.tool}
-								<span class="drop ico i-down"></span>
-							</button>
-							<ul class="dropdown-menu dropdown-menu-right" role="menu">
-								<li><a data-disabled="1" data-action="setting-name"  >${lang.fontinfo}</a></li>
-								<li><a data-disabled="1" data-action="setting-metrics">${lang.metrics}</a></li>
-							</ul>
-						</div>
+						<button data-action="save" type="button" class="btn btn-flat"><i class="ico ico-left i-save"></i> ${lang.save_proj}</button> | 
+						<button data-disabled="1" data-action="setting-name" class="btn btn-flat" >${lang.fontinfo}</button>
+						<button data-disabled="1" data-action="setting-metrics" class="btn btn-flat">${lang.metrics}</button>
 					</div>
 				</div>
 				<div id="project-list" class="project-list"></div>
