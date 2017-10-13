@@ -131,7 +131,7 @@ define(
 				painter : {
 					simple : true 
 				},
-                defaultRatio: 1, // 기본 크기 조정		1 
+                defaultRatio: 1.25, // 기본 크기 조정		1 
                 minScale: 0.1, // 최소 크기(줌)
                 maxScale: 200, // 최대 크기(줌)
                 enableScale: true, // 확장 가능 여부
