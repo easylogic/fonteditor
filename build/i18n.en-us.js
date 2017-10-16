@@ -10,6 +10,7 @@ module.exports = exports = {
     tabs_glyf: "Glyf",
     tabs_simple: "Simple Text Writer",    
     tabs_subsetting: "Subset",    
+    tabs_fullscreen: "전체화면",        
     newglyph: 'New Glyph',
     undo: 'Undo',
     redo: 'Redo',

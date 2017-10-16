@@ -450,7 +450,7 @@ body.simple-mode {
 		.notebook {
 			display:block;
 			position:relative;
-			border: 1px solid #ececec;
+
 		}
 
 		.notebook-left {
@@ -458,6 +458,7 @@ body.simple-mode {
 			overflow:hidden;
 			height: 260px;
 			//margin-right:1.5px;
+			border: 1px solid #ececec;			
 
 			&.classic-mode {
 				.classic-glyf-selector {
@@ -514,6 +515,9 @@ body.simple-mode {
 
             }			
 
+			&.fullscreen-mode {
+				display:none;
+			}
 
 			.classic-glyf-selector {
 				display:none;
@@ -527,6 +531,11 @@ body.simple-mode {
 						padding:10px 5px;
 						box-sizing:border-box;
 						border-bottom:1px solid #ececec;
+
+						> a {
+							cursor: pointer;
+							vertical-align: middle;
+						}
 					}
 
 					.glyf-list {
@@ -553,7 +562,7 @@ body.simple-mode {
 			}
 
 			.simple-glyf-selector {
-				display:block;
+				display:none;
 
 				.text-view-description {
 					position:absolute;

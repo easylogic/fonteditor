@@ -10,6 +10,7 @@ module.exports = exports = {
     tabs_glyf: "글자",
     tabs_simple: "간편 글자입력기",
     tabs_subsetting: "경량화",
+    tabs_fullscreen: "전체화면",    
     newglyph: '새 글자',
     undo: '되돌리기',
     redo: '다시실행하기',

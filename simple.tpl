@@ -94,8 +94,14 @@
 				<div id="project-list" class="project-list"></div>
 			</div>
 			<div class="glyf-list-manager">
-				<div class='glyf-list-title'>
+				<div class='glyf-list-title action-groups'>
 						${lang.glyf} <span class='glyf-total-count'></span>
+
+						<span style='padding-right:40px;'></span>
+						<a data-disabled="1" data-action="setting-glyf-generate-template">1. ${lang.generate_glyf_name_template}</a>
+						<span style='padding-right:40px;'></span>
+						<a data-disabled="1" data-action="setting-make-korean-glyf">2. ${lang.make_korean_glyf}</a>
+
 
 						<div class="btn-group action-groups">
 							<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown" title="${lang.tool}">
@@ -103,18 +109,13 @@
 								<span class="drop ico i-down"></span>
 							</button>
 							<ul class="dropdown-menu dropdown-menu-right" role="menu">
-								<!--<li><a data-disabled="1" data-action="setting-editor">${lang.setting}</a></li>
-								<li class="divider"></li>-->
 								<li><a data-disabled="1" data-action="find-glyf">${lang.find_glyf}</a></li>
-								<!--<li class="divider"></li>-->
-								<!--<li><a data-disabled="1" data-action="setting-glyf-name">${lang.gen_glyph_name}</a></li>-->
-								<!--<li><a data-disabled="1" data-action="setting-glyf-clearname">${lang.clear_glyph_name}</a></li>-->
-								<!--<li><a data-disabled="1" data-action="setting-optimize">${lang.optimize_glyph}</a></li>-->
-								<li><a data-disabled="1" data-action="setting-sort">${lang.sort_glyf}</a></li>
-								<!--<li><a data-disabled="1" data-action="setting-compound2simple">${lang.compound2simple}</a></li>-->
 								<li class="divider"></li>
-								<li><a data-disabled="1" data-action="setting-glyf-generate-template">1. ${lang.generate_glyf_name_template}</a></li> 
-								<li><a data-disabled="1" data-action="setting-make-korean-glyf">2. ${lang.make_korean_glyf}</a></li> 
+								<li><a data-disabled="1" data-action="setting-glyf-name">${lang.gen_glyph_name}</a></li>
+								<li><a data-disabled="1" data-action="setting-glyf-clearname">${lang.clear_glyph_name}</a></li>
+								<li><a data-disabled="1" data-action="setting-optimize">${lang.optimize_glyph}</a></li>
+								<li><a data-disabled="1" data-action="setting-sort">${lang.sort_glyf}</a></li>
+								<li><a data-disabled="1" data-action="setting-compound2simple">${lang.compound2simple}</a></li>
 							</ul>
 						</div>
 						<!--
@@ -155,6 +156,7 @@
 				<div class="tab-item" data-value="classic">${lang.tabs_glyf}</div>
 				<div class="tab-item" data-value="simple">${lang.tabs_simple}</div>
 				<div class="tab-item" data-value="subsetting">${lang.tabs_subsetting}</div>			
+				<div class="tab-item" data-value="fullscreen">${lang.tabs_fullscreen}</div>							
 				<div class="tab-tools">
 					<section class="toolbar action-groups" role="tools">
 						${lang.download} 
@@ -387,15 +389,18 @@
 				$(this).addClass('selected');
 
 				var tab = $(this).data('value');
+				var $notebook = $(".notebook-left");
 
 				if (tab == 'classic') {
-					$(".notebook-left").addClass('classic-mode').removeClass('project-mode simple-mode subsetting-mode');
+					$notebook.addClass('classic-mode').removeClass('project-mode simple-mode subsetting-mode fullscreen-mode');
 				} else if (tab == 'project') {
-					$(".notebook-left").addClass('project-mode').removeClass('classic-mode simple-mode subsetting-mode');
+					$notebook.addClass('project-mode').removeClass('classic-mode simple-mode subsetting-mode fullscreen-mode');
 				} else if (tab == 'subsetting') {
-					$(".notebook-left").addClass('subsetting-mode').removeClass('project-mode classic-mode simple-mode');					
-				} else {
-					$(".notebook-left").addClass('simple-mode').removeClass('classic-mode project-mode subsetting-mode');
+					$notebook.addClass('subsetting-mode').removeClass('project-mode classic-mode simple-mode fullscreen-mode');	
+				} else if (tab == 'simple') {
+					$notebook.addClass('simple-mode').removeClass('classic-mode project-mode subsetting-mode fullscreen-mode');
+				} else if (tab == 'fullscreen') {
+					$notebook.addClass('fullscreen-mode').removeClass('classic-mode project-mode subsetting-mode simple-mode');					
 				}
 			});
 
