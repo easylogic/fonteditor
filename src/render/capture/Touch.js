@@ -42,6 +42,8 @@ define(
                 altKey: e.altKey,
                 shiftKey: e.shiftKey,
                 isTouch: true, 
+                // 2손가락 이상은 Gesture 로 인지 
+                isGesture: e.changedTouches.length > 1,
                 originEvent: e
             };
         }
@@ -120,6 +122,14 @@ define(
                 event.deltaX = event.x - this.startX;
                 event.deltaY = event.y - this.startY;
 
+                if (event.isGesture) {
+                    event.right = event.deltaX > 0;
+                    event.left = event.deltaX <= 0; 
+
+                    event.top = event.deltaY <= 0;
+                    event.bottom = event.deltaY > 0; 
+                }
+
                 if (
                     Math.abs(event.deltaX) >= this.dragDelta
                     || Math.abs(event.deltaY) >= this.dragDelta
@@ -161,6 +171,15 @@ define(
                 event.deltaX = event.x - this.startX;
                 event.deltaY = event.y - this.startY;
                 this.isDragging = false;
+
+                if (event.isGesture) {
+                    event.right = event.deltaX > 0;
+                    event.left = event.deltaX <= 0; 
+
+                    event.top = event.deltaY <= 0;
+                    event.bottom = event.deltaY > 0; 
+                }
+
                 this.fire('dragend', event);
             }
             else if (this.isDown && !this.isDragging && false !== this.events.touchstart) {
