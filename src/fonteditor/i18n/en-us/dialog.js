@@ -72,7 +72,7 @@ define(
             dialog_showorigin: 'Show Origin',
             dialog_showcontour: 'Show Contour',
             dialog_choosepic: 'Choose Pic',
-            dialog_choosepic_tip: 'Please Choose A Pic,eg. jpg,gif,png,bmp,svg.',
+            dialog_choosepic_tip: 'eg. jpg,gif,png,bmp,svg.',
             dialog_preprocess: 'Pre Process',
             dialog_reverse: 'Reverse',
             dialog_gaussblur: 'Gauss Blur',

@@ -340,7 +340,7 @@
 			});	
 
 			$(".extensions-open").on('click', function () {
-				$(".editor-area").toggleClass('has-options');
+				$("body").toggleClass('has-options');
 			
 				if ($(".notebook-options .innerdialog.show").length == 0) {
 					accordian_resize($(".notebook-options .innerdialog:first .title"));

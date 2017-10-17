@@ -72,7 +72,7 @@ define(
             dialog_showorigin: '查看原图',
             dialog_showcontour: '查看轮廓',
             dialog_choosepic: '选择图片',
-            dialog_choosepic_tip: '请选择字形图片，支持jpg、gif、png、bmp、svg。',
+            dialog_choosepic_tip: 'jpg、gif、png、bmp、svg。',
             dialog_preprocess: '预处理',
             dialog_reverse: '反转',
             dialog_gaussblur: '高斯模糊',

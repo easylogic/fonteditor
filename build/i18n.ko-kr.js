@@ -8,7 +8,7 @@ module.exports = exports = {
     simple_mode_link : 'simple.html',
     tabs_project: "폰트",
     tabs_glyf: "글자",
-    tabs_simple: "간편 글자입력기",
+    tabs_simple: "글자입력기",
     tabs_subsetting: "경량화",
     tabs_fullscreen: "전체화면",    
     newglyph: '새 글자',

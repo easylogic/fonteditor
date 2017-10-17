@@ -8,7 +8,7 @@ module.exports = exports = {
     simple_mode_link : 'simple-cn.html',
     tabs_project: "Font",
     tabs_glyf: "Glyf",
-    tabs_simple: "Simple Text Writer",    
+    tabs_simple: "Text Writer",    
     tabs_subsetting: "Subset",       
     tabs_fullscreen: "전체화면",             
     newglyph: '新字形',

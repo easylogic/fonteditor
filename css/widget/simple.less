@@ -147,7 +147,8 @@ body.simple-mode {
 	.import-pic-dialog {
 		position:absolute !important;
 		background-color:transparent !important;
-		width: 760px !important;
+		/*
+		width: 760px !important;*/
 		height: 618px !important;
 
 		.modal-content {
@@ -213,6 +214,23 @@ body.simple-mode {
 			margin-bottom:0px;
 			color: white;
 		}
+	}
+}
+
+body.has-options {
+	.notebook-right {
+		width:auto !important;;
+		margin-right: 250px !important;
+	}
+
+	.notebook-options {
+		display: inline-block !important;;
+		vertical-align: top !important;;
+		position: absolute !important;;
+		top: 312px !important;;
+		right: 20px !important;;
+		z-index: 100 !important;;
+		width: 250px !important;
 	}
 }
 
@@ -395,19 +413,6 @@ body.simple-mode {
 		//margin-top: 100px;
 		//transition: all 0.3s ease-in;
 		background-color: white; 
-
-		&.has-options {
-			.notebook-options {
-				display: inline-block;
-				vertical-align: top;
-				position: absolute;
-				top: 312px;
-				right: -229px;
-				z-index: 1000;
-				width: 250px !important;
-			}
-		}
-
 		
 		.glyf-selector-tabs {
 			display:block;
@@ -801,6 +806,8 @@ body.simple-mode {
 			background-color:#121C42; 
 			overflow:hidden;
 			height: 640px;
+			width:100%;
+			box-sizing:border-box;
 			/*
 			background-image: url(../img/narrative-794978_1920.jpg);
 			background-repeat: no-repeat;

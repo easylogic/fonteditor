@@ -73,7 +73,7 @@ define(
             dialog_showorigin: 'Show Origin',
             dialog_showcontour: '윤과선 보기',
             dialog_choosepic: '이미지 선택하기',
-            dialog_choosepic_tip: '이미지를 선택해주세요.(jpg,gif,png,bmp,svg)',
+            dialog_choosepic_tip: 'jpg,gif,png,bmp,svg',
             dialog_preprocess: 'Pre Process',
             dialog_reverse: 'Reverse',
             dialog_gaussblur: 'Gauss Blur',
