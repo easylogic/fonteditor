@@ -201,19 +201,21 @@
 					</div>
 				</div>			
 			</div>
-			<div class="notebook notebook-right">
-				<div class="tools">
-					<a class="extensions-open" href="#glyf-editor"><i class="ico i-gear" ></i></a>
+			<div class="notebook notebook-container">
+				<div class="notebook notebook-right">
+					<div class="tools">
+						<a class="extensions-open" href="#glyf-editor"><i class="ico i-gear" ></i></a>
+					</div>
+					<section class="editor editing">
+						<ul id="editor-commandmenu" class="command-groups"></ul>
+						<div id="glyf-editor" class="glyf-editor" oncontextMenu="return false"></div>
+						<ul id="editor-commandmenu-bottom" class="command-groups-bottom"></ul>
+					</section>
 				</div>
-				<section class="editor editing">
-					<ul id="editor-commandmenu" class="command-groups"></ul>
-					<div id="glyf-editor" class="glyf-editor" oncontextMenu="return false"></div>
-					<ul id="editor-commandmenu-bottom" class="command-groups-bottom"></ul>
-				</section>
+				<div class="notebook notebook-options">
+					
+				</div>		
 			</div>
-			<div class="notebook notebook-options">
-				
-			</div>		
 		</div>
 
 		

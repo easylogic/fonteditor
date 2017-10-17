@@ -227,9 +227,9 @@ body.has-options {
 		display: inline-block !important;;
 		vertical-align: top !important;;
 		position: absolute !important;;
-		top: 312px !important;;
-		right: 20px !important;;
-		z-index: 100 !important;;
+		top: 0px !important;
+		right: 0px !important;
+		bottom:0px !important;
 		width: 250px !important;
 	}
 }
@@ -802,20 +802,17 @@ body.has-options {
             }
 		}
 
+		.notebook-container {
+			width:100%;
+			position:relative;
+		}
+
 		.notebook-right {
 			background-color:#121C42; 
 			overflow:hidden;
 			height: 640px;
 			width:100%;
 			box-sizing:border-box;
-			/*
-			background-image: url(../img/narrative-794978_1920.jpg);
-			background-repeat: no-repeat;
-			background-size: cover;
-			*/
-			//margin-left:1.5px;
-
-			// 에디터 위에 필요한 도구 설정 
 			> .tools {
 				position:absolute;
 				right:0px;
@@ -823,25 +820,23 @@ body.has-options {
 				display:inline-block;
 				padding:3px 5px;
 			}
-
 			
 		}
 
 		.notebook-options {
 			display:none;
-			background-color:rgba(0, 0, 0, 0.9); 
-			width: 200px;
-			height: 640px;
-			border-left:1px solid rgba(255, 255, 255, 0.1);
+			background-color:#ffffff; 
+			border:1px solid rgba(80, 80, 80, 0.1);
 			box-sizing: border-box;
 
 			.innerdialog {
-				color:white;
+				color:black;
 				height : auto !important;
 
 				.title {
 					padding: 5px;
-					background-color: rgba(50, 50, 50, 0.5);
+					background-color: rgba(255, 255, 255, 0.9);
+					border-bottom:1px solid rgba(80, 80, 80, 0.1);
 					cursor: pointer;
 				}
 
@@ -855,7 +850,6 @@ body.has-options {
 					height: 0px;
 					display:none;
 					overflow:auto;
-					background-color: rgba(255, 255, 255, 0.1);
 				}
 			}
 
@@ -873,13 +867,13 @@ body.has-options {
 						display:block;
 						border:0px;
 						background-color:transparent;
-						color:rgba(255, 255, 255, 0.8);
+						color:black;
 					}
 
 					.form-control {
-						background-color:rgba(0, 0, 0, 0.8);
-						color:rgba(255, 255, 255, 0.8);
-						border:1px solid rgba(0, 0, 0, 0.9); 			
+						background-color:rgba(255, 255, 255, 0.8);
+						color:black;
+						border:1px solid #eeeeee; 			
 						display:block;
 					}
 
@@ -900,7 +894,7 @@ body.has-options {
 					.point-group {
 
 						&.current {
-							background-color: rgba(255, 255, 255, 0.2);
+							background-color: rgba(82, 82, 82, 0.2);
 						}
 						padding:5px;
 
@@ -913,8 +907,7 @@ body.has-options {
 
 							> input[type=number] {
 								width: 60px;
-								background-color:rgba(0, 0, 0, 0.8);
-								color:rgba(255, 255, 255, 0.8);
+								color:rgba(0, 0, 0, 0.8);
 								border:1px solid rgba(0, 0, 0, 0.9); 
 								margin-right:2px;
 								display:inline-block;
@@ -963,7 +956,7 @@ body.has-options {
 								background-color: rgb(74, 144, 226);
 
 								.path {
-									fill: white;
+									fill: black;
 								}
 							}
 						}
@@ -996,7 +989,7 @@ body.has-options {
 							box-sizing: border-box;
 							display: block;
 							.path {
-								fill: rgba(255, 255, 255, 0.8);
+								fill: rgba(82, 82, 82, 0.8);
 							}
 						}
 
@@ -1039,7 +1032,7 @@ body.has-options {
 							height:30px;
 
 							path {
-								fill: rgba(255, 255, 255, 0.8);
+								fill: rgba(82, 82, 82, 0.8);
 							}
 						}
 
