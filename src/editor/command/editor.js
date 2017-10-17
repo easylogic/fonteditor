@@ -23,13 +23,7 @@ define(
                 var size = this.render.getSize();
 
                 scale = scale || (512 / this.options.unitsPerEm);
-				var distX = 0;
 
-				if (this.options.simple)   //   simple  모드에서는 스케일을 고정시킨다.  0.5 로 
-				{
-					//scale = 0.5;
-				}
-				
                 this.render.scaleTo(scale, {
                     x: size.width / 2,
                     y: size.height / 2
