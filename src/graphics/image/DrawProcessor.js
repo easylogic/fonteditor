@@ -145,12 +145,18 @@ define(
 			this.lineCap = lineCap || 'round'; 
 		}
 
-		DrawProcessor.prototype.getXY = function (e, pos) {
+		DrawProcessor.prototype.getXY = function (e, pos, touchIndex) {
+
 			var x = e.laryerX || e.clientX - pos.left;
 			var y = e.laryerY || e.clientY - pos.top;
 
-			x += $("html,body").scrollLeft()
-			y += $("html,body").scrollTop()
+			if (e.originalEvent.changedTouches) {
+				x = e.originalEvent.changedTouches[touchIndex || 0].pageX - pos.left;
+				y = e.originalEvent.changedTouches[touchIndex || 0].pageY - pos.top;
+			} else {
+				x += $("html,body").scrollLeft()
+				y += $("html,body").scrollTop()
+			}
 
 			if (pixelRatio !== 1)
 			{
@@ -201,38 +207,46 @@ define(
 			renderer[this.renderType].mousemove.call(this, this.canvas.ctx, xy);
 		}
 
+		DrawProcessor.prototype.drawstart = function (e) {
+			
+			this.canvas.ctx.strokeStyle = this.strokeStyle;
+			this.canvas.ctx.lineWidth = this.lineWidth;
+			this.canvas.ctx.lineJoin = this.lineJoin;
+			this.canvas.ctx.lineCap = this.lineCap;
+
+			var $previewPanel = $('.preview-panel');
+			pos = $previewPanel.offset();		
+
+			this.mousedown(e, pos);
+
+			return pos; 
+		}
+
 		DrawProcessor.prototype.initEvent = function () {
 			
 			// canvas  사이즈는 어떻게 고정할까요? 
 			// canvas drawing  메커니즘을 적용한다. 
-			var canvasOrigin = this.canvas; 
+			var $canvasOrigin = $(this.canvas); 
 			var isDrawing = false; 
 			var pos = { };
 			var self = this; 
-			canvasOrigin.onmousedown = function(e) {
+
+
+
+			$canvasOrigin.on('mousedown', function(e) {
 				isDrawing = true;
+				pos = self.drawstart(e);
+			});
 
-				canvasOrigin.ctx.strokeStyle = self.strokeStyle;
-				canvasOrigin.ctx.lineWidth = self.lineWidth;
-				canvasOrigin.ctx.lineJoin = self.lineJoin;
-				canvasOrigin.ctx.lineCap = self.lineCap;
-
-				var $previewPanel = $('.preview-panel');
-				pos = $previewPanel.offset();		
-				//pos.top += $previewPanel.scrollTop();
-				//pos.left += $previewPanel.scrollLeft();
-
-				self.mousedown(e, pos);
-			};
-			canvasOrigin.onmousemove = function(e) {
+			$canvasOrigin.on('mousemove', function(e) {
 			  if (isDrawing) {
 				self.mousemove(e, pos);
 			  }
-			};
-			canvasOrigin.onmouseup = function() {
+			});
+			$canvasOrigin.on('mouseup', function() {
 			  isDrawing = false;
 			  self.hideTracker(); 
-			};
+			});
 
 			this.onpaste = (function (self) { 
 				return function (e) {
@@ -241,7 +255,35 @@ define(
 			})(this);
 
 			document.addEventListener('paste', this.onpaste);
+
+			this.initTouchEvent();
 		};
+
+		DrawProcessor.prototype.initTouchEvent = function () {
+			
+			// canvas  사이즈는 어떻게 고정할까요? 
+			// canvas drawing  메커니즘을 적용한다. 
+			var $canvasOrigin = $(this.canvas); 
+			var isDrawing = false; 
+			var pos = { };
+			var self = this; 
+
+			$canvasOrigin.on('touchstart', function(e) {
+				isDrawing = true;
+
+				pos = self.drawstart(e);
+			});
+			$canvasOrigin.on('touchmove', function(e) {
+			  if (isDrawing) {
+				self.mousemove(e, pos);
+			  }
+			});
+			$canvasOrigin.on('touchend', function() {
+			  isDrawing = false;
+			  self.hideTracker(); 
+			});
+		};
+		
 
 		DrawProcessor.prototype.pasteImage = function (e) {
 			if (e.clipboardData) {
@@ -273,9 +315,7 @@ define(
 		};
 
 		DrawProcessor.prototype.dispose = function () {
-			this.canvas.onmousedown = null;
-			this.canvas.onmousemove = null;
-			this.canvas.onmouseup = null;
+			$(this.canvas).off('mousedown mousemove mouseup touchstart touchmove touchend');
 			this.canvas = null;
 
 			document.removeEventListener('paste', this.onpaste);

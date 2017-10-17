@@ -35,19 +35,6 @@
 	<div class="page">
 
 		<header id="header">      
-			<div class="container ">
-				<div class="row">
-					<div class="col-sm-12 overflow">
-					<div class="social-icons pull-right">
-							<ul class="nav nav-pills">
-								<li><a href="https://www.facebook.com/fontmoa" target="_facebook"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="https://www.twitter.com/fontmoa" target="_twitter"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="https://www.github.com/fontmoa" target="_github"><i class="fa fa-github"></i></a></li>
-							</ul>
-						</div> 
-					</div>
-				</div>
-			</div>
 			<div class="navbar" role="banner">
 				<div class="container">
 					<div class="navbar-header">
@@ -152,23 +139,19 @@
 		<div class="editor-area">
 
 			<div class="glyf-selector-tabs">
-				<div class="tab-item  selected" data-value="project">${lang.tabs_project}</div>
-				<div class="tab-item" data-value="classic">${lang.tabs_glyf}</div>
-				<div class="tab-item" data-value="simple">${lang.tabs_simple}</div>
-				<div class="tab-item" data-value="subsetting">${lang.tabs_subsetting}</div>			
-				<div class="tab-item" data-value="fullscreen">${lang.tabs_fullscreen}</div>							
-				<div class="tab-tools">
+				<span class="tab-item  selected" data-value="project">${lang.tabs_project}</span>
+				<span class="tab-item" data-value="classic">${lang.tabs_glyf}</span>
+				<span class="tab-item" data-value="simple">${lang.tabs_simple}</span>
+				<span class="tab-item" data-value="subsetting">${lang.tabs_subsetting}</span>			
+				<span class="tab-item" data-value="fullscreen">${lang.tabs_fullscreen}</span>							
+				<span class="tab-tools">
 					<section class="toolbar action-groups" role="tools">
-						${lang.download} 
-
 						<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
 						<!--<a class='btn btn-flat' data-action="export" data-type="otf" title="${lang.export_otf}"><i class="ico i-ttf"></i></a> -->
 						<a class='btn btn-flat' data-action="export" data-type="ttf" title="${lang.export_ttf}"><i class="ico i-ttf"></i></a>
 						<a class='btn btn-flat' data-action="export" data-type="woff" title="${lang.export_woff}"><i class="ico i-woff"></i></a>
 						<a class='btn btn-flat' data-action="export" data-type="zip" title="${lang.export_zip}"><i class="ico i-zip"></i></a>
 						<a data-disabled="1" data-action="setting-editor" class='btn btn-flat'><i class="ico i-gear" ></i> ${lang.setting}</a>
-
-						| 	
 						<div class="btn-group action-groups">
 							<button type="button" class="btn btn-flat dropdown-toggle" data-toggle="dropdown">
 								<i class="ico i-link" ></i> ${lang.language}
@@ -184,7 +167,7 @@
 						</div>
 						<a class="manual-link" href="https://fontmoa.gitbooks.io/fontmoa-fonteditor/" target="_manual"><i class="ico i-help"></i></a>
 					</section>
-				</div>
+				</span>
 			</div>
 
 			<div class="notebook notebook-left project-mode">
@@ -237,7 +220,7 @@
 		<footer id="footer">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-sm-12 contact">
 						<hr />
 						<div >
 							<address style="text-align:center">

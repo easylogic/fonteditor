@@ -184,6 +184,10 @@ body.simple-mode {
 				margin-left:5px;
 				margin-right:5px;
 				box-sizing:border-box;
+
+				span {
+					color: white;
+				}
 			}
 
 		}
@@ -207,6 +211,7 @@ body.simple-mode {
 			display:inline-block !important;
 			vertical-align: middle;
 			margin-bottom:0px;
+			color: white;
 		}
 	}
 }
@@ -277,20 +282,16 @@ body.simple-mode {
 		border-right:0px solid #ececec;
 		border-bottom:0px solid #ececec;
 		margin-bottom: 0;
-		height:70px !important;
+		height:70px;
 		//background-color:white;
-		max-width: 800px;
-		min-width: 800px;
+		min-width: 0px;
 
 		.container {
-			max-width: 1200px;
 			margin: 0 auto;
 			display:block;
 
 			&.stack-style {
 				width:auto;
-				max-width: 800px;
-				min-width:800px;
 			}
 		}
 
@@ -459,6 +460,7 @@ body.simple-mode {
 			height: 260px;
 			//margin-right:1.5px;
 			border: 1px solid #ececec;			
+			width:100%;
 
 			&.classic-mode {
 				.classic-glyf-selector {

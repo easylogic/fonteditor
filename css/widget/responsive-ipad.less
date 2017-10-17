@@ -1,0 +1,52 @@
+
+.page {
+
+	/* iPad */
+	@media only screen and (device-width: 768px) {
+		max-width: none;
+
+		.navbar {
+			min-width:0px !important;
+			max-width:none !important;
+			height: 40px !important;
+
+			.navbar-brand {
+				padding: 0px 15px;
+
+				h1 {
+					font-size: 20px;
+				}
+			}
+		}
+
+		.editor-area {
+
+			padding:10px !important;
+			padding-bottom:0px !important; 
+
+			.glyf-selector-tabs .tab-item {
+				margin-left: 1px !important;
+				margin-right:0px !important;
+			}
+		}
+
+		.toolbar > .action-groups {
+			margin-left: 0px !important;
+		}
+
+		footer {
+			margin:0px !important;
+			padding:0px !important;
+
+			.contact {
+				display:none;
+			}
+
+			.row {
+				width:100%;
+				padding-top:5px;
+				padding-bottom:5px;
+			}
+		}
+    }
+}
