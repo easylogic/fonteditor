@@ -1,4 +1,149 @@
+body.simple-mode {
+    /* iphone6 */
+    @media only screen and (device-width: 375px) {
 
-.page {
+        .iphone-hide {
+            display:none;
+        }
 
+        .page {
+        
+            max-width: none;
+
+            .navbar {
+                display:none;
+            }
+
+            .editor-area {
+                position:fixed;
+                top:0px;
+                left:0px;
+                right:0px;
+                bottom:40px;
+                box-sizing: border-box;
+                padding:2px !important;
+
+                .glyf-selector-tabs {
+                    position:absolute;
+                    left:0px;
+                    right:0px;
+                    top:0px;
+                    height:32px;
+                    display:flex;
+                    .tab-item {
+                        flex:1;
+                        text-align: center;
+                        border-radius: 0px !important;
+                        margin-left: 0px !important;
+                        margin-right:0px !important;
+                        border:0px;
+
+                        &[data-value=subsetting] {
+                            display: none;
+                        }
+                    }
+
+                    
+
+                    .tab-tools {
+                        display:none;
+                    }
+                }
+                
+                .menu-title {
+                    display:none;
+                }
+
+                .notebook-left {
+                    position:absolute;
+                    top:32px;
+                    left:0px;
+                    right:0px;
+                    bottom:0px;
+                    display:block;
+                    z-index:100;
+                    height: auto;
+
+                    &.editor-mode {
+                        display:none;
+                    }
+                }
+
+                .notebook-container {
+                    position:absolute;
+                    top:32px;
+                    left:0px;
+                    right:0px;
+                    bottom:0px;
+                    display:block;
+                    z-index:0;
+
+                    .notebook-right {
+                        position:absolute;
+                        left:0px;
+                        right:0px;
+                        top:0px;
+                        bottom:0px;
+                        height: auto;
+
+                        .editor {
+                            top:40px;
+                            bottom:40px;
+                            left:0px;
+                            right:0px;
+                            height:auto;
+
+                            #editor-commandmenu {
+                                top: -40px;
+                                border-radius: 0px;                                
+                            }
+
+                            #editor-commandmenu-bottom {
+                                bottom: -40px;
+                                border-radius: 0px;
+                            }
+
+                            .command-groups > li, 
+                            .command-groups-bottom > li, 
+                            .command-groups > li[data-theme="ico"], 
+                            .command-groups-bottom > li[data-theme="ico"] {
+                                padding: 0 8px; 
+                            }
+                        }
+
+                        > .tools  {
+                            top: 40px;
+                            z-index:1000;
+                        }
+                    }
+                }
+            }
+
+            .toolbar > .action-groups {
+                margin-left: 0px !important;
+            }
+
+            footer {
+                position: fixed;
+                bottom:0px;
+                height:40px;
+                left:0px;
+                right:0px;
+
+                margin:0px !important;
+                padding:0px !important;
+
+                .contact {
+                    display:none;
+                }
+
+                .row {
+                    width:100%;
+                    padding-top:5px;
+                    padding-bottom:5px;
+                }
+            }
+        }
+
+    }
 }

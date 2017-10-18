@@ -14,7 +14,7 @@
             <label class="erase-label" style="display:none;"><input type="checkbox" id="isErase" /> ${lang.dialog_erase}</label>
         </div>
         <button data-action="openfile" type="button" class="btn btn-flat btn-new btn-sm">${lang.dialog_choosepic}</button>
-        <span>${lang.dialog_choosepic_tip}</span>
+        <span class="iphone-hide">${lang.dialog_choosepic_tip}</span>
         <form id="import-pic-form" style="width:0px;height:0px;overflow:hidden;"><input id="import-pic-file" type="file"></form>
     </div>
     <div class="preview-panel"><div class="canvas-left"><canvas id="import-pic-canvas-origin"></canvas></div><div class="canvas-right"><canvas id="import-pic-canvas-fit"></canvas></div></div>

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="${lang.lang}">
 <head>
+	<title>FontMoa - FontEditor</title>
     <meta charset="UTF-8">
-    <title>FontMoa - FontEditor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
 
     <meta name="generator" content="Fontmoa v1.0.9">
     <meta name="description" content="한글 폰트를 쉽게 다루기 위해서 만든 폰트 에디터, FontEditor, 폰트모아, Fontmoa, Simple Font Editor for TTF">
@@ -69,11 +70,11 @@
 			<div class="project">
 				<div class="project-title">
 					<div class="project-btns action-groups">
-						<button data-action="new" type="button" class="btn btn-flat" title="${lang.new_font_title}"><i class="ico ico-left i-new"></i> ${lang.new_font_title}</button>
-						<button data-action="open" type="button" class="btn btn-flat" title="${lang.open_font_title}"><i class="ico ico-left i-open"></i> ${lang.open_font_title_2}</button>
+						<button data-action="new" type="button" class="btn btn-flat" title="${lang.new_font_title}"><i class="ico ico-left i-new"></i> <span class="menu-title">${lang.new_font_title}</span></button>
+						<button data-action="open" type="button" class="btn btn-flat" title="${lang.open_font_title}"><i class="ico ico-left i-open"></i>  <span class="menu-title">${lang.open_font_title_2}</span></button>
 					</div>
 					<div class="project-btns action-groups" style="float:right">
-						<button data-action="save" type="button" class="btn btn-flat"><i class="ico ico-left i-save"></i> ${lang.save_proj}</button> | 
+						<button data-action="save" type="button" class="btn btn-flat"><i class="ico ico-left i-save"></i>  <span class="menu-title">${lang.save_proj}</span> </button> | 
 						<button data-disabled="1" data-action="setting-name" class="btn btn-flat" >${lang.fontinfo}</button>
 						<button data-disabled="1" data-action="setting-metrics" class="btn btn-flat">${lang.metrics}</button>
 					</div>
@@ -84,10 +85,10 @@
 				<div class='glyf-list-title action-groups'>
 						${lang.glyf} <span class='glyf-total-count'></span>
 
-						<span style='padding-right:40px;'></span>
-						<a data-disabled="1" data-action="setting-glyf-generate-template">1. ${lang.generate_glyf_name_template}</a>
-						<span style='padding-right:40px;'></span>
-						<a data-disabled="1" data-action="setting-make-korean-glyf">2. ${lang.make_korean_glyf}</a>
+						<span style='padding-right:40px;' class="iphone-hide"></span>
+						<a data-disabled="1" data-action="setting-glyf-generate-template" class="iphone-hide">1. ${lang.generate_glyf_name_template}</a>
+						<span style='padding-right:40px;' class="iphone-hide"></span>
+						<a data-disabled="1" data-action="setting-make-korean-glyf" class="iphone-hide">2. ${lang.make_korean_glyf}</a>
 
 
 						<div class="btn-group action-groups">
@@ -143,7 +144,7 @@
 				<span class="tab-item" data-value="classic">${lang.tabs_glyf}</span>
 				<span class="tab-item" data-value="simple">${lang.tabs_simple}</span>
 				<span class="tab-item" data-value="subsetting">${lang.tabs_subsetting}</span>			
-				<span class="tab-item" data-value="fullscreen">${lang.tabs_fullscreen}</span>							
+				<span class="tab-item" data-value="editor">${lang.tabs_editor}</span>							
 				<span class="tab-tools">
 					<section class="toolbar action-groups" role="tools">
 						<a class='btn btn-flat' data-action="download-glyf" title="${lang.export_image}"><i class='ico i-file-image'></i></a>
@@ -177,8 +178,11 @@
 						<div class="text-input" contenteditable="true" tabindex="-1" placeholder="${lang.write_a_text}"></div>
 					</div>
 					<div class="font-view-description  description">
-						<label>${lang.font_size}</label> <span style="display:inline-block;width:200px;vertical-align:middle;"><input type="range" min="5" max="100" id="fontSize" style="width:100px;display:inline-block;vertical-align:middle;"/> <input type="number" min="5" max="100"  id="fontSizeInput"  style="width:60px;text-align:center;display:inline-block;vertical-align:middle;height:24px;"/> px</span>
-						<label><input type="checkbox" checked id="guidChar"/> ${lang.view_guide_chars}</label>
+						<label class="iphone-hide">${lang.font_size}</label> 
+						<span style="display:inline-block;width:200px;vertical-align:middle;">
+						<input type="range" min="5" max="100" id="fontSize" style="width:100px;display:inline-block;vertical-align:middle;"/> 
+						<input type="number" min="5" max="100"  id="fontSizeInput"  style="width:60px;text-align:center;display:inline-block;vertical-align:middle;height:24px;"/> px</span>
+						<label ><input type="checkbox" checked id="guidChar"/> <span class="iphone-hide">${lang.view_guide_chars}</span></label>
 						&nbsp;
 						<button type="button" class="btn btn-flat delete-glyf pull-right">${lang.delete_glyf}</button>
 					</div>
@@ -345,7 +349,7 @@
 				$("body").toggleClass('has-options');
 			
 				if ($(".notebook-options .innerdialog.show").length == 0) {
-					accordian_resize($(".notebook-options .innerdialog:first .title"));
+					accordian_resize($("#innerdialog-setting-shape-maker .title"));
 				}
 			});
 
@@ -377,15 +381,15 @@
 				var $notebook = $(".notebook-left");
 
 				if (tab == 'classic') {
-					$notebook.addClass('classic-mode').removeClass('project-mode simple-mode subsetting-mode fullscreen-mode');
+					$notebook.addClass('classic-mode').removeClass('project-mode simple-mode subsetting-mode editor-mode');
 				} else if (tab == 'project') {
-					$notebook.addClass('project-mode').removeClass('classic-mode simple-mode subsetting-mode fullscreen-mode');
+					$notebook.addClass('project-mode').removeClass('classic-mode simple-mode subsetting-mode editor-mode');
 				} else if (tab == 'subsetting') {
-					$notebook.addClass('subsetting-mode').removeClass('project-mode classic-mode simple-mode fullscreen-mode');	
+					$notebook.addClass('subsetting-mode').removeClass('project-mode classic-mode simple-mode editor-mode');	
 				} else if (tab == 'simple') {
-					$notebook.addClass('simple-mode').removeClass('classic-mode project-mode subsetting-mode fullscreen-mode');
-				} else if (tab == 'fullscreen') {
-					$notebook.addClass('fullscreen-mode').removeClass('classic-mode project-mode subsetting-mode simple-mode');					
+					$notebook.addClass('simple-mode').removeClass('classic-mode project-mode subsetting-mode editor-mode');
+				} else if (tab == 'editor') {
+					$notebook.addClass('editor-mode').removeClass('classic-mode project-mode subsetting-mode simple-mode');					
 				}
 			});
 
