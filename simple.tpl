@@ -137,7 +137,7 @@
 
 		<section class="main editing"></section>
 
-		<div class="editor-area">
+		<div class="editor-area project-mode">
 
 			<div class="glyf-selector-tabs">
 				<span class="tab-item  selected" data-value="project">${lang.tabs_project}</span>
@@ -171,7 +171,7 @@
 				</span>
 			</div>
 
-			<div class="notebook notebook-left project-mode">
+			<div class="notebook notebook-left">
 
 				<div class="simple-glyf-selector">
 					<div class="text-view" >
@@ -382,7 +382,7 @@
 				$(this).addClass('selected');
 
 				var tab = $(this).data('value');
-				var $notebook = $(".notebook-left");
+				var $notebook = $(".editor-area");
 
 				if (tab == 'classic') {
 					$notebook.addClass('classic-mode').removeClass('project-mode simple-mode subsetting-mode editor-mode');

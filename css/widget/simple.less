@@ -413,6 +413,81 @@ body.has-options {
 		//transition: all 0.3s ease-in;
 		background-color: white; 
 		
+
+		&.classic-mode {
+			.notebook-left {
+				.classic-glyf-selector {
+					display:block;
+				}
+	
+				.simple-glyf-selector,
+				.subsetting-glyf-selector,				
+				.project-glyf-selector
+				{
+					display:none;
+				}
+			}
+
+		}
+
+		&.simple-mode {
+			.notebook-left {
+				.simple-glyf-selector {
+					display:block;
+				}
+	
+				.classic-glyf-selector,
+				.subsetting-glyf-selector,				
+				.project-glyf-selector
+				{
+					display:none;
+				}
+			}
+			
+
+		}
+
+		&.project-mode {
+			.notebook-left {
+				.project-glyf-selector {
+					display:block;
+				}
+	
+				.classic-glyf-selector,
+				.subsetting-glyf-selector,
+				.simple-glyf-selector
+				{
+					display:none;
+				}
+			}
+
+
+		}
+		
+		&.subsetting-mode {
+			.notebook-left {
+				.subsetting-glyf-selector {
+					display:block;
+				}
+	
+				.project-glyf-selector,
+				.classic-glyf-selector,
+				.simple-glyf-selector
+				{
+					display:none;
+				}
+			}
+		
+
+		}			
+
+		&.editor-mode {
+			.notebook-left {
+				display:none;
+			}
+
+		}
+
 		.glyf-selector-tabs {
 			display:block;
 			position:relative;
@@ -466,64 +541,6 @@ body.has-options {
 			border: 1px solid #ececec;			
 			width:100%;
 
-			&.classic-mode {
-				.classic-glyf-selector {
-					display:block;
-				}
-
-				.simple-glyf-selector,
-				.subsetting-glyf-selector,				
-				.project-glyf-selector
-                {
-					display:none;
-				}
-			}
-
-            &.simple-mode {
-		        .simple-glyf-selector {
-					display:block;
-				}
-
-				.classic-glyf-selector,
-				.subsetting-glyf-selector,				
-				.project-glyf-selector
-                {
-					display:none;
-				}
-
-            }
-
-            &.project-mode {
-		        .project-glyf-selector {
-					display:block;
-				}
-
-				.classic-glyf-selector,
-				.subsetting-glyf-selector,
-				.simple-glyf-selector
-                {
-					display:none;
-				}
-
-			}
-			
-            &.subsetting-mode {
-		        .subsetting-glyf-selector {
-					display:block;
-				}
-
-				.project-glyf-selector,
-				.classic-glyf-selector,
-				.simple-glyf-selector
-                {
-					display:none;
-				}
-
-            }			
-
-			&.editor-mode {
-				display:none;
-			}
 
 			.classic-glyf-selector {
 				display:none;

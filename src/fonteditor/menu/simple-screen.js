@@ -23,6 +23,9 @@ define(
                 ico: 'reference',
                 title: ei18n.lang.showreference
             },
+            {
+                type: 'split'
+            },            
             /*{
 				type : 'input',
                 name: 'scaleinput',

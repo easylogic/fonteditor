@@ -14,13 +14,20 @@ body.simple-mode {
             }
 
             .editor-area {
-                position:fixed;
+                position: absolute;;
                 top:0px;
                 left:0px;
                 right:0px;
                 bottom:40px;
                 box-sizing: border-box;
                 padding:2px !important;
+
+                &.editor-mode {
+                    bottom:0px;
+                    .notebook-left {
+                        display:none;
+                    }
+                }                
 
                 .glyf-selector-tabs {
                     position:absolute;
@@ -63,9 +70,7 @@ body.simple-mode {
                     z-index:100;
                     height: auto;
 
-                    &.editor-mode {
-                        display:none;
-                    }
+
                 }
 
                 .notebook-container {
@@ -87,7 +92,7 @@ body.simple-mode {
 
                         .editor {
                             top:40px;
-                            bottom:40px;
+                            bottom:60px;
                             left:0px;
                             right:0px;
                             height:auto;
@@ -98,8 +103,9 @@ body.simple-mode {
                             }
 
                             #editor-commandmenu-bottom-container {
-                                bottom: -40px;
+                                bottom: -60px;
                                 border-radius: 0px;
+                                height:60px;
                             }
 
                             .command-groups > li, 
@@ -107,6 +113,15 @@ body.simple-mode {
                             .command-groups > li[data-theme="ico"], 
                             .command-groups-bottom > li[data-theme="ico"] {
                                 padding: 0 8px; 
+                            }
+
+                            .command-groups-bottom > li[data-split="1"] {
+                                display:block;
+                                height: 10px;
+                            }
+
+                            .command-groups-bottom > li[data-direction="right"] {
+                                float:right;
                             }
                         }
 
@@ -122,8 +137,12 @@ body.simple-mode {
                 margin-left: 0px !important;
             }
 
+            .editor-mode + footer {
+                display:none;
+            }
+
             footer {
-                position: fixed;
+                position: absolute;
                 bottom:0px;
                 height:40px;
                 left:0px;
