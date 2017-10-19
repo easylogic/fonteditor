@@ -211,9 +211,13 @@
 						<a class="extensions-open" href="#glyf-editor"><i class="ico i-gear" ></i></a>
 					</div>
 					<section class="editor editing">
-						<ul id="editor-commandmenu" class="command-groups"></ul>
+						<div class="editor-commandmenu-container" id="editor-commandmenu-container">
+							<ul id="editor-commandmenu" class="command-groups"></ul>
+						</div>
 						<div id="glyf-editor" class="glyf-editor" oncontextMenu="return false"></div>
-						<ul id="editor-commandmenu-bottom" class="command-groups-bottom"></ul>
+						<div class="editor-commandmenu-bottom-container" id="editor-commandmenu-bottom-container">
+							<ul id="editor-commandmenu-bottom" class="command-groups-bottom"></ul>
+						</div>
 					</section>
 				</div>
 				<div class="notebook notebook-options">

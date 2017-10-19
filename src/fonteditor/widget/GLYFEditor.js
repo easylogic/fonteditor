@@ -20,10 +20,9 @@ define(
         var COMMAND_SUPPORT = {
             // 形状组
             shapes: [
-                //'copyshapes', 'cutshapes', 'removeshapes', 
-				
+                'copyshapes', 'cutshapes', 'removeshapes', 
 				'reversepoints','horizontalalignshapes', 'verticalalignshapes',
-                'rotateleft', 'rotateright', 'flipshapes', 'mirrorshapes', 'addsymbol'
+                'rotateleft', 'rotateright', 'flipshapes', 'mirrorshapes'
             ],
             shapes2: [
                 'joinshapes', 'intersectshapes', 'tangencyshapes'
@@ -114,6 +113,10 @@ define(
 
             var commandMenu = this.commandMenu;
             if (commandMenu) {
+                commandMenu.disableCommands(COMMAND_SUPPORT.shapes);
+                commandMenu.disableCommands(COMMAND_SUPPORT.shapes2);
+                commandMenu.disableCommands(COMMAND_SUPPORT.shape);                
+                commandMenu.disableCommands(COMMAND_SUPPORT.point);
 
                 editor.on('selection:change', lang.debounce(function (e) {
                     var length = e.shapes ? e.shapes.length : 0;
@@ -126,7 +129,7 @@ define(
                     }
                     else {
                         commandMenu.enableCommands(COMMAND_SUPPORT.shapes);
-                        commandMenu.enableCommands(COMMAND_SUPPORT.point);
+                        commandMenu[editor.mode.type == 'point' ? 'enableCommands' : 'disableCommands'](COMMAND_SUPPORT.point);
                         commandMenu[length >= 2 ? 'enableCommands' : 'disableCommands'](COMMAND_SUPPORT.shapes2);
                         commandMenu[length === 1 ? 'enableCommands' : 'disableCommands'](COMMAND_SUPPORT.shape);
                     }

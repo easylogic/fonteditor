@@ -73,7 +73,7 @@ define(
 			this.isErase = false; 
 			this.setRenderType('shadow');
 			this.setStrokeStyle('#000000');
-			this.setLineWidth(20); 
+			this.setLineWidth(10); 
 			this.setLineJoin('round');
 			this.setLineCap('round');
 
@@ -87,8 +87,6 @@ define(
 				borderRadius: '50%',
 				border: "1px solid rgba(255, 255, 255, 0.3)",
 				backgroundColor: 'transparent',
-				width: this.lineWidth*2-1,
-				height: this.lineWidth*2-1,
 				'pointer-events' : 'none'
 			});
 
@@ -173,8 +171,8 @@ define(
 			}
 
 			this.$tracker.css({
-				left: xy.x * pixelRatio - this.lineWidth,
-				top : xy.y * pixelRatio + this.lineWidth
+				left: (xy.x * pixelRatio + this.offset.left) - (this.lineWidth * pixelRatio)/2,
+				top : (xy.y * pixelRatio + this.offset.top) - (this.lineWidth * pixelRatio)/2
 			})
 		}
 
@@ -214,6 +212,13 @@ define(
 			this.canvas.ctx.lineJoin = this.lineJoin;
 			this.canvas.ctx.lineCap = this.lineCap;
 
+			this.$tracker.css({
+				width: this.lineWidth * pixelRatio,
+				height: this.lineWidth * pixelRatio,
+			})
+
+			console.log(this.lineWidth);
+
 			var $previewPanel = $('.preview-panel');
 			pos = $previewPanel.offset();		
 
@@ -222,7 +227,7 @@ define(
 			return pos; 
 		}
 
-		DrawProcessor.prototype.initEvent = function () {
+		DrawProcessor.prototype.initEvent = function (offset) {
 			
 			// canvas  사이즈는 어떻게 고정할까요? 
 			// canvas drawing  메커니즘을 적용한다. 
@@ -230,7 +235,7 @@ define(
 			var isDrawing = false; 
 			var pos = { };
 			var self = this; 
-
+			self.offset = offset; 
 
 
 			$canvasOrigin.on('mousedown', function(e) {
@@ -317,6 +322,7 @@ define(
 		DrawProcessor.prototype.dispose = function () {
 			$(this.canvas).off('mousedown mousemove mouseup touchstart touchmove touchend');
 			this.canvas = null;
+			this.offset = null;
 
 			document.removeEventListener('paste', this.onpaste);
 		}

@@ -147,9 +147,12 @@ body.simple-mode {
 	.import-pic-dialog {
 		position:absolute !important;
 		background-color:transparent !important;
-		/*
-		width: 760px !important;*/
-		height: 618px !important;
+		left:0px !important;
+		right:0px !important;
+		bottom:40px !important;
+		top:32px !important;
+		width:auto !important;
+		height:auto !important;
 
 		.modal-content {
 
@@ -195,6 +198,8 @@ body.simple-mode {
 
 		.modal-footer {
 			background-color: transparent; 
+			padding-top:2px;
+			padding-bottom:0px;
 		}
 
 		.preview-panel {
@@ -1055,24 +1060,51 @@ body.has-options {
 			background-color: transparent;
 			border-radius:5px;
 
-			#editor-commandmenu {
-				top:-46px;			
+			.command-groups, .command-groups-bottom {
+				position:relative;
+				top: auto;
+				left: auto;
+				right: auto;
+				box-sizing: border-box;				
+				display: block;
+				height:auto;
+				overflow: initial;
+				li {
+					color:rgba(255, 255, 255, 0.8);
+					float:none;
+					display:inline-block;
+					vertical-align: middle;
+					line-height:1;
+					&[data-disabled] {
+						display: none;
+					}
+				}
+			}		
+
+			#editor-commandmenu-container {
+				position:absolute;
+				top:-46px;		
+				left:0px;
+				right:0px;
+				height: 40px;				
+				overflow-x: auto;	
 				border-radius: 5px;
 				background-color: rgba(229, 229, 229, 0.1);				
 
-				li {
-					color:rgba(255, 255, 255, 0.8);
-				}
+				
 			}
 			
-			#editor-commandmenu-bottom {
+			#editor-commandmenu-bottom-container {
+				position:absolute;
+				left:0px;
+				right:0px;
+				overflow-x: auto; 
+				height: 40px;
 				bottom: -54px;
 				border-radius: 5px;
 				background-color: rgba(229, 229, 229, 0.1);
 
-				li {
-					color:rgba(255, 255, 255, 0.8);
-				}
+				
 			}
 
 			#glyf-editor {

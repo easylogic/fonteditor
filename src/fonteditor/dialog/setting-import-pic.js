@@ -358,7 +358,7 @@ define(
 				program.data.drawProcessor.setErase($(this).prop('checked'));
 			});
 
-			program.data.drawProcessor.initEvent();
+			program.data.drawProcessor.initEvent($('#import-pic-dialog').offset());
         }
 
         function unbindEvent() {
