@@ -113,7 +113,6 @@ define(
                     context.translate(-0.5, -0.5);
                 }
 
-                context.scale(pixelRatio, pixelRatio);
                 context.beginPath();
 
                 var shapes = this.shapes;
