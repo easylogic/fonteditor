@@ -93,7 +93,7 @@ define(
                 var options = this.options;
                 var camera = this.painter.camera;
 
-                context.clearRect(0, 0, this.painter.width , this.painter.height);
+                context.clearRect(0, 0, this.painter.width * pixelRatio * 2 , this.painter.height * pixelRatio * 2);
                 $("#layerLog").html([
                     context.canvas.width, 
                     context.canvas.height, 
@@ -113,6 +113,7 @@ define(
                     context.translate(-0.5, -0.5);
                 }
 
+                context.scale(pixelRatio, pixelRatio);
                 context.beginPath();
 
                 var shapes = this.shapes;

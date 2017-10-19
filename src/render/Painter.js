@@ -36,10 +36,6 @@ define(
             canvas.style.height = options.height; 
             canvas.width = options.width * pixelRatio;
             canvas.height = options.height * pixelRatio;
-            
-            var context = canvas.getContext('2d');
-            context.scale(pixelRatio,pixelRatio);
-
             canvas.style.position = 'absolute';
             canvas.style.zIndex = level > MAX_LEVEL ? 1 : level;
 
