@@ -291,12 +291,11 @@ body.has-options {
 		background-color: white; 
 		padding-top:30px;
 		padding-bottom:50px;
-		.container {
-			&.stack-style {
-				width:auto;
-				max-width: 800px;
-				min-width:800px;
-			}
+
+		p#layerLog:empty:before {
+			content: attr(data-placeholder);
+			display:inline-block;
+			text-align: center;
 		}
 	}
 

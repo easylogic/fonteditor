@@ -93,7 +93,7 @@ define(
                 var options = this.options;
                 var camera = this.painter.camera;
 
-                context.clearRect(0, 0, this.painter.width / pixelRatio, this.painter.height / pixelRatio);
+                context.clearRect(0, 0, this.painter.width * pixelRatio, this.painter.height * pixelRatio);
                 setContextStyle(context, options);
 
                 // 细线模式

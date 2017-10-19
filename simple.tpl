@@ -245,7 +245,7 @@
 					</div>
 					<div class="col-sm-12">
 						<div class=" text-center">
-							<p>&copy; Fontmoa 2017. All Rights Reserved.</p>
+							<p id="layerLog" data-placeholder="&copy; Fontmoa 2017. All Rights Reserved."></p>
 						</div>
 					</div>
 				</div>
