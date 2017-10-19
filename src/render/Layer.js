@@ -99,7 +99,8 @@ define(
                     context.canvas.height, 
                     context.canvas.style.width, 
                     context.canvas.style.height,                    
-                    pixelRatio
+                    pixelRatio,
+                    camera.ratio
                 ].join(','));
                 console.log(context.canvas);
                 setContextStyle(context, options);
