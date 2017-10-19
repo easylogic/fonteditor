@@ -34,7 +34,6 @@ define(
             canvas.id = options.id;
             canvas.style.width = options.width;
             canvas.style.height = options.height; 
-
             canvas.width = options.width * pixelRatio;
             canvas.height = options.height * pixelRatio;
             canvas.style.position = 'absolute';
@@ -370,10 +369,12 @@ define(
 
 				// FIXME: 화면, 확대 축소할때는 사이즈를 조절하는게 맞는 것인가?  
                 this.layers.forEach(function (layer) {
-                    document.getElementById(layer.id).style.width = width + 'px';
-                    document.getElementById(layer.id).style.height = height + 'px';
-                    document.getElementById(layer.id).width = width * pixelRatio;
-                    document.getElementById(layer.id).height = height * pixelRatio;
+                    var canvasLayer = document.getElementById(layer.id);
+
+                    canvasLayer.style.width = width + 'px';
+                    canvasLayer.style.height = height + 'px';
+                    canvasLayer.width = width * pixelRatio;
+                    canvasLayer.height = height * pixelRatio;
 
                 });
 

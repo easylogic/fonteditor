@@ -7,6 +7,7 @@
 define(
     function (require) {
 
+        var pixelRatio = require('common/getPixelRatio');
         var guid = require('./util/guid');
         var lang = require('common/lang');
         var computeBoundingBox = require('graphics/computeBoundingBox');
@@ -92,7 +93,7 @@ define(
                 var options = this.options;
                 var camera = this.painter.camera;
 
-                context.clearRect(0, 0, this.painter.width, this.painter.height);
+                context.clearRect(0, 0, this.painter.width / pixelRatio, this.painter.height / pixelRatio);
                 setContextStyle(context, options);
 
                 // 细线模式
