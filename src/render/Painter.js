@@ -34,6 +34,8 @@ define(
             canvas.id = options.id;
             canvas.width = options.width;
             canvas.height = options.height;
+            canvas.style.width = options.width * pixelRatio;
+            canvas.style.height = options.height * pixelRatio;
             canvas.style.position = 'absolute';
             canvas.style.zIndex = level > MAX_LEVEL ? 1 : level;
 
