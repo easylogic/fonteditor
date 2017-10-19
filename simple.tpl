@@ -3,7 +3,7 @@
 <head>
 	<title>FontMoa - FontEditor</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui, user-scalable=no" >
 
     <meta name="generator" content="Fontmoa v1.0.9">
     <meta name="description" content="한글 폰트를 쉽게 다루기 위해서 만든 폰트 에디터, FontEditor, 폰트모아, Fontmoa, Simple Font Editor for TTF">
