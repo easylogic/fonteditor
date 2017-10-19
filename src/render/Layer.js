@@ -94,7 +94,14 @@ define(
                 var camera = this.painter.camera;
 
                 context.clearRect(0, 0, this.painter.width * pixelRatio * 2, this.painter.height * pixelRatio * 2);
-                $("#layerLog").html([this.painter.width, this.painter.height, pixelRatio].join(','));
+                $("#layerLog").html([
+                    context.canvas.width, 
+                    context.canvas.height, 
+                    context.canvas.style.width, 
+                    context.canvas.style.height,                    
+                    pixelRatio
+                ].join(','));
+                console.log(context.canvas);
                 setContextStyle(context, options);
 
                 // 细线模式
