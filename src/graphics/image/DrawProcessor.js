@@ -67,8 +67,10 @@ define(
          */
         function DrawProcessor(canvas) {
 			this.canvas = canvas;
+
+			var $el = $(this.canvas);
 	
-			$(this.canvas).css('cursor', 'pointer');
+			$el.css('cursor', 'pointer');
 			
 			this.isErase = false; 
 			this.setRenderType('shadow');
@@ -217,8 +219,6 @@ define(
 				height: this.lineWidth * pixelRatio,
 			})
 
-			console.log(this.lineWidth);
-
 			var $previewPanel = $('.preview-panel');
 			pos = $previewPanel.offset();		
 
@@ -275,11 +275,12 @@ define(
 
 			$canvasOrigin.on('touchstart', function(e) {
 				isDrawing = true;
-
+				e.preventDefault();
 				pos = self.drawstart(e);
 			});
 			$canvasOrigin.on('touchmove', function(e) {
 			  if (isDrawing) {
+				e.preventDefault();				  
 				self.mousemove(e, pos);
 			  }
 			});

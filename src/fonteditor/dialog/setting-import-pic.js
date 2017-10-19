@@ -413,7 +413,9 @@ define(
 				
 				var canvasOrigin = $('#import-pic-canvas-origin').get(0);
 				canvasOrigin.width = width; 
-				canvasOrigin.height = height;
+                canvasOrigin.height = height;
+                canvasOrigin.style.width = width * pixelRatio;
+                canvasOrigin.style.height = height * pixelRatio;
 
 				if (program.isSimpleMode && this.options.glyf)
 				{
