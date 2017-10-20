@@ -10,7 +10,7 @@ module.exports = exports = {
     tabs_glyf: "Glyf",
     tabs_simple: "Text Writer",    
     tabs_subsetting: "Subset",       
-    tabs_Editor: "Editor",             
+    tabs_editor: "Editor",         
     newglyph: '新字形',
     undo: '撤销',
     redo: '重做',
