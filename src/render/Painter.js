@@ -32,10 +32,8 @@ define(
             var level = options.level || 1;
 
             canvas.id = options.id;
-            canvas.style.width = options.width;
-            canvas.style.height = options.height; 
-            canvas.width = options.width * pixelRatio;
-            canvas.height = options.height * pixelRatio;
+            canvas.width = options.width;
+            canvas.height = options.height;
             canvas.style.position = 'absolute';
             canvas.style.zIndex = level > MAX_LEVEL ? 1 : level;
 
