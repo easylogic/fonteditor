@@ -147,8 +147,8 @@ define(
 
 		DrawProcessor.prototype.getXY = function (e, pos, touchIndex) {
 
-			var x = e.laryerX || e.clientX - pos.left;
-			var y = e.laryerY || e.clientY - pos.top;
+			var x = (e.laryerX || e.clientX) - pos.left;
+			var y = (e.laryerY || e.clientY) - pos.top;
 
 			if (e.originalEvent.changedTouches) {
 				x = e.originalEvent.changedTouches[touchIndex || 0].pageX - pos.left;
@@ -174,12 +174,14 @@ define(
 
 			this.$tracker.css({
 				left: (xy.x * pixelRatio + this.offset.left) - (this.lineWidth * pixelRatio)/2,
-				top : (xy.y * pixelRatio + this.offset.top) - (this.lineWidth * pixelRatio)/2
+				top : (xy.y + 20 - this.lineWidth/2) * pixelRatio
 			})
+		
+			console.log(xy.y, pixelRatio, this.$tracker.css('top'), this.lineWidth);
 		}
 
 		DrawProcessor.prototype.hideTracker = function () {
-			this.$tracker.hide();
+			//this.$tracker.hide();
 		}
 
 		DrawProcessor.prototype.mousedown = function (e, pos) {

@@ -38,12 +38,6 @@ define(
 
 			if (program.isSimpleMode)
 			{
-
-				if (pixelRatio !== 1) {
-					canvas.style.width = (width / pixelRatio) + 'px';
-					canvas.style.height = (height / pixelRatio) + 'px';
-				}
-
 				// 이미지를 바로 그리고 최종적으로 이미지를 개별 포인트로 변환한다. 
 				canvas.ctx.drawImage(image, 0, 0, width, height);
 				program.loading.hide();
@@ -397,7 +391,7 @@ define(
 					var pos = $editor.offset();
                     pos.top -= 40; // $(window).height()/2 - $('#import-pic-dialog').height()/2 - 100;
                     //pos.left -= 40;
-					this.getDialog().css(pos).width($editor.width());
+					this.getDialog().css(pos).width($editor.width()).height($editor.height() + 100);
 					$preview.width($editor.width()).height($editor.height());
 
 					$("#editor-commandmenu").hide();
