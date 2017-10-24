@@ -27,6 +27,12 @@
     <link rel="shortcut icon" href="/images/ico/icon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./dep/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/main.css">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/icon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/icon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/icon.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/ico/icon.png">
+
 	<style type="text/css" id="simple-font">
 		
 	</style>
