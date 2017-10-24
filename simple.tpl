@@ -131,7 +131,7 @@
 						</div> -->
 						<div class="btn-group action-groups">
 							<button data-action="add-new" type="button" class="btn btn-flat btn-new" title="${lang.newglyph}"><i class="ico ico-left i-add"></i> ${lang.newglyph}</button>
-							<button data-disabled="1" data-action="import" class="btn btn-flat" title="${lang.import}"><i class="ico ico-left i-add"></i> ${lang.import}(svg,font)</button>
+							<button data-disabled="1" data-action="import" class="btn btn-flat" title="${lang.import}"><i class="ico ico-left i-add"></i> ${lang.import}</button>
 							
 						</div>
 						<ul id="glyf-list-commandmenu" class="command-groups"></ul>

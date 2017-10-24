@@ -48,6 +48,20 @@ define(
             };
         }
 
+        function getXYList(e) {
+            var offset = $(e.target).offset();
+            var len = e.changedTouches.length;
+            var results = []; 
+            for(var i = 0; i < len; i++) {
+                results.push({
+                    x : getX(e, i) - offset.left,
+                    y : getY(e, i) - offset.top
+                });
+            }
+
+            return results;
+        }
+
 
         function prevent(e) {
             e.stopPropagation();
@@ -111,7 +125,6 @@ define(
             prevent(e);
 
             var event = getEvent(e);
-
             this.fire('move', event);
 
 
