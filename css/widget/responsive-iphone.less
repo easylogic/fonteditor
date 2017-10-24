@@ -120,34 +120,35 @@ body.simple-mode {
                             left:0px;
                             right:0px;
                             height:auto;
-
-                            #editor-commandmenu-container {
-                                top: -40px;
-                                border-radius: 0px;                                
-                            }
-
-                            #editor-commandmenu-bottom-container {
-                                bottom: -60px;
-                                border-radius: 0px;
-                                height:60px;
-                            }
-
-                            .command-groups > li, 
-                            .command-groups-bottom > li, 
-                            .command-groups > li[data-theme="ico"], 
-                            .command-groups-bottom > li[data-theme="ico"] {
-                                padding: 0 8px; 
-                            }
-
-                            .command-groups-bottom > li[data-split="1"] {
-                                display:block;
-                                height: 1px;
-                            }
-
-                            .command-groups-bottom > li[data-direction="right"] {
-                                float:right;
-                            }
                         }
+
+                        #editor-commandmenu-container {
+                            top: 0px;
+                            border-radius: 0px;                                
+                        }
+
+                        #editor-commandmenu-bottom-container {
+                            bottom: 0px;
+                            border-radius: 0px;
+                            height:60px;
+                            padding-top: 4px;                            
+                        }
+
+                        .command-groups > li, 
+                        .command-groups-bottom > li, 
+                        .command-groups > li[data-theme="ico"], 
+                        .command-groups-bottom > li[data-theme="ico"] {
+                            padding: 0 8px; 
+                        }
+
+                        .command-groups-bottom > li[data-split="1"] {
+                            display:block;
+                            height: 5px;
+                        }
+
+                        .command-groups-bottom > li[data-direction="right"] {
+                            float:right;
+                        }                        
 
                         > .tools  {
                             top: 40px;

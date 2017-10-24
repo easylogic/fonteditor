@@ -830,9 +830,11 @@ body.has-options {
 			> .tools {
 				position:absolute;
 				right:0px;
-				top:0px;
+				top:50px;
 				display:inline-block;
-				padding:3px 5px;
+				padding:3px 10px;
+				z-index: 10000;
+				font-size:20px;
 			}
 			
 		}
@@ -1057,70 +1059,63 @@ body.has-options {
 		}
 
 
+		.command-groups, .command-groups-bottom {
+			position:relative;
+			top: auto;
+			left: auto;
+			right: auto;
+			box-sizing: border-box;				
+			display: block;
+			height:auto;
+			overflow: initial;
+			li {
+				color:rgba(255, 255, 255, 0.8);
+				float:none;
+				display:inline-block;
+				vertical-align: middle;
+				line-height:1;
+
+				&[data-disabled] {
+					display: none;
+				}
+
+				&[data-direction="right"] {
+					float:right;
+					padding: 8px 4px;
+				}
+			}
+		}		
+
+		#editor-commandmenu-container {
+			position:absolute;
+			top:0px;		
+			left:0px;
+			right:0px;
+			height: 40px;
+			overflow-x: auto;	
+			background-color: rgba(229, 229, 229, 0.1);
+		}
+		
+		#editor-commandmenu-bottom-container {
+			position:absolute;
+			left:0px;
+			right:0px;
+			overflow-x: auto; 
+			height: 40px;
+			bottom: 0px;
+			background-color: rgba(229, 229, 229, 0.1);
+		}
 
 		.editor {
 			position:absolute;
-			top:60px;
+			top:50px;
 			right:20px;
 			left: 20px;
-			height: 514px;
+			bottom: 50px;
 			box-sizing:border-box;
 			border:0px;
 			background-color: transparent;
 			border-radius:5px;
-
-			.command-groups, .command-groups-bottom {
-				position:relative;
-				top: auto;
-				left: auto;
-				right: auto;
-				box-sizing: border-box;				
-				display: block;
-				height:auto;
-				overflow: initial;
-				li {
-					color:rgba(255, 255, 255, 0.8);
-					float:none;
-					display:inline-block;
-					vertical-align: middle;
-					line-height:1;
-
-					&[data-disabled] {
-						display: none;
-					}
-
-					&[data-direction="right"] {
-						float:right;
-						padding: 8px 4px;
-					}
-				}
-			}		
-
-			#editor-commandmenu-container {
-				position:absolute;
-				top:-46px;		
-				left:0px;
-				right:0px;
-				height: 40px;				
-				overflow-x: auto;	
-				border-radius: 5px;
-				background-color: rgba(229, 229, 229, 0.1);				
-
-				
-			}
-			
-			#editor-commandmenu-bottom-container {
-				position:absolute;
-				left:0px;
-				right:0px;
-				overflow-x: auto; 
-				height: 40px;
-				bottom: -54px;
-				border-radius: 5px;
-				background-color: rgba(229, 229, 229, 0.1);
-
-				
-			}
 
 			#glyf-editor {
 				position:absolute;

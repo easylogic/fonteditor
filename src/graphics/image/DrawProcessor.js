@@ -79,9 +79,10 @@ define(
 			this.setLineJoin('round');
 			this.setLineCap('round');
 
-			this.makeTracker();
+			//this.makeTracker();
 		}
 		
+		/*
 		DrawProcessor.prototype.makeTracker = function () {
 
 			this.$tracker = $("<div />").css({
@@ -96,6 +97,7 @@ define(
 
 			this.$tracker.insertAfter(this.canvas);			
 		}
+		*/
 
 		DrawProcessor.prototype.drawGlyf = function (glyf) {
 
@@ -167,6 +169,7 @@ define(
 			return { x : x , y : y };
 		}
 
+		/*
 		DrawProcessor.prototype.setTrackerPosition = function (xy, isShow) {
 			if (isShow) {
 				this.$tracker.show();
@@ -183,7 +186,7 @@ define(
 		DrawProcessor.prototype.hideTracker = function () {
 			//this.$tracker.hide();
 		}
-
+		*/
 		DrawProcessor.prototype.mousedown = function (e, pos) {
 			this.canvas.ctx.beginPath();
 
@@ -196,7 +199,7 @@ define(
 
 			var xy = this.getXY(e, pos);
 
-			this.setTrackerPosition(xy, true);
+			//this.setTrackerPosition(xy, true);
 
 			renderer[this.renderType].mousedown.call(this, this.canvas.ctx, xy);
 		}
@@ -204,7 +207,7 @@ define(
 
 			var xy = this.getXY(e, pos);
 			
-			this.setTrackerPosition(xy);
+			//this.setTrackerPosition(xy);
 
 			renderer[this.renderType].mousemove.call(this, this.canvas.ctx, xy);
 		}
@@ -216,10 +219,12 @@ define(
 			this.canvas.ctx.lineJoin = this.lineJoin;
 			this.canvas.ctx.lineCap = this.lineCap;
 
+			/*
 			this.$tracker.css({
 				width: this.lineWidth * pixelRatio,
 				height: this.lineWidth * pixelRatio,
 			})
+			*/
 
 			var $previewPanel = $('.preview-panel');
 			pos = $previewPanel.offset();		
@@ -252,7 +257,7 @@ define(
 			});
 			$canvasOrigin.on('mouseup', function() {
 			  isDrawing = false;
-			  self.hideTracker(); 
+			  //self.hideTracker(); 
 			});
 
 			this.onpaste = (function (self) { 
@@ -288,7 +293,7 @@ define(
 			});
 			$canvasOrigin.on('touchend', function() {
 			  isDrawing = false;
-			  self.hideTracker(); 
+			  //self.hideTracker(); 
 			});
 		};
 		
