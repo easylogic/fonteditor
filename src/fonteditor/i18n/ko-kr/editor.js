@@ -26,7 +26,7 @@ define(
 
 			
 
-            saveas: '다른 이름으로 저장',
+            saveas: '새 이름으로 저장',
             sync: '동기화',
             syncfont: '폰트 동기화',
             cancelsync: '동기화 취소',

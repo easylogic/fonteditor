@@ -376,6 +376,8 @@
 					text = ' ';
 				}
 
+				if (!text) return; 
+
 				var codepoint = text.codePointAt(0);
 
 				var unicode = codepoint;
@@ -524,7 +526,7 @@
 						$char.empty();
 
 						/*  이미지 편집기를 위에다 넣을까? 그런 다음 에디터를 보여줘? */
-						var fontSize = 512;
+						var fontSize = 280;
 						var fontFamily = $fontView.css('font-family').split(",").pop();
 						program.fire('import-pic', {
 							unicode : unicode,

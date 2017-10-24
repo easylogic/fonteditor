@@ -8,7 +8,7 @@ module.exports = exports = {
     simple_mode_link : 'simple-en.html',
     tabs_project: "Font",
     tabs_glyf: "Glyf",
-    tabs_simple: "Text Writer",    
+    tabs_simple: "Writer",    
     tabs_subsetting: "Subset",    
     tabs_editor: "Editor",        
     newglyph: 'New Glyph',
