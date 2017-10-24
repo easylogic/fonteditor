@@ -68,11 +68,11 @@ define(
                 if (i > 0) {
                     if (mode === 'rotate' && i <= 4) {
                         p.type = 'cpoint';
-                        p.size = 4;
+                        p.size = 5;
                     }
                     else {
                         p.type = 'point';
-                        p.size = 8;
+                        p.size = 10;
                     }
                 }
                 lang.extend(controls[i], p);
