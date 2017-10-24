@@ -142,7 +142,7 @@ define(
 			 */
 			showaxis : function () {
 				this.options.axis.hide = !this.options.axis.hide;
-				this.axisLayer.toggle(!this.options.axis.hide);
+				this.axisLayer.toggle(this.options.axis.hide);
 			},
 
 			/**
@@ -151,7 +151,7 @@ define(
 			 */
             showreference : function () {
 				this.options.referenceline.hide = !this.options.referenceline.hide;
-				this.referenceLineLayer.toggle(!this.options.referenceline.hide);
+				this.referenceLineLayer.toggle(this.options.referenceline.hide);
             },
 
             /**
