@@ -39,7 +39,7 @@ define(
             this.ttf = new TTF(ttf);
             this.changed = false; // ttf是否被改过
             this.history = new History({
-                maxRecord : 3 
+                maxRecord : 2
             });
         }
 
