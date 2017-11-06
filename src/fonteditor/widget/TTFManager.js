@@ -38,7 +38,9 @@ define(
         function Manager(ttf) {
             this.ttf = new TTF(ttf);
             this.changed = false; // ttf是否被改过
-            this.history = new History();
+            this.history = new History({
+                maxRecord : 3 
+            });
         }
 
         /**
@@ -495,7 +497,7 @@ define(
 
                 // 글자 하나 변경할때 전체 히스토리를 저장해야하는가? 
                 // 일단 저장안하는걸로  
-                this.fireChange(false /* true */,  'replace');
+                this.fireChange(true,  'replace');
             }
             return this;
         };
