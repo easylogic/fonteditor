@@ -337,7 +337,10 @@ define(
 			// 변경 이벤트 발생 
 			if (hasEvent !== false)
 			{
-				this.fireChange(true, 'replace');
+                // 전체 유니코드를 다시 생성할 때는 
+                // pushHistory 에 들어가는 순간 메모리에 이전 ttf 를 객체를 그대로 가지고 있기 때문에 
+                // pushHistory 를 적재하지 않는다.                 
+				this.fireChange(false, 'replace');
 			}
 
 

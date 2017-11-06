@@ -32,6 +32,11 @@ define(
 		var codeByJungSung = convertObject(jung_arr);
 		var codeByJongSung = convertObject(jong_arr);	// 종성은 ㄱ 인덱스가 1부터 시작 
 
+		// 아이디 픽스
+		var code_fixed = {
+			
+		}
+
 		// 
 		var johap_arr = {
 			'type1' : {
@@ -116,10 +121,32 @@ define(
 			return result;
 		}
 
+		function getPrefixCache(prefix, index, char) {
+
+
+			if (!code_fixed[prefix]) {
+				code_fixed[prefix] = {};
+			} 
+
+			if (!code_fixed[prefix][index]) {
+				code_fixed[prefix][index] = {};
+			}
+
+			if (!code_fixed[prefix][index][char]) {
+				code_fixed[prefix][index][char] = [prefix, index, char].join('-');
+			}
+
+			if (code_fixed[prefix][index][char]) {
+				return code_fixed[prefix][index][char];				
+			}
+
+			return [prefix, index, char].join('-');
+		}
+
 		function newUnicode(prefix, keys, type, cho, jung, jong) {
-			var g_cho = keys[prefix + '-1-' + cho];
-			var g_jung = keys[prefix + '-2-' + jung];
-			var g_jong = keys[prefix + '-3-' + jong];
+			var g_cho = keys[getPrefixCache(prefix , 1,  cho)];
+			var g_jung = keys[getPrefixCache(prefix , 2,  jung)];
+			var g_jong = keys[getPrefixCache(prefix, 3, jong)];
 
 			var unicode = createUnicode(cho, jung, jong);
 
