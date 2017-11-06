@@ -492,7 +492,10 @@ define(
             var list = this.ttf.replaceGlyf(glyf, index);
             if (list.length) {
                 list[0].modify = 'edit';
-                this.fireChange(true, 'replace');
+
+                // 글자 하나 변경할때 전체 히스토리를 저장해야하는가? 
+                // 일단 저장안하는걸로  
+                this.fireChange(false /* true */,  'replace');
             }
             return this;
         };
