@@ -103,9 +103,16 @@ define(
 		function createGlyfContours (cho, jung, jong) {
 			var result = [];
 		
-			if (cho && cho.glyf) result = result.concat(cho.glyf.contours || []);
-			if (jung && jung.glyf) result = result.concat(jung.glyf.contours || []);
-			if (jong && jong.glyf) result = result.concat(jong.glyf.contours || []);
+			if (cho && cho.glyf) { 
+				result = result.concat(cho.glyf.contours || []);
+			}
+			if (jung && jung.glyf) {
+				result = result.concat(jung.glyf.contours || []);
+			}
+
+			if (jong && jong.glyf) {
+				result = result.concat(jong.glyf.contours || []);
+			} 
 			return result;
 		}
 

@@ -92,8 +92,10 @@ define(
                 if (ttf.glyf[index]) {
 
                     // 이건 모양을 바로 넣는 방식 
-                    // addcontours 커맨드를 써봅시다. 
-                    program.editor.execCommand('addcontours', ttf.glyf[index].contours, {
+                    // addcontours 커맨드를 써봅시다.
+                    
+                    var cloneContours = lang.clone(ttf.glyf[index].contours);
+                    program.editor.execCommand('addcontours', cloneContours, {
                         selected: true
                     });
                 }
