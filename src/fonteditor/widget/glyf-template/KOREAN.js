@@ -33,9 +33,8 @@ define(
 		var codeByJongSung = convertObject(jong_arr);	// 종성은 ㄱ 인덱스가 1부터 시작 
 
 		// 아이디 픽스
-		var code_fixed = {
-			
-		}
+		var code_fixed = {}
+		var check_keys = ['k1','k2','k3','k4','k5','k6'];
 
 		// 
 		var johap_arr = {
@@ -201,7 +200,7 @@ define(
         return {
 
 			getCheckKeys : function () {
-				return ['k1','k2','k3','k4','k5','k6'];
+				return check_keys;
 			},
 
 			generate : function () {
@@ -271,18 +270,18 @@ define(
 
 					if (johap_arr.type1.jung.indexOf(jungsung_code) > -1) {
 						return [ 
-							GLYFConstant.KOREAN + 1 + '-1-'+chosung_code,
-							GLYFConstant.KOREAN + 1 + '-2-'+jungsung_code
+							'k1-1-' + chosung_code,
+							'k1-2-' + jungsung_code
 						];
 					} else if (johap_arr.type2.jung.indexOf(jungsung_code) > -1) {
 						return [ 
-							GLYFConstant.KOREAN + 2 + '-1-'+chosung_code,
-							GLYFConstant.KOREAN + 2 + '-2-'+jungsung_code
+							'k2-1-'+chosung_code,
+							'k2-2-'+jungsung_code
 						];
 					} else if (johap_arr.type3.jung.indexOf(jungsung_code) > -1) {
 						return [ 
-							GLYFConstant.KOREAN + 3 + '-1-'+chosung_code,
-							GLYFConstant.KOREAN + 3 + '-2-'+jungsung_code
+							'k3-1-'+chosung_code,
+							'k3-2-'+jungsung_code
 						];
 					}
 
@@ -291,21 +290,21 @@ define(
 
 					if (johap_arr.type4.jung.indexOf(jungsung_code) > -1) {
 						return [ 
-							GLYFConstant.KOREAN + 4 + '-1-'+chosung_code,
-							GLYFConstant.KOREAN + 4 + '-2-'+jungsung_code,
-							GLYFConstant.KOREAN + 4 + '-3-'+jongsung_code
+							'k4-1-'+chosung_code,
+							'k4-2-'+jungsung_code,
+							'k4-3-'+jongsung_code
 						];
 					} else if (johap_arr.type5.jung.indexOf(jungsung_code) > -1) {
 						return [ 							
-							GLYFConstant.KOREAN + 5 + '-1-'+chosung_code,
-							GLYFConstant.KOREAN + 5 + '-2-'+jungsung_code,
-							GLYFConstant.KOREAN + 5 + '-3-'+jongsung_code
+							'k5-1-'+chosung_code,
+							'k5-2-'+jungsung_code,
+							'k5-3-'+jongsung_code
 						];
 					} else if (johap_arr.type6.jung.indexOf(jungsung_code) > -1) {
 						return [ 
-							GLYFConstant.KOREAN + 6 + '-1-'+chosung_code,
-							GLYFConstant.KOREAN + 6 + '-2-'+jungsung_code,
-							GLYFConstant.KOREAN + 6 + '-3-'+jongsung_code
+							'k6-1-'+chosung_code,
+							'k6-2-'+jungsung_code,
+							'k6-3-'+jongsung_code
 						];
 					}
 				}
@@ -329,19 +328,19 @@ define(
 
                         if (jungsung_1_arr.indexOf(arr[2]) > -1) {
                             return [
-                                ['k1', '2', arr[2]].join('-'),    
-                                ['k4', '2', arr[2]].join('-'),    
+                                'k1-2-' + arr[2],    
+                                'k4-2-' + arr[2],    
                             ];
                         } else if (jungsung_2_arr.indexOf(arr[2]) > -1) {
                             return [
-                                ['k2', '2', arr[2]].join('-'),    
-                                ['k5', '2', arr[2]].join('-'),    
+                                'k2-2-' + arr[2],    
+                                'k5-2-' + arr[2],    
                             ];
 
                         } else if (jungsung_3_arr.indexOf(arr[2]) > -1) {
                             return [
-                                ['k3', '2', arr[2]].join('-'),    
-                                ['k6', '2', arr[2]].join('-'),    
+                                'k3-2-' + arr[2],    
+                                'k6-2-' + arr[2],    
                             ];
 
                         }
